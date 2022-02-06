@@ -19,5 +19,10 @@ struct Section {
 struct ViewModel {
     let sections: [Section]
     
-    static let emptyModel = ViewModel(sections: [])
+    static let emptyModel = Self(sections: [])
+    static let fullModel = Self(sections: [
+        Section(title: "Section 1", cells: [
+            .standard(title: "Title", body: "Body")
+        ])
+    ])
 }

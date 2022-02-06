@@ -40,7 +40,10 @@ class ViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        model.sections[section].title
+        switch model.sections[section].header {
+        case .standard(let title, _, _):
+            return title
+        }
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

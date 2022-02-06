@@ -12,7 +12,7 @@ enum Cell {
 }
 
 struct Section {
-    let title: String
+    let header: Cell
     let cells: [Cell]
 }
 

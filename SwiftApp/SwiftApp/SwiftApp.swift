@@ -38,15 +38,19 @@ class SwiftApp {
             guard let vc = vc else { return ViewModel.emptyModel }
             
             return ViewModel(sections: [
-                Section(title: "Section 1", cells: [
-                    .standard(
-                        title: "Title",
-                        body: "Body",
-                        onTap: {
-                            print("onTap")
-                            vc.refresh()
-                    })
-                ])
+                Section(
+                    header: .standard(title: "Section 1"),
+                    cells: [
+                        .standard(
+                            title: "Title",
+                            body: "Body",
+                            onTap: {
+                                print("onTap")
+                                vc.refresh()
+                            }
+                        )
+                    ]
+                )
             ])
         }
         return vc

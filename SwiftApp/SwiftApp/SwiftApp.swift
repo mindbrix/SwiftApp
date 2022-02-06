@@ -32,7 +32,7 @@ class SwiftApp {
     private let window: UIWindow
     private var _screen: Screen = .Main
     
-    private func makeViewController(for screen: Screen) -> UIViewController {
+    private func makeViewController(for screen: Screen, embedInNavController: Bool = false) -> UIViewController {
         let vc = ViewController()
         switch screen {
         case .Main:
@@ -76,7 +76,6 @@ class SwiftApp {
                 ])
             }
         }
-        
-        return vc
+        return embedInNavController ? UINavigationController(rootViewController: vc) : vc
     }
 }

@@ -103,11 +103,11 @@
 			children = (
 				E977D00527AFC887007E4998 /* AppDelegate.swift */,
 				E977D00727AFC887007E4998 /* SceneDelegate.swift */,
+				E977D03E27AFDBBA007E4998 /* SwiftApp.swift */,
 				E977D00927AFC887007E4998 /* ViewController.swift */,
 				E977D00E27AFC887007E4998 /* Assets.xcassets */,
 				E977D01027AFC887007E4998 /* LaunchScreen.storyboard */,
 				E977D01327AFC887007E4998 /* Info.plist */,
-				E977D03E27AFDBBA007E4998 /* SwiftApp.swift */,
 			);
 			path = SwiftApp;
 			sourceTree = "<group>";

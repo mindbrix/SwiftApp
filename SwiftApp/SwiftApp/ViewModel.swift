@@ -16,8 +16,8 @@ struct Section {
     let cells: [Cell]
 }
 
-struct Model {
-    let sections: [Model]
+struct ViewModel {
+    let sections: [Section]
     
-    static let emptyModel = Model(sections: [])
+    static let emptyModel = ViewModel(sections: [])
 }

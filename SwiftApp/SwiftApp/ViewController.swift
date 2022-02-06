@@ -8,7 +8,7 @@
 import UIKit
 
 class ViewController: UITableViewController {
-    var model = Model.emptyModel
+    var model = ViewModel.emptyModel
     
     override func viewDidLoad() {
         super.viewDidLoad()

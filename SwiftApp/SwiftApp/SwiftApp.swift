@@ -28,7 +28,8 @@ class SwiftApp {
         }
         set {
             _screen = newValue
-            window.rootViewController = makeViewController(for: _screen)
+            let vc = makeViewController(for: _screen)
+            window.rootViewController = _screen.embedInNavController ? UINavigationController(rootViewController: vc) : vc
             window.makeKeyAndVisible()
         }
     }
@@ -80,6 +81,6 @@ class SwiftApp {
                 ])
             }
         }
-        return screen.embedInNavController ? UINavigationController(rootViewController: vc) : vc
+        return vc
     }
 }

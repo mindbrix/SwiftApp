@@ -47,8 +47,7 @@ class SwiftApp {
                                 title: "Go to Splash",
                                 onTap: {
                                     print("onTap")
-                                    self.rootScreen = .Splash
-//                                    vc.refresh()
+                                    vc.navigationController?.pushViewController(self.makeViewController(for: .Splash), animated: true)
                                 }
                             )
                         ]

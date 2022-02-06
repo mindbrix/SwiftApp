@@ -17,7 +17,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
 
         app = SwiftApp(window: UIWindow(windowScene: windowScene))
-        app?.screen = .Main
+        app?.rootScreen = .Main
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

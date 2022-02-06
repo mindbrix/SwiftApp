@@ -22,10 +22,10 @@ class SwiftApp {
         self.window = window
     }
     
-    var screen: Screen = .Main {
+    var rootScreen: Screen = .Main {
         didSet {
-            let vc = makeViewController(for: screen)
-            window.rootViewController = screen.embedInNavController ? UINavigationController(rootViewController: vc) : vc
+            let vc = makeViewController(for: rootScreen)
+            window.rootViewController = rootScreen.embedInNavController ? UINavigationController(rootViewController: vc) : vc
             window.makeKeyAndVisible()
         }
     }
@@ -47,7 +47,7 @@ class SwiftApp {
                                 title: "Go to Splash",
                                 onTap: {
                                     print("onTap")
-                                    self.screen = .Splash
+                                    self.rootScreen = .Splash
 //                                    vc.refresh()
                                 }
                             )
@@ -67,7 +67,7 @@ class SwiftApp {
                                 title: "Go to Main",
                                 onTap: {
                                     print("onTap")
-                                    self.screen = .Main
+                                    self.rootScreen = .Main
 //                                    vc.refresh()
                                 }
                             )

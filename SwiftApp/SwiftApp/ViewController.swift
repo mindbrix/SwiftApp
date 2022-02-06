@@ -8,7 +8,11 @@
 import UIKit
 
 class ViewController: UITableViewController {
-    var model = ViewModel.fullModel
+    var model = ViewModel.fullModel {
+        didSet {
+            self.tableView.reloadData()
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -33,6 +33,10 @@ class SwiftApp {
     private var _screen: Screen = .Main
     
     private static func makeViewController(for screen: Screen) -> UIViewController {
-        ViewController()
+        let vc = ViewController()
+        vc.getModel = {
+            ViewModel.fullModel
+        }
+        return vc
     }
 }

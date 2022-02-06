@@ -8,9 +8,9 @@
 import UIKit
 
 class ViewController: UITableViewController {
-    var model = ViewModel.fullModel {
+    var getModel: (() -> ViewModel) = { ViewModel.emptyModel } {
         didSet {
-            self.tableView.reloadData()
+            model = getModel()
         }
     }
     
@@ -21,6 +21,12 @@ class ViewController: UITableViewController {
         self.view.backgroundColor = .lightGray
     }
 
+    private var model = ViewModel.emptyModel {
+        didSet {
+            self.tableView.reloadData()
+        }
+    }
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
         model.sections.count
     }

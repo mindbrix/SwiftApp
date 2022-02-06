@@ -24,7 +24,7 @@ class SwiftApp {
         }
         set {
             _screen = newValue
-            window.rootViewController = SwiftApp.makeViewController(for: _screen)
+            window.rootViewController = makeViewController(for: _screen)
             window.makeKeyAndVisible()
         }
     }
@@ -32,27 +32,51 @@ class SwiftApp {
     private let window: UIWindow
     private var _screen: Screen = .Main
     
-    private static func makeViewController(for screen: Screen) -> UIViewController {
+    private func makeViewController(for screen: Screen) -> UIViewController {
         let vc = ViewController()
-        vc.getModel = { [weak vc] in
-            guard let vc = vc else { return ViewModel.emptyModel }
-            
-            return ViewModel(sections: [
-                Section(
-                    header: .standard(title: "Section 1"),
-                    cells: [
-                        .standard(
-                            title: "Title",
-                            body: "Body",
-                            onTap: {
-                                print("onTap")
-                                vc.refresh()
-                            }
-                        )
-                    ]
-                )
-            ])
+        switch screen {
+        case .Main:
+            vc.getModel = { [weak self, weak vc] in
+                guard let self = self, let vc = vc else { return ViewModel.emptyModel }
+                
+                return ViewModel(sections: [
+                    Section(
+                        header: .standard(title: String(describing: screen)),
+                        cells: [
+                            .standard(
+                                title: "Go to Splash",
+                                onTap: {
+                                    print("onTap")
+                                    self.screen = .Splash
+//                                    vc.refresh()
+                                }
+                            )
+                        ]
+                    )
+                ])
+            }
+        case .Splash:
+            vc.getModel = { [weak vc] in
+                guard let vc = vc else { return ViewModel.emptyModel }
+                
+                return ViewModel(sections: [
+                    Section(
+                        header: .standard(title: String(describing: screen)),
+                        cells: [
+                            .standard(
+                                title: "Go to Main",
+                                onTap: {
+                                    print("onTap")
+                                    self.screen = .Main
+//                                    vc.refresh()
+                                }
+                            )
+                        ]
+                    )
+                ])
+            }
         }
+        
         return vc
     }
 }

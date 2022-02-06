@@ -35,7 +35,16 @@ class SwiftApp {
     private static func makeViewController(for screen: Screen) -> UIViewController {
         let vc = ViewController()
         vc.getModel = {
-            ViewModel.fullModel
+            ViewModel(sections: [
+                Section(title: "Section 1", cells: [
+                    .standard(
+                        title: "Title",
+                        body: "Body",
+                        onTap: {
+                            print("onTap")
+                    })
+                ])
+            ])
         }
         return vc
     }

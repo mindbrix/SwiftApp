@@ -20,14 +20,4 @@ struct ViewModel {
     let sections: [Section]
     
     static let emptyModel = Self(sections: [])
-    static let fullModel = Self(sections: [
-        Section(title: "Section 1", cells: [
-            .standard(
-                title: "Title",
-                body: "Body",
-                onTap: {
-                    print("onTap")
-            })
-        ])
-    ])
 }

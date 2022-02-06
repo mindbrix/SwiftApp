@@ -8,7 +8,7 @@
 import Foundation
 
 enum Cell {
-    case standard(title: String, body: String?)
+    case standard(title: String, body: String? = nil, onTap: (() -> Void)? = nil)
 }
 
 struct Section {
@@ -22,7 +22,12 @@ struct ViewModel {
     static let emptyModel = Self(sections: [])
     static let fullModel = Self(sections: [
         Section(title: "Section 1", cells: [
-            .standard(title: "Title", body: "Body")
+            .standard(
+                title: "Title",
+                body: "Body",
+                onTap: {
+                    print("onTap")
+            })
         ])
     ])
 }

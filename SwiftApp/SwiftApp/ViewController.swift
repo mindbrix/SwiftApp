@@ -37,10 +37,17 @@ class ViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath)
 
         switch model.sections[indexPath.section].cells[indexPath.row] {
-        case .standard(let title, _):
+        case .standard(let title, _, _):
             cell.textLabel?.text = title
         }
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        switch model.sections[indexPath.section].cells[indexPath.row] {
+        case .standard(_, _, let onTap):
+            onTap?()
+        }
     }
     
     private let reuseIdentifier = "reuseIdentifier"

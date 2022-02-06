@@ -55,8 +55,8 @@ class SwiftApp {
                 ])
             }
         case .Splash:
-            vc.getModel = { [weak vc] in
-                guard let vc = vc else { return ViewModel.emptyModel }
+            vc.getModel = { [weak self, weak vc] in
+                guard let self = self, let vc = vc else { return ViewModel.emptyModel }
                 
                 return ViewModel(sections: [
                     Section(

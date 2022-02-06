@@ -8,7 +8,8 @@
 import UIKit
 
 class ViewController: UITableViewController {
-
+    var model = Model.emptyModel
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.

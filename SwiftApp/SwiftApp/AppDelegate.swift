@@ -9,13 +9,12 @@ import UIKit
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
-    var window: UIWindow?
+    var app: SwiftApp?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        window = UIWindow()
-        window?.rootViewController = ViewController()
-        window?.makeKeyAndVisible()
+        app = SwiftApp(window: UIWindow())
+        app?.screen = .Main
         return true
     }
 

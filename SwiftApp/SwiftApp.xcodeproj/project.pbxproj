@@ -14,6 +14,9 @@
 		E977D01227AFC887007E4998 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E977D01027AFC887007E4998 /* LaunchScreen.storyboard */; };
 		E977D01D27AFC887007E4998 /* SwiftAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E977D01C27AFC887007E4998 /* SwiftAppTests.swift */; };
 		E977D02827AFC887007E4998 /* SwiftAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E977D02727AFC887007E4998 /* SwiftAppUITests.swift */; };
+		E977D03F27AFDBBA007E4998 /* SwiftApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E977D03E27AFDBBA007E4998 /* SwiftApp.swift */; };
+		E977D04027AFDBBA007E4998 /* SwiftApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E977D03E27AFDBBA007E4998 /* SwiftApp.swift */; };
+		E977D04127AFDBBA007E4998 /* SwiftApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E977D03E27AFDBBA007E4998 /* SwiftApp.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +50,7 @@
 		E977D02327AFC887007E4998 /* SwiftAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E977D02727AFC887007E4998 /* SwiftAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftAppUITests.swift; sourceTree = "<group>"; };
 		E977D02927AFC887007E4998 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E977D03E27AFDBBA007E4998 /* SwiftApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftApp.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +107,7 @@
 				E977D00E27AFC887007E4998 /* Assets.xcassets */,
 				E977D01027AFC887007E4998 /* LaunchScreen.storyboard */,
 				E977D01327AFC887007E4998 /* Info.plist */,
+				E977D03E27AFDBBA007E4998 /* SwiftApp.swift */,
 			);
 			path = SwiftApp;
 			sourceTree = "<group>";
@@ -257,6 +262,7 @@
 				E977D00A27AFC887007E4998 /* ViewController.swift in Sources */,
 				E977D00627AFC887007E4998 /* AppDelegate.swift in Sources */,
 				E977D00827AFC887007E4998 /* SceneDelegate.swift in Sources */,
+				E977D03F27AFDBBA007E4998 /* SwiftApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -265,6 +271,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E977D01D27AFC887007E4998 /* SwiftAppTests.swift in Sources */,
+				E977D04027AFDBBA007E4998 /* SwiftApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -273,6 +280,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E977D02827AFC887007E4998 /* SwiftAppUITests.swift in Sources */,
+				E977D04127AFDBBA007E4998 /* SwiftApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

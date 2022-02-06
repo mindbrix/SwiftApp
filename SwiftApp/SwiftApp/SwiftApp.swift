@@ -22,20 +22,15 @@ class SwiftApp {
         self.window = window
     }
     
-    var screen: Screen {
-        get {
-            _screen
-        }
-        set {
-            _screen = newValue
-            let vc = makeViewController(for: _screen)
-            window.rootViewController = _screen.embedInNavController ? UINavigationController(rootViewController: vc) : vc
+    var screen: Screen = .Main {
+        didSet {
+            let vc = makeViewController(for: screen)
+            window.rootViewController = screen.embedInNavController ? UINavigationController(rootViewController: vc) : vc
             window.makeKeyAndVisible()
         }
     }
    
     private let window: UIWindow
-    private var _screen: Screen = .Main
     
     private func makeViewController(for screen: Screen) -> UIViewController {
         let vc = ViewController()

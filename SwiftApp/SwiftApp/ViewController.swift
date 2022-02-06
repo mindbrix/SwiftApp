@@ -36,6 +36,7 @@ class ViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath)
 
+        cell.selectionStyle = .none
         switch model.sections[indexPath.section].cells[indexPath.row] {
         case .standard(let title, _, _):
             cell.textLabel?.text = title

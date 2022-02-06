@@ -12,6 +12,10 @@ class SwiftApp {
     enum Screen {
         case Main
         case Splash
+        
+        var embedInNavController: Bool {
+            self == .Main
+        }
     }
     
     init(window: UIWindow) {
@@ -32,7 +36,7 @@ class SwiftApp {
     private let window: UIWindow
     private var _screen: Screen = .Main
     
-    private func makeViewController(for screen: Screen, embedInNavController: Bool = false) -> UIViewController {
+    private func makeViewController(for screen: Screen) -> UIViewController {
         let vc = ViewController()
         switch screen {
         case .Main:
@@ -76,6 +80,6 @@ class SwiftApp {
                 ])
             }
         }
-        return embedInNavController ? UINavigationController(rootViewController: vc) : vc
+        return screen.embedInNavController ? UINavigationController(rootViewController: vc) : vc
     }
 }

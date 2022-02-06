@@ -21,6 +21,10 @@ class ViewController: UITableViewController {
         self.view.backgroundColor = .lightGray
     }
 
+    func refresh() {
+        model = getModel()
+    }
+    
     private var model = ViewModel.emptyModel {
         didSet {
             self.tableView.reloadData()

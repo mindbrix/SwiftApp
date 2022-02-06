@@ -34,14 +34,17 @@ class SwiftApp {
     
     private static func makeViewController(for screen: Screen) -> UIViewController {
         let vc = ViewController()
-        vc.getModel = {
-            ViewModel(sections: [
+        vc.getModel = { [weak vc] in
+            guard let vc = vc else { return ViewModel.emptyModel }
+            
+            return ViewModel(sections: [
                 Section(title: "Section 1", cells: [
                     .standard(
                         title: "Title",
                         body: "Body",
                         onTap: {
                             print("onTap")
+                            vc.refresh()
                     })
                 ])
             ])

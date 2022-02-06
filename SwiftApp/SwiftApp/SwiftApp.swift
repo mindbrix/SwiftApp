@@ -39,7 +39,7 @@ class SwiftApp {
             vc.getModel = { [weak self, weak vc] in
                 guard let self = self, let vc = vc else { return ViewModel.emptyModel }
                 
-                return ViewModel(header: .standard(title: String(describing: screen)), sections: [
+                return ViewModel(title: String(describing: screen), sections: [
                     Section(
                         header: .standard(title: "Header"),
                         cells: [
@@ -58,7 +58,7 @@ class SwiftApp {
             vc.getModel = { [weak self, weak vc] in
                 guard let self = self, let vc = vc else { return ViewModel.emptyModel }
                 
-                return ViewModel(header: .standard(title: String(describing: screen)), sections: [
+                return ViewModel(title: String(describing: screen), sections: [
                     Section(
                         header: .standard(title: "Header"),
                         cells: [

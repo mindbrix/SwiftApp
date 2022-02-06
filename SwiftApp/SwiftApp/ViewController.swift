@@ -27,10 +27,7 @@ class ViewController: UITableViewController {
     
     private var model = ViewModel.emptyModel {
         didSet {
-            switch model.header {
-            case .standard(let title, _, _ ):
-                self.title = title
-            }
+            self.title = model.title
             self.tableView.reloadData()
         }
     }

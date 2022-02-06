@@ -17,8 +17,8 @@ struct Section {
 }
 
 struct ViewModel {
-    let header: Cell
+    let title: String
     let sections: [Section]
     
-    static let emptyModel = Self(header: .standard(title: ""), sections: [])
+    static let emptyModel = Self(title: "", sections: [])
 }

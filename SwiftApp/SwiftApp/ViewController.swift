@@ -59,12 +59,14 @@ class ViewController: UITableViewController {
             switch cell {
             case .button(let title, _):
                 tvc.backgroundColor = .red
-                tvc.label.textAlignment = .center
-                tvc.label.text = title
-            case .standard(let title, _, _):
+                tvc.cellView.label0.textAlignment = .center
+                tvc.cellView.label0.text = title
+            case .standard(let title, let body, _):
                 tvc.backgroundColor = .white
-                tvc.label.textAlignment = .left
-                tvc.label.text = title
+                tvc.cellView.label0.textAlignment = .left
+                tvc.cellView.label0.text = title
+                tvc.cellView.label1.textAlignment = .left
+                tvc.cellView.label1.text = body
             }
         }
         return tvc

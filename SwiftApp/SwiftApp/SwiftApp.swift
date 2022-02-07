@@ -16,7 +16,7 @@ class SwiftApp {
     enum Screen: String, CaseIterable {
         case Main
         case Counter
-        case Store
+        case DefaultStore
         
         var embedInNavController: Bool {
             self == .Main
@@ -81,10 +81,10 @@ class SwiftApp {
                                 }
                             ),
                             .button(
-                                title: "Go to \(Screen.Store.rawValue)",
+                                title: "Go to \(Screen.DefaultStore.rawValue)",
                                 onTap: {
                                     guard let nc = vc.navigationController else { return }
-                                    nc.pushViewController(self.makeViewController(for: .Store), animated: true)
+                                    nc.pushViewController(self.makeViewController(for: .DefaultStore), animated: true)
                                 }
                             )
                         ]
@@ -117,7 +117,7 @@ class SwiftApp {
                     )
                 ])
             }
-        case .Store:
+        case .DefaultStore:
             vc.getModel = { [weak self] in
                 guard let self = self else { return ViewModel.emptyModel }
                 

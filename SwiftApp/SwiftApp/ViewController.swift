@@ -16,8 +16,8 @@ class ViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        for cellClass in CellClass.allCases {
-            self.tableView.register(cellClass.cellClass, forCellReuseIdentifier: cellClass.reuseID)
+        for type in CellType.allCases {
+            self.tableView.register(type.cellClass, forCellReuseIdentifier: type.reuseID)
         }
         self.view.backgroundColor = .lightGray
     }
@@ -52,7 +52,7 @@ class ViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = model.sections[indexPath.section].cells[indexPath.row]
-        let tvCell = tableView.dequeueReusableCell(withIdentifier: cell.cellClass.reuseID, for: indexPath)
+        let tvCell = tableView.dequeueReusableCell(withIdentifier: cell.type.reuseID, for: indexPath)
 
         tvCell.selectionStyle = .none
         switch cell {

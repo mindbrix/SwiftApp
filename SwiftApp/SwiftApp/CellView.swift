@@ -42,11 +42,11 @@ class CellView: UIView {
     
     var cell: Cell? {
         didSet {
-            applyCell(cell)
+            applyCell()
         }
     }
     
-    private func applyCell(_ cell: Cell?) {
+    private func applyCell() {
         for subview in stack.subviews {
             subview.removeFromSuperview()
         }

@@ -43,7 +43,8 @@ class SwiftApp {
                     Section(
                         header: .standard(title: "Header"),
                         cells: [
-                            .standard(
+                            .standard(title: "Standard cell"),
+                            .button(
                                 title: "Go to Splash",
                                 onTap: {
                                     print("onTap")
@@ -62,7 +63,8 @@ class SwiftApp {
                     Section(
                         header: .standard(title: "Header"),
                         cells: [
-                            .standard(
+                            .standard(title: "Standard cell"),
+                            .button(
                                 title: "Go to Main",
                                 onTap: {
                                     print("onTap")

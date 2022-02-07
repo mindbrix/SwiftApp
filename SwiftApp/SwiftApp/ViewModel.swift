@@ -8,6 +8,7 @@
 import Foundation
 
 enum Cell {
+    case button(title: String, onTap: (() -> Void))
     case standard(title: String, body: String? = nil, onTap: (() -> Void)? = nil)
 }
 

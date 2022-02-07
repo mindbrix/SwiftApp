@@ -44,6 +44,8 @@ class ViewController: UITableViewController {
         switch model.sections[section].header {
         case .standard(let title, _, _):
             return title
+        default:
+            return nil
         }
     }
 
@@ -52,7 +54,13 @@ class ViewController: UITableViewController {
 
         cell.selectionStyle = .none
         switch model.sections[indexPath.section].cells[indexPath.row] {
+        case .button(let title, _):
+            cell.backgroundColor = .red
+            cell.textLabel?.textAlignment = .center
+            cell.textLabel?.text = title
         case .standard(let title, _, _):
+            cell.backgroundColor = .white
+            cell.textLabel?.textAlignment = .left
             cell.textLabel?.text = title
         }
         return cell
@@ -60,7 +68,9 @@ class ViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch model.sections[indexPath.section].cells[indexPath.row] {
-        case .standard(_, _, let onTap):
+        case .button(_, let onTap):
+            onTap()
+        case .standard(_ , _, let onTap):
             onTap?()
         }
     }

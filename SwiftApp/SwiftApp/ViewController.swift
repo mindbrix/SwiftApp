@@ -42,10 +42,10 @@ class ViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         switch model.sections[section].header {
+        case .button(_, _):
+            return nil
         case .standard(let title, _, _):
             return title
-        default:
-            return nil
         }
     }
 

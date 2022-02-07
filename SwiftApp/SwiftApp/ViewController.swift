@@ -56,18 +56,7 @@ class ViewController: UITableViewController {
         tvc.selectionStyle = .none
         
         if let tvc = tvc as? TableViewCell {
-            switch cell {
-            case .button(let title, _):
-                tvc.backgroundColor = .red
-                tvc.cellView.label0.textAlignment = .center
-                tvc.cellView.label0.text = title
-            case .standard(let title, let body, _):
-                tvc.backgroundColor = .white
-                tvc.cellView.label0.textAlignment = .left
-                tvc.cellView.label0.text = title
-                tvc.cellView.label1.textAlignment = .left
-                tvc.cellView.label1.text = body
-            }
+            tvc.cellView.applyCell(cell)
         }
         return tvc
     }

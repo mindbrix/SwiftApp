@@ -29,7 +29,7 @@ class TableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.contentView.addSubview(cellView)
-        cellView.constrainToSuperview(insets: UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8))
+        cellView.constrainToSuperview()
     }
     
     required init?(coder: NSCoder) {

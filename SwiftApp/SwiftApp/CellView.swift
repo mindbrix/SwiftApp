@@ -33,7 +33,22 @@ class CellView: UIView {
         stack.addArrangedSubview(label0)
         stack.addArrangedSubview(label1)
         addSubview(stack)
-        stack.constrainToSuperview()
+        stack.constrainToSuperview(insets: UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8))
+    }
+    
+    func applyCell(_ cell: Cell) {
+        switch cell {
+        case .button(let title, _):
+            backgroundColor = .red
+            label0.textAlignment = .center
+            label0.text = title
+        case .standard(let title, let body, _):
+            backgroundColor = .white
+            label0.textAlignment = .left
+            label0.text = title
+            label1.textAlignment = .left
+            label1.text = body
+        }
     }
     
     required init?(coder: NSCoder) {

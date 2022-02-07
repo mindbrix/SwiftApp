@@ -32,6 +32,20 @@ class SwiftApp {
    
     private let window: UIWindow
     
+    private var topViewController: ViewController? {
+        if let nc = window.rootViewController as? UINavigationController, let vc = nc.topViewController as? ViewController {
+            return vc
+        } else if let vc = window.rootViewController as? ViewController {
+            return vc
+        } else {
+            return nil
+        }
+    }
+    
+    private func refresh() {
+        topViewController?.refresh()
+    }
+    
     private func makeViewController(for screen: Screen) -> UIViewController {
         let vc = ViewController()
         switch screen {
@@ -48,7 +62,8 @@ class SwiftApp {
                                 title: "Go to Splash",
                                 onTap: {
                                     print("onTap")
-                                    vc.navigationController?.pushViewController(self.makeViewController(for: .Splash), animated: true)
+                                    let splash = self.makeViewController(for: .Splash)
+                                    vc.navigationController?.pushViewController(splash, animated: true)
                                 }
                             )
                         ]
@@ -68,8 +83,8 @@ class SwiftApp {
                                 title: "Go to Main",
                                 onTap: {
                                     print("onTap")
-                                    self.rootScreen = .Main
-//                                    vc.refresh()
+//                                    self.rootScreen = .Main
+                                    self.refresh()
                                 }
                             )
                         ]

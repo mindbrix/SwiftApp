@@ -121,15 +121,14 @@ class SwiftApp {
             vc.getModel = { [weak self] in
                 guard let self = self else { return ViewModel.emptyModel }
                 
-                let cells = DefaultsKey.allCases.map({ key in
-                    Cell.standard(
-                        title: key.rawValue,
-                        body: String(self.getDefaultsItem(key: key) as? Int ?? 0))
-                })
                 return ViewModel(title: screen.rawValue, sections: [
                     Section(
                         header: .standard(title: screen.rawValue),
-                        cells: cells
+                        cells: DefaultsKey.allCases.map({ key in
+                            Cell.standard(
+                                title: key.rawValue,
+                                body: String(describing: self.getDefaultsItem(key: key)))
+                        })
                     )
                 ])
             }

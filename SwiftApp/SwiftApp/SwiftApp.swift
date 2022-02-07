@@ -126,7 +126,17 @@ class SwiftApp {
                 ])
             }
         case .DequeueTest:
-            break
+            vc.getModel = {
+                ViewModel(title: screen.rawValue, sections: [
+                    Section(
+                        header: .standard(title: screen.rawValue),
+                        cells: Array(1...100).map({ int in
+                            Cell.standard(
+                                title: String(int))
+                        })
+                    )
+                ])
+            }
         }
         return vc
     }

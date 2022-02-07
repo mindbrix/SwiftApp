@@ -124,7 +124,7 @@ class SwiftApp {
                 return ViewModel(title: screen.rawValue, sections: [
                     Section(
                         header: .standard(title: screen.rawValue),
-                        cells: StoreKey.allCases.map({ key in Cell.standard(title: "Key: \(key.rawValue). Value: \(self.getStoreItem(key: key) ?? "nil")" ) })
+                        cells: StoreKey.allCases.map({ key in Cell.standard(title: "\(key.rawValue): \(self.getStoreItem(key: key) ?? "nil")" ) })
                     )
                 ])
             }

@@ -36,14 +36,13 @@ class SwiftApp {
    
     private let window: UIWindow
     
-    private var store: [ItemKey: Any] = [.counter: 0]
-    
     private func getStoreItem(item: ItemKey) -> Any? {
-        store[item]
+        UserDefaults.standard.object(forKey: item.rawValue)
     }
     
     private func setStoreItem(item: ItemKey, value: Any) {
-        store[item] = value
+        UserDefaults.standard.setValue(value, forKey: item.rawValue)
+        UserDefaults.standard.synchronize()
         refresh()
     }
     
@@ -87,7 +86,8 @@ class SwiftApp {
             }
         case .Counter:
             vc.getModel = { [weak self, weak vc] in
-                guard let self = self, let vc = vc, let count = self.getStoreItem(item: .counter) as? Int else { return ViewModel.emptyModel }
+                guard let self = self, let vc = vc else { return ViewModel.emptyModel }
+                let count = self.getStoreItem(item: .counter) as? Int ?? 0
                 
                 return ViewModel(title: screen.rawValue, sections: [
                     Section(

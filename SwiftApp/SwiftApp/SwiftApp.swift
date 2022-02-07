@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 class SwiftApp {
-    enum ItemKey: String {
+    enum StoreKey: String {
         case counter
     }
     
@@ -36,11 +36,11 @@ class SwiftApp {
    
     private let window: UIWindow
     
-    private func getStoreItem(key: ItemKey) -> Any? {
+    private func getStoreItem(key: StoreKey) -> Any? {
         UserDefaults.standard.object(forKey: key.rawValue)
     }
     
-    private func setStoreItem(key: ItemKey, value: Any) {
+    private func setStoreItem(key: StoreKey, value: Any) {
         UserDefaults.standard.setValue(value, forKey: key.rawValue)
         UserDefaults.standard.synchronize()
         refresh()

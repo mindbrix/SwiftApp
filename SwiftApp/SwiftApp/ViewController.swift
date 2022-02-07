@@ -76,7 +76,5 @@ class ViewController: UITableViewController {
             onTap?()
         }
     }
-    
-    private let reuseIdentifier = "reuseIdentifier"
 }
 

@@ -76,15 +76,15 @@ class SwiftApp {
                             .button(
                                 title: "Go to \(Screen.Counter.rawValue)",
                                 onTap: {
-                                    let splash = self.makeViewController(for: .Counter)
-                                    vc.navigationController?.pushViewController(splash, animated: true)
+                                    guard let nc = vc.navigationController else { return }
+                                    nc.pushViewController(self.makeViewController(for: .Counter), animated: true)
                                 }
                             ),
                             .button(
                                 title: "Go to \(Screen.Store.rawValue)",
                                 onTap: {
-                                    let splash = self.makeViewController(for: .Store)
-                                    vc.navigationController?.pushViewController(splash, animated: true)
+                                    guard let nc = vc.navigationController else { return }
+                                    nc.pushViewController(self.makeViewController(for: .Store), animated: true)
                                 }
                             )
                         ]

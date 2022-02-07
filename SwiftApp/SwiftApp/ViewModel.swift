@@ -6,11 +6,10 @@
 //
 
 import Foundation
-import UIKit
 
 enum CellType: CaseIterable {
     case base
-    var cellClass: AnyClass { UITableViewCell.self }
+    var cellClass: AnyClass { TableViewCell.self }
     var reuseID: String { String(describing: cellClass) }
 }
 

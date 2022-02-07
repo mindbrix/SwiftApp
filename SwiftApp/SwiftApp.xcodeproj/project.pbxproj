@@ -18,6 +18,7 @@
 		E977D04027AFDBBA007E4998 /* SwiftApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E977D03E27AFDBBA007E4998 /* SwiftApp.swift */; };
 		E977D04127AFDBBA007E4998 /* SwiftApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E977D03E27AFDBBA007E4998 /* SwiftApp.swift */; };
 		E977D05227AFECA8007E4998 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E977D05127AFECA8007E4998 /* ViewModel.swift */; };
+		E977D06527B1635A007E4998 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E977D06427B1635A007E4998 /* TableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +54,7 @@
 		E977D02927AFC887007E4998 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E977D03E27AFDBBA007E4998 /* SwiftApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftApp.swift; sourceTree = "<group>"; };
 		E977D05127AFECA8007E4998 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
+		E977D06427B1635A007E4998 /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +108,7 @@
 				E977D00527AFC887007E4998 /* AppDelegate.swift */,
 				E977D00727AFC887007E4998 /* SceneDelegate.swift */,
 				E977D03E27AFDBBA007E4998 /* SwiftApp.swift */,
+				E977D06427B1635A007E4998 /* TableViewCell.swift */,
 				E977D00927AFC887007E4998 /* ViewController.swift */,
 				E977D05127AFECA8007E4998 /* ViewModel.swift */,
 				E977D00E27AFC887007E4998 /* Assets.xcassets */,
@@ -265,6 +268,7 @@
 				E977D05227AFECA8007E4998 /* ViewModel.swift in Sources */,
 				E977D00A27AFC887007E4998 /* ViewController.swift in Sources */,
 				E977D00627AFC887007E4998 /* AppDelegate.swift in Sources */,
+				E977D06527B1635A007E4998 /* TableViewCell.swift in Sources */,
 				E977D00827AFC887007E4998 /* SceneDelegate.swift in Sources */,
 				E977D03F27AFDBBA007E4998 /* SwiftApp.swift in Sources */,
 			);

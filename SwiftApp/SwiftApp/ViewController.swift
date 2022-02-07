@@ -53,17 +53,19 @@ class ViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = model.sections[indexPath.section].cells[indexPath.row]
         let tvc = tableView.dequeueReusableCell(withIdentifier: cell.type.reuseID, for: indexPath)
-
         tvc.selectionStyle = .none
-        switch cell {
-        case .button(let title, _):
-            tvc.backgroundColor = .red
-            tvc.textLabel?.textAlignment = .center
-            tvc.textLabel?.text = title
-        case .standard(let title, _, _):
-            tvc.backgroundColor = .white
-            tvc.textLabel?.textAlignment = .left
-            tvc.textLabel?.text = title
+        
+        if let tvc = tvc as? TableViewCell {
+            switch cell {
+            case .button(let title, _):
+                tvc.backgroundColor = .red
+                tvc.label.textAlignment = .center
+                tvc.label.text = title
+            case .standard(let title, _, _):
+                tvc.backgroundColor = .white
+                tvc.label.textAlignment = .left
+                tvc.label.text = title
+            }
         }
         return tvc
     }

@@ -38,7 +38,19 @@ class CellView: UIView {
         stack.constrainToSuperview(insets: Self.defaultStackInsets)
     }
     
-    func applyCell(_ cell: Cell) {
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    var cell: Cell? {
+        didSet {
+            if let cell = cell {
+                applyCell(cell)
+            }
+        }
+    }
+    
+    private func applyCell(_ cell: Cell) {
         switch cell {
         case .button(let title, _):
             backgroundColor = .red
@@ -51,9 +63,5 @@ class CellView: UIView {
             label1.textAlignment = .left
             label1.text = body
         }
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
 }

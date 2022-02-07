@@ -56,7 +56,7 @@ class ViewController: UITableViewController {
         tvc.selectionStyle = .none
         
         if let tvc = tvc as? TableViewCell {
-            tvc.cellView.applyCell(cell)
+            tvc.cellView.cell = cell
         }
         return tvc
     }

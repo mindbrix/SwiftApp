@@ -32,8 +32,6 @@ class CellView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        stack.addArrangedSubview(label0)
-        stack.addArrangedSubview(label1)
         addSubview(stack)
         stack.constrainToSuperview(insets: Self.defaultStackInsets)
     }
@@ -44,13 +42,17 @@ class CellView: UIView {
     
     var cell: Cell? {
         didSet {
-            if let cell = cell {
-                applyCell(cell)
-            }
+            applyCell(cell)
         }
     }
     
-    private func applyCell(_ cell: Cell) {
+    private func applyCell(_ cell: Cell?) {
+        for subview in stack.subviews {
+            subview.removeFromSuperview()
+        }
+        guard let cell = cell else { return }
+        
+        stack.addArrangedSubview(label0)
         switch cell {
         case .button(let title, _):
             backgroundColor = .red
@@ -60,6 +62,7 @@ class CellView: UIView {
             backgroundColor = .white
             label0.textAlignment = .left
             label0.text = title
+            stack.addArrangedSubview(label1)
             label1.textAlignment = .left
             label1.text = body
         }

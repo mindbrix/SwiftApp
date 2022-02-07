@@ -13,10 +13,23 @@ enum CellType: CaseIterable {
     var reuseID: String { String(describing: cellClass) }
 }
 
-enum Cell {
+enum Cell: Hashable {
     case button(title: String, onTap: (() -> Void))
     case standard(title: String, body: String? = nil, onTap: (() -> Void)? = nil)
     
+    static func == (lhs: Cell, rhs: Cell) -> Bool {
+        lhs.hashValue == rhs.hashValue
+    }
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(String(describing: self))
+        switch self {
+        case .button(let title, _):
+            hasher.combine(title)
+        case .standard(let title, let body, _):
+            hasher.combine(title)
+            hasher.combine(body)
+        }
+    }
     var type: CellType { .base }
 }
 

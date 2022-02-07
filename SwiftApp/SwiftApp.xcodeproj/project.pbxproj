@@ -25,6 +25,12 @@
 		E977D07727B1A9C9007E4998 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E977D07627B1A9C9007E4998 /* Extensions.swift */; };
 		E977D07827B1A9C9007E4998 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E977D07627B1A9C9007E4998 /* Extensions.swift */; };
 		E977D07927B1A9C9007E4998 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E977D07627B1A9C9007E4998 /* Extensions.swift */; };
+		E977D08027B1D625007E4998 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E977D06427B1635A007E4998 /* TableViewCell.swift */; };
+		E977D08427B1D626007E4998 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E977D06427B1635A007E4998 /* TableViewCell.swift */; };
+		E977D08827B1D62C007E4998 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E977D00927AFC887007E4998 /* ViewController.swift */; };
+		E977D08C27B1D62D007E4998 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E977D00927AFC887007E4998 /* ViewController.swift */; };
+		E977D09027B1D630007E4998 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E977D05127AFECA8007E4998 /* ViewModel.swift */; };
+		E977D09427B1D631007E4998 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E977D05127AFECA8007E4998 /* ViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -290,10 +296,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E977D08827B1D62C007E4998 /* ViewController.swift in Sources */,
+				E977D08027B1D625007E4998 /* TableViewCell.swift in Sources */,
 				E977D01D27AFC887007E4998 /* SwiftAppTests.swift in Sources */,
 				E977D04027AFDBBA007E4998 /* SwiftApp.swift in Sources */,
 				E977D06E27B1A628007E4998 /* CellView.swift in Sources */,
 				E977D07827B1A9C9007E4998 /* Extensions.swift in Sources */,
+				E977D09027B1D630007E4998 /* ViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -301,10 +310,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E977D08C27B1D62D007E4998 /* ViewController.swift in Sources */,
+				E977D08427B1D626007E4998 /* TableViewCell.swift in Sources */,
 				E977D02827AFC887007E4998 /* SwiftAppUITests.swift in Sources */,
 				E977D04127AFDBBA007E4998 /* SwiftApp.swift in Sources */,
 				E977D06F27B1A628007E4998 /* CellView.swift in Sources */,
 				E977D07927B1A9C9007E4998 /* Extensions.swift in Sources */,
+				E977D09427B1D631007E4998 /* ViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

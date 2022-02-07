@@ -38,11 +38,11 @@ class SwiftApp {
    
     private let window: UIWindow
     
-    private func getDefaultsItem(key: DefaultsKey) -> Any? {
+    private func getDefaultsItem(_ key: DefaultsKey) -> Any? {
         UserDefaults.standard.object(forKey: key.rawValue)
     }
     
-    private func setDefaultsItem(key: DefaultsKey, value: Any) {
+    private func setDefaultsItem(_ key: DefaultsKey, value: Any) {
         UserDefaults.standard.setValue(value, forKey: key.rawValue)
         UserDefaults.standard.synchronize()
         refresh()
@@ -87,7 +87,7 @@ class SwiftApp {
         case .Counter:
             vc.getModel = { [weak self] in
                 guard let self = self else { return ViewModel.emptyModel }
-                let count = self.getDefaultsItem(key: .counter) as? Int ?? 0
+                let count = self.getDefaultsItem(.counter) as? Int ?? 0
                 
                 return ViewModel(title: screen.rawValue, sections: [
                     Section(
@@ -97,13 +97,13 @@ class SwiftApp {
                             .button(
                                 title: "Down",
                                 onTap: {
-                                    self.setDefaultsItem(key: .counter, value: max(0, count - 1))
+                                    self.setDefaultsItem(.counter, value: max(0, count - 1))
                                 }
                             ),
                             .button(
                                 title: "Up",
                                 onTap: {
-                                    self.setDefaultsItem(key: .counter, value: count + 1)
+                                    self.setDefaultsItem(.counter, value: count + 1)
                                 }
                             )
                         ]
@@ -120,7 +120,7 @@ class SwiftApp {
                         cells: DefaultsKey.allCases.map({ key in
                             Cell.standard(
                                 title: key.rawValue,
-                                body: String(describing: self.getDefaultsItem(key: key)))
+                                body: String(describing: self.getDefaultsItem(key)))
                         })
                     )
                 ])

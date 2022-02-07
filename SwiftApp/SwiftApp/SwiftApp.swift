@@ -17,6 +17,7 @@ class SwiftApp {
         case Main
         case Counter
         case DefaultStore
+        case DequeueTest
         
         var embedInNavController: Bool {
             self == .Main
@@ -70,24 +71,16 @@ class SwiftApp {
                 
                 return ViewModel(title: screen.rawValue, sections: [
                     Section(
-                        header: .standard(title: "Header"),
-                        cells: [
-                            .standard(title: "Standard cell"),
+                        header: .standard(title: "Menu"),
+                        cells: [Screen.Counter, Screen.DefaultStore, Screen.DequeueTest].map({ screen in
                             .button(
-                                title: "Go to \(Screen.Counter.rawValue)",
+                                title: screen.rawValue,
                                 onTap: {
                                     guard let nc = vc.navigationController else { return }
-                                    nc.pushViewController(self.makeViewController(for: .Counter), animated: true)
-                                }
-                            ),
-                            .button(
-                                title: "Go to \(Screen.DefaultStore.rawValue)",
-                                onTap: {
-                                    guard let nc = vc.navigationController else { return }
-                                    nc.pushViewController(self.makeViewController(for: .DefaultStore), animated: true)
+                                    nc.pushViewController(self.makeViewController(for: screen), animated: true)
                                 }
                             )
-                        ]
+                        })
                     )
                 ])
             }
@@ -132,6 +125,7 @@ class SwiftApp {
                     )
                 ])
             }
+        case .DequeueTest:
             break
         }
         return vc

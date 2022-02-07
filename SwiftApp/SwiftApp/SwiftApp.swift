@@ -72,7 +72,7 @@ class SwiftApp {
                 return ViewModel(title: screen.rawValue, sections: [
                     Section(
                         header: .standard(title: "Menu"),
-                        cells: [Screen.Counter, Screen.DefaultStore, Screen.DequeueTest].map({ screen in
+                        cells: Screen.allCases.filter({ $0 != .Main }).map({ screen in
                             .button(
                                 title: screen.rawValue,
                                 onTap: {

@@ -52,20 +52,20 @@ class ViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = model.sections[indexPath.section].cells[indexPath.row]
-        let tvCell = tableView.dequeueReusableCell(withIdentifier: cell.type.reuseID, for: indexPath)
+        let tvc = tableView.dequeueReusableCell(withIdentifier: cell.type.reuseID, for: indexPath)
 
-        tvCell.selectionStyle = .none
+        tvc.selectionStyle = .none
         switch cell {
         case .button(let title, _):
-            tvCell.backgroundColor = .red
-            tvCell.textLabel?.textAlignment = .center
-            tvCell.textLabel?.text = title
+            tvc.backgroundColor = .red
+            tvc.textLabel?.textAlignment = .center
+            tvc.textLabel?.text = title
         case .standard(let title, _, _):
-            tvCell.backgroundColor = .white
-            tvCell.textLabel?.textAlignment = .left
-            tvCell.textLabel?.text = title
+            tvc.backgroundColor = .white
+            tvc.textLabel?.textAlignment = .left
+            tvc.textLabel?.text = title
         }
-        return tvCell
+        return tvc
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

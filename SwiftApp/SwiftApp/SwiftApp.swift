@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 class SwiftApp {
-    enum StoreKey: String, CaseIterable {
+    enum DefaultsKey: String, CaseIterable {
         case counter
     }
     
@@ -37,11 +37,11 @@ class SwiftApp {
    
     private let window: UIWindow
     
-    private func getStoreItem(key: StoreKey) -> Any? {
+    private func getDefaultsItem(key: DefaultsKey) -> Any? {
         UserDefaults.standard.object(forKey: key.rawValue)
     }
     
-    private func setStoreItem(key: StoreKey, value: Any) {
+    private func setDefaultsItem(key: DefaultsKey, value: Any) {
         UserDefaults.standard.setValue(value, forKey: key.rawValue)
         UserDefaults.standard.synchronize()
         refresh()
@@ -94,7 +94,7 @@ class SwiftApp {
         case .Counter:
             vc.getModel = { [weak self] in
                 guard let self = self else { return ViewModel.emptyModel }
-                let count = self.getStoreItem(key: .counter) as? Int ?? 0
+                let count = self.getDefaultsItem(key: .counter) as? Int ?? 0
                 
                 return ViewModel(title: screen.rawValue, sections: [
                     Section(
@@ -104,13 +104,13 @@ class SwiftApp {
                             .button(
                                 title: "Down",
                                 onTap: {
-                                    self.setStoreItem(key: .counter, value: max(0, count - 1))
+                                    self.setDefaultsItem(key: .counter, value: max(0, count - 1))
                                 }
                             ),
                             .button(
                                 title: "Up",
                                 onTap: {
-                                    self.setStoreItem(key: .counter, value: count + 1)
+                                    self.setDefaultsItem(key: .counter, value: count + 1)
                                 }
                             )
                         ]
@@ -124,7 +124,7 @@ class SwiftApp {
                 return ViewModel(title: screen.rawValue, sections: [
                     Section(
                         header: .standard(title: screen.rawValue),
-                        cells: StoreKey.allCases.map({ key in Cell.standard(title: "\(key.rawValue): \(self.getStoreItem(key: key) ?? "nil")" ) })
+                        cells: DefaultsKey.allCases.map({ key in Cell.standard(title: "\(key.rawValue): \(self.getDefaultsItem(key: key) ?? "nil")" ) })
                     )
                 ])
             }

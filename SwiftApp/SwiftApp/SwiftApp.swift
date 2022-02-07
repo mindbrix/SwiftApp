@@ -9,9 +9,13 @@ import Foundation
 import UIKit
 
 class SwiftApp {
+    enum ItemKey: String {
+        case counter
+    }
+    
     enum Screen: String, CaseIterable {
         case Main
-        case Splash
+        case Counter
         
         var embedInNavController: Bool {
             self == .Main
@@ -31,6 +35,17 @@ class SwiftApp {
     }
    
     private let window: UIWindow
+    
+    private var store: [ItemKey: Any] = [.counter: 0]
+    
+    private func getStoreItem(item: ItemKey) -> Any? {
+        store[item]
+    }
+    
+    private func setStoreItem(item: ItemKey, value: Any) {
+        store[item] = value
+        refresh()
+    }
     
     private var topViewController: ViewController? {
         if let nc = window.rootViewController as? UINavigationController, let vc = nc.topViewController as? ViewController {
@@ -59,10 +74,10 @@ class SwiftApp {
                         cells: [
                             .standard(title: "Standard cell"),
                             .button(
-                                title: "Go to \(Screen.Splash.rawValue)",
+                                title: "Go to \(Screen.Counter.rawValue)",
                                 onTap: {
                                     print("onTap")
-                                    let splash = self.makeViewController(for: .Splash)
+                                    let splash = self.makeViewController(for: .Counter)
                                     vc.navigationController?.pushViewController(splash, animated: true)
                                 }
                             )
@@ -70,21 +85,25 @@ class SwiftApp {
                     )
                 ])
             }
-        case .Splash:
+        case .Counter:
             vc.getModel = { [weak self, weak vc] in
-                guard let self = self, let vc = vc else { return ViewModel.emptyModel }
+                guard let self = self, let vc = vc, let count = self.getStoreItem(item: .counter) as? Int else { return ViewModel.emptyModel }
                 
                 return ViewModel(title: screen.rawValue, sections: [
                     Section(
                         header: .standard(title: "Header"),
                         cells: [
-                            .standard(title: "Standard cell"),
+                            .standard(title: "Count: \(count)"),
                             .button(
-                                title: "Go to \(Screen.Main.rawValue)",
+                                title: "Down",
                                 onTap: {
-                                    print("onTap")
-//                                    self.rootScreen = .Main
-                                    self.refresh()
+                                    self.setStoreItem(item: .counter, value: max(0, count - 1))
+                                }
+                            ),
+                            .button(
+                                title: "Up",
+                                onTap: {
+                                    self.setStoreItem(item: .counter, value: count + 1)
                                 }
                             )
                         ]

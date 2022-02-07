@@ -16,8 +16,9 @@ class ViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: reuseIdentifier)
+        for cellClass in CellClass.allCases {
+            self.tableView.register(cellClass.cellClass, forCellReuseIdentifier: cellClass.reuseID)
+        }
         self.view.backgroundColor = .lightGray
     }
 
@@ -50,20 +51,21 @@ class ViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath)
+        let cell = model.sections[indexPath.section].cells[indexPath.row]
+        let tvCell = tableView.dequeueReusableCell(withIdentifier: cell.cellClass.reuseID, for: indexPath)
 
-        cell.selectionStyle = .none
-        switch model.sections[indexPath.section].cells[indexPath.row] {
+        tvCell.selectionStyle = .none
+        switch cell {
         case .button(let title, _):
-            cell.backgroundColor = .red
-            cell.textLabel?.textAlignment = .center
-            cell.textLabel?.text = title
+            tvCell.backgroundColor = .red
+            tvCell.textLabel?.textAlignment = .center
+            tvCell.textLabel?.text = title
         case .standard(let title, _, _):
-            cell.backgroundColor = .white
-            cell.textLabel?.textAlignment = .left
-            cell.textLabel?.text = title
+            tvCell.backgroundColor = .white
+            tvCell.textLabel?.textAlignment = .left
+            tvCell.textLabel?.text = title
         }
-        return cell
+        return tvCell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

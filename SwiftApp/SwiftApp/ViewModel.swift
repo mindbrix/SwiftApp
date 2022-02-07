@@ -6,10 +6,19 @@
 //
 
 import Foundation
+import UIKit
+
+enum CellClass: CaseIterable {
+    case base
+    var cellClass: AnyClass { UITableViewCell.self }
+    var reuseID: String { String(describing: cellClass) }
+}
 
 enum Cell {
     case button(title: String, onTap: (() -> Void))
     case standard(title: String, body: String? = nil, onTap: (() -> Void)? = nil)
+    
+    var cellClass: CellClass { .base }
 }
 
 struct Section {

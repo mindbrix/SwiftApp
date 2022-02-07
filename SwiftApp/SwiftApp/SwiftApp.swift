@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 class SwiftApp {
-    enum Screen {
+    enum Screen: String, CaseIterable {
         case Main
         case Splash
         
@@ -53,13 +53,13 @@ class SwiftApp {
             vc.getModel = { [weak self, weak vc] in
                 guard let self = self, let vc = vc else { return ViewModel.emptyModel }
                 
-                return ViewModel(title: String(describing: screen), sections: [
+                return ViewModel(title: screen.rawValue, sections: [
                     Section(
                         header: .standard(title: "Header"),
                         cells: [
                             .standard(title: "Standard cell"),
                             .button(
-                                title: "Go to Splash",
+                                title: "Go to \(Screen.Splash.rawValue)",
                                 onTap: {
                                     print("onTap")
                                     let splash = self.makeViewController(for: .Splash)
@@ -74,13 +74,13 @@ class SwiftApp {
             vc.getModel = { [weak self, weak vc] in
                 guard let self = self, let vc = vc else { return ViewModel.emptyModel }
                 
-                return ViewModel(title: String(describing: screen), sections: [
+                return ViewModel(title: screen.rawValue, sections: [
                     Section(
                         header: .standard(title: "Header"),
                         cells: [
                             .standard(title: "Standard cell"),
                             .button(
-                                title: "Go to Main",
+                                title: "Go to \(Screen.Main.rawValue)",
                                 onTap: {
                                     print("onTap")
 //                                    self.rootScreen = .Main

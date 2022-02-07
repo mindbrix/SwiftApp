@@ -55,16 +55,16 @@ class CellView: UIView {
         stack.addArrangedSubview(label0)
         switch cell {
         case .button(let title, _):
-            backgroundColor = .red
+            label0.text = title
             label0.textAlignment = .center
-            label0.text = title
+            backgroundColor = .red
         case .standard(let title, let body, _):
-            backgroundColor = .white
-            label0.textAlignment = .left
             label0.text = title
+            label0.textAlignment = .left
             stack.addArrangedSubview(label1)
-            label1.textAlignment = .left
             label1.text = body
+            label1.textAlignment = .left
+            backgroundColor = .white
         }
     }
 }

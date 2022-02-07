@@ -7,6 +7,18 @@
 
 import UIKit
 
+extension UIView {
+    func constrainToSuperview() {
+        guard let superView = self.superview else { return }
+        NSLayoutConstraint.activate([
+            leadingAnchor.constraint(equalTo: superView.leadingAnchor),
+            trailingAnchor.constraint(equalTo: superView.trailingAnchor),
+            topAnchor.constraint(equalTo: superView.topAnchor),
+            bottomAnchor.constraint(equalTo: superView.bottomAnchor)
+        ])
+    }
+}
+
 class TableViewCell: UITableViewCell {
     lazy var label: UILabel = {
         let label = UILabel()
@@ -18,12 +30,7 @@ class TableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.contentView.addSubview(label)
-        NSLayoutConstraint.activate([
-            label.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor),
-            label.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor),
-            label.topAnchor.constraint(equalTo: self.contentView.topAnchor),
-            label.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor)
-        ])
+        label.constrainToSuperview()
     }
     
     required init?(coder: NSCoder) {

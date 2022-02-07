@@ -10,6 +10,7 @@ import UIKit
 class TableViewCell: UITableViewCell {
     lazy var label: UILabel = {
         let label = UILabel()
+        label.numberOfLines = 0
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()

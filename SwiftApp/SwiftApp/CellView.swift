@@ -9,6 +9,8 @@ import Foundation
 import UIKit
 
 class CellView: UIView {
+    static let defaultStackInsets = UIEdgeInsets(top: 4, left: 4, bottom: 4, right: 4)
+    
     lazy var label0: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
@@ -33,7 +35,7 @@ class CellView: UIView {
         stack.addArrangedSubview(label0)
         stack.addArrangedSubview(label1)
         addSubview(stack)
-        stack.constrainToSuperview(insets: UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8))
+        stack.constrainToSuperview(insets: Self.defaultStackInsets)
     }
     
     func applyCell(_ cell: Cell) {

@@ -9,13 +9,14 @@ import Foundation
 import UIKit
 
 class SwiftApp {
-    enum StoreKey: String {
+    enum StoreKey: String, CaseIterable {
         case counter
     }
     
     enum Screen: String, CaseIterable {
         case Main
         case Counter
+        case Store
         
         var embedInNavController: Bool {
             self == .Main
@@ -75,8 +76,14 @@ class SwiftApp {
                             .button(
                                 title: "Go to \(Screen.Counter.rawValue)",
                                 onTap: {
-                                    print("onTap")
                                     let splash = self.makeViewController(for: .Counter)
+                                    vc.navigationController?.pushViewController(splash, animated: true)
+                                }
+                            ),
+                            .button(
+                                title: "Go to \(Screen.Store.rawValue)",
+                                onTap: {
+                                    let splash = self.makeViewController(for: .Store)
                                     vc.navigationController?.pushViewController(splash, animated: true)
                                 }
                             )
@@ -85,8 +92,8 @@ class SwiftApp {
                 ])
             }
         case .Counter:
-            vc.getModel = { [weak self, weak vc] in
-                guard let self = self, let vc = vc else { return ViewModel.emptyModel }
+            vc.getModel = { [weak self] in
+                guard let self = self else { return ViewModel.emptyModel }
                 let count = self.getStoreItem(key: .counter) as? Int ?? 0
                 
                 return ViewModel(title: screen.rawValue, sections: [
@@ -110,6 +117,18 @@ class SwiftApp {
                     )
                 ])
             }
+        case .Store:
+            vc.getModel = { [weak self] in
+                guard let self = self else { return ViewModel.emptyModel }
+                
+                return ViewModel(title: screen.rawValue, sections: [
+                    Section(
+                        header: .standard(title: screen.rawValue),
+                        cells: StoreKey.allCases.map({ key in Cell.standard(title: "Key: \(key.rawValue). Value: \(self.getStoreItem(key: key) ?? "nil")" ) })
+                    )
+                ])
+            }
+            break
         }
         return vc
     }

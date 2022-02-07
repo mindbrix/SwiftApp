@@ -132,7 +132,8 @@ class SwiftApp {
                         header: .standard(title: screen.rawValue),
                         cells: Array(1...100).map({ int in
                             Cell.standard(
-                                title: String(int))
+                                title: String(int),
+                                body: int % 2 == 0 ? nil : "Body")
                         })
                     )
                 ])

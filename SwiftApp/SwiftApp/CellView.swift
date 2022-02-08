@@ -76,16 +76,21 @@ class CellView: UIView {
     private func applyCellStyle() {
         guard let cell = cell else { return }
         
+        let fontSize: CGFloat = 14
         switch cell {
         case .button(_, _):
             label0.textAlignment = .center
+            label0.font = UIFont.systemFont(ofSize: fontSize * 1.33, weight: .medium)
             backgroundColor = .red
         case .header( _):
             label0.textAlignment = .left
-            backgroundColor = .lightGray
+            label0.font = UIFont.systemFont(ofSize: fontSize, weight: .regular)
+            backgroundColor = UIColor(white: 0.9, alpha: 1)
         case .standard(_, _, _):
             label0.textAlignment = .left
+            label0.font = UIFont.systemFont(ofSize: fontSize * 1.2, weight: .regular)
             label1.textAlignment = .left
+            label1.font = UIFont.systemFont(ofSize: fontSize, weight: .regular)
             backgroundColor = .white
         }
     }

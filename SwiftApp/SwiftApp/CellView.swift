@@ -53,6 +53,10 @@ class CellView: UIView {
     lazy var tapper: UITapGestureRecognizer = {
         UITapGestureRecognizer(target: self, action: #selector(onTap))
     }()
+    lazy var textField: UITextField = {
+        let field = UITextField()
+        return field
+    }()
     
     private func applyCell() {
         for subview in stack.subviews {
@@ -72,8 +76,8 @@ class CellView: UIView {
             label1.text = body
         case .textInput(let title, let get, _):
             label0.text = title
-            stack.addArrangedSubview(label1)
-            label1.text = get()
+            stack.addArrangedSubview(textField)
+            textField.text = get()
         }
     }
     
@@ -99,8 +103,8 @@ class CellView: UIView {
         case .textInput(_, _, _):
             label0.font = UIFont.systemFont(ofSize: fontSize * 0.866, weight: .regular)
             label0.textAlignment = .left
-            label1.font = UIFont.systemFont(ofSize: fontSize * 1.2, weight: .regular)
-            label1.textAlignment = .left
+            textField.font = UIFont.systemFont(ofSize: fontSize * 1.2, weight: .regular)
+            textField.textAlignment = .left
             backgroundColor = UIColor(white: 0.95, alpha: 1)
         }
     }

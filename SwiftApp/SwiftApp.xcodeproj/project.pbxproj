@@ -18,15 +18,15 @@
 		E977D04027AFDBBA007E4998 /* SwiftApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E977D03E27AFDBBA007E4998 /* SwiftApp.swift */; };
 		E977D04127AFDBBA007E4998 /* SwiftApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E977D03E27AFDBBA007E4998 /* SwiftApp.swift */; };
 		E977D05227AFECA8007E4998 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E977D05127AFECA8007E4998 /* ViewModel.swift */; };
-		E977D06527B1635A007E4998 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E977D06427B1635A007E4998 /* TableViewCell.swift */; };
+		E977D06527B1635A007E4998 /* CellViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E977D06427B1635A007E4998 /* CellViewCell.swift */; };
 		E977D06D27B1A628007E4998 /* CellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E977D06C27B1A628007E4998 /* CellView.swift */; };
 		E977D06E27B1A628007E4998 /* CellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E977D06C27B1A628007E4998 /* CellView.swift */; };
 		E977D06F27B1A628007E4998 /* CellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E977D06C27B1A628007E4998 /* CellView.swift */; };
 		E977D07727B1A9C9007E4998 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E977D07627B1A9C9007E4998 /* Extensions.swift */; };
 		E977D07827B1A9C9007E4998 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E977D07627B1A9C9007E4998 /* Extensions.swift */; };
 		E977D07927B1A9C9007E4998 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E977D07627B1A9C9007E4998 /* Extensions.swift */; };
-		E977D08027B1D625007E4998 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E977D06427B1635A007E4998 /* TableViewCell.swift */; };
-		E977D08427B1D626007E4998 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E977D06427B1635A007E4998 /* TableViewCell.swift */; };
+		E977D08027B1D625007E4998 /* CellViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E977D06427B1635A007E4998 /* CellViewCell.swift */; };
+		E977D08427B1D626007E4998 /* CellViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E977D06427B1635A007E4998 /* CellViewCell.swift */; };
 		E977D08827B1D62C007E4998 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E977D00927AFC887007E4998 /* ViewController.swift */; };
 		E977D08C27B1D62D007E4998 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E977D00927AFC887007E4998 /* ViewController.swift */; };
 		E977D09027B1D630007E4998 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E977D05127AFECA8007E4998 /* ViewModel.swift */; };
@@ -66,7 +66,7 @@
 		E977D02927AFC887007E4998 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E977D03E27AFDBBA007E4998 /* SwiftApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftApp.swift; sourceTree = "<group>"; };
 		E977D05127AFECA8007E4998 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
-		E977D06427B1635A007E4998 /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
+		E977D06427B1635A007E4998 /* CellViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellViewCell.swift; sourceTree = "<group>"; };
 		E977D06C27B1A628007E4998 /* CellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellView.swift; sourceTree = "<group>"; };
 		E977D07627B1A9C9007E4998 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -121,10 +121,10 @@
 			children = (
 				E977D00527AFC887007E4998 /* AppDelegate.swift */,
 				E977D06C27B1A628007E4998 /* CellView.swift */,
+				E977D06427B1635A007E4998 /* CellViewCell.swift */,
 				E977D07627B1A9C9007E4998 /* Extensions.swift */,
 				E977D00727AFC887007E4998 /* SceneDelegate.swift */,
 				E977D03E27AFDBBA007E4998 /* SwiftApp.swift */,
-				E977D06427B1635A007E4998 /* TableViewCell.swift */,
 				E977D00927AFC887007E4998 /* ViewController.swift */,
 				E977D05127AFECA8007E4998 /* ViewModel.swift */,
 				E977D00E27AFC887007E4998 /* Assets.xcassets */,
@@ -285,7 +285,7 @@
 				E977D00A27AFC887007E4998 /* ViewController.swift in Sources */,
 				E977D00627AFC887007E4998 /* AppDelegate.swift in Sources */,
 				E977D07727B1A9C9007E4998 /* Extensions.swift in Sources */,
-				E977D06527B1635A007E4998 /* TableViewCell.swift in Sources */,
+				E977D06527B1635A007E4998 /* CellViewCell.swift in Sources */,
 				E977D00827AFC887007E4998 /* SceneDelegate.swift in Sources */,
 				E977D03F27AFDBBA007E4998 /* SwiftApp.swift in Sources */,
 				E977D06D27B1A628007E4998 /* CellView.swift in Sources */,
@@ -297,7 +297,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E977D08827B1D62C007E4998 /* ViewController.swift in Sources */,
-				E977D08027B1D625007E4998 /* TableViewCell.swift in Sources */,
+				E977D08027B1D625007E4998 /* CellViewCell.swift in Sources */,
 				E977D01D27AFC887007E4998 /* SwiftAppTests.swift in Sources */,
 				E977D04027AFDBBA007E4998 /* SwiftApp.swift in Sources */,
 				E977D06E27B1A628007E4998 /* CellView.swift in Sources */,
@@ -311,7 +311,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E977D08C27B1D62D007E4998 /* ViewController.swift in Sources */,
-				E977D08427B1D626007E4998 /* TableViewCell.swift in Sources */,
+				E977D08427B1D626007E4998 /* CellViewCell.swift in Sources */,
 				E977D02827AFC887007E4998 /* SwiftAppUITests.swift in Sources */,
 				E977D04127AFDBBA007E4998 /* SwiftApp.swift in Sources */,
 				E977D06F27B1A628007E4998 /* CellView.swift in Sources */,

@@ -51,7 +51,7 @@ class ViewController: UITableViewController {
         let tvc = tableView.dequeueReusableCell(withIdentifier: cell.type.reuseID, for: indexPath)
         tvc.selectionStyle = .none
         
-        if let tvc = tvc as? TableViewCell {
+        if let tvc = tvc as? CellViewCell {
             tvc.cellView.cell = cell
         }
         return tvc

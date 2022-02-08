@@ -7,7 +7,7 @@
 
 import UIKit
 
-class TableViewCell: UITableViewCell {
+class CellViewCell: UITableViewCell {
     lazy var cellView: CellView = {
         let cellView = CellView()
         cellView.translatesAutoresizingMaskIntoConstraints = false

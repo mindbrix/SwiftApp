@@ -9,7 +9,7 @@ import Foundation
 
 enum CellType: CaseIterable {
     case base
-    var cellClass: AnyClass { TableViewCell.self }
+    var cellClass: AnyClass { CellViewCell.self }
     var reuseID: String { String(describing: cellClass) }
 }
 

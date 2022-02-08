@@ -8,6 +8,8 @@
 import UIKit
 
 class CellViewCell: UITableViewCell {
+    static let reuseID = String(describing: CellViewCell.self)
+    
     lazy var cellView: CellView = {
         let cellView = CellView()
         cellView.translatesAutoresizingMaskIntoConstraints = false

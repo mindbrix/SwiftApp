@@ -7,12 +7,6 @@
 
 import Foundation
 
-enum CellType: CaseIterable {
-    case base
-    var cellClass: AnyClass { CellViewCell.self }
-    var reuseID: String { String(describing: cellClass) }
-}
-
 enum Cell: Hashable {
     case button(title: String, onTap: (() -> Void))
     case header(title: String)
@@ -24,7 +18,6 @@ enum Cell: Hashable {
     func hash(into hasher: inout Hasher) {
         hasher.combine(String(describing: self))
     }
-    var type: CellType { .base }
 }
 
 struct Section: Equatable {

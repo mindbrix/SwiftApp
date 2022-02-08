@@ -8,7 +8,7 @@
 import UIKit
 
 class TableViewController: UITableViewController {
-    var getModel: (() -> ViewModel) = { ViewModel.emptyModel } {
+    var getModel: ModelClosure = { ViewModel.emptyModel } {
         didSet {
             model = getModel()
         }

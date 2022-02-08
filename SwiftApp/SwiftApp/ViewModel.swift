@@ -31,3 +31,5 @@ struct ViewModel: Equatable {
     
     static let emptyModel = Self(title: "", sections: [])
 }
+
+typealias ModelClosure = () -> ViewModel

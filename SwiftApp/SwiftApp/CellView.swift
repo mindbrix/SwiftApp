@@ -9,6 +9,27 @@ import Foundation
 import UIKit
 
 class CellView: UIView {
+    init(cell: Cell? = nil) {
+        super.init(frame: .zero)
+        addSubview(stack)
+        stack.constrainToSuperview(insets: Self.defaultStackInsets)
+        stack.addGestureRecognizer(tapper)
+        self.cell = cell
+        applyCell()
+        applyCellStyle()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    var cell: Cell? {
+        didSet {
+            applyCell()
+            applyCellStyle()
+        }
+    }
+    
     static let defaultStackInsets = UIEdgeInsets(top: 4, left: 4, bottom: 4, right: 4)
     
     lazy var label0: UILabel = {
@@ -32,31 +53,6 @@ class CellView: UIView {
     lazy var tapper: UITapGestureRecognizer = {
         UITapGestureRecognizer(target: self, action: #selector(onTap))
     }()
-    
-    convenience init(cell: Cell) {
-        self.init(frame: .zero)
-        self.cell = cell
-        applyCell()
-        applyCellStyle()
-    }
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        addSubview(stack)
-        stack.constrainToSuperview(insets: Self.defaultStackInsets)
-        stack.addGestureRecognizer(tapper)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    var cell: Cell? {
-        didSet {
-            applyCell()
-            applyCellStyle()
-        }
-    }
     
     private func applyCell() {
         for subview in stack.subviews {

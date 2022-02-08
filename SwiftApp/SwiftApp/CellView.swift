@@ -128,13 +128,13 @@ class CellView: UIView, UITextFieldDelegate {
     // MARK: - UITextFieldDelegate
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        if let text = textField.text, let textRange = Range(range, in: text) {
-            switch cell {
-            case .textInput(_, _, let set):
+        switch cell {
+        case .textInput(_, _, let set):
+            if let text = textField.text, let textRange = Range(range, in: text) {
                 set(text.replacingCharacters(in: textRange, with: string))
-            default:
-                break
             }
+        default:
+            break
         }
         return true
     }

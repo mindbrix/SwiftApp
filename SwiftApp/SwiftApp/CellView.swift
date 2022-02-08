@@ -86,20 +86,20 @@ class CellView: UIView, UITextFieldDelegate {
             label0.text = title
         case .standard(let title, let body, _):
             stack.addArrangedSubview(label0)
-            label0.text = title
             stack.addArrangedSubview(label1)
+            label0.text = title
             label1.text = body
         case .textInput(let title, let get, _):
             stack.addArrangedSubview(label0)
-            label0.text = title
             stack.addArrangedSubview(textField)
+            label0.text = title
             textField.text = get()
         case .thumbnail(let get, let caption, _):
             stack.axis = .horizontal
             stack.alignment = .leading
             stack.addArrangedSubview(image)
-            image.image = get()
             stack.addArrangedSubview(label0)
+            image.image = get()
             label0.text = caption
         }
     }

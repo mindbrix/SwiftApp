@@ -28,6 +28,7 @@ class ViewController: UITableViewController {
     
     private var model = ViewModel.emptyModel {
         didSet {
+            guard oldValue != model else { return }
             self.title = model.title
             self.tableView.reloadData()
         }

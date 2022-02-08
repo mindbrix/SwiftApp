@@ -22,23 +22,16 @@ enum Cell: Hashable {
     }
     func hash(into hasher: inout Hasher) {
         hasher.combine(String(describing: self))
-        switch self {
-        case .button(let title, _):
-            hasher.combine(title)
-        case .standard(let title, let body, _):
-            hasher.combine(title)
-            hasher.combine(body)
-        }
     }
     var type: CellType { .base }
 }
 
-struct Section {
+struct Section: Equatable {
     let header: Cell
     let cells: [Cell]
 }
 
-struct ViewModel {
+struct ViewModel: Equatable {
     let title: String
     let sections: [Section]
     

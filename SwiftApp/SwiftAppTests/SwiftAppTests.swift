@@ -23,6 +23,7 @@ class SwiftAppTests: XCTestCase {
         // Use XCTAssert and related functions to verify your tests produce the correct results.
         let c0 = Cell.standard(title: "Title0")
         let c1 = Cell.standard(title: "Title1")
+        assert("\(c0)" == String(describing: c0))
         XCTAssertEqual(c0, c0)
         XCTAssertNotEqual(c0, c1)
     }

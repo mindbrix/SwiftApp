@@ -71,7 +71,7 @@ class SwiftApp {
                 
                 return ViewModel(title: screen.rawValue, sections: [
                     Section(
-                        header: .standard(title: "Menu"),
+                        header: .header(title: "Menu"),
                         cells: Screen.allCases.filter({ $0 != .Main }).map({ screen in
                             .button(
                                 title: screen.rawValue,
@@ -91,7 +91,7 @@ class SwiftApp {
                 
                 return ViewModel(title: screen.rawValue, sections: [
                     Section(
-                        header: .standard(title: "Header"),
+                        header: .header(title: "Header"),
                         cells: [
                             .standard(title: "Count: \(count)"),
                             .button(
@@ -116,7 +116,7 @@ class SwiftApp {
                 
                 return ViewModel(title: screen.rawValue, sections: [
                     Section(
-                        header: .standard(title: screen.rawValue),
+                        header: .header(title: screen.rawValue),
                         cells: DefaultsKey.allCases.map({ key in
                             Cell.standard(
                                 title: key.rawValue,
@@ -129,7 +129,7 @@ class SwiftApp {
             vc.getModel = {
                 ViewModel(title: screen.rawValue, sections: [
                     Section(
-                        header: .standard(title: screen.rawValue),
+                        header: .header(title: screen.rawValue),
                         cells: Array(1...100).map({ int in
                             Cell.standard(
                                 title: String(int),

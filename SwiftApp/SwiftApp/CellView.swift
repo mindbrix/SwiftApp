@@ -64,6 +64,10 @@ class CellView: UIView {
             label0.text = title
             label0.textAlignment = .center
             backgroundColor = .red
+        case .header(let title):
+            label0.text = title
+            label0.textAlignment = .left
+            backgroundColor = .lightGray
         case .standard(let title, let body, _):
             label0.text = title
             label0.textAlignment = .left

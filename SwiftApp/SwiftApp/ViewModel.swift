@@ -15,6 +15,7 @@ enum CellType: CaseIterable {
 
 enum Cell: Hashable {
     case button(title: String, onTap: (() -> Void))
+    case header(title: String)
     case standard(title: String, body: String? = nil, onTap: (() -> Void)? = nil)
     
     static func == (lhs: Cell, rhs: Cell) -> Bool {

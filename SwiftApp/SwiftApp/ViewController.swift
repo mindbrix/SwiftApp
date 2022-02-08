@@ -42,13 +42,8 @@ class ViewController: UITableViewController {
         model.sections[section].cells.count
     }
 
-    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        switch model.sections[section].header {
-        case .button(_, _):
-            return nil
-        case .standard(let title, _, _):
-            return title
-        }
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        return CellView(cell: model.sections[section].header)
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

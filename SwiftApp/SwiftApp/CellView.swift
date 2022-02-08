@@ -30,6 +30,12 @@ class CellView: UIView {
         return stack
     }()
     
+    convenience init(cell: Cell) {
+        self.init(frame: .zero)
+        self.cell = cell
+        applyCell()
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         addSubview(stack)

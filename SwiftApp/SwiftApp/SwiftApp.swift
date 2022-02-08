@@ -66,7 +66,7 @@ class SwiftApp {
         let vc = TableViewController()
         switch screen {
         case .Main:
-            vc.getModel = { [weak self, weak vc] in
+            vc.modelClosure = { [weak self, weak vc] in
                 guard let self = self, let vc = vc else { return ViewModel.emptyModel }
                 
                 return ViewModel(title: screen.rawValue, sections: [
@@ -85,7 +85,7 @@ class SwiftApp {
                 ])
             }
         case .Counter:
-            vc.getModel = { [weak self] in
+            vc.modelClosure = { [weak self] in
                 guard let self = self else { return ViewModel.emptyModel }
                 let count = self.getDefaultsItem(.counter) as? Int ?? 0
                 
@@ -111,7 +111,7 @@ class SwiftApp {
                 ])
             }
         case .DefaultStore:
-            vc.getModel = { [weak self] in
+            vc.modelClosure = { [weak self] in
                 guard let self = self else { return ViewModel.emptyModel }
                 
                 return ViewModel(title: screen.rawValue, sections: [
@@ -126,7 +126,7 @@ class SwiftApp {
                 ])
             }
         case .DequeueTest:
-            vc.getModel = {
+            vc.modelClosure = {
                 ViewModel(title: screen.rawValue, sections: [
                     Section(
                         header: .header(title: screen.rawValue),

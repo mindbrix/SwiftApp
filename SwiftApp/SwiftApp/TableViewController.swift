@@ -8,9 +8,9 @@
 import UIKit
 
 class TableViewController: UITableViewController {
-    var getModel: ModelClosure = { ViewModel.emptyModel } {
+    var modelClosure: ModelClosure = { ViewModel.emptyModel } {
         didSet {
-            model = getModel()
+            model = modelClosure()
         }
     }
     
@@ -21,7 +21,7 @@ class TableViewController: UITableViewController {
     }
 
     func refresh() {
-        model = getModel()
+        model = modelClosure()
     }
     
     private var model = ViewModel.emptyModel {

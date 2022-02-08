@@ -31,16 +31,12 @@ class CellView: UIView, UITextFieldDelegate {
     }
     
     static let defaultStackInsets = UIEdgeInsets(top: 4, left: 4, bottom: 4, right: 4)
+    static let thumbSize: CGFloat = 64
     
     lazy var image: UIImageView = {
         let image = UIImageView()
-        let size: CGFloat = 64
         image.contentMode = .scaleAspectFit
         image.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            image.widthAnchor.constraint(equalToConstant: size),
-            image.heightAnchor.constraint(equalToConstant: size)
-        ])
         return image
     }()
     lazy var label0: UILabel = {
@@ -68,6 +64,10 @@ class CellView: UIView, UITextFieldDelegate {
         field.delegate = self
         return field
     }()
+    lazy var thumbConstraints: [NSLayoutConstraint] = {[
+        image.widthAnchor.constraint(equalToConstant: Self.thumbSize),
+        image.heightAnchor.constraint(equalToConstant: Self.thumbSize)
+    ]}()
     
     private func applyCell() {
         for subview in stack.subviews {
@@ -107,6 +107,7 @@ class CellView: UIView, UITextFieldDelegate {
     private func applyCellStyle() {
         guard let cell = cell else { return }
         
+        NSLayoutConstraint.deactivate(thumbConstraints)
         let fontSize: CGFloat = 14
         switch cell {
         case .button(_, _):
@@ -130,6 +131,7 @@ class CellView: UIView, UITextFieldDelegate {
             textField.textAlignment = .left
             backgroundColor = UIColor(white: 0.95, alpha: 1)
         case .thumbnail:
+            NSLayoutConstraint.activate(thumbConstraints)
             label0.font = .systemFont(ofSize: fontSize, weight: .regular)
             label0.textAlignment = .left
             backgroundColor = .white

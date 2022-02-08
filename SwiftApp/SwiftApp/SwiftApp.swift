@@ -91,9 +91,9 @@ class SwiftApp {
                 
                 return ViewModel(title: screen.rawValue, sections: [
                     Section(
-                        header: .header(title: "Header"),
+                        header: .header(title: "Count"),
                         cells: [
-                            .standard(title: "Count: \(count)"),
+                            .standard(title: String(count)),
                             .button(
                                 title: "Down",
                                 onTap: {

@@ -70,6 +70,10 @@ class CellView: UIView {
             label0.text = title
             stack.addArrangedSubview(label1)
             label1.text = body
+        case .textInput(let title, let get, _):
+            label0.text = title
+            stack.addArrangedSubview(label1)
+            label1.text = get()
         }
     }
     
@@ -92,6 +96,12 @@ class CellView: UIView {
             label1.textAlignment = .left
             label1.font = UIFont.systemFont(ofSize: fontSize, weight: .regular)
             backgroundColor = .white
+        case .textInput(_, _, _):
+            label0.font = UIFont.systemFont(ofSize: fontSize * 0.866, weight: .regular)
+            label0.textAlignment = .left
+            label1.font = UIFont.systemFont(ofSize: fontSize * 1.2, weight: .regular)
+            label1.textAlignment = .left
+            backgroundColor = UIColor(white: 0.95, alpha: 1)
         }
     }
     
@@ -105,6 +115,8 @@ class CellView: UIView {
             break
         case .standard(_, _, let onTap):
             onTap?()
+        case .textInput(_, _, _):
+            break
         }
     }
 }

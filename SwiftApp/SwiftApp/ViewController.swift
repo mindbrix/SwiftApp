@@ -56,15 +56,4 @@ class ViewController: UITableViewController {
         }
         return tvc
     }
-    
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        switch model.sections[indexPath.section].cells[indexPath.row] {
-        case .button(_, let onTap):
-            onTap()
-        case .header(_):
-            break
-        case .standard(_ , _, let onTap):
-            onTap?()
-        }
-    }
 }

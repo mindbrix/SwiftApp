@@ -18,6 +18,7 @@ class SwiftApp {
         case Counter
         case DefaultStore
         case DequeueTest
+        case TextInputTest
         
         var embedInNavController: Bool {
             self == .Main
@@ -26,6 +27,9 @@ class SwiftApp {
     
     init(window: UIWindow) {
         self.window = window
+        for int in 1 ... 100 {
+            strings[int] = "\(int)"
+        }
     }
     
     var rootScreen: Screen = .Main {
@@ -37,6 +41,7 @@ class SwiftApp {
     }
    
     private let window: UIWindow
+    private var strings: [Int: String] = [:]
     
     private func getDefaultsItem(_ key: DefaultsKey) -> Any? {
         UserDefaults.standard.object(forKey: key.rawValue)
@@ -136,6 +141,17 @@ class SwiftApp {
                             Cell.standard(
                                 title: String(int),
                                 body: int % 2 == 0 ? nil : .longText)
+                        })
+                    )
+                ])
+            }
+        case .TextInputTest:
+            vc.modelClosure = {
+                ViewModel(title: screen.rawValue, sections: [
+                    Section(
+                        header: .header(title: screen.rawValue),
+                        cells: self.strings.keys.sorted().map({ key in
+                            Cell.textInput(title: "\(key)", get: { self.strings[key] ?? "" }, set: { string in self.strings[key] = string })
                         })
                     )
                 ])

@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class CellView: UIView {
+class CellView: UIView, UITextFieldDelegate {
     init(cell: Cell? = nil) {
         super.init(frame: .zero)
         addSubview(stack)
@@ -55,6 +55,7 @@ class CellView: UIView {
     }()
     lazy var textField: UITextField = {
         let field = UITextField()
+        field.delegate = self
         return field
     }()
     
@@ -122,5 +123,19 @@ class CellView: UIView {
         case .textInput(_, _, _):
             break
         }
+    }
+    
+    // MARK: - UITextFieldDelegate
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if let text = textField.text, let textRange = Range(range, in: text) {
+            switch cell {
+            case .textInput(_, _, let set):
+                set(text.replacingCharacters(in: textRange, with: string))
+            default:
+                break
+            }
+        }
+        return true
     }
 }

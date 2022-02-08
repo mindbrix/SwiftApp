@@ -151,7 +151,10 @@ class SwiftApp {
                     Section(
                         header: .header(title: screen.rawValue),
                         cells: self.strings.keys.sorted().map({ key in
-                            Cell.textInput(title: "\(key)", get: { self.strings[key] ?? "" }, set: { string in self.strings[key] = string })
+                            Cell.textInput(
+                                title: "\(key)",
+                                get: { self.strings[key] ?? "" },
+                                set: { string in self.strings[key] = string })
                         })
                     )
                 ])

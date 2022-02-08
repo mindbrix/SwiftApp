@@ -34,8 +34,13 @@ class CellView: UIView, UITextFieldDelegate {
     
     lazy var image: UIImageView = {
         let image = UIImageView()
+        let size: CGFloat = 64
         image.contentMode = .scaleAspectFit
         image.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            image.widthAnchor.constraint(equalToConstant: size),
+            image.heightAnchor.constraint(equalToConstant: size)
+        ])
         return image
     }()
     lazy var label0: UILabel = {
@@ -71,6 +76,7 @@ class CellView: UIView, UITextFieldDelegate {
         guard let cell = cell else { return }
         
         stack.axis = .vertical
+        stack.alignment = .fill
         switch cell {
         case .button(let title, _):
             stack.addArrangedSubview(label0)
@@ -90,6 +96,7 @@ class CellView: UIView, UITextFieldDelegate {
             textField.text = get()
         case .thumbnail(let get, let caption, _):
             stack.axis = .horizontal
+            stack.alignment = .leading
             stack.addArrangedSubview(image)
             image.image = get()
             stack.addArrangedSubview(label0)

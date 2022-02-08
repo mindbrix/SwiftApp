@@ -90,7 +90,12 @@ class SwiftApp {
                     Section(
                         header: .header(title: "Images"),
                         cells: [
-                            .thumbnail(get: { UIImage(named: "avatar") }, caption: .longText, onTap: nil)
+                            .thumbnail(get: { UIImage(named: "avatar") }, caption: .longText, onTap: nil),
+                            .button(
+                                title: "Refresh",
+                                onTap: {
+                                    self.refresh()
+                                })
                         ])
                 ])
             }

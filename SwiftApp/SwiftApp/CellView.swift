@@ -34,6 +34,7 @@ class CellView: UIView {
         self.init(frame: .zero)
         self.cell = cell
         applyCell()
+        applyCellStyle()
     }
     
     override init(frame: CGRect) {
@@ -49,6 +50,7 @@ class CellView: UIView {
     var cell: Cell? {
         didSet {
             applyCell()
+            applyCellStyle()
         }
     }
     
@@ -62,17 +64,27 @@ class CellView: UIView {
         switch cell {
         case .button(let title, _):
             label0.text = title
-            label0.textAlignment = .center
-            backgroundColor = .red
         case .header(let title):
             label0.text = title
-            label0.textAlignment = .left
-            backgroundColor = .lightGray
         case .standard(let title, let body, _):
             label0.text = title
-            label0.textAlignment = .left
             stack.addArrangedSubview(label1)
             label1.text = body
+        }
+    }
+    
+    private func applyCellStyle() {
+        guard let cell = cell else { return }
+        
+        switch cell {
+        case .button(_, _):
+            label0.textAlignment = .center
+            backgroundColor = .red
+        case .header( _):
+            label0.textAlignment = .left
+            backgroundColor = .lightGray
+        case .standard(_, _, _):
+            label0.textAlignment = .left
             label1.textAlignment = .left
             backgroundColor = .white
         }

@@ -29,6 +29,9 @@ class CellView: UIView {
         stack.translatesAutoresizingMaskIntoConstraints = false
         return stack
     }()
+    lazy var tapper: UITapGestureRecognizer = {
+        UITapGestureRecognizer(target: self, action: #selector(onTap))
+    }()
     
     convenience init(cell: Cell) {
         self.init(frame: .zero)
@@ -41,6 +44,7 @@ class CellView: UIView {
         super.init(frame: frame)
         addSubview(stack)
         stack.constrainToSuperview(insets: Self.defaultStackInsets)
+        stack.addGestureRecognizer(tapper)
     }
     
     required init?(coder: NSCoder) {
@@ -92,6 +96,19 @@ class CellView: UIView {
             label1.textAlignment = .left
             label1.font = UIFont.systemFont(ofSize: fontSize, weight: .regular)
             backgroundColor = .white
+        }
+    }
+    
+    @objc func onTap() {
+        guard let cell = cell else { return }
+        
+        switch cell {
+        case .button(_, let onTap):
+            onTap()
+        case .header( _):
+            break
+        case .standard(_, _, let onTap):
+            onTap?()
         }
     }
 }

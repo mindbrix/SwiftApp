@@ -110,27 +110,27 @@ class CellView: UIView, UITextFieldDelegate {
         let fontSize: CGFloat = 14
         switch cell {
         case .button(_, _):
-            label0.font = UIFont.systemFont(ofSize: fontSize * 1.33, weight: .medium)
+            label0.font = .systemFont(ofSize: fontSize * 1.33, weight: .medium)
             label0.textAlignment = .center
             backgroundColor = .red
         case .header( _):
-            label0.font = UIFont.systemFont(ofSize: fontSize, weight: .regular)
+            label0.font = .systemFont(ofSize: fontSize, weight: .regular)
             label0.textAlignment = .left
             backgroundColor = UIColor(white: 0.9, alpha: 1)
         case .standard(_, _, _):
-            label0.font = UIFont.systemFont(ofSize: fontSize * 1.2, weight: .regular)
+            label0.font = .systemFont(ofSize: fontSize * 1.2, weight: .regular)
             label0.textAlignment = .left
-            label1.font = UIFont.systemFont(ofSize: fontSize, weight: .regular)
+            label1.font = .systemFont(ofSize: fontSize, weight: .regular)
             label1.textAlignment = .left
             backgroundColor = .white
         case .textInput(_, _, _):
-            label0.font = UIFont.systemFont(ofSize: fontSize * 0.866, weight: .regular)
+            label0.font = .systemFont(ofSize: fontSize * 0.866, weight: .regular)
             label0.textAlignment = .left
-            textField.font = UIFont.systemFont(ofSize: fontSize * 1.2, weight: .regular)
+            textField.font = .systemFont(ofSize: fontSize * 1.2, weight: .regular)
             textField.textAlignment = .left
             backgroundColor = UIColor(white: 0.95, alpha: 1)
         case .thumbnail:
-            label0.font = UIFont.systemFont(ofSize: fontSize, weight: .regular)
+            label0.font = .systemFont(ofSize: fontSize, weight: .regular)
             label0.textAlignment = .left
             backgroundColor = .white
         }

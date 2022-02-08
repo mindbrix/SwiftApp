@@ -73,7 +73,7 @@ class SwiftApp {
                     Section(
                         header: .header(title: "Menu"),
                         cells: Screen.allCases.filter({ $0 != .Main }).map({ screen in
-                            .button(
+                            .standard(
                                 title: screen.rawValue,
                                 onTap: {
                                     guard let nc = vc.navigationController else { return }
@@ -113,17 +113,16 @@ class SwiftApp {
         case .DefaultStore:
             vc.modelClosure = { [weak self] in
                 guard let self = self else { return ViewModel.emptyModel }
-                
-                return ViewModel(title: screen.rawValue, sections: [
-                    Section(
-                        header: .header(title: screen.rawValue),
-                        cells: DefaultsKey.allCases.map({ key in
-                            Cell.standard(
-                                title: key.rawValue,
-                                body: String(describing: self.getDefaultsItem(key)))
-                        })
-                    )
-                ])
+                return
+                    ViewModel(title: screen.rawValue, sections:
+                        DefaultsKey.allCases.map({ key in
+                            Section(
+                                header: .header(title: key.rawValue),
+                                cells: [
+                                    .standard(title: String(describing: self.getDefaultsItem(key)))
+                                ]
+                            )
+                        }))
             }
         case .DequeueTest:
             vc.modelClosure = {

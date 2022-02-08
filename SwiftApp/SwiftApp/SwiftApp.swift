@@ -48,10 +48,10 @@ class SwiftApp {
         refresh()
     }
     
-    private var topViewController: ViewController? {
-        if let nc = window.rootViewController as? UINavigationController, let vc = nc.topViewController as? ViewController {
+    private var topViewController: TableViewController? {
+        if let nc = window.rootViewController as? UINavigationController, let vc = nc.topViewController as? TableViewController {
             return vc
-        } else if let vc = window.rootViewController as? ViewController {
+        } else if let vc = window.rootViewController as? TableViewController {
             return vc
         } else {
             return nil
@@ -63,7 +63,7 @@ class SwiftApp {
     }
     
     private func makeViewController(for screen: Screen) -> UIViewController {
-        let vc = ViewController()
+        let vc = TableViewController()
         switch screen {
         case .Main:
             vc.getModel = { [weak self, weak vc] in

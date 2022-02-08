@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ViewController: UITableViewController {
+class TableViewController: UITableViewController {
     var getModel: (() -> ViewModel) = { ViewModel.emptyModel } {
         didSet {
             model = getModel()

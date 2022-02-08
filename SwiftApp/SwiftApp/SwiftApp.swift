@@ -133,7 +133,7 @@ class SwiftApp {
                         cells: Array(1...100).map({ int in
                             Cell.standard(
                                 title: String(int),
-                                body: int % 2 == 0 ? nil : "Body")
+                                body: int % 2 == 0 ? nil : .longText)
                         })
                     )
                 ])

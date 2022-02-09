@@ -89,6 +89,11 @@ class SwiftApp {
                             .image(
                                 get: { UIImage(named: "avatar") },
                                 caption: .longText,
+                                onTap: nil,
+                                isThumbnail: true),
+                            .image(
+                                get: { UIImage(named: "avatar") },
+                                caption: .longText,
                                 onTap: nil),
                             .button(
                                 title: "Refresh",

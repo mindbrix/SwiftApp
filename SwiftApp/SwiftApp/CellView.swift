@@ -84,9 +84,9 @@ class CellView: UIView, UITextFieldDelegate {
             stack.addArrangedSubview(label0)
         case .header:
             stack.addArrangedSubview(label0)
-        case .image:
-            stack.axis = .horizontal
-            stack.alignment = .leading
+        case .image(_, _, _, let isThumbnail):
+            stack.axis = isThumbnail ? .horizontal : .vertical
+            stack.alignment = isThumbnail ? .leading : .fill
             stack.addArrangedSubview(image)
             stack.addArrangedSubview(label0)
         case .standard:
@@ -120,7 +120,6 @@ class CellView: UIView, UITextFieldDelegate {
     private func applyStyle() {
         guard let cell = cell else { return }
         
-        widthConstraint.isActive = false
         heightConstraint?.isActive = false
         let fontSize: CGFloat = 14
         switch cell {
@@ -132,12 +131,12 @@ class CellView: UIView, UITextFieldDelegate {
             label0.font = .systemFont(ofSize: fontSize, weight: .regular)
             label0.textAlignment = .left
             backgroundColor = UIColor(white: 0.9, alpha: 1)
-        case .image:
+        case .image(_, _, _, let isThumbnail):
             if let size = image.image?.size {
                 heightConstraint = image.heightAnchor.constraint(
                     equalTo: image.widthAnchor,
                     multiplier: size.height / size.width)
-                widthConstraint.isActive = true
+                widthConstraint.isActive = isThumbnail
                 heightConstraint?.isActive = true
             }
             label0.font = .systemFont(ofSize: fontSize, weight: .regular)

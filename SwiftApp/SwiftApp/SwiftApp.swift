@@ -11,8 +11,8 @@ import UIKit
 class SwiftApp {
     enum DefaultsKey: String, CaseIterable, Comparable {
         case counter
-        case username
         case password
+        case username
         
         static func < (lhs: SwiftApp.DefaultsKey, rhs: SwiftApp.DefaultsKey) -> Bool { lhs.rawValue < rhs.rawValue }
     }
@@ -132,7 +132,7 @@ class SwiftApp {
         case .DefaultStore:
             vc.modelClosure = { [weak self] in
                 guard let self = self else { return ViewModel.emptyModel }
-                return ViewModel(title: screen.rawValue, sections: DefaultsKey.allCases.sorted().map({ key in
+                return ViewModel(title: screen.rawValue, sections: DefaultsKey.allCases.map({ key in
                     Section(
                         header: .header(title: key.rawValue),
                         cells: [

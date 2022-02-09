@@ -84,6 +84,13 @@ class CellView: UIView, UITextFieldDelegate {
         case .header(let title):
             stack.addArrangedSubview(label0)
             label0.text = title
+        case .image(let get, let caption, _):
+            stack.axis = .horizontal
+            stack.alignment = .leading
+            stack.addArrangedSubview(image)
+            stack.addArrangedSubview(label0)
+            image.image = get()
+            label0.text = caption
         case .standard(let title, let body, _):
             stack.addArrangedSubview(label0)
             stack.addArrangedSubview(label1)
@@ -94,13 +101,6 @@ class CellView: UIView, UITextFieldDelegate {
             stack.addArrangedSubview(textField)
             label0.text = title
             textField.text = get()
-        case .thumbnail(let get, let caption, _):
-            stack.axis = .horizontal
-            stack.alignment = .leading
-            stack.addArrangedSubview(image)
-            stack.addArrangedSubview(label0)
-            image.image = get()
-            label0.text = caption
         }
     }
     
@@ -119,6 +119,17 @@ class CellView: UIView, UITextFieldDelegate {
             label0.font = .systemFont(ofSize: fontSize, weight: .regular)
             label0.textAlignment = .left
             backgroundColor = UIColor(white: 0.9, alpha: 1)
+        case .image:
+            if let size = image.image?.size {
+                heightConstraint = image.heightAnchor.constraint(
+                    equalTo: image.widthAnchor,
+                    multiplier: size.height / size.width)
+                widthConstraint.isActive = true
+                heightConstraint?.isActive = true
+            }
+            label0.font = .systemFont(ofSize: fontSize, weight: .regular)
+            label0.textAlignment = .left
+            backgroundColor = .white
         case .standard(_, _, _):
             label0.font = .systemFont(ofSize: fontSize * 1.2, weight: .regular)
             label0.textAlignment = .left
@@ -131,17 +142,6 @@ class CellView: UIView, UITextFieldDelegate {
             textField.font = .systemFont(ofSize: fontSize * 1.2, weight: .regular)
             textField.textAlignment = .left
             backgroundColor = UIColor(white: 0.95, alpha: 1)
-        case .thumbnail:
-            if let size = image.image?.size {
-                heightConstraint = image.heightAnchor.constraint(
-                    equalTo: image.widthAnchor,
-                    multiplier: size.height / size.width)
-                widthConstraint.isActive = true
-                heightConstraint?.isActive = true
-            }
-            label0.font = .systemFont(ofSize: fontSize, weight: .regular)
-            label0.textAlignment = .left
-            backgroundColor = .white
         }
     }
     
@@ -153,12 +153,12 @@ class CellView: UIView, UITextFieldDelegate {
             onTap()
         case .header( _):
             break
+        case .image(_, _, let onTap):
+            onTap?()
         case .standard(_, _, let onTap):
             onTap?()
         case .textInput(_, _, _):
             break
-        case .thumbnail(_, _, let onTap):
-            onTap?()
         }
     }
     

@@ -86,7 +86,7 @@ class SwiftApp {
                     Section(
                         header: .header(title: "Images"),
                         cells: [
-                            .thumbnail(
+                            .image(
                                 get: { UIImage(named: "avatar") },
                                 caption: .longText,
                                 onTap: nil),

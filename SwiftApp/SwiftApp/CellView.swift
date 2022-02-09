@@ -105,9 +105,9 @@ class CellView: UIView, UITextFieldDelegate {
         case .standard(let title, let body, _):
             label0.text = title
             label1.text = body
-        case .textInput(let title, let get, _):
-            label0.text = title
-            textField.text = get()
+        case .textInput(let key, let value, _):
+            label0.text = key
+            textField.text = value
         }
     }
     

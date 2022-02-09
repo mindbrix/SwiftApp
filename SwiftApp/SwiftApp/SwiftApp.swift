@@ -149,14 +149,16 @@ class SwiftApp {
         case .DefaultStore:
             vc.modelClosure = { [weak self] in
                 guard let self = self else { return ViewModel.emptyModel }
-                return ViewModel(fontSize: self.fontSize, title: screen.rawValue, sections: DefaultsKey.allCases.map({ key in
+                return ViewModel(fontSize: self.fontSize, title: screen.rawValue, sections: [
                     Section(
-                        header: .header(heading: key.rawValue),
-                        cells: [
-                            .standard(title: String(describing: self.getDefaultsItem(key)))
-                        ]
-                    )
-                }))
+                        header: .header(heading: screen.rawValue),
+                        cells: DefaultsKey.allCases.map({ key in
+                            .textInput(
+                                name: key.rawValue,
+                                get: { String(describing: self.getDefaultsItem(key)) },
+                                set: {_ in })
+                        })
+                )])
             }
         case .DequeueTest:
             vc.modelClosure = {

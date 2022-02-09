@@ -11,6 +11,7 @@ import UIKit
 class SwiftApp {
     enum DefaultsKey: String, CaseIterable {
         case counter
+        case fontSize
         case password
         case username
     }
@@ -69,8 +70,9 @@ class SwiftApp {
         case .Main:
             vc.modelClosure = { [weak self, weak vc] in
                 guard let self = self, let vc = vc else { return ViewModel.emptyModel }
+                let fontSize = self.getDefaultsItem(.fontSize) as? CGFloat ?? 18
                 
-                return ViewModel(fontSize: 24, title: screen.rawValue, sections: [
+                return ViewModel(fontSize: fontSize, title: screen.rawValue, sections: [
                     Section(
                         header: .header(title: "Menu"),
                         cells: Screen.allCases.filter({ !$0.embedInNavController }).map({ screen in
@@ -83,6 +85,16 @@ class SwiftApp {
                             )
                         })
                     ),
+                    Section(
+                        header: .header(title: "fontSize: \(fontSize)"),
+                        cells: [
+                            .button(
+                                title: "fontSize++",
+                                onTap: { self.setDefaultsItem(.fontSize, value: fontSize + 1) }),
+                            .button(
+                                title: "fontSize = 10",
+                                onTap: { self.setDefaultsItem(.fontSize, value: 10) })
+                        ]),
                     Section(
                         header: .header(title: "Images"),
                         cells: [
@@ -97,9 +109,7 @@ class SwiftApp {
                                 onTap: nil),
                             .button(
                                 title: "Refresh",
-                                onTap: {
-                                    self.refresh()
-                                })
+                                onTap: { self.refresh() })
                         ])
                 ])
             }

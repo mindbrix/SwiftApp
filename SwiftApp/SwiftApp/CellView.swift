@@ -16,7 +16,6 @@ class CellView: UIView, UITextFieldDelegate {
         stack.addGestureRecognizer(tapper)
         self.cell = cell
         applyCell()
-        applyCellStyle()
     }
     
     required init?(coder: NSCoder) {
@@ -26,7 +25,6 @@ class CellView: UIView, UITextFieldDelegate {
     var cell: Cell? {
         didSet {
             applyCell()
-            applyCellStyle()
         }
     }
     
@@ -70,41 +68,56 @@ class CellView: UIView, UITextFieldDelegate {
     var heightConstraint: NSLayoutConstraint?
     
     private func applyCell() {
+        setupStack()
+        applyModel()
+        applyStyle()
+    }
+    private func setupStack() {
         for subview in stack.subviews {
             subview.removeFromSuperview()
         }
-        guard let cell = cell else { return }
-        
         stack.axis = .vertical
         stack.alignment = .fill
+        guard let cell = cell else { return }
         switch cell {
-        case .button(let title, _):
+        case .button:
             stack.addArrangedSubview(label0)
-            label0.text = title
-        case .header(let title):
+        case .header:
             stack.addArrangedSubview(label0)
-            label0.text = title
-        case .image(let get, let caption, _):
+        case .image:
             stack.axis = .horizontal
             stack.alignment = .leading
             stack.addArrangedSubview(image)
             stack.addArrangedSubview(label0)
+        case .standard:
+            stack.addArrangedSubview(label0)
+            stack.addArrangedSubview(label1)
+        case .textInput:
+            stack.addArrangedSubview(label0)
+            stack.addArrangedSubview(textField)
+        }
+    }
+    private func applyModel() {
+        guard let cell = cell else { return }
+        
+        switch cell {
+        case .button(let title, _):
+            label0.text = title
+        case .header(let title):
+            label0.text = title
+        case .image(let get, let caption, _, _):
             image.image = get()
             label0.text = caption
         case .standard(let title, let body, _):
-            stack.addArrangedSubview(label0)
-            stack.addArrangedSubview(label1)
             label0.text = title
             label1.text = body
         case .textInput(let title, let get, _):
-            stack.addArrangedSubview(label0)
-            stack.addArrangedSubview(textField)
             label0.text = title
             textField.text = get()
         }
     }
     
-    private func applyCellStyle() {
+    private func applyStyle() {
         guard let cell = cell else { return }
         
         widthConstraint.isActive = false
@@ -151,13 +164,13 @@ class CellView: UIView, UITextFieldDelegate {
         switch cell {
         case .button(_, let onTap):
             onTap()
-        case .header( _):
+        case .header:
             break
-        case .image(_, _, let onTap):
+        case .image(_, _, let onTap, _):
             onTap?()
         case .standard(_, _, let onTap):
             onTap?()
-        case .textInput(_, _, _):
+        case .textInput:
             break
         }
     }

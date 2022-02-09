@@ -11,7 +11,7 @@ import UIKit
 enum Cell: Hashable {
     case button(title: String, onTap: (() -> Void))
     case header(title: String)
-    case image(get: () -> UIImage?, caption: String, onTap: (() -> Void)? = nil)
+    case image(get: () -> UIImage?, caption: String, onTap: (() -> Void)? = nil, isThumbnail: Bool = false)
     case standard(title: String, body: String? = nil, onTap: (() -> Void)? = nil)
     case textInput(title: String, get: () -> String, set: (String) -> Void)
     
@@ -21,7 +21,7 @@ enum Cell: Hashable {
     func hash(into hasher: inout Hasher) {
         hasher.combine(String(describing: self))
         switch self {
-        case .image(let get, _, _):
+        case .image(let get, _, _, _):
             hasher.combine(get())
         case .textInput(_, let get, _):
             hasher.combine(get())

@@ -17,6 +17,7 @@ class TableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.register(CellViewCell.self, forCellReuseIdentifier: CellViewCell.reuseID)
+        self.tableView.separatorStyle = .none
         self.view.backgroundColor = .lightGray
     }
 

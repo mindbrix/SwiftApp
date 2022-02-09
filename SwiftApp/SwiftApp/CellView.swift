@@ -124,7 +124,7 @@ class CellView: UIView, UITextFieldDelegate {
         case .standard:
             backgroundColor = .white
         case .textInput:
-            backgroundColor = UIColor(white: 0.95, alpha: 1)
+            backgroundColor = .white
         }
     }
     

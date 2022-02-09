@@ -67,6 +67,7 @@ class SwiftApp {
         let vc = TableViewController()
         switch screen {
         case .Main:
+            vc.fontSize = 12
             vc.modelClosure = { [weak self, weak vc] in
                 guard let self = self, let vc = vc else { return ViewModel.emptyModel }
                 
@@ -104,6 +105,7 @@ class SwiftApp {
                 ])
             }
         case .Counter:
+            vc.fontSize = 24
             vc.modelClosure = { [weak self] in
                 guard let self = self else { return ViewModel.emptyModel }
                 let count = self.getDefaultsItem(.counter) as? Int ?? 0
@@ -140,6 +142,7 @@ class SwiftApp {
                 }))
             }
         case .DequeueTest:
+            vc.fontSize = 14
             vc.modelClosure = {
                 ViewModel(title: screen.rawValue, sections: [
                     Section(
@@ -153,6 +156,7 @@ class SwiftApp {
                 ])
             }
         case .Login:
+            vc.fontSize = 24
             vc.modelClosure = {
                 return ViewModel(title: screen.rawValue, sections: [
                     Section(

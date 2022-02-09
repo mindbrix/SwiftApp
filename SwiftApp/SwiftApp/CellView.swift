@@ -129,11 +129,11 @@ class CellView: UIView, UITextFieldDelegate {
     
     private func applyStyle() {
         heightConstraint?.isActive = false
-        let fontSize: CGFloat = 14
+        let fontSize: CGFloat = 18
         guard let cell = cell else { return }
         switch cell {
         case .button(_, _):
-            label0.font = .systemFont(ofSize: fontSize * 1.33, weight: .medium)
+            label0.font = .systemFont(ofSize: fontSize * 1.2, weight: .medium)
             label0.textAlignment = .center
         case .header( _):
             label0.font = .systemFont(ofSize: fontSize, weight: .regular)

@@ -40,6 +40,12 @@ class SwiftApp {
    
     private let window: UIWindow
     
+    private var fontSize: CGFloat = 18 {
+        didSet {
+            refresh()
+        }
+    }
+    
     private func getDefaultsItem(_ key: DefaultsKey) -> Any? {
         UserDefaults.standard.object(forKey: key.rawValue)
     }
@@ -70,9 +76,8 @@ class SwiftApp {
         case .Main:
             vc.modelClosure = { [weak self, weak vc] in
                 guard let self = self, let vc = vc else { return ViewModel.emptyModel }
-                let fontSize = self.getDefaultsItem(.fontSize) as? CGFloat ?? 18
                 
-                return ViewModel(fontSize: fontSize, title: screen.rawValue, sections: [
+                return ViewModel(fontSize: self.fontSize, title: screen.rawValue, sections: [
                     Section(
                         header: .header(title: "Menu"),
                         cells: Screen.allCases.filter({ !$0.embedInNavController }).map({ screen in
@@ -86,14 +91,14 @@ class SwiftApp {
                         })
                     ),
                     Section(
-                        header: .header(title: "fontSize: \(fontSize)"),
+                        header: .header(title: "fontSize: \(self.fontSize)"),
                         cells: [
                             .button(
                                 title: "fontSize++",
-                                onTap: { self.setDefaultsItem(.fontSize, value: fontSize + 1) }),
+                                onTap: { self.fontSize += 1 }),
                             .button(
                                 title: "fontSize = 10",
-                                onTap: { self.setDefaultsItem(.fontSize, value: 10) })
+                                onTap: { self.fontSize = 10 })
                         ]),
                     Section(
                         header: .header(title: "Images"),
@@ -118,7 +123,7 @@ class SwiftApp {
                 guard let self = self else { return ViewModel.emptyModel }
                 let count = self.getDefaultsItem(.counter) as? Int ?? 0
                 
-                return ViewModel(fontSize: 18, title: screen.rawValue, sections: [
+                return ViewModel(fontSize:  self.fontSize, title: screen.rawValue, sections: [
                     Section(
                         header: .header(title: "Count"),
                         cells: [
@@ -140,7 +145,7 @@ class SwiftApp {
         case .DefaultStore:
             vc.modelClosure = { [weak self] in
                 guard let self = self else { return ViewModel.emptyModel }
-                return ViewModel(fontSize: 18, title: screen.rawValue, sections: DefaultsKey.allCases.map({ key in
+                return ViewModel(fontSize:  self.fontSize, title: screen.rawValue, sections: DefaultsKey.allCases.map({ key in
                     Section(
                         header: .header(title: key.rawValue),
                         cells: [
@@ -151,7 +156,7 @@ class SwiftApp {
             }
         case .DequeueTest:
             vc.modelClosure = {
-                ViewModel(fontSize: 18, title: screen.rawValue, sections: [
+                ViewModel(fontSize:  self.fontSize, title: screen.rawValue, sections: [
                     Section(
                         header: .header(title: screen.rawValue),
                         cells: Array(1...100).map({ int in
@@ -164,7 +169,7 @@ class SwiftApp {
             }
         case .Login:
             vc.modelClosure = {
-                return ViewModel(fontSize: 18, title: screen.rawValue, sections: [
+                return ViewModel(fontSize:  self.fontSize, title: screen.rawValue, sections: [
                     Section(
                         header: .header(title: screen.rawValue),
                         cells: [

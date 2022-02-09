@@ -25,9 +25,7 @@ class SwiftApp {
         case Login
         case TextInputTest
         
-        var embedInNavController: Bool {
-            self == .Main
-        }
+        var embedInNavController: Bool { self == .Main }
     }
     
     init(window: UIWindow) {

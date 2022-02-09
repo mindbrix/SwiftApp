@@ -36,12 +36,16 @@ struct Section: Equatable {
     let cells: [Cell]
 }
 
-struct ViewModel: Equatable {
+struct Style: Equatable {
     let fontSize: CGFloat
+}
+
+struct ViewModel: Equatable {
+    let style: Style
     let title: String
     let sections: [Section]
     
-    static let emptyModel = Self(fontSize: 0, title: "", sections: [])
+    static let emptyModel = Self(style: .init(fontSize: 0), title: "", sections: [])
 }
 
 typealias ModelClosure = () -> ViewModel

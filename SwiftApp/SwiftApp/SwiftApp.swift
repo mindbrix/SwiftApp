@@ -11,6 +11,8 @@ import UIKit
 class SwiftApp {
     enum DefaultsKey: String, CaseIterable {
         case counter
+        case username
+        case password
     }
     
     enum Screen: String, CaseIterable {
@@ -157,18 +159,18 @@ class SwiftApp {
             }
         case .Login:
             vc.modelClosure = {
-                ViewModel(title: screen.rawValue, sections: [
+                return ViewModel(title: screen.rawValue, sections: [
                     Section(
                         header: .header(title: screen.rawValue),
                         cells: [
                             .textInput(
                                 title: "User",
-                                get: {"nigel@mindbrix.co.uk" },
-                                set: { string in }),
+                                get: { self.getDefaultsItem(.username) as? String ?? "" },
+                                set: { string in self.setDefaultsItem(.username, value: string) }),
                             .textInput(
-                                title: "User",
-                                get: {"password" },
-                                set: { string in }),
+                                title: "Password",
+                                get: { self.getDefaultsItem(.password) as? String ?? "" },
+                                set: { string in self.setDefaultsItem(.password, value: string) }),
                             .button(
                                 title: "Login",
                                 onTap: {

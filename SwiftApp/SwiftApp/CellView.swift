@@ -131,13 +131,18 @@ class CellView: UIView, UITextFieldDelegate {
     private func applyStyle(fontSize: CGFloat) {
         heightConstraint?.isActive = false
         
+        let titleFont = UIFont.systemFont(ofSize: fontSize * 1.2, weight: .regular)
+        let captionFont = UIFont.systemFont(ofSize: fontSize * 1.0, weight: .regular)
+        let keyFont = UIFont.systemFont(ofSize: fontSize * 0.866, weight: .regular)
+        let valueFont = titleFont
+        
         guard let cell = cell else { return }
         switch cell {
         case .button(_, _):
-            label0.font = .systemFont(ofSize: fontSize * 1.2, weight: .medium)
+            label0.font = titleFont
             label0.textAlignment = .center
         case .header( _):
-            label0.font = .systemFont(ofSize: fontSize, weight: .regular)
+            label0.font = captionFont
             label0.textAlignment = .left
         case .image(let get, _, _, let isThumbnail):
             if let size = get()?.size {
@@ -147,17 +152,17 @@ class CellView: UIView, UITextFieldDelegate {
                 widthConstraint.isActive = isThumbnail
                 heightConstraint?.isActive = true
             }
-            label0.font = .systemFont(ofSize: fontSize, weight: .regular)
+            label0.font = captionFont
             label0.textAlignment = .left
         case .standard(_, _, _):
-            label0.font = .systemFont(ofSize: fontSize * 1.2, weight: .regular)
+            label0.font = titleFont
             label0.textAlignment = .left
-            label1.font = .systemFont(ofSize: fontSize, weight: .regular)
+            label1.font = captionFont
             label1.textAlignment = .left
         case .textInput(_, _, _):
-            label0.font = .systemFont(ofSize: fontSize * 0.866, weight: .regular)
+            label0.font = keyFont
             label0.textAlignment = .left
-            textField.font = .systemFont(ofSize: fontSize * 1.2, weight: .regular)
+            textField.font = valueFont
             textField.textAlignment = .left
         }
     }

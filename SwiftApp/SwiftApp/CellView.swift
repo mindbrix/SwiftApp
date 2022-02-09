@@ -97,16 +97,16 @@ class CellView: UIView, UITextFieldDelegate {
         switch cell {
         case .button(let title, _):
             label0.text = title
-        case .header(let title):
-            label0.text = title
+        case .header(let caption):
+            label0.text = caption
         case .image(let get, let caption, _, _):
             image.image = get()
             label0.text = caption
-        case .standard(let title, let body, _):
+        case .standard(let title, let caption, _):
             label0.text = title
-            label1.text = body
-        case .textInput(let title, let get, let set):
-            label0.text = title
+            label1.text = caption
+        case .textInput(let key, let get, let set):
+            label0.text = key
             textField.text = get()
             textField.isUserInteractionEnabled = set != nil
         }
@@ -130,7 +130,6 @@ class CellView: UIView, UITextFieldDelegate {
     
     private func applyStyle(fontSize: CGFloat) {
         heightConstraint?.isActive = false
-        
         let titleFont = UIFont.systemFont(ofSize: fontSize * 1.2, weight: .regular)
         let captionFont = UIFont.systemFont(ofSize: fontSize * 1.0, weight: .regular)
         let keyFont = UIFont.systemFont(ofSize: fontSize * 0.866, weight: .regular)
@@ -141,7 +140,7 @@ class CellView: UIView, UITextFieldDelegate {
         case .button(_, _):
             label0.font = titleFont
             label0.textAlignment = .center
-        case .header( _):
+        case .header:
             label0.font = captionFont
             label0.textAlignment = .left
         case .image(let get, _, _, let isThumbnail):

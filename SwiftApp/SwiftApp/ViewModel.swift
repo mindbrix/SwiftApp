@@ -10,9 +10,9 @@ import UIKit
 
 enum Cell: Hashable {
     case button(title: String, onTap: (() -> Void))
-    case header(heading: String)
+    case header(caption: String)
     case image(get: () -> UIImage?, caption: String, onTap: (() -> Void)? = nil, isThumbnail: Bool = false)
-    case standard(title: String, body: String? = nil, onTap: (() -> Void)? = nil)
+    case standard(title: String, caption: String? = nil, onTap: (() -> Void)? = nil)
     case textInput(key: String, get: () -> String, set: ((String) -> Void)?)
     
     static func == (lhs: Cell, rhs: Cell) -> Bool {

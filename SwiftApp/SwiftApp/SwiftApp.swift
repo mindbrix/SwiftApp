@@ -136,11 +136,7 @@ class SwiftApp {
                         Section(
                             header: .header(title: key.rawValue),
                             cells: [
-                                .standard(title: String(describing: self.getDefaultsItem(key))),
-                                .textInput(
-                                    title: key.rawValue,
-                                    get: { String(describing: self.getDefaultsItem(key)) },
-                                    set: { string in })
+                                .standard(title: String(describing: self.getDefaultsItem(key)))
                             ]
                         )
                     }))

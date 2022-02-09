@@ -9,12 +9,10 @@ import Foundation
 import UIKit
 
 class SwiftApp {
-    enum DefaultsKey: String, CaseIterable, Comparable {
+    enum DefaultsKey: String, CaseIterable {
         case counter
         case password
         case username
-        
-        static func < (lhs: SwiftApp.DefaultsKey, rhs: SwiftApp.DefaultsKey) -> Bool { lhs.rawValue < rhs.rawValue }
     }
     
     enum Screen: String, CaseIterable {

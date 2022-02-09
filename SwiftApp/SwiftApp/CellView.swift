@@ -133,7 +133,9 @@ class CellView: UIView, UITextFieldDelegate {
             backgroundColor = UIColor(white: 0.95, alpha: 1)
         case .thumbnail:
             if let size = image.image?.size {
-                heightConstraint = image.heightAnchor.constraint(equalTo: image.widthAnchor, multiplier: size.height / size.width)
+                heightConstraint = image.heightAnchor.constraint(
+                    equalTo: image.widthAnchor,
+                    multiplier: size.height / size.width)
                 widthConstraint.isActive = true
                 heightConstraint?.isActive = true
             }

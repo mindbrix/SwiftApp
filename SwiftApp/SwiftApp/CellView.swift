@@ -130,9 +130,10 @@ class CellView: UIView, UITextFieldDelegate {
     
     private func applyStyle(fontSize: CGFloat) {
         heightConstraint?.isActive = false
-        let titleFont = UIFont.systemFont(ofSize: fontSize * 1.2, weight: .regular)
-        let captionFont = UIFont.systemFont(ofSize: fontSize * 1.0, weight: .regular)
-        let keyFont = UIFont.systemFont(ofSize: fontSize * 0.866, weight: .regular)
+        let fontName = "Helvetica"
+        let titleFont = UIFont(name: fontName, size: fontSize * 1.2)
+        let captionFont = UIFont(name: fontName, size: fontSize * 1.0)
+        let keyFont = UIFont(name: fontName, size: fontSize * 0.866)
         let valueFont = titleFont
         
         guard let cell = cell else { return }

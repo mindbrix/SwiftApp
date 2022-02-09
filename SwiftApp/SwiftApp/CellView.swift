@@ -20,16 +20,15 @@ class CellView: UIView, UITextFieldDelegate {
         fatalError("init(coder:) has not been implemented")
     }
     
-    var cell: Cell? {
-        didSet {
-            setupStack()
-            applyColors()
-            applyStyle()
-            applyModel()
-        }
+    func apply(cell: Cell, fontSize: CGFloat) {
+        self.cell = cell
+        setupStack()
+        applyColors()
+        applyStyle(fontSize: fontSize)
+        applyModel()
     }
-    var fontSize: CGFloat = 18
-    
+    private var cell: Cell?
+
     static let defaultStackInsets = UIEdgeInsets(top: 4, left: 4, bottom: 4, right: 4)
     static let thumbSize: CGFloat = 64
     
@@ -128,7 +127,7 @@ class CellView: UIView, UITextFieldDelegate {
         }
     }
     
-    private func applyStyle() {
+    private func applyStyle(fontSize: CGFloat) {
         heightConstraint?.isActive = false
         
         guard let cell = cell else { return }

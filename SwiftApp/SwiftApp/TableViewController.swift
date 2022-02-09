@@ -42,7 +42,7 @@ class TableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let cv = CellView()
-        cv.cell = model.sections[section].header
+        cv.apply(cell: model.sections[section].header, fontSize: 18)
         return cv
     }
 
@@ -52,7 +52,7 @@ class TableViewController: UITableViewController {
         tvc.selectionStyle = .none
         
         if let tvc = tvc as? CellViewCell {
-            tvc.cellView.cell = cell
+            tvc.cellView.apply(cell: cell, fontSize: 18)
         }
         return tvc
     }

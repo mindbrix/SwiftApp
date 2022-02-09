@@ -20,7 +20,7 @@ class CellView: UIView, UITextFieldDelegate {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func apply(cell: Cell, style: Style) {
+    func apply(cell: Cell, style: FontStyle) {
         self.cell = cell
         setupStack()
         applyColors()
@@ -128,11 +128,11 @@ class CellView: UIView, UITextFieldDelegate {
         }
     }
     
-    private func applyStyle(style: Style) {
+    private func applyStyle(style: FontStyle) {
         heightConstraint?.isActive = false
-        let titleFont = UIFont(name: style.fontName, size: style.fontSize * 1.2)
-        let captionFont = UIFont(name: style.fontName, size: style.fontSize * 1.0)
-        let keyFont = UIFont(name: style.fontName, size: style.fontSize * 0.866)
+        let titleFont = UIFont(name: style.name, size: style.size * 1.2)
+        let captionFont = UIFont(name: style.name, size: style.size * 1.0)
+        let keyFont = UIFont(name: style.name, size: style.size * 0.866)
         let valueFont = titleFont
         
         guard let cell = cell else { return }

@@ -28,6 +28,7 @@ class CellView: UIView, UITextFieldDelegate {
             applyModel()
         }
     }
+    var fontSize: CGFloat = 18
     
     static let defaultStackInsets = UIEdgeInsets(top: 4, left: 4, bottom: 4, right: 4)
     static let thumbSize: CGFloat = 64
@@ -129,7 +130,7 @@ class CellView: UIView, UITextFieldDelegate {
     
     private func applyStyle() {
         heightConstraint?.isActive = false
-        let fontSize: CGFloat = 18
+        
         guard let cell = cell else { return }
         switch cell {
         case .button(_, _):

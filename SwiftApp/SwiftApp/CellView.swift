@@ -64,10 +64,10 @@ class CellView: UIView, UITextFieldDelegate {
         field.delegate = self
         return field
     }()
-    lazy var thumbConstraints: [NSLayoutConstraint] = {[
-        image.widthAnchor.constraint(equalToConstant: Self.thumbSize),
-        image.heightAnchor.constraint(equalToConstant: Self.thumbSize)
-    ]}()
+    lazy var widthConstraint: NSLayoutConstraint = {
+        image.widthAnchor.constraint(equalToConstant: Self.thumbSize)
+    }()
+    var heightConstraint: NSLayoutConstraint?
     
     private func applyCell() {
         for subview in stack.subviews {
@@ -107,7 +107,8 @@ class CellView: UIView, UITextFieldDelegate {
     private func applyCellStyle() {
         guard let cell = cell else { return }
         
-        NSLayoutConstraint.deactivate(thumbConstraints)
+        widthConstraint.isActive = false
+        heightConstraint?.isActive = false
         let fontSize: CGFloat = 14
         switch cell {
         case .button(_, _):
@@ -131,7 +132,11 @@ class CellView: UIView, UITextFieldDelegate {
             textField.textAlignment = .left
             backgroundColor = UIColor(white: 0.95, alpha: 1)
         case .thumbnail:
-            NSLayoutConstraint.activate(thumbConstraints)
+            if let size = image.image?.size {
+                heightConstraint = image.heightAnchor.constraint(equalTo: image.widthAnchor, multiplier: size.height / size.width)
+                widthConstraint.isActive = true
+                heightConstraint?.isActive = true
+            }
             label0.font = .systemFont(ofSize: fontSize, weight: .regular)
             label0.textAlignment = .left
             backgroundColor = .white

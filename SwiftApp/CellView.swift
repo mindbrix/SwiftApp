@@ -92,6 +92,23 @@ class CellView: UIView, UITextFieldDelegate {
             stack.addArrangedSubview(textField)
         }
     }
+    
+    private func applyColors() {
+        guard let cell = cell else { return }
+        switch cell {
+        case .button:
+            backgroundColor = .red
+        case .header:
+            backgroundColor = UIColor(white: 0.9, alpha: 1)
+        case .image:
+            backgroundColor = .white
+        case .standard:
+            backgroundColor = .white
+        case .textInput:
+            backgroundColor = .white
+        }
+    }
+    
     private func applyModel() {
         guard let cell = cell else { return }
         switch cell {
@@ -109,22 +126,6 @@ class CellView: UIView, UITextFieldDelegate {
             label0.text = key
             textField.text = get()
             textField.isUserInteractionEnabled = set != nil
-        }
-    }
-    
-    private func applyColors() {
-        guard let cell = cell else { return }
-        switch cell {
-        case .button:
-            backgroundColor = .red
-        case .header:
-            backgroundColor = UIColor(white: 0.9, alpha: 1)
-        case .image:
-            backgroundColor = .white
-        case .standard:
-            backgroundColor = .white
-        case .textInput:
-            backgroundColor = .white
         }
     }
     

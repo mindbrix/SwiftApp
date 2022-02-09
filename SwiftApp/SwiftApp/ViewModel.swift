@@ -13,7 +13,7 @@ enum Cell: Hashable {
     case header(heading: String)
     case image(get: () -> UIImage?, caption: String, onTap: (() -> Void)? = nil, isThumbnail: Bool = false)
     case standard(title: String, body: String? = nil, onTap: (() -> Void)? = nil)
-    case textInput(key: String, get: () -> String, set: (String) -> Void)
+    case textInput(key: String, get: () -> String, set: ((String) -> Void)?)
     
     static func == (lhs: Cell, rhs: Cell) -> Bool {
         lhs.hashValue == rhs.hashValue

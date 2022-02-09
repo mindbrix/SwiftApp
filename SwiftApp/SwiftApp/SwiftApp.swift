@@ -156,7 +156,7 @@ class SwiftApp {
                             .textInput(
                                 key: key.rawValue,
                                 get: { String(describing: self.getDefaultsItem(key)) },
-                                set: {_ in })
+                                set: nil)
                         })
                 )])
             }

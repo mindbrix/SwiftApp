@@ -183,7 +183,7 @@ class CellView: UIView, UITextFieldDelegate {
         switch cell {
         case .textInput(_, _, let set):
             if let text = textField.text, let textRange = Range(range, in: text) {
-                set(text.replacingCharacters(in: textRange, with: string))
+                set?(text.replacingCharacters(in: textRange, with: string))
             }
         default:
             break

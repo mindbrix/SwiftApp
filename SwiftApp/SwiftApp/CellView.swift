@@ -69,8 +69,8 @@ class CellView: UIView, UITextFieldDelegate {
     
     private func applyCell() {
         setupStack()
-        applyModel()
         applyStyle()
+        applyModel()
     }
     private func setupStack() {
         for subview in stack.subviews {
@@ -131,8 +131,8 @@ class CellView: UIView, UITextFieldDelegate {
             label0.font = .systemFont(ofSize: fontSize, weight: .regular)
             label0.textAlignment = .left
             backgroundColor = UIColor(white: 0.9, alpha: 1)
-        case .image(_, _, _, let isThumbnail):
-            if let size = image.image?.size {
+        case .image(let get, _, _, let isThumbnail):
+            if let size = get()?.size {
                 heightConstraint = image.heightAnchor.constraint(
                     equalTo: image.widthAnchor,
                     multiplier: size.height / size.width)

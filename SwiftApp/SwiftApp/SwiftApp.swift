@@ -39,7 +39,7 @@ class SwiftApp {
    
     private let window: UIWindow
     
-    private var style: Style = .init(fontSize: 18) {
+    private var style: Style = .defaultStyle {
         didSet {
             refresh()
         }
@@ -94,10 +94,10 @@ class SwiftApp {
                         cells: [
                             .button(
                                 title: "fontSize++",
-                                onTap: { self.style = .init(fontSize: self.style.fontSize + 1) }),
+                                onTap: { self.style = .init(fontName: self.style.fontName, fontSize: self.style.fontSize + 1) }),
                             .button(
                                 title: "fontSize = 10",
-                                onTap: { self.style = .init(fontSize: 10) })
+                                onTap: { self.style = .init(fontName: self.style.fontName, fontSize: 10) })
                         ]),
                     Section(
                         header: .header(caption: "Images"),

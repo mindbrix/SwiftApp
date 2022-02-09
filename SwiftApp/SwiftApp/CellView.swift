@@ -69,6 +69,7 @@ class CellView: UIView, UITextFieldDelegate {
     
     private func applyCell() {
         setupStack()
+        applyColors()
         applyStyle()
         applyModel()
     }
@@ -117,6 +118,22 @@ class CellView: UIView, UITextFieldDelegate {
         }
     }
     
+    private func applyColors() {
+        guard let cell = cell else { return }
+        switch cell {
+        case .button:
+            backgroundColor = .red
+        case .header:
+            backgroundColor = UIColor(white: 0.9, alpha: 1)
+        case .image:
+            backgroundColor = .white
+        case .standard:
+            backgroundColor = .white
+        case .textInput:
+            backgroundColor = UIColor(white: 0.95, alpha: 1)
+        }
+    }
+    
     private func applyStyle() {
         guard let cell = cell else { return }
         
@@ -126,11 +143,9 @@ class CellView: UIView, UITextFieldDelegate {
         case .button(_, _):
             label0.font = .systemFont(ofSize: fontSize * 1.33, weight: .medium)
             label0.textAlignment = .center
-            backgroundColor = .red
         case .header( _):
             label0.font = .systemFont(ofSize: fontSize, weight: .regular)
             label0.textAlignment = .left
-            backgroundColor = UIColor(white: 0.9, alpha: 1)
         case .image(let get, _, _, let isThumbnail):
             if let size = get()?.size {
                 heightConstraint = image.heightAnchor.constraint(
@@ -141,19 +156,16 @@ class CellView: UIView, UITextFieldDelegate {
             }
             label0.font = .systemFont(ofSize: fontSize, weight: .regular)
             label0.textAlignment = .left
-            backgroundColor = .white
         case .standard(_, _, _):
             label0.font = .systemFont(ofSize: fontSize * 1.2, weight: .regular)
             label0.textAlignment = .left
             label1.font = .systemFont(ofSize: fontSize, weight: .regular)
             label1.textAlignment = .left
-            backgroundColor = .white
         case .textInput(_, _, _):
             label0.font = .systemFont(ofSize: fontSize * 0.866, weight: .regular)
             label0.textAlignment = .left
             textField.font = .systemFont(ofSize: fontSize * 1.2, weight: .regular)
             textField.textAlignment = .left
-            backgroundColor = UIColor(white: 0.95, alpha: 1)
         }
     }
     

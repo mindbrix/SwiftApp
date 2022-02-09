@@ -11,7 +11,6 @@ import UIKit
 class SwiftApp {
     enum DefaultsKey: String, CaseIterable {
         case counter
-        case fontSize
         case password
         case username
     }

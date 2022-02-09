@@ -105,9 +105,10 @@ class CellView: UIView, UITextFieldDelegate {
         case .standard(let title, let body, _):
             label0.text = title
             label1.text = body
-        case .textInput(let title, let get, _):
+        case .textInput(let title, let get, let set):
             label0.text = title
             textField.text = get()
+            textField.isUserInteractionEnabled = set != nil
         }
     }
     

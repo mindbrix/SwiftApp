@@ -34,7 +34,6 @@ class CellView: UIView, UITextFieldDelegate {
     
     lazy var image: UIImageView = {
         let image = UIImageView()
-        image.contentMode = .scaleAspectFit
         image.translatesAutoresizingMaskIntoConstraints = false
         return image
     }()

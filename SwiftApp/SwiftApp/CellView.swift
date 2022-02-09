@@ -141,7 +141,7 @@ class CellView: UIView, UITextFieldDelegate {
         case .image(let get, _, _, let isThumbnail):
             if let size = get()?.size {
                 heightConstraint = image.heightAnchor.constraint(
-                    equalTo: image.widthAnchor,
+                    lessThanOrEqualTo: image.widthAnchor,
                     multiplier: size.height / size.width)
                 widthConstraint.isActive = isThumbnail
                 heightConstraint?.isActive = true

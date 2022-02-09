@@ -14,6 +14,13 @@ class CellView: UIView, UITextFieldDelegate {
         addSubview(stack)
         stack.constrainToSuperview(insets: Self.defaultStackInsets)
         stack.addGestureRecognizer(tapper)
+        addSubview(separator)
+        NSLayoutConstraint.activate([
+            leadingAnchor.constraint(equalTo: separator.leadingAnchor),
+            trailingAnchor.constraint(equalTo: separator.trailingAnchor),
+            bottomAnchor.constraint(equalTo: separator.bottomAnchor),
+            separator.heightAnchor.constraint(equalToConstant: 0.5)
+        ])
     }
     
     required init?(coder: NSCoder) {
@@ -48,6 +55,11 @@ class CellView: UIView, UITextFieldDelegate {
         label.numberOfLines = 0
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
+    }()
+    lazy var separator: UIView = {
+        let separator = UIView()
+        separator.translatesAutoresizingMaskIntoConstraints = false
+        return separator
     }()
     lazy var stack: UIStackView = {
         let stack = UIStackView()
@@ -94,6 +106,7 @@ class CellView: UIView, UITextFieldDelegate {
     }
     
     private func applyColors() {
+        separator.backgroundColor = .clear
         guard let cell = cell else { return }
         switch cell {
         case .button:
@@ -104,8 +117,9 @@ class CellView: UIView, UITextFieldDelegate {
             backgroundColor = .white
         case .standard:
             backgroundColor = .white
-        case .textInput:
+        case .textInput(_, _, let set):
             backgroundColor = .white
+            separator.backgroundColor = set == nil ? .lightGray : .clear
         }
     }
     

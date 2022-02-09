@@ -72,6 +72,7 @@ class CellView: UIView, UITextFieldDelegate {
     lazy var textField: UITextField = {
         let field = UITextField()
         field.delegate = self
+        field.translatesAutoresizingMaskIntoConstraints = false
         return field
     }()
     lazy var widthConstraint: NSLayoutConstraint = {

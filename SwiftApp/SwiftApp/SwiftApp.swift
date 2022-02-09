@@ -67,11 +67,10 @@ class SwiftApp {
         let vc = TableViewController()
         switch screen {
         case .Main:
-            vc.fontSize = 12
             vc.modelClosure = { [weak self, weak vc] in
                 guard let self = self, let vc = vc else { return ViewModel.emptyModel }
                 
-                return ViewModel(title: screen.rawValue, sections: [
+                return ViewModel(fontSize: 24, title: screen.rawValue, sections: [
                     Section(
                         header: .header(title: "Menu"),
                         cells: Screen.allCases.filter({ !$0.embedInNavController }).map({ screen in
@@ -105,12 +104,11 @@ class SwiftApp {
                 ])
             }
         case .Counter:
-            vc.fontSize = 24
             vc.modelClosure = { [weak self] in
                 guard let self = self else { return ViewModel.emptyModel }
                 let count = self.getDefaultsItem(.counter) as? Int ?? 0
                 
-                return ViewModel(title: screen.rawValue, sections: [
+                return ViewModel(fontSize: 18, title: screen.rawValue, sections: [
                     Section(
                         header: .header(title: "Count"),
                         cells: [
@@ -132,7 +130,7 @@ class SwiftApp {
         case .DefaultStore:
             vc.modelClosure = { [weak self] in
                 guard let self = self else { return ViewModel.emptyModel }
-                return ViewModel(title: screen.rawValue, sections: DefaultsKey.allCases.map({ key in
+                return ViewModel(fontSize: 18, title: screen.rawValue, sections: DefaultsKey.allCases.map({ key in
                     Section(
                         header: .header(title: key.rawValue),
                         cells: [
@@ -142,9 +140,8 @@ class SwiftApp {
                 }))
             }
         case .DequeueTest:
-            vc.fontSize = 14
             vc.modelClosure = {
-                ViewModel(title: screen.rawValue, sections: [
+                ViewModel(fontSize: 18, title: screen.rawValue, sections: [
                     Section(
                         header: .header(title: screen.rawValue),
                         cells: Array(1...100).map({ int in
@@ -156,9 +153,8 @@ class SwiftApp {
                 ])
             }
         case .Login:
-            vc.fontSize = 24
             vc.modelClosure = {
-                return ViewModel(title: screen.rawValue, sections: [
+                return ViewModel(fontSize: 18, title: screen.rawValue, sections: [
                     Section(
                         header: .header(title: screen.rawValue),
                         cells: [

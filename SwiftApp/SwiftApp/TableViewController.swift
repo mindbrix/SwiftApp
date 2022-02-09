@@ -14,12 +14,6 @@ class TableViewController: UITableViewController {
         }
     }
     
-    var fontSize: CGFloat = 18 {
-        didSet {
-            self.tableView.reloadData()
-        }
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.register(CellViewCell.self, forCellReuseIdentifier: CellViewCell.reuseID)
@@ -48,7 +42,7 @@ class TableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let cv = CellView()
-        cv.apply(cell: model.sections[section].header, fontSize: fontSize)
+        cv.apply(cell: model.sections[section].header, fontSize: model.fontSize)
         return cv
     }
 
@@ -58,7 +52,7 @@ class TableViewController: UITableViewController {
         tvc.selectionStyle = .none
         
         if let tvc = tvc as? CellViewCell {
-            tvc.cellView.apply(cell: cell, fontSize: fontSize)
+            tvc.cellView.apply(cell: cell, fontSize: model.fontSize)
         }
         return tvc
     }

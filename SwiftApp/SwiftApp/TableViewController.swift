@@ -41,7 +41,9 @@ class TableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        return CellView(cell: model.sections[section].header)
+        let cv = CellView()
+        cv.cell = model.sections[section].header
+        return cv
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

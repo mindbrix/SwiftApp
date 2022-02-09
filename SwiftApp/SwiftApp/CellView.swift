@@ -9,13 +9,11 @@ import Foundation
 import UIKit
 
 class CellView: UIView, UITextFieldDelegate {
-    init(cell: Cell? = nil) {
+    init() {
         super.init(frame: .zero)
         addSubview(stack)
         stack.constrainToSuperview(insets: Self.defaultStackInsets)
         stack.addGestureRecognizer(tapper)
-        self.cell = cell
-        applyCell()
     }
     
     required init?(coder: NSCoder) {
@@ -24,7 +22,10 @@ class CellView: UIView, UITextFieldDelegate {
     
     var cell: Cell? {
         didSet {
-            applyCell()
+            setupStack()
+            applyColors()
+            applyStyle()
+            applyModel()
         }
     }
     
@@ -67,12 +68,6 @@ class CellView: UIView, UITextFieldDelegate {
     }()
     var heightConstraint: NSLayoutConstraint?
     
-    private func applyCell() {
-        setupStack()
-        applyColors()
-        applyStyle()
-        applyModel()
-    }
     private func setupStack() {
         for subview in stack.subviews {
             subview.removeFromSuperview()
@@ -100,7 +95,6 @@ class CellView: UIView, UITextFieldDelegate {
     }
     private func applyModel() {
         guard let cell = cell else { return }
-        
         switch cell {
         case .button(let title, _):
             label0.text = title
@@ -135,10 +129,9 @@ class CellView: UIView, UITextFieldDelegate {
     }
     
     private func applyStyle() {
-        guard let cell = cell else { return }
-        
         heightConstraint?.isActive = false
         let fontSize: CGFloat = 14
+        guard let cell = cell else { return }
         switch cell {
         case .button(_, _):
             label0.font = .systemFont(ofSize: fontSize * 1.33, weight: .medium)
@@ -171,7 +164,6 @@ class CellView: UIView, UITextFieldDelegate {
     
     @objc func onTap() {
         guard let cell = cell else { return }
-        
         switch cell {
         case .button(_, let onTap):
             onTap()

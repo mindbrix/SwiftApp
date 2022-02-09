@@ -9,10 +9,12 @@ import Foundation
 import UIKit
 
 class SwiftApp {
-    enum DefaultsKey: String, CaseIterable {
+    enum DefaultsKey: String, CaseIterable, Comparable {
         case counter
         case username
         case password
+        
+        static func < (lhs: SwiftApp.DefaultsKey, rhs: SwiftApp.DefaultsKey) -> Bool { lhs.rawValue < rhs.rawValue }
     }
     
     enum Screen: String, CaseIterable {
@@ -134,15 +136,14 @@ class SwiftApp {
         case .DefaultStore:
             vc.modelClosure = { [weak self] in
                 guard let self = self else { return ViewModel.emptyModel }
-                return ViewModel(title: screen.rawValue, sections:
-                    DefaultsKey.allCases.map({ key in
-                        Section(
-                            header: .header(title: key.rawValue),
-                            cells: [
-                                .standard(title: String(describing: self.getDefaultsItem(key)))
-                            ]
-                        )
-                    }))
+                return ViewModel(title: screen.rawValue, sections: DefaultsKey.allCases.sorted().map({ key in
+                    Section(
+                        header: .header(title: key.rawValue),
+                        cells: [
+                            .standard(title: String(describing: self.getDefaultsItem(key)))
+                        ]
+                    )
+                }))
             }
         case .DequeueTest:
             vc.modelClosure = {

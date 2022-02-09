@@ -80,7 +80,7 @@ class SwiftApp {
                 return ViewModel(title: screen.rawValue, sections: [
                     Section(
                         header: .header(title: "Menu"),
-                        cells: Screen.allCases.filter({ $0 != .Main }).map({ screen in
+                        cells: Screen.allCases.filter({ !$0.embedInNavController }).map({ screen in
                             .standard(
                                 title: screen.rawValue,
                                 onTap: {

@@ -103,13 +103,6 @@ class SwiftApp {
                         header: .header(caption: "Images"),
                         cells: [
                             .image(
-                                get: { UIImage(named: "avatar") },
-                                caption: .longText,
-                                isThumbnail: true),
-                            .image(
-                                get: { UIImage(named: "avatar") },
-                                caption: .longText),
-                            .image(
                                 get: { UIImage(named: "grab0") },
                                 caption: .longText,
                                 isThumbnail: true),

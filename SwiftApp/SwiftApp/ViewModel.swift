@@ -50,5 +50,5 @@ struct FontStyle: Equatable {
     let name: String
     let size: CGFloat
     
-    static let defaultStyle = Self(name: "GillSans", size: 18)
+    static let defaultStyle = Self(name: "HelveticaNeue", size: 18)
 }

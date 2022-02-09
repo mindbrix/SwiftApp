@@ -18,6 +18,7 @@ class SwiftApp {
         case Counter
         case DefaultStore
         case DequeueTest
+        case Login
         case TextInputTest
         
         var embedInNavController: Bool {
@@ -151,6 +152,29 @@ class SwiftApp {
                                 title: String(int),
                                 body: int % 2 == 0 ? nil : .longText)
                         })
+                    )
+                ])
+            }
+        case .Login:
+            vc.modelClosure = {
+                ViewModel(title: screen.rawValue, sections: [
+                    Section(
+                        header: .header(title: screen.rawValue),
+                        cells: [
+                            .textInput(
+                                title: "User",
+                                get: {"nigel@mindbrix.co.uk" },
+                                set: { string in }),
+                            .textInput(
+                                title: "User",
+                                get: {"password" },
+                                set: { string in }),
+                            .button(
+                                title: "Login",
+                                onTap: {
+                                }
+                            ),
+                        ]
                     )
                 ])
             }

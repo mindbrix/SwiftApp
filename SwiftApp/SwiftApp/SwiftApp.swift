@@ -154,7 +154,7 @@ class SwiftApp {
                         header: .header(heading: screen.rawValue),
                         cells: DefaultsKey.allCases.map({ key in
                             .textInput(
-                                name: key.rawValue,
+                                key: key.rawValue,
                                 get: { String(describing: self.getDefaultsItem(key)) },
                                 set: {_ in })
                         })
@@ -180,11 +180,11 @@ class SwiftApp {
                         header: .header(heading: screen.rawValue),
                         cells: [
                             .textInput(
-                                name: "User",
+                                key: "User",
                                 get: { self.getDefaultsItem(.username) as? String ?? "" },
                                 set: { string in self.setDefaultsItem(.username, value: string) }),
                             .textInput(
-                                name: "Password",
+                                key: "Password",
                                 get: { self.getDefaultsItem(.password) as? String ?? "" },
                                 set: { string in self.setDefaultsItem(.password, value: string) }),
                             .button(

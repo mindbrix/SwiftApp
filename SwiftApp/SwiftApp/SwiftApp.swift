@@ -78,7 +78,7 @@ class SwiftApp {
                 
                 return ViewModel(fontSize: self.fontSize, title: screen.rawValue, sections: [
                     Section(
-                        header: .header(title: "Menu"),
+                        header: .header(heading: "Menu"),
                         cells: Screen.allCases.filter({ !$0.embedInNavController }).map({ screen in
                             .standard(
                                 title: screen.rawValue,
@@ -90,7 +90,7 @@ class SwiftApp {
                         })
                     ),
                     Section(
-                        header: .header(title: "fontSize: \(self.fontSize)"),
+                        header: .header(heading: "fontSize: \(self.fontSize)"),
                         cells: [
                             .button(
                                 title: "fontSize++",
@@ -100,7 +100,7 @@ class SwiftApp {
                                 onTap: { self.fontSize = 10 })
                         ]),
                     Section(
-                        header: .header(title: "Images"),
+                        header: .header(heading: "Images"),
                         cells: [
                             .image(
                                 get: { UIImage(named: "avatar") },
@@ -129,7 +129,7 @@ class SwiftApp {
                 
                 return ViewModel(fontSize: self.fontSize, title: screen.rawValue, sections: [
                     Section(
-                        header: .header(title: "Count"),
+                        header: .header(heading: "Count"),
                         cells: [
                             .standard(
                                 title: String(count)
@@ -151,7 +151,7 @@ class SwiftApp {
                 guard let self = self else { return ViewModel.emptyModel }
                 return ViewModel(fontSize: self.fontSize, title: screen.rawValue, sections: DefaultsKey.allCases.map({ key in
                     Section(
-                        header: .header(title: key.rawValue),
+                        header: .header(heading: key.rawValue),
                         cells: [
                             .standard(title: String(describing: self.getDefaultsItem(key)))
                         ]
@@ -162,7 +162,7 @@ class SwiftApp {
             vc.modelClosure = {
                 ViewModel(fontSize: self.fontSize, title: screen.rawValue, sections: [
                     Section(
-                        header: .header(title: screen.rawValue),
+                        header: .header(heading: screen.rawValue),
                         cells: Array(1...100).map({ int in
                             .standard(
                                 title: String(int),
@@ -175,14 +175,14 @@ class SwiftApp {
             vc.modelClosure = {
                 return ViewModel(fontSize: self.fontSize, title: screen.rawValue, sections: [
                     Section(
-                        header: .header(title: screen.rawValue),
+                        header: .header(heading: screen.rawValue),
                         cells: [
                             .textInput(
-                                title: "User",
+                                name: "User",
                                 get: { self.getDefaultsItem(.username) as? String ?? "" },
                                 set: { string in self.setDefaultsItem(.username, value: string) }),
                             .textInput(
-                                title: "Password",
+                                name: "Password",
                                 get: { self.getDefaultsItem(.password) as? String ?? "" },
                                 set: { string in self.setDefaultsItem(.password, value: string) }),
                             .button(

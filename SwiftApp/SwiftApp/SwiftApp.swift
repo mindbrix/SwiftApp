@@ -114,18 +114,16 @@ class SwiftApp {
                     Section(
                         header: .header(title: "Count"),
                         cells: [
-                            .standard(title: String(count)),
+                            .standard(
+                                title: String(count)
+                            ),
                             .button(
                                 title: "Down",
-                                onTap: {
-                                    self.setDefaultsItem(.counter, value: max(0, count - 1))
-                                }
+                                onTap: { self.setDefaultsItem(.counter, value: max(0, count - 1)) }
                             ),
                             .button(
                                 title: "Up",
-                                onTap: {
-                                    self.setDefaultsItem(.counter, value: count + 1)
-                                }
+                                onTap: { self.setDefaultsItem(.counter, value: count + 1) }
                             )
                         ]
                     )

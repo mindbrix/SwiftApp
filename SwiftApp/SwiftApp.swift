@@ -20,6 +20,7 @@ class SwiftApp {
         case Counter
         case DefaultStore
         case DequeueTest
+        case Fonts
         case Login
         
         var embedInNavController: Bool { self == .Main }
@@ -165,6 +166,21 @@ class SwiftApp {
                         })
                     )
                 ])
+            }
+        case .Fonts:
+            vc.modelClosure = {
+                return ViewModel(style: self.style, title: screen.rawValue, sections:
+                    UIFont.familyNames.map({ name in
+                        Section(
+                            header: .header(caption: name),
+                            cells: UIFont.fontNames(forFamilyName: name).map({ fontName in
+                                .standard(title: fontName, caption: nil, onTap: {
+                                    self.style = .init(name: fontName, size: self.style.size)
+                                })
+                            })
+                        )
+                    })
+                )
             }
         case .Login:
             vc.modelClosure = {

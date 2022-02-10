@@ -148,6 +148,7 @@ class CellView: UIView, UITextFieldDelegate {
         case .textInput(_, _, let set):
             backgroundColor = .white
             separator.backgroundColor = set == nil ? .lightGray : .clear
+            underline.backgroundColor = set == nil ? .clear : .lightGray
         }
     }
     

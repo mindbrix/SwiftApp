@@ -170,7 +170,7 @@ class SwiftApp {
             vc.modelClosure = {
                 return ViewModel(style: self.style, title: screen.rawValue, sections: [
                     Section(
-                        header: .header(caption: screen.rawValue),
+                        header: nil,
                         cells: [
                             .textInput(
                                 key: "User",

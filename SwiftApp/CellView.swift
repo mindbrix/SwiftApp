@@ -74,7 +74,19 @@ class CellView: UIView, UITextFieldDelegate {
         let field = UITextField()
         field.delegate = self
         field.translatesAutoresizingMaskIntoConstraints = false
+        field.addSubview(underline)
+        NSLayoutConstraint.activate([
+            field.leadingAnchor.constraint(equalTo: underline.leadingAnchor),
+            field.trailingAnchor.constraint(equalTo: underline.trailingAnchor),
+            field.bottomAnchor.constraint(equalTo: underline.bottomAnchor),
+            underline.heightAnchor.constraint(equalToConstant: 0.5)
+        ])
         return field
+    }()
+    lazy var underline: UIView = {
+        let underline = UIView()
+        underline.translatesAutoresizingMaskIntoConstraints = false
+        return underline
     }()
     lazy var widthConstraint: NSLayoutConstraint = {
         image.widthAnchor.constraint(equalToConstant: Self.thumbSize)
@@ -122,6 +134,7 @@ class CellView: UIView, UITextFieldDelegate {
     
     private func applyColors() {
         separator.backgroundColor = .clear
+        underline.backgroundColor = .clear
         guard let cell = cell else { return }
         switch cell {
         case .button:

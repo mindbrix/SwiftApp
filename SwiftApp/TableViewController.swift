@@ -21,6 +21,12 @@ class TableViewController: UITableViewController {
         self.view.backgroundColor = .lightGray
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        guard let nc = self.navigationController else { return }
+        nc.setNavigationBarHidden(nc.viewControllers.count == 1, animated: true)
+    }
+    
     func refresh() {
         model = modelClosure()
     }

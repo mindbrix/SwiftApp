@@ -12,7 +12,7 @@ class TableViewController: UITableViewController {
         super.viewDidLoad()
         self.tableView.register(CellViewCell.self, forCellReuseIdentifier: CellViewCell.reuseID)
         self.tableView.separatorStyle = .none
-        self.view.backgroundColor = .lightGray
+        self.view.backgroundColor = .white
     }
 
     override func viewWillAppear(_ animated: Bool) {

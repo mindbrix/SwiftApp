@@ -82,7 +82,7 @@ class CellView: UIView, UITextFieldDelegate {
     var heightConstraint: NSLayoutConstraint?
     
     lazy var insetConstraints: ConstraintQuadtuple = {
-        stack.constraintsToView(self, insets: Self.defaultStackInsets)
+        stack.constraintsToView(self)
     }()
     var stackInsets: UIEdgeInsets = .zero {
         didSet {

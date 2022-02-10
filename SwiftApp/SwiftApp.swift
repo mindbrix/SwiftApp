@@ -170,12 +170,15 @@ class SwiftApp {
         case .Fonts:
             vc.modelClosure = {
                 return ViewModel(style: self.style, title: screen.rawValue, sections:
-                    UIFont.familyNames.map({ name in
+                    UIFont.familyNames.map({ familyName in
                         Section(
-                            header: .header(caption: name),
-                            cells: UIFont.fontNames(forFamilyName: name).map({ fontName in
-                                .standard(title: fontName, caption: nil, onTap: {
-                                    self.style = .init(name: fontName, size: self.style.size)
+                            header: .header(caption: familyName),
+                            cells: UIFont.fontNames(forFamilyName: familyName).map({ fontName in
+                                .standard(
+                                    title: fontName,
+                                    caption: nil,
+                                    onTap: {
+                                        self.style = .init(name: fontName, size: self.style.size)
                                 })
                             })
                         )

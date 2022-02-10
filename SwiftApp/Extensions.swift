@@ -13,16 +13,20 @@ extension String {
 }
 
 extension UIView {
-    func constraintsToView(_ view: UIView, insets: UIEdgeInsets = .zero) -> [NSLayoutConstraint] {
-        [
+    typealias ConstraintQuadtuple = (top: NSLayoutConstraint, left: NSLayoutConstraint, bottom: NSLayoutConstraint, right: NSLayoutConstraint)
+    
+    func constraintsToView(_ view: UIView, insets: UIEdgeInsets = .zero) -> ConstraintQuadtuple {
+        (
             topAnchor.constraint(equalTo: view.topAnchor, constant: insets.top),
             leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: insets.left),
             bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -insets.bottom),
             trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -insets.right)
-        ]
+        )
     }
+    
     func constrainToSuperview(insets: UIEdgeInsets = .zero) {
         guard let superview = self.superview else { return }
-        NSLayoutConstraint.activate(constraintsToView(superview, insets: insets))
+        let quadtuple = constraintsToView(superview, insets: insets)
+        NSLayoutConstraint.activate([quadtuple.top, quadtuple.left, quadtuple.bottom, quadtuple.right])
     }
 }

@@ -14,7 +14,8 @@ class CellView: UIView, UITextFieldDelegate {
         addSubview(stack)
         stack.addGestureRecognizer(tapper)
         addSubview(separator)
-        NSLayoutConstraint.activate(insetConstraints + [
+        NSLayoutConstraint.activate([
+            insetConstraints.top, insetConstraints.left, insetConstraints.bottom, insetConstraints.right,
             heightAnchor.constraint(greaterThanOrEqualToConstant: 1),
             leadingAnchor.constraint(equalTo: separator.leadingAnchor),
             trailingAnchor.constraint(equalTo: separator.trailingAnchor),
@@ -80,16 +81,15 @@ class CellView: UIView, UITextFieldDelegate {
     }()
     var heightConstraint: NSLayoutConstraint?
     
-    lazy var insetConstraints: [NSLayoutConstraint] = {
+    lazy var insetConstraints: ConstraintQuadtuple = {
         stack.constraintsToView(self, insets: Self.defaultStackInsets)
     }()
     var stackInsets: UIEdgeInsets = .zero {
         didSet {
-            guard insetConstraints.count == 4 else { return }
-            insetConstraints[0].constant = stackInsets.top
-            insetConstraints[1].constant = stackInsets.left
-            insetConstraints[2].constant = -stackInsets.bottom
-            insetConstraints[3].constant = -stackInsets.right
+            insetConstraints.top.constant = stackInsets.top
+            insetConstraints.left.constant = stackInsets.left
+            insetConstraints.bottom.constant = -stackInsets.bottom
+            insetConstraints.right.constant = -stackInsets.right
         }
     }
     

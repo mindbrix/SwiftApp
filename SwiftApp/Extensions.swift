@@ -13,13 +13,16 @@ extension String {
 }
 
 extension UIView {
+    func constraintsToView(_ view: UIView, insets: UIEdgeInsets = .zero) -> [NSLayoutConstraint] {
+        [
+            topAnchor.constraint(equalTo: view.topAnchor, constant: insets.top),
+            leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: insets.left),
+            bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -insets.bottom),
+            trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -insets.right)
+        ]
+    }
     func constrainToSuperview(insets: UIEdgeInsets = .zero) {
         guard let superview = self.superview else { return }
-        NSLayoutConstraint.activate([
-            leadingAnchor.constraint(equalTo: superview.leadingAnchor, constant: insets.left),
-            trailingAnchor.constraint(equalTo: superview.trailingAnchor, constant: -insets.right),
-            topAnchor.constraint(equalTo: superview.topAnchor, constant: insets.top),
-            bottomAnchor.constraint(equalTo: superview.bottomAnchor, constant: -insets.bottom)
-        ])
+        NSLayoutConstraint.activate(constraintsToView(superview, insets: insets))
     }
 }

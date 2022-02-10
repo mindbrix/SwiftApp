@@ -170,6 +170,15 @@ class SwiftApp {
             vc.modelClosure = {
                 return ViewModel(style: self.style, title: screen.rawValue, sections: [
                     Section(
+                        header: .standard(
+                            title: "Back",
+                            onTap: {
+                                guard let nc = vc.navigationController else { return }
+                                nc.popViewController(animated: true)
+                            }
+                        ),
+                        cells: []),
+                    Section(
                         header: .header(caption: screen.rawValue),
                         cells: [
                             .textInput(

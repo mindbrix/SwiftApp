@@ -9,6 +9,7 @@ import UIKit
 
 class TableViewController: UITableViewController {
     let monosection = true
+    let withheader = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,7 +47,7 @@ class TableViewController: UITableViewController {
         if monosection {
             var count = 0
             for section in model.sections {
-                count += section.cells.count + 0
+                count += section.cells.count + (withheader ? 1 : 0)
             }
             return count
         } else {
@@ -57,7 +58,7 @@ class TableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let cv = CellView()
         cv.apply(
-            cell: monosection ? .header(caption: "monosection") : model.sections[section].header,
+            cell: monosection ? .header(caption: model.title) : model.sections[section].header,
             style: model.style)
         return cv
     }
@@ -70,9 +71,10 @@ class TableViewController: UITableViewController {
                 if monosection {
                     var base = 0
                     for section in model.sections {
-                        let end = base + section.cells.count
+                        let end = base + section.cells.count + (withheader ? 1 : 0)
                         if indexPath.row < end {
-                            return section.cells[indexPath.row - base]
+                            let idx = indexPath.row - base
+                            return !withheader ? section.cells[idx] : idx == 0 ? section.header : section.cells[idx - 1]
                         } else {
                             base = end
                         }

@@ -45,11 +45,7 @@ class TableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if monosection {
-            var count = 0
-            for section in model.sections {
-                count += section.cells.count + (withheader ? 1 : 0)
-            }
-            return count
+            return (withheader ? model.sections.count : 0) + model.sections.reduce(0, { x, section in  x + section.cells.count })
         } else {
             return model.sections[section].cells.count
         }

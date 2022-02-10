@@ -32,7 +32,7 @@ enum Cell: Hashable {
 }
 
 struct Section: Equatable {
-    let header: Cell
+    let header: Cell?
     let cells: [Cell]
 }
 

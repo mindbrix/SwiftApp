@@ -63,7 +63,7 @@ class TableViewController: UITableViewController {
         let tvc = tableView.dequeueReusableCell(withIdentifier: CellViewCell.reuseID, for: indexPath)
         tvc.selectionStyle = .none
         if let tvc = tvc as? CellViewCell {
-            let cell: Cell = {
+            let cell: Cell? = {
                 if monosection {
                     var base = 0
                     for section in model.sections {
@@ -75,7 +75,7 @@ class TableViewController: UITableViewController {
                             base = end
                         }
                     }
-                    return model.sections[indexPath.section].cells[indexPath.row]
+                    return nil
                 } else {
                     return model.sections[indexPath.section].cells[indexPath.row]
                 }

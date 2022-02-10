@@ -12,10 +12,10 @@ class CellView: UIView, UITextFieldDelegate {
     init() {
         super.init(frame: .zero)
         addSubview(stack)
-        stack.constrainToSuperview(insets: Self.defaultStackInsets)
         stack.addGestureRecognizer(tapper)
         addSubview(separator)
-        NSLayoutConstraint.activate([
+        NSLayoutConstraint.activate(insetConstraints + [
+            heightAnchor.constraint(greaterThanOrEqualToConstant: 1),
             leadingAnchor.constraint(equalTo: separator.leadingAnchor),
             trailingAnchor.constraint(equalTo: separator.trailingAnchor),
             bottomAnchor.constraint(equalTo: separator.bottomAnchor),
@@ -27,7 +27,7 @@ class CellView: UIView, UITextFieldDelegate {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func apply(cell: Cell, style: FontStyle) {
+    func apply(cell: Cell?, style: FontStyle) {
         self.cell = cell
         setupStack()
         applyColors()
@@ -80,10 +80,24 @@ class CellView: UIView, UITextFieldDelegate {
     }()
     var heightConstraint: NSLayoutConstraint?
     
+    lazy var insetConstraints: [NSLayoutConstraint] = {
+        stack.constraintsToView(self, insets: Self.defaultStackInsets)
+    }()
+    var stackInsets: UIEdgeInsets = .zero {
+        didSet {
+            guard insetConstraints.count == 4 else { return }
+            insetConstraints[0].constant = stackInsets.top
+            insetConstraints[1].constant = stackInsets.left
+            insetConstraints[2].constant = -stackInsets.bottom
+            insetConstraints[3].constant = -stackInsets.right
+        }
+    }
+    
     private func setupStack() {
         for subview in stack.subviews {
             subview.removeFromSuperview()
         }
+        stackInsets = cell == nil ? .zero : Self.defaultStackInsets
         stack.axis = .vertical
         stack.alignment = .fill
         guard let cell = cell else { return }

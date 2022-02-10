@@ -8,12 +8,6 @@
 import UIKit
 
 class TableViewController: UITableViewController {
-    var modelClosure: ModelClosure = { ViewModel.emptyModel } {
-        didSet {
-            model = modelClosure()
-        }
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.register(CellViewCell.self, forCellReuseIdentifier: CellViewCell.reuseID)
@@ -25,11 +19,14 @@ class TableViewController: UITableViewController {
         super.viewWillAppear(animated)
         guard let nc = self.navigationController else { return }
         nc.setNavigationBarHidden(nc.viewControllers.count == 1, animated: true)
+        refresh()
     }
     
     func refresh() {
         model = modelClosure()
     }
+    
+    var modelClosure: ModelClosure = { ViewModel.emptyModel }
     
     private var model = ViewModel.emptyModel {
         didSet {

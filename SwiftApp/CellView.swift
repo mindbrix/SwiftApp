@@ -129,8 +129,11 @@ class CellView: UIView, UITextFieldDelegate {
             for (index, atom) in atoms.enumerated() {
                 guard index < 2 else { return }
                 switch atom {
-                case .image:
+                case .image(_, _, let onTap):
                     stack.addArrangedSubview(image)
+                    if onTap != nil {
+                        image.addGestureRecognizer(tappers[index])
+                    }
                 case .input:
                     stack.addArrangedSubview(textField)
                 case .text(_, _, _, let onTap):
@@ -197,8 +200,9 @@ class CellView: UIView, UITextFieldDelegate {
         case .cell(let atoms, _):
             for (index, atom) in atoms.enumerated() {
                 switch atom {
-                case .image(let get, _, _):
+                case .image(let get, _, let onTap):
                     image.image = get()
+                    image.isUserInteractionEnabled = onTap != nil
                 case .input(let get, let set, _):
                     textField.text = get()
                     textField.isUserInteractionEnabled = set != nil
@@ -289,8 +293,8 @@ class CellView: UIView, UITextFieldDelegate {
             guard sender != tapper else { return }
             if let index = tappers.firstIndex(of: sender), index < 2 {
                 switch atoms[index] {
-                case .image(_ , _, _):
-                    break
+                case .image(_ , _, let onTap):
+                    onTap?()
                 case .input:
                     break
                 case .text(_, _, _, let onTap):

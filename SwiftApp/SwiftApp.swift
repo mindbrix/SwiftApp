@@ -130,7 +130,9 @@ class SwiftApp {
                             })
                         ]),
                         .cell([
-                            .image(get: { UIImage(named: "grab0") }, width: nil),
+                            .image(get: { UIImage(named: "grab0") }, onTap: {
+                                print("grab0")
+                            }),
                             .input(get: { "Input" }, set: { string in })
                         ], isVertical: true)
                     ])

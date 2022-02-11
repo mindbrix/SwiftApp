@@ -48,7 +48,8 @@ class TableViewController: UITableViewController {
         let cv = CellView()
         cv.apply(
             cell: model.sections[section].header,
-            style: model.style)
+            style: model.style,
+            isHeader: true)
         return cv
     }
 

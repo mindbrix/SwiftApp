@@ -28,10 +28,10 @@ class CellView: UIView, UITextFieldDelegate {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func apply(cell: Cell?, style: FontStyle) {
+    func apply(cell: Cell?, style: FontStyle, isHeader: Bool = false) {
         self.cell = cell
         setupStack()
-        applyColors()
+        applyColors(isHeader: isHeader)
         applyStyle(style: style)
         applyModel()
     }
@@ -161,7 +161,7 @@ class CellView: UIView, UITextFieldDelegate {
         }
     }
     
-    private func applyColors() {
+    private func applyColors(isHeader: Bool) {
         separator.backgroundColor = .clear
         underline.backgroundColor = .clear
         label0.textColor = .black
@@ -178,7 +178,7 @@ class CellView: UIView, UITextFieldDelegate {
                     labels[index].textColor = onTap == nil ? .black : .blue
                 }
             }
-            backgroundColor = .white
+            backgroundColor = isHeader ? UIColor(white: 0.9, alpha: 1) : .white
         case .button:
             label0.textColor = .blue
         case .header:

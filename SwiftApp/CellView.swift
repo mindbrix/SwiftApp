@@ -77,7 +77,7 @@ class CellView: UIView, UITextFieldDelegate {
         field.addSubview(underline)
         NSLayoutConstraint.activate([
             underline.leadingAnchor.constraint(equalTo: field.leadingAnchor),
-            underline.trailingAnchor.constraint(equalTo: field.trailingAnchor),
+            underline.widthAnchor.constraint(equalTo: field.widthAnchor, multiplier: 0.9),
             underline.bottomAnchor.constraint(equalTo: field.bottomAnchor),
             underline.heightAnchor.constraint(equalToConstant: 0.5)
         ])

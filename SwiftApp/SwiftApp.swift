@@ -91,12 +91,8 @@ class SwiftApp {
                     Section(
                         header: .cell([.text("fontSize: \(self.style.size)")]),
                         cells: [
-                            .button(
-                                title: "fontSize++",
-                                onTap: { self.style = .init(name: self.style.name, size: self.style.size + 1) }),
-                            .button(
-                                title: "fontSize = 10",
-                                onTap: { self.style = .init(name: self.style.name, size: 10) })
+                            .cell([.text("fontSize++", onTap: { self.style = .init(name: self.style.name, size: self.style.size + 1) })]),
+                            .cell([.text("fontSize = 10", onTap: { self.style = .init(name: self.style.name, size: 10) })]),
                         ]),
                     Section(
                         header: .cell([.text("Images")]),
@@ -108,9 +104,6 @@ class SwiftApp {
                             .image(
                                 get: { UIImage(named: "grab0") },
                                 caption: .longText),
-                            .button(
-                                title: "Refresh",
-                                onTap: { self.refresh() })
                         ])
                 ])
             }
@@ -215,11 +208,6 @@ class SwiftApp {
                                 key: "Password",
                                 get: { self.getDefaultsItem(.password) as? String ?? "" },
                                 set: { string in self.setDefaultsItem(.password, value: string) }),
-                            .button(
-                                title: "Login",
-                                onTap: {
-                                }
-                            ),
                         ]
                     )
                 ])

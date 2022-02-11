@@ -121,7 +121,7 @@ class SwiftApp {
             vc.modelClosure = {
                 ViewModel(style: self.style, title: screen.rawValue, sections: [
                     Section(header: nil, cells:[
-                        .cell(atoms: [
+                        .cell([
                             .text("Text 1", scale: 86, alignment: .left, onTap: {
                                 print("Text 1")
                             }),
@@ -129,7 +129,7 @@ class SwiftApp {
                                 print("Text 2")
                             })
                         ]),
-                        .cell(atoms: [
+                        .cell([
                             .image(get: { UIImage(named: "grab0") }, width: nil),
                             .input(get: { "Input" }, set: { string in })
                         ], isVertical: true)
@@ -145,10 +145,8 @@ class SwiftApp {
                     Section(
                         header: nil,
                         cells: [
-                            .cell(atoms: [
-                                .text(String(count), scale: 200, alignment: .center)
-                            ]),
-                            .cell(atoms: [
+                            .cell([.text(String(count), scale: 200, alignment: .center)]),
+                            .cell([
                                 .text("Down", scale: 120, alignment: .center, onTap: {
                                     self.setDefaultsItem(.counter, value: max(0, count - 1))
                                 }),
@@ -167,7 +165,7 @@ class SwiftApp {
                     Section(
                         header: .header(caption: screen.rawValue),
                         cells: DefaultsKey.allCases.map({ key in
-                            .cell(atoms: [
+                            .cell([
                                 .text(key.rawValue),
                                 .input(get: { String(describing: self.getDefaultsItem(key)) }, scale: 120)
                             ], isVertical: true)

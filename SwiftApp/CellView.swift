@@ -122,9 +122,9 @@ class CellView: UIView, UITextFieldDelegate {
             for (index, atom) in atoms.enumerated() {
                 switch atom {
                 case .image:
-                    break
+                    stack.addArrangedSubview(image)
                 case .input:
-                    break
+                    stack.addArrangedSubview(textField)
                 case .text:
                     guard index < labels.count else { return }
                     stack.addArrangedSubview(labels[index])
@@ -155,7 +155,7 @@ class CellView: UIView, UITextFieldDelegate {
         guard let cell = cell else { return }
         switch cell {
         case .cell:
-            break
+            backgroundColor = .systemPink
         case .button:
             label0.textColor = .blue
         case .header:
@@ -177,10 +177,11 @@ class CellView: UIView, UITextFieldDelegate {
         case .cell(let atoms, _):
             for (index, atom) in atoms.enumerated() {
                 switch atom {
-                case .image:
-                    break
-                case .input:
-                    break
+                case .image(let get, _, _):
+                    image.image = get()
+                case .input(let get, let set, _):
+                    textField.text = get()
+                    textField.isUserInteractionEnabled = set != nil
                 case .text(let string, _, _, _):
                     guard index < labels.count else { return }
                     labels[index].text = string
@@ -215,10 +216,16 @@ class CellView: UIView, UITextFieldDelegate {
         case .cell(let atoms, _):
             for (index, atom) in atoms.enumerated() {
                 switch atom {
-                case .image:
-                    break
-                case .input:
-                    break
+                case .image(let get, _, _):
+                    if let size = get()?.size {
+                        heightConstraint = image.heightAnchor.constraint(
+                            lessThanOrEqualTo: image.widthAnchor,
+                            multiplier: size.height / size.width)
+                        heightConstraint?.isActive = true
+                    }
+                case .input(_, _, let scale):
+                    textField.font = UIFont(name: style.name, size: style.size * scale / 100)
+                    textField.textAlignment = .left
                 case .text(_, let scale, let alignment, _):
                     guard index < labels.count else { return }
                     labels[index].font = UIFont(name: style.name, size: style.size * scale / 100)

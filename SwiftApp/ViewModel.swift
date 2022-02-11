@@ -12,7 +12,7 @@ import UIKit
 enum Atom: Hashable {
     case text(_ string: String, scale: CGFloat = 100, alignment: NSTextAlignment = .left, onTap: (() -> Void)? = nil)
     case image(get: () -> UIImage?, width: CGFloat? = nil, onTap: (() -> Void)? = nil)
-    case input(get: () -> String, set: ((String) -> Void)?, scale: Int = 100)
+    case input(get: () -> String, set: ((String) -> Void)?, scale: CGFloat = 100)
     
     static func == (lhs: Atom, rhs: Atom) -> Bool {
         lhs.hashValue == rhs.hashValue

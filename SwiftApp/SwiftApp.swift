@@ -123,7 +123,14 @@ class SwiftApp {
                     Section(header: nil, cells:[
                         .cell(atoms: [
                             .text("Text 1", scale: 86, alignment: .left),
-                            .text("Text 2", scale: 120, alignment: .right)])
+                            .text("Text 2", scale: 120, alignment: .right)
+                        ]),
+                        .cell(atoms: [
+                            .image(get: {
+                                    UIImage(named: "grab0") }, width: nil),
+                            .input(get: { "Input" }, set: { string in })
+                            
+                        ], isVertical: true)
                     ])
                 ])
             }

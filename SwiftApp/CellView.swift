@@ -156,8 +156,8 @@ class CellView: UIView, UITextFieldDelegate {
                     break
                 case .input(_, let set, _):
                     textField.textColor = set == nil ? .gray : .black
-                //            separator.backgroundColor = set == nil ? .lightGray : .clear
-                //            underline.backgroundColor = set == nil ? .clear : .lightGray
+                    separator.backgroundColor = set == nil ? .lightGray : .clear
+                    underline.backgroundColor = set == nil ? .clear : .lightGray
                 case .text(_, _, _, let onTap):
                     labels[index].textColor = onTap == nil ? .black : .blue
                 }

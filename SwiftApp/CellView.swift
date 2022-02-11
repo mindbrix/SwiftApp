@@ -135,10 +135,11 @@ class CellView: UIView, UITextFieldDelegate {
     private func applyColors() {
         separator.backgroundColor = .clear
         underline.backgroundColor = .clear
+        label0.textColor = .black
         guard let cell = cell else { return }
         switch cell {
         case .button:
-            backgroundColor = .red
+            label0.textColor = .blue
         case .header:
             backgroundColor = UIColor(white: 0.9, alpha: 1)
         case .image:
@@ -183,7 +184,7 @@ class CellView: UIView, UITextFieldDelegate {
         switch cell {
         case .button(_, _):
             label0.font = titleFont
-            label0.textAlignment = .center
+            label0.textAlignment = .left
         case .header:
             label0.font = captionFont
             label0.textAlignment = .left

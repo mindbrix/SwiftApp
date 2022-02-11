@@ -8,13 +8,9 @@
 import Foundation
 import UIKit
 
-enum Alignment {
-    case center
-    case left
-    case right
-}
+
 enum Atom: Hashable {
-    case text(_ string: String, scale: Int = 100, alignment: Alignment = .left, onTap: (() -> Void)? = nil)
+    case text(_ string: String, scale: CGFloat = 100, alignment: NSTextAlignment = .left, onTap: (() -> Void)? = nil)
     case image(get: () -> UIImage?, width: CGFloat? = nil, onTap: (() -> Void)? = nil)
     case input(get: () -> String, set: ((String) -> Void)?, scale: Int = 100)
     
@@ -35,7 +31,7 @@ enum Atom: Hashable {
 }
 
 enum Cell: Hashable {
-    case cell(_ atoms: [Atom]? = nil, isVertical: Bool = false)
+    case cell(atoms: [Atom], isVertical: Bool = false)
     case button(title: String, onTap: (() -> Void))
     case header(caption: String)
     case image(get: () -> UIImage?, caption: String, onTap: (() -> Void)? = nil, isThumbnail: Bool = false)

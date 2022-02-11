@@ -57,6 +57,9 @@ class CellView: UIView, UITextFieldDelegate {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
+    lazy var labels: [UILabel] = {
+        [label0, label1]
+    }()
     lazy var separator: UIView = {
         let separator = UIView()
         separator.translatesAutoresizingMaskIntoConstraints = false
@@ -114,8 +117,19 @@ class CellView: UIView, UITextFieldDelegate {
         stack.alignment = .fill
         guard let cell = cell else { return }
         switch cell {
-        case .cell:
-            break
+        case .cell(let atoms, let isVertical):
+            stack.axis = isVertical ? .vertical : .horizontal
+            for (index, atom) in atoms.enumerated() {
+                switch atom {
+                case .image:
+                    break
+                case .input:
+                    break
+                case .text:
+                    guard index < labels.count else { return }
+                    stack.addArrangedSubview(labels[index])
+                }
+            }
         case .button:
             stack.addArrangedSubview(label0)
         case .header:
@@ -160,8 +174,18 @@ class CellView: UIView, UITextFieldDelegate {
     private func applyModel() {
         guard let cell = cell else { return }
         switch cell {
-        case .cell:
-            break
+        case .cell(let atoms, _):
+            for (index, atom) in atoms.enumerated() {
+                switch atom {
+                case .image:
+                    break
+                case .input:
+                    break
+                case .text(let string, _, _, _):
+                    guard index < labels.count else { return }
+                    labels[index].text = string
+                }
+            }
         case .button(let title, _):
             label0.text = title
         case .header(let caption):
@@ -188,8 +212,19 @@ class CellView: UIView, UITextFieldDelegate {
         
         guard let cell = cell else { return }
         switch cell {
-        case .cell:
-            break
+        case .cell(let atoms, _):
+            for (index, atom) in atoms.enumerated() {
+                switch atom {
+                case .image:
+                    break
+                case .input:
+                    break
+                case .text(_, let scale, let alignment, _):
+                    guard index < labels.count else { return }
+                    labels[index].font = UIFont(name: style.name, size: style.size * scale / 100)
+                    labels[index].textAlignment = alignment
+                }
+            }
         case .button(_, _):
             label0.font = titleFont
             label0.textAlignment = .left

@@ -17,6 +17,7 @@ class SwiftApp {
     
     enum Screen: String, CaseIterable {
         case Main
+        case Atoms
         case Counter
         case DefaultStore
         case DequeueTest
@@ -114,6 +115,16 @@ class SwiftApp {
                                 title: "Refresh",
                                 onTap: { self.refresh() })
                         ])
+                ])
+            }
+        case .Atoms:
+            vc.modelClosure = {
+                ViewModel(style: self.style, title: screen.rawValue, sections: [
+                    Section(header: nil, cells:[
+                        .cell(atoms: [
+                            .text("Text 1", scale: 86, alignment: .left),
+                            .text("Text 2", scale: 120, alignment: .right)])
+                    ])
                 ])
             }
         case .Counter:

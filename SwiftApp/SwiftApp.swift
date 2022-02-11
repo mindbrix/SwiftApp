@@ -122,8 +122,12 @@ class SwiftApp {
                 ViewModel(style: self.style, title: screen.rawValue, sections: [
                     Section(header: nil, cells:[
                         .cell(atoms: [
-                            .text("Text 1", scale: 86, alignment: .left),
-                            .text("Text 2", scale: 120, alignment: .right)
+                            .text("Text 1", scale: 86, alignment: .left, onTap: {
+                                print("Text 1")
+                            }),
+                            .text("Text 2", scale: 120, alignment: .right, onTap: {
+                                print("Text 2")
+                            })
                         ]),
                         .cell(atoms: [
                             .image(get: {

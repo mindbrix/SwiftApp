@@ -32,19 +32,12 @@ enum Atom: Hashable {
 
 enum Cell: Hashable {
     case cell(_ atoms: [Atom], isVertical: Bool = false)
-    case image(get: () -> UIImage?, caption: String, onTap: (() -> Void)? = nil, isThumbnail: Bool = false)
     
     static func == (lhs: Cell, rhs: Cell) -> Bool {
         lhs.hashValue == rhs.hashValue
     }
     func hash(into hasher: inout Hasher) {
         hasher.combine(String(describing: self))
-        switch self {
-        case .image(let get, _, _, _):
-            hasher.combine(get())
-        default:
-            break
-        }
     }
 }
 

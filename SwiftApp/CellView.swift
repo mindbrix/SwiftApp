@@ -125,7 +125,8 @@ class CellView: UIView, UITextFieldDelegate {
             for (index, atom) in atoms.enumerated() {
                 guard index < 2 else { return }
                 switch atom {
-                case .image(_, _, let onTap):
+                case .image(_, let width, let onTap):
+                    stack.alignment = width != nil ? .leading : .fill
                     stack.addArrangedSubview(image)
                     if onTap != nil {
                         image.addGestureRecognizer(tappers[index])
@@ -139,11 +140,6 @@ class CellView: UIView, UITextFieldDelegate {
                     }
                 }
             }
-        case .image(_, _, _, let isThumbnail):
-            stack.axis = isThumbnail ? .horizontal : .vertical
-            stack.alignment = isThumbnail ? .leading : .fill
-            stack.addArrangedSubview(image)
-            stack.addArrangedSubview(label0)
         }
     }
     
@@ -165,8 +161,6 @@ class CellView: UIView, UITextFieldDelegate {
                 }
             }
             backgroundColor = isHeader ? UIColor(white: 0.9, alpha: 1) : .white
-        case .image:
-            backgroundColor = .white
 //        case .textInput(_, _, let set):
 //            backgroundColor = .white
 //            separator.backgroundColor = set == nil ? .lightGray : .clear
@@ -192,9 +186,6 @@ class CellView: UIView, UITextFieldDelegate {
                     labels[index].isUserInteractionEnabled = onTap != nil
                 }
             }
-        case .image(let get, let caption, _, _):
-            image.image = get()
-            label0.text = caption
         }
     }
     
@@ -206,12 +197,14 @@ class CellView: UIView, UITextFieldDelegate {
         case .cell(let atoms, _):
             for (index, atom) in atoms.enumerated() {
                 switch atom {
-                case .image(let get, _, _):
+                case .image(let get, let width, _):
                     if let size = get()?.size {
                         heightConstraint = image.heightAnchor.constraint(
                             lessThanOrEqualTo: image.widthAnchor,
                             multiplier: size.height / size.width)
                         heightConstraint?.isActive = true
+                        widthConstraint.constant = width ?? 0
+                        widthConstraint.isActive = width != nil
                     }
                 case .input(_, _, let scale):
                     textField.font = UIFont(name: style.name, size: style.size * scale / 100)
@@ -222,16 +215,6 @@ class CellView: UIView, UITextFieldDelegate {
                     labels[index].textAlignment = alignment
                 }
             }
-        case .image(let get, _, _, let isThumbnail):
-            if let size = get()?.size {
-                heightConstraint = image.heightAnchor.constraint(
-                    lessThanOrEqualTo: image.widthAnchor,
-                    multiplier: size.height / size.width)
-                widthConstraint.isActive = isThumbnail
-                heightConstraint?.isActive = true
-            }
-            label0.font = captionFont
-            label0.textAlignment = .left
         }
     }
     
@@ -249,8 +232,6 @@ class CellView: UIView, UITextFieldDelegate {
                     onTap?()
                 }
             }
-        case .image(_, _, let onTap, _):
-            onTap?()
         }
     }
     

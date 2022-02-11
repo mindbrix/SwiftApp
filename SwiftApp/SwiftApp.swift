@@ -97,13 +97,14 @@ class SwiftApp {
                     Section(
                         header: .cell([.text("Images")]),
                         cells: [
-                            .image(
-                                get: { UIImage(named: "grab0") },
-                                caption: .longText,
-                                isThumbnail: true),
-                            .image(
-                                get: { UIImage(named: "grab0") },
-                                caption: .longText),
+                            .cell([
+                                .image(get: { UIImage(named: "grab0") }),
+                                .text(.longText)
+                            ], isVertical: true),
+                            .cell([
+                                .image(get: { UIImage(named: "grab0") }, width: 64),
+                                .text(.longText)
+                            ], isVertical: false),
                         ])
                 ])
             }

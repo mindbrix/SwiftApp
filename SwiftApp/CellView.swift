@@ -73,6 +73,10 @@ class CellView: UIView, UITextFieldDelegate {
     lazy var tapper: UITapGestureRecognizer = {
         UITapGestureRecognizer(target: self, action: #selector(onTap))
     }()
+    lazy var tappers: [UITapGestureRecognizer] = {
+        [UITapGestureRecognizer(target: self, action: #selector(onTap)),
+         UITapGestureRecognizer(target: self, action: #selector(onTap))]
+    }()
     lazy var textField: UITextField = {
         let field = UITextField()
         field.delegate = self
@@ -111,6 +115,9 @@ class CellView: UIView, UITextFieldDelegate {
     private func setupStack() {
         for subview in stack.subviews {
             subview.removeFromSuperview()
+            for recognizer in subview.gestureRecognizers ?? [] {
+                subview.removeGestureRecognizer(recognizer)
+            }
         }
         stackInsets = cell == nil ? .zero : Self.defaultStackInsets
         stack.axis = .vertical
@@ -120,14 +127,18 @@ class CellView: UIView, UITextFieldDelegate {
         case .cell(let atoms, let isVertical):
             stack.axis = isVertical ? .vertical : .horizontal
             for (index, atom) in atoms.enumerated() {
+                guard index < 2 else { return }
                 switch atom {
                 case .image:
                     stack.addArrangedSubview(image)
                 case .input:
                     stack.addArrangedSubview(textField)
-                case .text:
-                    guard index < labels.count else { return }
+                case .text(_, _, _, let onTap):
                     stack.addArrangedSubview(labels[index])
+                    labels[index].isUserInteractionEnabled = onTap != nil
+                    if onTap != nil {
+                        labels[index].addGestureRecognizer(tappers[index])
+                    }
                 }
             }
         case .button:
@@ -261,11 +272,21 @@ class CellView: UIView, UITextFieldDelegate {
         }
     }
     
-    @objc func onTap() {
+    @objc func onTap(_ sender: UITapGestureRecognizer) {
         guard let cell = cell else { return }
         switch cell {
-        case .cell:
-            break
+        case .cell(let atoms, _):
+            guard sender != tapper else { return }
+            if let index = tappers.firstIndex(of: sender), index < 2 {
+                switch atoms[index] {
+                case .image(_ , _, _):
+                    break
+                case .input:
+                    break
+                case .text(_, _, _, let onTap):
+                    onTap?()
+                }
+            }
         case .button(_, let onTap):
             onTap()
         case .header:

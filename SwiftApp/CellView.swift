@@ -12,7 +12,6 @@ class CellView: UIView, UITextFieldDelegate {
     init() {
         super.init(frame: .zero)
         addSubview(stack)
-        stack.addGestureRecognizer(tapper)
         addSubview(separator)
         NSLayoutConstraint.activate([
             insetConstraints.top, insetConstraints.left, insetConstraints.bottom, insetConstraints.right,
@@ -69,9 +68,6 @@ class CellView: UIView, UITextFieldDelegate {
         let stack = UIStackView()
         stack.translatesAutoresizingMaskIntoConstraints = false
         return stack
-    }()
-    lazy var tapper: UITapGestureRecognizer = {
-        UITapGestureRecognizer(target: self, action: #selector(onTap))
     }()
     lazy var tappers: [UITapGestureRecognizer] = {
         [UITapGestureRecognizer(target: self, action: #selector(onTap)),
@@ -243,7 +239,6 @@ class CellView: UIView, UITextFieldDelegate {
         guard let cell = cell else { return }
         switch cell {
         case .cell(let atoms, _):
-            guard sender != tapper else { return }
             if let index = tappers.firstIndex(of: sender), index < 2 {
                 switch atoms[index] {
                 case .image(_ , _, let onTap):

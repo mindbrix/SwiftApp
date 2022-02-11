@@ -165,7 +165,17 @@ class CellView: UIView, UITextFieldDelegate {
         label0.textColor = .black
         guard let cell = cell else { return }
         switch cell {
-        case .cell:
+        case .cell(let atoms, _):
+            for (index, atom) in atoms.enumerated() {
+                switch atom {
+                case .image:
+                    break
+                case .input(_, let set, _):
+                    textField.textColor = set == nil ? .gray : .black
+                case .text(_, _, _, let onTap):
+                    labels[index].textColor = onTap == nil ? .black : .blue
+                }
+            }
             backgroundColor = .white
         case .button:
             label0.textColor = .blue

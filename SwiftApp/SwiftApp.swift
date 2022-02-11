@@ -130,10 +130,8 @@ class SwiftApp {
                             })
                         ]),
                         .cell(atoms: [
-                            .image(get: {
-                                    UIImage(named: "grab0") }, width: nil),
+                            .image(get: { UIImage(named: "grab0") }, width: nil),
                             .input(get: { "Input" }, set: { string in })
-                            
                         ], isVertical: true)
                     ])
                 ])
@@ -169,10 +167,10 @@ class SwiftApp {
                     Section(
                         header: .header(caption: screen.rawValue),
                         cells: DefaultsKey.allCases.map({ key in
-                            .textInput(
-                                key: key.rawValue,
-                                get: { String(describing: self.getDefaultsItem(key)) },
-                                set: nil)
+                            .cell(atoms: [
+                                .text(key.rawValue),
+                                .input(get: { String(describing: self.getDefaultsItem(key)) }, scale: 120)
+                            ], isVertical: true)
                         })
                 )])
             }

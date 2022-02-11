@@ -33,7 +33,6 @@ enum Atom: Hashable {
 enum Cell: Hashable {
     case cell(_ atoms: [Atom], isVertical: Bool = false)
     case image(get: () -> UIImage?, caption: String, onTap: (() -> Void)? = nil, isThumbnail: Bool = false)
-    case standard(title: String, caption: String? = nil, onTap: (() -> Void)? = nil)
     
     static func == (lhs: Cell, rhs: Cell) -> Bool {
         lhs.hashValue == rhs.hashValue

@@ -170,9 +170,7 @@ class SwiftApp {
                     Section(
                         header: .cell([.text(screen.rawValue)]),
                         cells: Array(1...100).map({ int in
-                            .standard(
-                                title: String(int),
-                                caption: int % 2 == 0 ? nil : .longText)
+                            .cell([.text(String(int)), .text(int % 2 == 0 ? "" : .longText)], isVertical: true)
                         })
                     )
                 ])
@@ -184,11 +182,9 @@ class SwiftApp {
                         Section(
                             header: .cell([.text(familyName)]),
                             cells: UIFont.fontNames(forFamilyName: familyName).map({ fontName in
-                                .standard(
-                                    title: fontName,
-                                    onTap: {
-                                        self.style = .init(name: fontName, size: self.style.size)
-                                })
+                                .cell([.text(fontName, onTap: {
+                                    self.style = .init(name: fontName, size: self.style.size)
+                                })])
                             })
                         )
                     })

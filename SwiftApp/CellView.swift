@@ -148,9 +148,6 @@ class CellView: UIView, UITextFieldDelegate {
             stack.alignment = isThumbnail ? .leading : .fill
             stack.addArrangedSubview(image)
             stack.addArrangedSubview(label0)
-        case .standard:
-            stack.addArrangedSubview(label0)
-            stack.addArrangedSubview(label1)
         }
     }
     
@@ -173,8 +170,6 @@ class CellView: UIView, UITextFieldDelegate {
             }
             backgroundColor = isHeader ? UIColor(white: 0.9, alpha: 1) : .white
         case .image:
-            backgroundColor = .white
-        case .standard:
             backgroundColor = .white
 //        case .textInput(_, _, let set):
 //            backgroundColor = .white
@@ -204,19 +199,12 @@ class CellView: UIView, UITextFieldDelegate {
         case .image(let get, let caption, _, _):
             image.image = get()
             label0.text = caption
-        case .standard(let title, let caption, _):
-            label0.text = title
-            label1.text = caption
         }
     }
     
     private func applyStyle(style: FontStyle) {
         heightConstraint?.isActive = false
-        let titleFont = UIFont(name: style.name, size: style.size * 1.2)
         let captionFont = UIFont(name: style.name, size: style.size * 1.0)
-        let keyFont = UIFont(name: style.name, size: style.size * 0.866)
-        let valueFont = titleFont
-        
         guard let cell = cell else { return }
         switch cell {
         case .cell(let atoms, _):
@@ -248,11 +236,6 @@ class CellView: UIView, UITextFieldDelegate {
             }
             label0.font = captionFont
             label0.textAlignment = .left
-        case .standard(_, _, _):
-            label0.font = titleFont
-            label0.textAlignment = .left
-            label1.font = captionFont
-            label1.textAlignment = .left
         }
     }
     
@@ -272,8 +255,6 @@ class CellView: UIView, UITextFieldDelegate {
                 }
             }
         case .image(_, _, let onTap, _):
-            onTap?()
-        case .standard(_, _, let onTap):
             onTap?()
         }
     }

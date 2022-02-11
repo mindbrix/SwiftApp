@@ -8,6 +8,32 @@
 import Foundation
 import UIKit
 
+enum Alignment {
+    case center
+    case left
+    case right
+}
+enum Atom: Hashable {
+    case text(_ string: String, scale: Int = 100, alignment: Alignment = .left, onTap: (() -> Void)? = nil)
+    case image(get: () -> UIImage?, width: CGFloat? = nil, onTap: (() -> Void)? = nil)
+    case input(get: () -> String, set: ((String) -> Void)?, scale: Int = 100)
+    
+    static func == (lhs: Atom, rhs: Atom) -> Bool {
+        lhs.hashValue == rhs.hashValue
+    }
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(String(describing: self))
+        switch self {
+        case .image(let get, _, _):
+            hasher.combine(get())
+        case .input(let get, _, _):
+            hasher.combine(get())
+        default:
+            break
+        }
+    }
+}
+
 enum Cell: Hashable {
     case button(title: String, onTap: (() -> Void))
     case header(caption: String)

@@ -34,7 +34,6 @@ enum Cell: Hashable {
     case cell(_ atoms: [Atom], isVertical: Bool = false)
     case image(get: () -> UIImage?, caption: String, onTap: (() -> Void)? = nil, isThumbnail: Bool = false)
     case standard(title: String, caption: String? = nil, onTap: (() -> Void)? = nil)
-    case textInput(key: String, get: () -> String, set: ((String) -> Void)?)
     
     static func == (lhs: Cell, rhs: Cell) -> Bool {
         lhs.hashValue == rhs.hashValue
@@ -43,8 +42,6 @@ enum Cell: Hashable {
         hasher.combine(String(describing: self))
         switch self {
         case .image(let get, _, _, _):
-            hasher.combine(get())
-        case .textInput(_, let get, _):
             hasher.combine(get())
         default:
             break

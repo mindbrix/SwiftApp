@@ -151,9 +151,6 @@ class CellView: UIView, UITextFieldDelegate {
         case .standard:
             stack.addArrangedSubview(label0)
             stack.addArrangedSubview(label1)
-        case .textInput:
-            stack.addArrangedSubview(label0)
-            stack.addArrangedSubview(textField)
         }
     }
     
@@ -179,10 +176,10 @@ class CellView: UIView, UITextFieldDelegate {
             backgroundColor = .white
         case .standard:
             backgroundColor = .white
-        case .textInput(_, _, let set):
-            backgroundColor = .white
-            separator.backgroundColor = set == nil ? .lightGray : .clear
-            underline.backgroundColor = set == nil ? .clear : .lightGray
+//        case .textInput(_, _, let set):
+//            backgroundColor = .white
+//            separator.backgroundColor = set == nil ? .lightGray : .clear
+//            underline.backgroundColor = set == nil ? .clear : .lightGray
         }
     }
     
@@ -210,10 +207,6 @@ class CellView: UIView, UITextFieldDelegate {
         case .standard(let title, let caption, _):
             label0.text = title
             label1.text = caption
-        case .textInput(let key, let get, let set):
-            label0.text = key
-            textField.text = get()
-            textField.isUserInteractionEnabled = set != nil
         }
     }
     
@@ -260,11 +253,6 @@ class CellView: UIView, UITextFieldDelegate {
             label0.textAlignment = .left
             label1.font = captionFont
             label1.textAlignment = .left
-        case .textInput(_, _, _):
-            label0.font = keyFont
-            label0.textAlignment = .left
-            textField.font = valueFont
-            textField.textAlignment = .left
         }
     }
     
@@ -287,8 +275,6 @@ class CellView: UIView, UITextFieldDelegate {
             onTap?()
         case .standard(_, _, let onTap):
             onTap?()
-        case .textInput:
-            break
         }
     }
     
@@ -296,9 +282,17 @@ class CellView: UIView, UITextFieldDelegate {
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         switch cell {
-        case .textInput(_, _, let set):
-            if let text = textField.text, let textRange = Range(range, in: text) {
-                set?(text.replacingCharacters(in: textRange, with: string))
+        case .cell(let atoms, _):
+            if let index = stack.subviews.firstIndex(of: textField), index < 2 {
+                switch atoms[index] {
+                case .input(_, let set, _):
+                    if let text = textField.text, let textRange = Range(range, in: text) {
+                        set?(text.replacingCharacters(in: textRange, with: string))
+                    }
+                    break
+                default:
+                    break
+                }
             }
         default:
             break

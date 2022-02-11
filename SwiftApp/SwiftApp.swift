@@ -200,14 +200,20 @@ class SwiftApp {
                     Section(
                         header: nil,
                         cells: [
-                            .textInput(
-                                key: "User",
-                                get: { self.getDefaultsItem(.username) as? String ?? "" },
-                                set: { string in self.setDefaultsItem(.username, value: string) }),
-                            .textInput(
-                                key: "Password",
-                                get: { self.getDefaultsItem(.password) as? String ?? "" },
-                                set: { string in self.setDefaultsItem(.password, value: string) }),
+                            .cell([
+                                .text("User"),
+                                .input(
+                                    get: { self.getDefaultsItem(.username) as? String ?? "" },
+                                    set: { string in self.setDefaultsItem(.username, value: string) },
+                                    scale: 120),
+                                ], isVertical: true),
+                            .cell([
+                                .text("Password"),
+                                .input(
+                                    get: { self.getDefaultsItem(.password) as? String ?? "" },
+                                    set: { string in self.setDefaultsItem(.password, value: string) },
+                                    scale: 120),
+                            ], isVertical: true)
                         ]
                     )
                 ])

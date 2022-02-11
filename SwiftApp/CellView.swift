@@ -257,21 +257,19 @@ class CellView: UIView, UITextFieldDelegate {
     // MARK: - UITextFieldDelegate
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        switch cell {
-        case .cell(let atoms, _):
-            if let index = stack.subviews.firstIndex(of: textField), index < 2 {
+        if let index = stack.subviews.firstIndex(of: textField), index < 2,
+           let text = textField.text, let textRange = Range(range, in: text) {
+            switch cell {
+            case .cell(let atoms, _):
                 switch atoms[index] {
                 case .input(_, let set, _):
-                    if let text = textField.text, let textRange = Range(range, in: text) {
-                        set?(text.replacingCharacters(in: textRange, with: string))
-                    }
-                    break
+                    set?(text.replacingCharacters(in: textRange, with: string))
                 default:
                     break
                 }
+            default:
+                break
             }
-        default:
-            break
         }
         return true
     }

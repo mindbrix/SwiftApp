@@ -145,16 +145,16 @@ class SwiftApp {
                 
                 return ViewModel(style: self.style, title: screen.rawValue, sections: [
                     Section(
-                        header: .header(caption: "Count"),
+                        header: nil,
                         cells: [
                             .cell(atoms: [
                                 .text(String(count), scale: 200, alignment: .center)
                             ]),
                             .cell(atoms: [
-                                .text("Down", scale: 120, alignment: .left, onTap: {
+                                .text("Down", scale: 120, alignment: .center, onTap: {
                                     self.setDefaultsItem(.counter, value: max(0, count - 1))
                                 }),
-                                .text("Up", scale: 120, alignment: .right, onTap: {
+                                .text("Up", scale: 120, alignment: .center, onTap: {
                                     self.setDefaultsItem(.counter, value: count + 1)
                                 })
                             ]),

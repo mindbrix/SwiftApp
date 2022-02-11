@@ -170,7 +170,10 @@ class SwiftApp {
                     Section(
                         header: .cell([.text(screen.rawValue)]),
                         cells: Array(1...100).map({ int in
-                            .cell([.text(String(int)), .text(int % 2 == 0 ? "" : .longText)], isVertical: true)
+                            .cell([
+                                .text(String(int)),
+                                .text(int % 2 == 0 ? "" : .longText)],
+                                isVertical: true)
                         })
                     )
                 ])

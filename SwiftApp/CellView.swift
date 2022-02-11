@@ -166,7 +166,7 @@ class CellView: UIView, UITextFieldDelegate {
         guard let cell = cell else { return }
         switch cell {
         case .cell:
-            backgroundColor = .systemPink
+            backgroundColor = .white
         case .button:
             label0.textColor = .blue
         case .header:

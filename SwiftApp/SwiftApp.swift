@@ -147,17 +147,17 @@ class SwiftApp {
                     Section(
                         header: .header(caption: "Count"),
                         cells: [
-                            .standard(
-                                title: String(count)
-                            ),
-                            .button(
-                                title: "Down",
-                                onTap: { self.setDefaultsItem(.counter, value: max(0, count - 1)) }
-                            ),
-                            .button(
-                                title: "Up",
-                                onTap: { self.setDefaultsItem(.counter, value: count + 1) }
-                            )
+                            .cell(atoms: [
+                                .text(String(count), scale: 200, alignment: .center)
+                            ]),
+                            .cell(atoms: [
+                                .text("Down", scale: 120, alignment: .left, onTap: {
+                                    self.setDefaultsItem(.counter, value: max(0, count - 1))
+                                }),
+                                .text("Up", scale: 120, alignment: .right, onTap: {
+                                    self.setDefaultsItem(.counter, value: count + 1)
+                                })
+                            ]),
                         ]
                     )
                 ])

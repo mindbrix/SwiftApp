@@ -30,15 +30,8 @@ enum Atom: Hashable {
     }
 }
 
-enum Cell: Hashable {
+enum Cell: Equatable {
     case cell(_ atoms: [Atom], isVertical: Bool = false)
-    
-    static func == (lhs: Cell, rhs: Cell) -> Bool {
-        lhs.hashValue == rhs.hashValue
-    }
-    func hash(into hasher: inout Hasher) {
-        hasher.combine(String(describing: self))
-    }
 }
 
 struct Section: Equatable {

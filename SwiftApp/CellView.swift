@@ -156,15 +156,13 @@ class CellView: UIView, UITextFieldDelegate {
                     break
                 case .input(_, let set, _):
                     textField.textColor = set == nil ? .gray : .black
+                //            separator.backgroundColor = set == nil ? .lightGray : .clear
+                //            underline.backgroundColor = set == nil ? .clear : .lightGray
                 case .text(_, _, _, let onTap):
                     labels[index].textColor = onTap == nil ? .black : .blue
                 }
             }
             backgroundColor = isHeader ? UIColor(white: 0.9, alpha: 1) : .white
-//        case .textInput(_, _, let set):
-//            backgroundColor = .white
-//            separator.backgroundColor = set == nil ? .lightGray : .clear
-//            underline.backgroundColor = set == nil ? .clear : .lightGray
         }
     }
     
@@ -191,7 +189,6 @@ class CellView: UIView, UITextFieldDelegate {
     
     private func applyStyle(style: FontStyle) {
         heightConstraint?.isActive = false
-        let captionFont = UIFont(name: style.name, size: style.size * 1.0)
         guard let cell = cell else { return }
         switch cell {
         case .cell(let atoms, _):

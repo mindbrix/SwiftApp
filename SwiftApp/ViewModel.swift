@@ -35,6 +35,7 @@ enum Atom: Hashable {
 }
 
 enum Cell: Hashable {
+    case cell(_ atoms: [Atom]? = nil, isVertical: Bool = false)
     case button(title: String, onTap: (() -> Void))
     case header(caption: String)
     case image(get: () -> UIImage?, caption: String, onTap: (() -> Void)? = nil, isThumbnail: Bool = false)

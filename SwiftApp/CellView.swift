@@ -114,6 +114,8 @@ class CellView: UIView, UITextFieldDelegate {
         stack.alignment = .fill
         guard let cell = cell else { return }
         switch cell {
+        case .cell:
+            break
         case .button:
             stack.addArrangedSubview(label0)
         case .header:
@@ -138,6 +140,8 @@ class CellView: UIView, UITextFieldDelegate {
         label0.textColor = .black
         guard let cell = cell else { return }
         switch cell {
+        case .cell:
+            break
         case .button:
             label0.textColor = .blue
         case .header:
@@ -156,6 +160,8 @@ class CellView: UIView, UITextFieldDelegate {
     private func applyModel() {
         guard let cell = cell else { return }
         switch cell {
+        case .cell:
+            break
         case .button(let title, _):
             label0.text = title
         case .header(let caption):
@@ -182,6 +188,8 @@ class CellView: UIView, UITextFieldDelegate {
         
         guard let cell = cell else { return }
         switch cell {
+        case .cell:
+            break
         case .button(_, _):
             label0.font = titleFont
             label0.textAlignment = .left
@@ -214,6 +222,8 @@ class CellView: UIView, UITextFieldDelegate {
     @objc func onTap() {
         guard let cell = cell else { return }
         switch cell {
+        case .cell:
+            break
         case .button(_, let onTap):
             onTap()
         case .header:

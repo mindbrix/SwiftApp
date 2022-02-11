@@ -135,7 +135,6 @@ class CellView: UIView, UITextFieldDelegate {
                     stack.addArrangedSubview(textField)
                 case .text(_, _, _, let onTap):
                     stack.addArrangedSubview(labels[index])
-                    labels[index].isUserInteractionEnabled = onTap != nil
                     if onTap != nil {
                         labels[index].addGestureRecognizer(tappers[index])
                     }
@@ -203,9 +202,10 @@ class CellView: UIView, UITextFieldDelegate {
                 case .input(let get, let set, _):
                     textField.text = get()
                     textField.isUserInteractionEnabled = set != nil
-                case .text(let string, _, _, _):
+                case .text(let string, _, _, let onTap):
                     guard index < labels.count else { return }
                     labels[index].text = string
+                    labels[index].isUserInteractionEnabled = onTap != nil
                 }
             }
         case .button(let title, _):

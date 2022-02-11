@@ -176,7 +176,6 @@ class SwiftApp {
                             cells: UIFont.fontNames(forFamilyName: familyName).map({ fontName in
                                 .standard(
                                     title: fontName,
-                                    caption: nil,
                                     onTap: {
                                         self.style = .init(name: fontName, size: self.style.size)
                                 })

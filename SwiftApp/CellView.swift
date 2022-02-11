@@ -17,9 +17,9 @@ class CellView: UIView, UITextFieldDelegate {
         NSLayoutConstraint.activate([
             insetConstraints.top, insetConstraints.left, insetConstraints.bottom, insetConstraints.right,
             heightAnchor.constraint(greaterThanOrEqualToConstant: 1),
-            leadingAnchor.constraint(equalTo: separator.leadingAnchor),
-            trailingAnchor.constraint(equalTo: separator.trailingAnchor),
-            bottomAnchor.constraint(equalTo: separator.bottomAnchor),
+            separator.leadingAnchor.constraint(equalTo: leadingAnchor),
+            separator.trailingAnchor.constraint(equalTo: trailingAnchor),
+            separator.bottomAnchor.constraint(equalTo: bottomAnchor),
             separator.heightAnchor.constraint(equalToConstant: 0.5)
         ])
     }
@@ -76,9 +76,9 @@ class CellView: UIView, UITextFieldDelegate {
         field.translatesAutoresizingMaskIntoConstraints = false
         field.addSubview(underline)
         NSLayoutConstraint.activate([
-            field.leadingAnchor.constraint(equalTo: underline.leadingAnchor),
-            field.trailingAnchor.constraint(equalTo: underline.trailingAnchor),
-            field.bottomAnchor.constraint(equalTo: underline.bottomAnchor),
+            underline.leadingAnchor.constraint(equalTo: field.leadingAnchor),
+            underline.trailingAnchor.constraint(equalTo: field.trailingAnchor),
+            underline.bottomAnchor.constraint(equalTo: field.bottomAnchor),
             underline.heightAnchor.constraint(equalToConstant: 0.5)
         ])
         return field

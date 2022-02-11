@@ -33,7 +33,6 @@ enum Atom: Hashable {
 enum Cell: Hashable {
     case cell(_ atoms: [Atom], isVertical: Bool = false)
     case button(title: String, onTap: (() -> Void))
-    case header(caption: String)
     case image(get: () -> UIImage?, caption: String, onTap: (() -> Void)? = nil, isThumbnail: Bool = false)
     case standard(title: String, caption: String? = nil, onTap: (() -> Void)? = nil)
     case textInput(key: String, get: () -> String, set: ((String) -> Void)?)

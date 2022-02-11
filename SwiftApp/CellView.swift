@@ -145,9 +145,7 @@ class CellView: UIView, UITextFieldDelegate {
             }
         case .button:
             stack.addArrangedSubview(label0)
-        case .header:
-            stack.addArrangedSubview(label0)
-        case .image(_, _, _, let isThumbnail):
+         case .image(_, _, _, let isThumbnail):
             stack.axis = isThumbnail ? .horizontal : .vertical
             stack.alignment = isThumbnail ? .leading : .fill
             stack.addArrangedSubview(image)
@@ -181,8 +179,6 @@ class CellView: UIView, UITextFieldDelegate {
             backgroundColor = isHeader ? UIColor(white: 0.9, alpha: 1) : .white
         case .button:
             label0.textColor = .blue
-        case .header:
-            backgroundColor = UIColor(white: 0.9, alpha: 1)
         case .image:
             backgroundColor = .white
         case .standard:
@@ -214,8 +210,6 @@ class CellView: UIView, UITextFieldDelegate {
             }
         case .button(let title, _):
             label0.text = title
-        case .header(let caption):
-            label0.text = caption
         case .image(let get, let caption, _, _):
             image.image = get()
             label0.text = caption
@@ -260,9 +254,6 @@ class CellView: UIView, UITextFieldDelegate {
         case .button(_, _):
             label0.font = titleFont
             label0.textAlignment = .left
-        case .header:
-            label0.font = captionFont
-            label0.textAlignment = .left
         case .image(let get, _, _, let isThumbnail):
             if let size = get()?.size {
                 heightConstraint = image.heightAnchor.constraint(
@@ -303,8 +294,6 @@ class CellView: UIView, UITextFieldDelegate {
             }
         case .button(_, let onTap):
             onTap()
-        case .header:
-            break
         case .image(_, _, let onTap, _):
             onTap?()
         case .standard(_, _, let onTap):

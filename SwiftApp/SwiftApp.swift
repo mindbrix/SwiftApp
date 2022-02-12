@@ -164,7 +164,7 @@ class SwiftApp {
                         Section(
                             header: .stack([.text(familyName)]),
                             cells: UIFont.fontNames(forFamilyName: familyName).map({ fontName in
-                                .stack([.text(fontName, onTap: {
+                                .stack([.text(fontName, scale: 86, onTap: {
                                     self.style = .init(name: fontName, size: self.style.size)
                                 })])
                             })

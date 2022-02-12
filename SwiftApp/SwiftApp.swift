@@ -70,7 +70,7 @@ class SwiftApp {
         topViewController?.refresh()
     }
     
-    private func makeViewController(for screen: Screen) -> UIViewController {
+    private func makeViewController(for screen: Screen) -> TableViewController {
         let vc = TableViewController()
         switch screen {
         case .Main:

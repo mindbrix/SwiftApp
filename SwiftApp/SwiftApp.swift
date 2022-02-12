@@ -79,6 +79,14 @@ class SwiftApp {
                 
                 return ViewModel(style: self.style, title: screen.rawValue, sections: [
                     Section(
+                        header: .stack([.text("fontSize: \(self.style.size)", alignment: .center)]),
+                        cells: [
+                            .stack([
+                                .text("--fontSize", alignment: .center, onTap: { self.style = .init(name: self.style.name, size: max(4, self.style.size - 1)) }),
+                                .text("fontSize++", alignment: .center, onTap: { self.style = .init(name: self.style.name, size: self.style.size + 1) })
+                            ]),
+                        ]),
+                    Section(
                         header: .stack([.text("Menu")]),
                         cells: Screen.allCases.filter({ !$0.embedInNavController }).map({ screen in
                             .stack([.text(screen.rawValue, scale: 100, alignment: .left, onTap: {
@@ -87,12 +95,6 @@ class SwiftApp {
                             })])
                         })
                     ),
-                    Section(
-                        header: .stack([.text("fontSize: \(self.style.size)")]),
-                        cells: [
-                            .stack([.text("fontSize++", onTap: { self.style = .init(name: self.style.name, size: self.style.size + 1) })]),
-                            .stack([.text("fontSize = 10", onTap: { self.style = .init(name: self.style.name, size: 10) })]),
-                        ]),
                     Section(
                         header: .stack([.text("Images")]),
                         cells: [

@@ -37,7 +37,6 @@ class CellView: UIView, UITextFieldDelegate {
     private var cell: Cell?
 
     static let defaultStackInsets = UIEdgeInsets(top: 4, left: 4, bottom: 4, right: 4)
-    static let thumbSize: CGFloat = 64
     
     lazy var image: UIImageView = {
         let image = UIImageView()
@@ -92,7 +91,7 @@ class CellView: UIView, UITextFieldDelegate {
         return underline
     }()
     lazy var widthConstraint: NSLayoutConstraint = {
-        image.widthAnchor.constraint(equalToConstant: Self.thumbSize)
+        image.widthAnchor.constraint(equalToConstant: 0)
     }()
     var heightConstraint: NSLayoutConstraint?
     

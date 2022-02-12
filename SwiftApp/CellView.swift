@@ -46,6 +46,7 @@ class CellView: UIView, UITextFieldDelegate {
     }()
     lazy var label0: UILabel = {
         let label = UILabel()
+        label.setContentCompressionResistancePriority(.required, for: .horizontal)
         label.numberOfLines = 0
         label.translatesAutoresizingMaskIntoConstraints = false
         return label

@@ -102,11 +102,11 @@ class SwiftApp {
                         header: .stack([.text("Images")]),
                         cells: [
                             .stack([
-                                .image(get: { UIImage(named: "grab0") }, onTap: { print("grab0") }),
+                                .image(url: "grab0", onTap: { print("grab0") }),
                                 .text(.longText, scale: 50)
                             ], isVertical: true),
                             .stack([
-                                .image(get: { UIImage(named: "grab0") }, width: 64, onTap: { print("grab0") }),
+                                .image(url: "grab0", width: 64, onTap: { print("grab0") }),
                                 .text(.longText, scale: 50)
                             ], isVertical: false),
                         ])

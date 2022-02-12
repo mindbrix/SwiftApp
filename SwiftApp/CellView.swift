@@ -177,7 +177,7 @@ class CellView: UIView, UITextFieldDelegate {
                 guard index < labels.count else { return }
                 switch atom {
                 case .image(let get, _, let onTap):
-                    image.image = get()
+                    image.image = UIImage(named: get)
                     image.isUserInteractionEnabled = onTap != nil
                 case .input(let get, let set, _):
                     textField.text = get()
@@ -198,7 +198,7 @@ class CellView: UIView, UITextFieldDelegate {
             for (index, atom) in atoms.enumerated() {
                 switch atom {
                 case .image(let get, let width, _):
-                    if let size = get()?.size {
+                    if let size = UIImage(named: get)?.size {
                         heightConstraint = image.heightAnchor.constraint(
                             lessThanOrEqualTo: image.widthAnchor,
                             multiplier: size.height / size.width)

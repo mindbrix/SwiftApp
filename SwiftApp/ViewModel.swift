@@ -11,7 +11,7 @@ import UIKit
 
 enum Atom: Hashable {
     case text(_ string: String, scale: CGFloat = 100, alignment: NSTextAlignment = .left, onTap: (() -> Void)? = nil)
-    case image(get: () -> UIImage?, width: CGFloat? = nil, onTap: (() -> Void)? = nil)
+    case image(url: String, width: CGFloat? = nil, onTap: (() -> Void)? = nil)
     case input(get: () -> String, set: ((String) -> Void)? = nil, scale: CGFloat = 100)
     
     static func == (lhs: Atom, rhs: Atom) -> Bool {
@@ -20,8 +20,6 @@ enum Atom: Hashable {
     func hash(into hasher: inout Hasher) {
         hasher.combine(String(describing: self))
         switch self {
-        case .image(let get, _, _):
-            hasher.combine(get())
         case .input(let get, _, _):
             hasher.combine(get())
         default:

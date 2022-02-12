@@ -235,6 +235,7 @@ class CellView: UIView, UITextFieldDelegate {
     // MARK: - UITextFieldDelegate
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        guard let cell = cell else { return false }
         if let index = stack.subviews.firstIndex(of: textField), index < 2,
            let text = textField.text, let textRange = Range(range, in: text) {
             switch cell {
@@ -245,8 +246,6 @@ class CellView: UIView, UITextFieldDelegate {
                 default:
                     break
                 }
-            default:
-                break
             }
         }
         return true

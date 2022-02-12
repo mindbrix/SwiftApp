@@ -171,6 +171,7 @@ class CellView: UIView, UITextFieldDelegate {
         switch cell {
         case .cell(let atoms, _):
             for (index, atom) in atoms.enumerated() {
+                guard index < labels.count else { return }
                 switch atom {
                 case .image(let get, _, let onTap):
                     image.image = get()
@@ -179,7 +180,6 @@ class CellView: UIView, UITextFieldDelegate {
                     textField.text = get()
                     textField.isUserInteractionEnabled = set != nil
                 case .text(let string, _, _, let onTap):
-                    guard index < labels.count else { return }
                     labels[index].text = string
                     labels[index].isUserInteractionEnabled = onTap != nil
                 }

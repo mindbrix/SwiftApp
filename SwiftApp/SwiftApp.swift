@@ -28,6 +28,13 @@ class SwiftApp {
     
     init(window: UIWindow) {
         self.window = window
+        _ = Timer.scheduledTimer(withTimeInterval: 1 / 60, repeats: true) { [weak self] timer in
+            guard let self = self else { return }
+            if self.needsRefresh {
+                self.topViewController?.refresh()
+            }
+            self.needsRefresh = false
+        }
     }
     
     var rootScreen: Screen = .Main {
@@ -66,8 +73,9 @@ class SwiftApp {
         }
     }
     
+    private var needsRefresh = false
     private func refresh() {
-        topViewController?.refresh()
+        needsRefresh = true
     }
     
     private func makeViewController(for screen: Screen) -> TableViewController {

@@ -120,7 +120,7 @@ class CellView: UIView, UITextFieldDelegate {
         stack.alignment = .fill
         guard let cell = cell else { return }
         switch cell {
-        case .cell(let atoms, let isVertical):
+        case .atoms(let atoms, let isVertical):
             stack.axis = isVertical ? .vertical : .horizontal
             for (index, atom) in atoms.enumerated() {
                 guard index < 2 else { return }
@@ -149,7 +149,7 @@ class CellView: UIView, UITextFieldDelegate {
         label0.textColor = .black
         guard let cell = cell else { return }
         switch cell {
-        case .cell(let atoms, _):
+        case .atoms(let atoms, _):
             for (index, atom) in atoms.enumerated() {
                 switch atom {
                 case .image:
@@ -169,7 +169,7 @@ class CellView: UIView, UITextFieldDelegate {
     private func applyModel() {
         guard let cell = cell else { return }
         switch cell {
-        case .cell(let atoms, _):
+        case .atoms(let atoms, _):
             for (index, atom) in atoms.enumerated() {
                 guard index < labels.count else { return }
                 switch atom {
@@ -191,7 +191,7 @@ class CellView: UIView, UITextFieldDelegate {
         heightConstraint?.isActive = false
         guard let cell = cell else { return }
         switch cell {
-        case .cell(let atoms, _):
+        case .atoms(let atoms, _):
             for (index, atom) in atoms.enumerated() {
                 switch atom {
                 case .image(let get, let width, _):
@@ -218,7 +218,7 @@ class CellView: UIView, UITextFieldDelegate {
     @objc func onTap(_ sender: UITapGestureRecognizer) {
         guard let cell = cell else { return }
         switch cell {
-        case .cell(let atoms, _):
+        case .atoms(let atoms, _):
             if let index = tappers.firstIndex(of: sender), index < 2 {
                 switch atoms[index] {
                 case .image(_ , _, let onTap):
@@ -239,7 +239,7 @@ class CellView: UIView, UITextFieldDelegate {
         if let index = stack.subviews.firstIndex(of: textField), index < 2,
            let text = textField.text, let textRange = Range(range, in: text) {
             switch cell {
-            case .cell(let atoms, _):
+            case .atoms(let atoms, _):
                 switch atoms[index] {
                 case .input(_, let set, _):
                     set?(text.replacingCharacters(in: textRange, with: string))

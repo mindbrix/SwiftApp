@@ -31,7 +31,7 @@ enum Atom: Hashable {
 }
 
 enum Cell: Equatable {
-    case cell(_ atoms: [Atom], isVertical: Bool = false)
+    case atoms(_ atoms: [Atom], isVertical: Bool = false)
 }
 
 struct Section: Equatable {

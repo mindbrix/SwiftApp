@@ -79,28 +79,28 @@ class SwiftApp {
                 
                 return ViewModel(style: self.style, title: screen.rawValue, sections: [
                     Section(
-                        header: .cell([.text("Menu")]),
+                        header: .atoms([.text("Menu")]),
                         cells: Screen.allCases.filter({ !$0.embedInNavController }).map({ screen in
-                            .cell([.text(screen.rawValue, scale: 100, alignment: .left, onTap: {
+                            .atoms([.text(screen.rawValue, scale: 100, alignment: .left, onTap: {
                                 guard let nc = vc.navigationController else { return }
                                 nc.pushViewController(self.makeViewController(for: screen), animated: true)
                             })])
                         })
                     ),
                     Section(
-                        header: .cell([.text("fontSize: \(self.style.size)")]),
+                        header: .atoms([.text("fontSize: \(self.style.size)")]),
                         cells: [
-                            .cell([.text("fontSize++", onTap: { self.style = .init(name: self.style.name, size: self.style.size + 1) })]),
-                            .cell([.text("fontSize = 10", onTap: { self.style = .init(name: self.style.name, size: 10) })]),
+                            .atoms([.text("fontSize++", onTap: { self.style = .init(name: self.style.name, size: self.style.size + 1) })]),
+                            .atoms([.text("fontSize = 10", onTap: { self.style = .init(name: self.style.name, size: 10) })]),
                         ]),
                     Section(
-                        header: .cell([.text("Images")]),
+                        header: .atoms([.text("Images")]),
                         cells: [
-                            .cell([
+                            .atoms([
                                 .image(get: { UIImage(named: "grab0") }, onTap: { print("grab0") }),
                                 .text(.longText)
                             ], isVertical: true),
-                            .cell([
+                            .atoms([
                                 .image(get: { UIImage(named: "grab0") }, width: 64, onTap: { print("grab0") }),
                                 .text(.longText)
                             ], isVertical: false),
@@ -116,8 +116,8 @@ class SwiftApp {
                     Section(
                         header: nil,
                         cells: [
-                            .cell([.text(String(count), scale: 200, alignment: .center)]),
-                            .cell([
+                            .atoms([.text(String(count), scale: 200, alignment: .center)]),
+                            .atoms([
                                 .text("Down", scale: 120, alignment: .center, onTap: {
                                     self.setDefaultsItem(.counter, value: max(0, count - 1))
                                 }),
@@ -134,9 +134,9 @@ class SwiftApp {
                 guard let self = self else { return ViewModel.emptyModel }
                 return ViewModel(style: self.style, title: screen.rawValue, sections: [
                     Section(
-                        header: .cell([.text(screen.rawValue)]),
+                        header: .atoms([.text(screen.rawValue)]),
                         cells: DefaultsKey.allCases.map({ key in
-                            .cell([
+                            .atoms([
                                 .text(key.rawValue),
                                 .input(get: { String(describing: self.getDefaultsItem(key)) }, scale: 120)
                             ], isVertical: true)
@@ -147,9 +147,9 @@ class SwiftApp {
             vc.modelClosure = {
                 ViewModel(style: self.style, title: screen.rawValue, sections: [
                     Section(
-                        header: .cell([.text(screen.rawValue)]),
+                        header: .atoms([.text(screen.rawValue)]),
                         cells: Array(1...100).map({ int in
-                            .cell([
+                            .atoms([
                                 .text(String(int)),
                                 .text(int % 2 == 0 ? "" : .longText)],
                                 isVertical: true)
@@ -162,9 +162,9 @@ class SwiftApp {
                 return ViewModel(style: self.style, title: screen.rawValue, sections:
                     UIFont.familyNames.map({ familyName in
                         Section(
-                            header: .cell([.text(familyName)]),
+                            header: .atoms([.text(familyName)]),
                             cells: UIFont.fontNames(forFamilyName: familyName).map({ fontName in
-                                .cell([.text(fontName, onTap: {
+                                .atoms([.text(fontName, onTap: {
                                     self.style = .init(name: fontName, size: self.style.size)
                                 })])
                             })
@@ -178,14 +178,14 @@ class SwiftApp {
                     Section(
                         header: nil,
                         cells: [
-                            .cell([
+                            .atoms([
                                 .text("User"),
                                 .input(
                                     get: { self.getDefaultsItem(.username) as? String ?? "" },
                                     set: { string in self.setDefaultsItem(.username, value: string) },
                                     scale: 120),
                                 ], isVertical: true),
-                            .cell([
+                            .atoms([
                                 .text("Password"),
                                 .input(
                                     get: { self.getDefaultsItem(.password) as? String ?? "" },

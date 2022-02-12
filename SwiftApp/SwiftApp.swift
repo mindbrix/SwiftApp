@@ -17,7 +17,6 @@ class SwiftApp {
     
     enum Screen: String, CaseIterable {
         case Main
-        case Atoms
         case Counter
         case DefaultStore
         case DequeueTest
@@ -98,35 +97,14 @@ class SwiftApp {
                         header: .cell([.text("Images")]),
                         cells: [
                             .cell([
-                                .image(get: { UIImage(named: "grab0") }),
+                                .image(get: { UIImage(named: "grab0") }, onTap: { print("grab0") }),
                                 .text(.longText)
                             ], isVertical: true),
                             .cell([
-                                .image(get: { UIImage(named: "grab0") }, width: 64),
+                                .image(get: { UIImage(named: "grab0") }, width: 64, onTap: { print("grab0") }),
                                 .text(.longText)
                             ], isVertical: false),
                         ])
-                ])
-            }
-        case .Atoms:
-            vc.modelClosure = {
-                ViewModel(style: self.style, title: screen.rawValue, sections: [
-                    Section(header: nil, cells:[
-                        .cell([
-                            .text("Text 1", scale: 86, alignment: .left, onTap: {
-                                print("Text 1")
-                            }),
-                            .text("Text 2", scale: 120, alignment: .right, onTap: {
-                                print("Text 2")
-                            })
-                        ]),
-                        .cell([
-                            .image(get: { UIImage(named: "grab0") }, onTap: {
-                                print("grab0")
-                            }),
-                            .input(get: { "Input" }, set: { string in })
-                        ], isVertical: true)
-                    ])
                 ])
             }
         case .Counter:

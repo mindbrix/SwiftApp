@@ -179,14 +179,14 @@ class SwiftApp {
                         header: nil,
                         cells: [
                             .stack([
-                                .text("User"),
+                                .text("User", scale: 86),
                                 .input(
                                     get: { self.getDefaultsItem(.username) as? String ?? "" },
                                     set: { string in self.setDefaultsItem(.username, value: string) },
                                     scale: 120),
                                 ], isVertical: true),
                             .stack([
-                                .text("Password"),
+                                .text("Password", scale: 86),
                                 .input(
                                     get: { self.getDefaultsItem(.password) as? String ?? "" },
                                     set: { string in self.setDefaultsItem(.password, value: string) },

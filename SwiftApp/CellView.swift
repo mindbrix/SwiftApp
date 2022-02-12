@@ -36,7 +36,8 @@ class CellView: UIView, UITextFieldDelegate {
     }
     private var cell: Cell?
 
-    static let defaultStackInsets = UIEdgeInsets(top: 4, left: 4, bottom: 4, right: 4)
+    static let spacing: CGFloat = 4
+    static let defaultStackInsets = UIEdgeInsets(top: CellView.spacing, left: CellView.spacing, bottom: CellView.spacing, right: CellView.spacing)
     
     lazy var image: UIImageView = {
         let image = UIImageView()
@@ -117,6 +118,7 @@ class CellView: UIView, UITextFieldDelegate {
         stackInsets = .zero
         stack.axis = .vertical
         stack.alignment = .fill
+        stack.spacing = Self.spacing
         guard let cell = cell else { return }
         switch cell {
         case .stack(let atoms, let isVertical, let inset):

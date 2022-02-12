@@ -79,7 +79,10 @@ class SwiftApp {
                 
                 return ViewModel(style: self.style, title: screen.rawValue, sections: [
                     Section(
-                        header: .stack([.text("fontSize: \(self.style.size)", alignment: .center)]),
+                        header: .stack([
+                            .text(self.style.name, alignment: .left),
+                            .text("size: \(self.style.size)", alignment: .right)
+                        ]),
                         cells: [
                             .stack([
                                 .text("--fontSize", alignment: .center, onTap: { self.style = .init(name: self.style.name, size: max(4, self.style.size - 1)) }),

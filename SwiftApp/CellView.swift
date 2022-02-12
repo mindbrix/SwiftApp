@@ -114,12 +114,13 @@ class CellView: UIView, UITextFieldDelegate {
                 subview.removeGestureRecognizer(recognizer)
             }
         }
-        stackInsets = cell == nil ? .zero : Self.defaultStackInsets
+        stackInsets = .zero
         stack.axis = .vertical
         stack.alignment = .fill
         guard let cell = cell else { return }
         switch cell {
-        case .stack(let atoms, let isVertical):
+        case .stack(let atoms, let isVertical, let inset):
+            stackInsets = inset ?? Self.defaultStackInsets
             stack.axis = isVertical ? .vertical : .horizontal
             for (index, atom) in atoms.enumerated() {
                 guard index < 2 else { return }
@@ -148,7 +149,7 @@ class CellView: UIView, UITextFieldDelegate {
         label0.textColor = .black
         guard let cell = cell else { return }
         switch cell {
-        case .stack(let atoms, _):
+        case .stack(let atoms, _, _):
             for (index, atom) in atoms.enumerated() {
                 switch atom {
                 case .image:
@@ -168,7 +169,7 @@ class CellView: UIView, UITextFieldDelegate {
     private func applyModel() {
         guard let cell = cell else { return }
         switch cell {
-        case .stack(let atoms, _):
+        case .stack(let atoms, _, _):
             for (index, atom) in atoms.enumerated() {
                 guard index < labels.count else { return }
                 switch atom {
@@ -190,7 +191,7 @@ class CellView: UIView, UITextFieldDelegate {
         heightConstraint?.isActive = false
         guard let cell = cell else { return }
         switch cell {
-        case .stack(let atoms, _):
+        case .stack(let atoms, _, _):
             for (index, atom) in atoms.enumerated() {
                 switch atom {
                 case .image(let get, let width, _):
@@ -217,7 +218,7 @@ class CellView: UIView, UITextFieldDelegate {
     @objc func onTap(_ sender: UITapGestureRecognizer) {
         guard let cell = cell else { return }
         switch cell {
-        case .stack(let atoms, _):
+        case .stack(let atoms, _, _):
             if let index = tappers.firstIndex(of: sender), index < 2 {
                 switch atoms[index] {
                 case .image(_ , _, let onTap):
@@ -238,7 +239,7 @@ class CellView: UIView, UITextFieldDelegate {
         if let index = stack.subviews.firstIndex(of: textField), index < 2,
            let text = textField.text, let textRange = Range(range, in: text) {
             switch cell {
-            case .stack(let atoms, _):
+            case .stack(let atoms, _, _):
                 switch atoms[index] {
                 case .input(_, let set, _):
                     set?(text.replacingCharacters(in: textRange, with: string))

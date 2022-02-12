@@ -37,7 +37,6 @@ class CellView: UIView, UITextFieldDelegate {
     private var cell: Cell?
 
     static let spacing: CGFloat = 4
-    static let defaultStackInsets = UIEdgeInsets(top: CellView.spacing, left: CellView.spacing, bottom: CellView.spacing, right: CellView.spacing)
     
     lazy var image: UIImageView = {
         let image = UIImageView()
@@ -123,7 +122,7 @@ class CellView: UIView, UITextFieldDelegate {
         guard let cell = cell else { return }
         switch cell {
         case .stack(let atoms, let isVertical, let inset):
-            stackInsets = inset ?? Self.defaultStackInsets
+            stackInsets = inset ?? UIEdgeInsets(top: CellView.spacing, left: CellView.spacing, bottom: CellView.spacing, right: CellView.spacing)
             stack.axis = isVertical ? .vertical : .horizontal
             for (index, atom) in atoms.enumerated() {
                 guard index < 2 else { return }
@@ -176,8 +175,8 @@ class CellView: UIView, UITextFieldDelegate {
             for (index, atom) in atoms.enumerated() {
                 guard index < labels.count else { return }
                 switch atom {
-                case .image(let get, _, let onTap):
-                    image.image = UIImage(named: get)
+                case .image(let url, _, let onTap):
+                    image.image = UIImage(named: url)
                     image.isUserInteractionEnabled = onTap != nil
                 case .input(let get, let set, _):
                     textField.text = get()
@@ -197,8 +196,8 @@ class CellView: UIView, UITextFieldDelegate {
         case .stack(let atoms, _, _):
             for (index, atom) in atoms.enumerated() {
                 switch atom {
-                case .image(let get, let width, _):
-                    if let size = UIImage(named: get)?.size {
+                case .image(let url, let width, _):
+                    if let size = UIImage(named: url)?.size {
                         heightConstraint = image.heightAnchor.constraint(
                             lessThanOrEqualTo: image.widthAnchor,
                             multiplier: size.height / size.width)

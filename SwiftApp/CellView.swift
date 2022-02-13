@@ -86,10 +86,6 @@ class CellView: UIView, UITextFieldDelegate {
         stack.translatesAutoresizingMaskIntoConstraints = false
         return stack
     }()
-    lazy var tappers: [UITapGestureRecognizer] = {
-        [UITapGestureRecognizer(target: self, action: #selector(onTap)),
-         UITapGestureRecognizer(target: self, action: #selector(onTap))]
-    }()
     lazy var textField: UITextField = {
         let field = UITextField()
         field.delegate = self
@@ -143,7 +139,7 @@ class CellView: UIView, UITextFieldDelegate {
                     stack.alignment = width != nil ? .leading : .fill
                     stack.addArrangedSubview(image)
                     if onTap != nil {
-                        image.addGestureRecognizer(tappers[index])
+                        image.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onTapper)))
                     }
                 case .input:
                     stack.addArrangedSubview(textField)
@@ -153,7 +149,7 @@ class CellView: UIView, UITextFieldDelegate {
                     label.translatesAutoresizingMaskIntoConstraints = false
                     stack.addArrangedSubview(label)
                     if onTap != nil {
-                        label.addGestureRecognizer(tappers[index])
+                        label.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onTapper)))
                     }
                 }
             }
@@ -193,7 +189,7 @@ class CellView: UIView, UITextFieldDelegate {
         }
     }
     
-    @objc func onTap(_ sender: UITapGestureRecognizer) {
+    @objc func onTapper(_ sender: UITapGestureRecognizer) {
         guard let cell = cell, let view = sender.view, let index = stack.subviews.firstIndex(of: view) else { return }
         switch cell {
         case .stack(let atoms, _, _):

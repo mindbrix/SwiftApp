@@ -27,26 +27,17 @@ extension Cell {
 }
 
 class ImageView: UIImageView {
-    var aspectImage: UIImage? {
-        get {
-            image
+    func setAspectImage(_ image: UIImage?, width: CGFloat? = nil) {
+        self.image = image
+        heightConstraint = nil
+        if let size = image?.size {
+            heightConstraint = heightAnchor.constraint(
+                lessThanOrEqualTo: widthAnchor,
+                multiplier: size.height / size.width)
+            heightConstraint?.isActive = true
         }
-        set {
-            image = newValue
-            heightConstraint = nil
-            if let size = image?.size {
-                heightConstraint = heightAnchor.constraint(
-                    lessThanOrEqualTo: widthAnchor,
-                    multiplier: size.height / size.width)
-                heightConstraint?.isActive = true
-            }
-        }
-    }
-    var width: CGFloat? = nil {
-        didSet {
-            widthConstraint.constant = width ?? 0
-            widthConstraint.isActive = width != nil
-        }
+        widthConstraint.constant = width ?? 0
+        widthConstraint.isActive = width != nil
     }
     lazy var widthConstraint: NSLayoutConstraint = {
         widthAnchor.constraint(equalToConstant: 0)
@@ -189,8 +180,7 @@ class CellView: UIView, UITextFieldDelegate {
         switch atom {
         case .image(let url, let width, _):
             guard let iv = view as? ImageView else { return }
-            iv.aspectImage = UIImage(named: url)
-            iv.width = width
+            iv.setAspectImage(UIImage(named: url), width: width)
         case .input(let get, let set, let scale):
             guard let tf = view as? TextField else { return }
             tf.textColor = set == nil ? .gray : .black

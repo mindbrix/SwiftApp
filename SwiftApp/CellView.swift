@@ -207,7 +207,7 @@ class CellView: UIView, UITextFieldDelegate {
     }
     
     @objc func onTap(_ sender: UITapGestureRecognizer) {
-        guard let cell = cell, let view = sender.view, let index = stack.subviews.firstIndex(of: view), index < 2 else { return }
+        guard let cell = cell, let view = sender.view, let index = stack.subviews.firstIndex(of: view) else { return }
         switch cell {
         case .stack(let atoms, _, _):
             switch atoms[index] {
@@ -224,8 +224,7 @@ class CellView: UIView, UITextFieldDelegate {
     // MARK: - UITextFieldDelegate
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        guard let cell = cell else { return false }
-        if let index = stack.subviews.firstIndex(of: textField), index < 2,
+        if let cell = cell, let index = stack.subviews.firstIndex(of: textField),
            let text = textField.text, let textRange = Range(range, in: text) {
             switch cell {
             case .stack(let atoms, _, _):

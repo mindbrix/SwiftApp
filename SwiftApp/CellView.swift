@@ -47,15 +47,17 @@ class CellView: UIView, UITextFieldDelegate {
     
     func apply(cell: Cell?, style: FontStyle, isHeader: Bool = false) {
         self.cell = cell
+        stackInsets = .zero
         setupStack()
-        backgroundColor = isHeader ? UIColor(white: 0.9, alpha: 1) : .white
         guard let cell = cell else { return }
         switch cell {
-        case .stack(let atoms, _, _):
+        case .stack(let atoms, _, let insets):
+            stackInsets = insets ?? UIEdgeInsets(top: CellView.spacing, left: CellView.spacing, bottom: CellView.spacing, right: CellView.spacing)
             for (index, atom) in atoms.enumerated() {
                 applyAtom(atom, style: style, view: stack.subviews[index])
             }
         }
+        backgroundColor = isHeader ? UIColor(white: 0.9, alpha: 1) : .white
     }
     private var cell: Cell?
     private var atomsTypes: [String] = []
@@ -143,14 +145,12 @@ class CellView: UIView, UITextFieldDelegate {
                 subview.removeGestureRecognizer(recognizer)
             }
         }
-        stackInsets = .zero
         stack.axis = .vertical
         stack.alignment = .fill
         stack.spacing = Self.spacing
         guard let cell = cell else { return }
         switch cell {
-        case .stack(let atoms, let isVertical, let inset):
-            stackInsets = inset ?? UIEdgeInsets(top: CellView.spacing, left: CellView.spacing, bottom: CellView.spacing, right: CellView.spacing)
+        case .stack(let atoms, let isVertical, _):
             stack.axis = isVertical ? .vertical : .horizontal
             for (index, atom) in atoms.enumerated() {
                 guard index < 2 else { return }

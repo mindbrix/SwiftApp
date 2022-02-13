@@ -144,9 +144,8 @@ class CellView: UIView, UITextFieldDelegate {
         guard let cell = cell else { return }
         switch cell {
         case .stack(let atoms, _, _):
-            for (index, atom) in atoms.enumerated() {
-                guard index < 2 else { return }
-                switch atom {
+            for (_, atom) in atoms.enumerated() {
+               switch atom {
                 case .image(_, let width, let onTap):
                     stack.alignment = width != nil ? .leading : .fill
                     let image = ImageView()

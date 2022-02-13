@@ -115,7 +115,8 @@ class SwiftApp {
                             ], isVertical: true),
                             .stack([
                                 .image(url: "grab0", width: 64, onTap: { print("grab0") }),
-                                .text(.longText, scale: 50)
+                                .text(.longText, scale: 50),
+                                .image(url: "grab0", width: 64, onTap: { print("grab0") }),
                             ], isVertical: false),
                         ])
                 ])

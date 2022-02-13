@@ -48,7 +48,11 @@ class CellView: UIView, UITextFieldDelegate {
     func apply(cell: Cell?, style: FontStyle, isHeader: Bool = false) {
         self.cell = cell
         stackInsets = .zero
-        setupStack()
+        let types = cell?.atomsTypes ?? []
+        if types != atomsTypes {
+            atomsTypes = types
+            setupStack()
+        }
         guard let cell = cell else { return }
         switch cell {
         case .stack(let atoms, _, let insets):
@@ -135,10 +139,6 @@ class CellView: UIView, UITextFieldDelegate {
     }
     
     private func setupStack() {
-        let types = cell?.atomsTypes ?? []
-        guard types != atomsTypes else { return }
-        atomsTypes = types
-        
         for subview in stack.subviews {
             subview.removeFromSuperview()
             for recognizer in subview.gestureRecognizers ?? [] {

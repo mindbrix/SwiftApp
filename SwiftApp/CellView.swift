@@ -8,6 +8,24 @@
 import Foundation
 import UIKit
 
+extension Cell {
+    var atomsTypes: [String] {
+        switch self {
+        case .stack(let atoms, _, _):
+            return atoms.map( { atom in
+                switch atom{
+                case .image:
+                    return UIImageView.description()
+                case .input:
+                    return UITextField.description()
+                case .text:
+                    return UILabel.description()
+                }
+            })
+        }
+    }
+}
+
 class CellView: UIView, UITextFieldDelegate {
     init() {
         super.init(frame: .zero)
@@ -35,7 +53,8 @@ class CellView: UIView, UITextFieldDelegate {
         applyModel()
     }
     private var cell: Cell?
-
+    private var atomsTypes: [String] = []
+    
     static let spacing: CGFloat = 4
     
     lazy var image: UIImageView = {
@@ -109,6 +128,10 @@ class CellView: UIView, UITextFieldDelegate {
     }
     
     private func setupStack() {
+        let types = cell?.atomsTypes ?? []
+        guard types != atomsTypes else { return }
+        atomsTypes = types
+        
         for subview in stack.subviews {
             subview.removeFromSuperview()
             for recognizer in subview.gestureRecognizers ?? [] {

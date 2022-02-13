@@ -48,6 +48,8 @@ class CellView: UIView, UITextFieldDelegate {
     func apply(cell: Cell?, style: FontStyle, isHeader: Bool = false) {
         self.cell = cell
         stackInsets = .zero
+        stack.axis = .vertical
+        stack.spacing = Self.spacing
         let types = cell?.atomsTypes ?? []
         if types != atomsTypes {
             atomsTypes = types
@@ -55,8 +57,9 @@ class CellView: UIView, UITextFieldDelegate {
         }
         guard let cell = cell else { return }
         switch cell {
-        case .stack(let atoms, _, let insets):
+        case .stack(let atoms, let isVertical, let insets):
             stackInsets = insets ?? UIEdgeInsets(top: CellView.spacing, left: CellView.spacing, bottom: CellView.spacing, right: CellView.spacing)
+            stack.axis = isVertical ? .vertical : .horizontal
             for (index, atom) in atoms.enumerated() {
                 applyAtom(atom, style: style, view: stack.subviews[index])
             }
@@ -145,13 +148,10 @@ class CellView: UIView, UITextFieldDelegate {
                 subview.removeGestureRecognizer(recognizer)
             }
         }
-        stack.axis = .vertical
         stack.alignment = .fill
-        stack.spacing = Self.spacing
         guard let cell = cell else { return }
         switch cell {
-        case .stack(let atoms, let isVertical, _):
-            stack.axis = isVertical ? .vertical : .horizontal
+        case .stack(let atoms, _, _):
             for (index, atom) in atoms.enumerated() {
                 guard index < 2 else { return }
                 switch atom {

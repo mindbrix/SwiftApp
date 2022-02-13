@@ -29,4 +29,14 @@ extension UIView {
         let quadtuple = constraintsToView(superview, insets: insets)
         NSLayoutConstraint.activate([quadtuple.top, quadtuple.left, quadtuple.bottom, quadtuple.right])
     }
+    
+    var firstResponder: UIView? {
+        guard !isFirstResponder else { return self }
+        for subview in subviews {
+            if let firstResponder = subview.firstResponder {
+                return firstResponder
+            }
+        }
+        return nil
+    }
 }

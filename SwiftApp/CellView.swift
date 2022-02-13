@@ -207,18 +207,16 @@ class CellView: UIView, UITextFieldDelegate {
     }
     
     @objc func onTap(_ sender: UITapGestureRecognizer) {
-        guard let cell = cell else { return }
+        guard let cell = cell, let view = sender.view, let index = stack.subviews.firstIndex(of: view), index < 2 else { return }
         switch cell {
         case .stack(let atoms, _, _):
-            if let index = tappers.firstIndex(of: sender), index < 2 {
-                switch atoms[index] {
-                case .image(_ , _, let onTap):
-                    onTap?()
-                case .input:
-                    break
-                case .text(_, _, _, let onTap):
-                    onTap?()
-                }
+            switch atoms[index] {
+            case .image(_ , _, let onTap):
+                onTap?()
+            case .input:
+                break
+            case .text(_, _, _, let onTap):
+                onTap?()
             }
         }
     }

@@ -182,16 +182,16 @@ class CellView: UIView, UITextFieldDelegate {
     private func applyAtom(_ atom: Atom, style: FontStyle, view: UIView) {
         switch atom {
         case .image(let url, let width, _):
-            guard let iv = view as? ImageView else { return }
-            iv.setAspectImage(UIImage(named: url), width: width)
+            guard let image = view as? ImageView else { return }
+            image.setAspectImage(UIImage(named: url), width: width)
         case .input(let get, let set, let scale):
-            guard let tf = view as? TextField else { return }
-            tf.textColor = set == nil ? .gray : .black
-            tf.text = get()
-            tf.font = UIFont(name: style.name, size: style.size * scale / 100)
-            tf.textAlignment = .left
+            guard let field = view as? TextField else { return }
+            field.textColor = set == nil ? .gray : .black
+            field.text = get()
+            field.font = UIFont(name: style.name, size: style.size * scale / 100)
+            field.textAlignment = .left
             separator.backgroundColor = set == nil ? .lightGray : .clear
-            tf.underline.backgroundColor = set == nil ? .clear : .lightGray
+            field.underline.backgroundColor = set == nil ? .clear : .lightGray
         case .text(let string, let scale, let alignment, let onTap):
             guard let label = view as? UILabel else { return }
             label.textColor = onTap == nil ? .black : .blue

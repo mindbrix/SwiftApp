@@ -59,6 +59,10 @@ class TextField : UITextField {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    var canResign = true
+    override var canResignFirstResponder: Bool {
+        canResign
+    }
     lazy var underline: UIView = {
         let underline = UIView()
         underline.translatesAutoresizingMaskIntoConstraints = false

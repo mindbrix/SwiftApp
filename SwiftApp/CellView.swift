@@ -58,7 +58,7 @@ class CellView: UIView, UITextFieldDelegate {
         guard let cell = cell else { return }
         switch cell {
         case .stack(let atoms, let isVertical, let insets):
-            stackInsets = insets ?? UIEdgeInsets(top: CellView.spacing, left: CellView.spacing, bottom: CellView.spacing, right: CellView.spacing)
+            stackInsets = insets ?? UIEdgeInsets(top: Self.spacing, left: Self.spacing, bottom: Self.spacing, right: Self.spacing)
             stack.axis = isVertical ? .vertical : .horizontal
             for (index, atom) in atoms.enumerated() {
                 applyAtom(atom, style: style, view: stack.subviews[index])

@@ -48,7 +48,7 @@ class CellView: UIView, UITextFieldDelegate {
     func apply(cell: Cell?, style: FontStyle, isHeader: Bool = false) {
         self.cell = cell
         setupStack()
-        
+        backgroundColor = isHeader ? UIColor(white: 0.9, alpha: 1) : .white
         guard let cell = cell else { return }
         switch cell {
         case .stack(let atoms, _, _):
@@ -56,7 +56,6 @@ class CellView: UIView, UITextFieldDelegate {
                 applyAtom(atom, style: style, view: stack.subviews[index])
             }
         }
-        backgroundColor = isHeader ? UIColor(white: 0.9, alpha: 1) : .white        
     }
     private var cell: Cell?
     private var atomsTypes: [String] = []

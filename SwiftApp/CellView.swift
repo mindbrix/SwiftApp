@@ -48,9 +48,15 @@ class CellView: UIView, UITextFieldDelegate {
     func apply(cell: Cell?, style: FontStyle, isHeader: Bool = false) {
         self.cell = cell
         setupStack()
-        applyColors(isHeader: isHeader)
-        applyStyle(style: style)
-        applyModel()
+        
+        guard let cell = cell else { return }
+        switch cell {
+        case .stack(let atoms, _, _):
+            for (index, atom) in atoms.enumerated() {
+                applyAtom(atom, style: style, view: stack.subviews[index])
+            }
+        }
+        backgroundColor = isHeader ? UIColor(white: 0.9, alpha: 1) : .white        
     }
     private var cell: Cell?
     private var atomsTypes: [String] = []
@@ -168,75 +174,36 @@ class CellView: UIView, UITextFieldDelegate {
         }
     }
     
-    private func applyColors(isHeader: Bool) {
-        separator.backgroundColor = .clear
-        underline.backgroundColor = .clear
-        label0.textColor = .black
-        guard let cell = cell else { return }
-        switch cell {
-        case .stack(let atoms, _, _):
-            for (index, atom) in atoms.enumerated() {
-                switch atom {
-                case .image:
-                    break
-                case .input(_, let set, _):
-                    textField.textColor = set == nil ? .gray : .black
-                    separator.backgroundColor = set == nil ? .lightGray : .clear
-                    underline.backgroundColor = set == nil ? .clear : .lightGray
-                case .text(_, _, _, let onTap):
-                    labels[index].textColor = onTap == nil ? .black : .blue
-                }
+    private func applyAtom(_ atom: Atom, style: FontStyle, view: UIView) {
+        switch atom {
+        case .image(let url, let width, let onTap):
+            guard let iv = view as? UIImageView else {  return }
+            iv.image = UIImage(named: url)
+            iv.isUserInteractionEnabled = onTap != nil
+            if let size = UIImage(named: url)?.size {
+                heightConstraint = image.heightAnchor.constraint(
+                    lessThanOrEqualTo: image.widthAnchor,
+                    multiplier: size.height / size.width)
+                heightConstraint?.isActive = true
+                widthConstraint.constant = width ?? 0
+                widthConstraint.isActive = width != nil
             }
-            backgroundColor = isHeader ? UIColor(white: 0.9, alpha: 1) : .white
-        }
-    }
-    
-    private func applyModel() {
-        guard let cell = cell else { return }
-        switch cell {
-        case .stack(let atoms, _, _):
-            for (index, atom) in atoms.enumerated() {
-                guard index < labels.count else { return }
-                switch atom {
-                case .image(let url, _, let onTap):
-                    image.image = UIImage(named: url)
-                    image.isUserInteractionEnabled = onTap != nil
-                case .input(let get, let set, _):
-                    textField.text = get()
-                    textField.isUserInteractionEnabled = set != nil
-                case .text(let string, _, _, let onTap):
-                    labels[index].text = string
-                    labels[index].isUserInteractionEnabled = onTap != nil
-                }
-            }
-        }
-    }
-    
-    private func applyStyle(style: FontStyle) {
-        heightConstraint?.isActive = false
-        guard let cell = cell else { return }
-        switch cell {
-        case .stack(let atoms, _, _):
-            for (index, atom) in atoms.enumerated() {
-                switch atom {
-                case .image(let url, let width, _):
-                    if let size = UIImage(named: url)?.size {
-                        heightConstraint = image.heightAnchor.constraint(
-                            lessThanOrEqualTo: image.widthAnchor,
-                            multiplier: size.height / size.width)
-                        heightConstraint?.isActive = true
-                        widthConstraint.constant = width ?? 0
-                        widthConstraint.isActive = width != nil
-                    }
-                case .input(_, _, let scale):
-                    textField.font = UIFont(name: style.name, size: style.size * scale / 100)
-                    textField.textAlignment = .left
-                case .text(_, let scale, let alignment, _):
-                    guard index < labels.count else { return }
-                    labels[index].font = UIFont(name: style.name, size: style.size * scale / 100)
-                    labels[index].textAlignment = alignment
-                }
-            }
+        case .input(let get, let set, let scale):
+            guard let tf = view as? UITextField else {  return }
+            tf.textColor = set == nil ? .gray : .black
+            tf.text = get()
+            tf.isUserInteractionEnabled = set != nil
+            tf.font = UIFont(name: style.name, size: style.size * scale / 100)
+            tf.textAlignment = .left
+//            separator.backgroundColor = set == nil ? .lightGray : .clear
+//            underline.backgroundColor = set == nil ? .clear : .lightGray
+        case .text(let string, let scale, let alignment, let onTap):
+            guard let label = view as? UILabel else {  return }
+            label.textColor = onTap == nil ? .black : .blue
+            label.text = string
+            label.isUserInteractionEnabled = onTap != nil
+            label.font = UIFont(name: style.name, size: style.size * scale / 100)
+            label.textAlignment = alignment
         }
     }
     

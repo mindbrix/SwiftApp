@@ -110,6 +110,14 @@ class CellView: UIView, UITextFieldDelegate {
         }
         backgroundColor = isHeader ? UIColor(white: 0.9, alpha: 1) : .white
     }
+    func fade(from color: UIColor) {
+        let animation = CABasicAnimation(keyPath: #keyPath(CALayer.backgroundColor))
+        animation.fromValue = color.cgColor
+        animation.toValue = backgroundColor?.cgColor
+        animation.duration = 1
+        animation.repeatCount = 1
+        layer.add(animation, forKey: #keyPath(CALayer.backgroundColor))
+    }
     private var cell: Cell?
     private var atomsTypes: [String] = []
     

@@ -53,6 +53,7 @@ class TableViewController: UITableViewController {
             cell: model.sections[section].header,
             style: model.style,
             isHeader: true)
+        cv.fade(from: .blue)
         return cv
     }
 
@@ -63,6 +64,7 @@ class TableViewController: UITableViewController {
             tvc.cellView.apply(
                 cell: model.sections[indexPath.section].cells[indexPath.row],
                 style: model.style)
+            tvc.cellView.fade(from: .red)
         }
         return tvc
     }

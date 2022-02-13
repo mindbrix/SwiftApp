@@ -93,8 +93,12 @@ class SwiftApp {
                         ]),
                         cells: [
                             .stack([
-                                .text("--fontSize", alignment: .center, onTap: { self.style = .init(name: self.style.name, size: max(4, self.style.size - 1)) }),
-                                .text("fontSize++", alignment: .center, onTap: { self.style = .init(name: self.style.name, size: self.style.size + 1) })
+                                .text("--fontSize", alignment: .center, onTap: {
+                                    self.style = .init(name: self.style.name, size: max(4, self.style.size - 1))
+                                }),
+                                .text("fontSize++", alignment: .center, onTap: {
+                                    self.style = .init(name: self.style.name, size: self.style.size + 1)
+                                })
                             ]),
                         ]),
                     Section(
@@ -152,7 +156,11 @@ class SwiftApp {
                         cells: DefaultsKey.allCases.map({ key in
                             .stack([
                                 .text(key.rawValue),
-                                .input(get: { String(describing: self.getDefaultsItem(key)) }, scale: 120)
+                                .input(
+                                    get: {
+                                        String(describing: self.getDefaultsItem(key))
+                                    },
+                                    scale: 120)
                             ], isVertical: true)
                         })
                 )])
@@ -195,15 +203,23 @@ class SwiftApp {
                             .stack([
                                 .text("User", scale: 86),
                                 .input(
-                                    get: { self.getDefaultsItem(.username) as? String ?? "" },
-                                    set: { string in self.setDefaultsItem(.username, value: string) },
+                                    get: {
+                                        self.getDefaultsItem(.username) as? String ?? ""
+                                    },
+                                    set: { string in
+                                        self.setDefaultsItem(.username, value: string)
+                                    },
                                     scale: 120),
                                 ], isVertical: true),
                             .stack([
                                 .text("Password", scale: 86),
                                 .input(
-                                    get: { self.getDefaultsItem(.password) as? String ?? "" },
-                                    set: { string in self.setDefaultsItem(.password, value: string) },
+                                    get: {
+                                        self.getDefaultsItem(.password) as? String ?? ""
+                                    },
+                                    set: { string in
+                                        self.setDefaultsItem(.password, value: string)
+                                    },
                                     scale: 120),
                             ], isVertical: true)
                         ]

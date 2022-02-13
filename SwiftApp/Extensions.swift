@@ -30,11 +30,11 @@ extension UIView {
         NSLayoutConstraint.activate([quadtuple.top, quadtuple.left, quadtuple.bottom, quadtuple.right])
     }
     
-    func fadeToBackground(from color: UIColor) {
+    func fadeToBackground(from color: UIColor, duration: TimeInterval = 0.66) {
         let animation = CABasicAnimation(keyPath: #keyPath(CALayer.backgroundColor))
         animation.fromValue = color.cgColor
         animation.toValue = backgroundColor?.cgColor
-        animation.duration = 1
+        animation.duration = duration
         animation.repeatCount = 1
         layer.add(animation, forKey: #keyPath(CALayer.backgroundColor))
     }

@@ -73,7 +73,9 @@ class TextField : UITextField {
 class CellView: UIView, UITextFieldDelegate {
     init() {
         super.init(frame: .zero)
+        stack.translatesAutoresizingMaskIntoConstraints = false
         addSubview(stack)
+        separator.translatesAutoresizingMaskIntoConstraints = false
         addSubview(separator)
         NSLayoutConstraint.activate([
             insetConstraints.top, insetConstraints.left, insetConstraints.bottom, insetConstraints.right,
@@ -112,19 +114,10 @@ class CellView: UIView, UITextFieldDelegate {
     }
     private var cell: Cell?
     private var atomsTypes: [String] = []
-    
+    let separator = UIView()
+    let stack = UIStackView()
     static let spacing: CGFloat = 4
     
-    lazy var separator: UIView = {
-        let separator = UIView()
-        separator.translatesAutoresizingMaskIntoConstraints = false
-        return separator
-    }()
-    lazy var stack: UIStackView = {
-        let stack = UIStackView()
-        stack.translatesAutoresizingMaskIntoConstraints = false
-        return stack
-    }()
     lazy var insetConstraints: ConstraintQuadtuple = {
         stack.constraintsToView(self)
     }()

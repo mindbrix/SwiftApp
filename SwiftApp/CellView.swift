@@ -26,6 +26,27 @@ extension Cell {
     }
 }
 
+class TextField : UITextField {
+    init() {
+        super.init(frame: .zero)
+        addSubview(underline)
+        NSLayoutConstraint.activate([
+            underline.leadingAnchor.constraint(equalTo: leadingAnchor),
+            underline.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.9),
+            underline.bottomAnchor.constraint(equalTo: bottomAnchor),
+            underline.heightAnchor.constraint(equalToConstant: 0.5)
+        ])
+    }
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    lazy var underline: UIView = {
+        let underline = UIView()
+        underline.translatesAutoresizingMaskIntoConstraints = false
+        return underline
+    }()
+}
+
 class CellView: UIView, UITextFieldDelegate {
     init() {
         super.init(frame: .zero)
@@ -125,7 +146,7 @@ class CellView: UIView, UITextFieldDelegate {
                         image.isUserInteractionEnabled = true
                     }
                 case .input(_, let set, _):
-                    let field = UITextField()
+                    let field = TextField()
                     field.delegate = self
                     field.translatesAutoresizingMaskIntoConstraints = false
                     field.isUserInteractionEnabled = set != nil
@@ -158,13 +179,13 @@ class CellView: UIView, UITextFieldDelegate {
                 widthConstraint.isActive = width != nil
             }
         case .input(let get, let set, let scale):
-            guard let tf = view as? UITextField else {  return }
+            guard let tf = view as? TextField else {  return }
             tf.textColor = set == nil ? .gray : .black
             tf.text = get()
             tf.font = UIFont(name: style.name, size: style.size * scale / 100)
             tf.textAlignment = .left
-//            separator.backgroundColor = set == nil ? .lightGray : .clear
-//            underline.backgroundColor = set == nil ? .clear : .lightGray
+            separator.backgroundColor = set == nil ? .lightGray : .clear
+            tf.underline.backgroundColor = set == nil ? .clear : .lightGray
         case .text(let string, let scale, let alignment, let onTap):
             guard let label = view as? UILabel else {  return }
             label.textColor = onTap == nil ? .black : .blue

@@ -76,22 +76,6 @@ class CellView: UIView, UITextFieldDelegate {
         image.translatesAutoresizingMaskIntoConstraints = false
         return image
     }()
-    lazy var label0: UILabel = {
-        let label = UILabel()
-        label.setContentCompressionResistancePriority(.required, for: .horizontal)
-        label.numberOfLines = 0
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    lazy var label1: UILabel = {
-        let label = UILabel()
-        label.numberOfLines = 0
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    lazy var labels: [UILabel] = {
-        [label0, label1]
-    }()
     lazy var separator: UIView = {
         let separator = UIView()
         separator.translatesAutoresizingMaskIntoConstraints = false
@@ -164,9 +148,12 @@ class CellView: UIView, UITextFieldDelegate {
                 case .input:
                     stack.addArrangedSubview(textField)
                 case .text(_, _, _, let onTap):
-                    stack.addArrangedSubview(labels[index])
+                    let label = UILabel()
+                    label.numberOfLines = 0
+                    label.translatesAutoresizingMaskIntoConstraints = false
+                    stack.addArrangedSubview(label)
                     if onTap != nil {
-                        labels[index].addGestureRecognizer(tappers[index])
+                        label.addGestureRecognizer(tappers[index])
                     }
                 }
             }

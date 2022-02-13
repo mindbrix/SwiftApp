@@ -30,9 +30,12 @@ class TableViewController: UITableViewController {
     
     private var model = ViewModel.emptyModel {
         didSet {
-            guard oldValue != model else { return }
+//            guard oldValue != model else { return }
             self.title = model.title
+            let first = self.tableView.firstResponder as? TextField
+            first?.canResign = false
             self.tableView.reloadData()
+            first?.canResign = true
         }
     }
     

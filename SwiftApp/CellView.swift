@@ -86,24 +86,6 @@ class CellView: UIView, UITextFieldDelegate {
         stack.translatesAutoresizingMaskIntoConstraints = false
         return stack
     }()
-    lazy var textField: UITextField = {
-        let field = UITextField()
-        field.delegate = self
-        field.translatesAutoresizingMaskIntoConstraints = false
-        field.addSubview(underline)
-        NSLayoutConstraint.activate([
-            underline.leadingAnchor.constraint(equalTo: field.leadingAnchor),
-            underline.widthAnchor.constraint(equalTo: field.widthAnchor, multiplier: 0.9),
-            underline.bottomAnchor.constraint(equalTo: field.bottomAnchor),
-            underline.heightAnchor.constraint(equalToConstant: 0.5)
-        ])
-        return field
-    }()
-    lazy var underline: UIView = {
-        let underline = UIView()
-        underline.translatesAutoresizingMaskIntoConstraints = false
-        return underline
-    }()
     lazy var widthConstraint: NSLayoutConstraint = {
         image.widthAnchor.constraint(equalToConstant: 0)
     }()
@@ -140,9 +122,14 @@ class CellView: UIView, UITextFieldDelegate {
                     stack.addArrangedSubview(image)
                     if onTap != nil {
                         image.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onTapper)))
+                        image.isUserInteractionEnabled = true
                     }
-                case .input:
-                    stack.addArrangedSubview(textField)
+                case .input(_, let set, _):
+                    let field = UITextField()
+                    field.delegate = self
+                    field.translatesAutoresizingMaskIntoConstraints = false
+                    field.isUserInteractionEnabled = set != nil
+                    stack.addArrangedSubview(field)
                 case .text(_, _, _, let onTap):
                     let label = UILabel()
                     label.numberOfLines = 0
@@ -150,6 +137,7 @@ class CellView: UIView, UITextFieldDelegate {
                     stack.addArrangedSubview(label)
                     if onTap != nil {
                         label.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onTapper)))
+                        label.isUserInteractionEnabled = true
                     }
                 }
             }
@@ -158,10 +146,9 @@ class CellView: UIView, UITextFieldDelegate {
     
     private func applyAtom(_ atom: Atom, style: FontStyle, view: UIView) {
         switch atom {
-        case .image(let url, let width, let onTap):
+        case .image(let url, let width, _):
             guard let iv = view as? UIImageView else {  return }
             iv.image = UIImage(named: url)
-            iv.isUserInteractionEnabled = onTap != nil
             if let size = UIImage(named: url)?.size {
                 heightConstraint = image.heightAnchor.constraint(
                     lessThanOrEqualTo: image.widthAnchor,
@@ -174,7 +161,6 @@ class CellView: UIView, UITextFieldDelegate {
             guard let tf = view as? UITextField else {  return }
             tf.textColor = set == nil ? .gray : .black
             tf.text = get()
-            tf.isUserInteractionEnabled = set != nil
             tf.font = UIFont(name: style.name, size: style.size * scale / 100)
             tf.textAlignment = .left
 //            separator.backgroundColor = set == nil ? .lightGray : .clear
@@ -183,7 +169,6 @@ class CellView: UIView, UITextFieldDelegate {
             guard let label = view as? UILabel else {  return }
             label.textColor = onTap == nil ? .black : .blue
             label.text = string
-            label.isUserInteractionEnabled = onTap != nil
             label.font = UIFont(name: style.name, size: style.size * scale / 100)
             label.textAlignment = alignment
         }

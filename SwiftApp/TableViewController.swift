@@ -8,7 +8,8 @@
 import UIKit
 
 class TableViewController: UITableViewController {
-    let textField = TextField()
+    private let textField = TextField()
+    private var responderClosure: ResponderClosure?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,7 +54,6 @@ class TableViewController: UITableViewController {
             self.tableView.reloadData()
         }
     }
-    private var responderClosure: ResponderClosure?
     
     override func numberOfSections(in tableView: UITableView) -> Int {
         model.sections.count

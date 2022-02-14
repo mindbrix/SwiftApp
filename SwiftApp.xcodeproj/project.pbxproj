@@ -119,7 +119,7 @@
 		E977D00427AFC887007E4998 /* SwiftApp */ = {
 			isa = PBXGroup;
 			children = (
-				E9A838BE27BA69B40096FAFB /* Extensions */,
+				E9A838BE27BA69B40096FAFB /* extensions */,
 				E977D00527AFC887007E4998 /* AppDelegate.swift */,
 				E977D06C27B1A628007E4998 /* CellView.swift */,
 				E977D06427B1635A007E4998 /* CellViewCell.swift */,
@@ -152,12 +152,12 @@
 			path = SwiftAppUITests;
 			sourceTree = "<group>";
 		};
-		E9A838BE27BA69B40096FAFB /* Extensions */ = {
+		E9A838BE27BA69B40096FAFB /* extensions */ = {
 			isa = PBXGroup;
 			children = (
 				E977D07627B1A9C9007E4998 /* Extensions.swift */,
 			);
-			path = Extensions;
+			path = extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

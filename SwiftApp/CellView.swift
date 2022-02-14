@@ -8,7 +8,6 @@
 import Foundation
 import UIKit
 
-typealias ResponderClosure = (TextField) -> Void
 
 extension Cell {
     var atomsTypes: [String] {

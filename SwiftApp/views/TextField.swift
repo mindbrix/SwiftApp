@@ -8,6 +8,8 @@
 import Foundation
 import UIKit
 
+typealias ResponderClosure = (TextField) -> Bool?
+
 class TextField : UITextField {
     init() {
         super.init(frame: .zero)
@@ -28,9 +30,8 @@ class TextField : UITextField {
     }
     var responderClosure: ResponderClosure?
     override func becomeFirstResponder() -> Bool {
-        let didBecome = super.becomeFirstResponder()
-        responderClosure?(self)
-        return didBecome
+        let flag: Bool? = responderClosure?(self) ?? nil
+        return flag ?? super.becomeFirstResponder()
     }
     lazy var underline: UIView = {
         let underline = UIView()

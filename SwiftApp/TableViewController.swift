@@ -25,8 +25,11 @@ class TableViewController: UITableViewController {
             textField.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             textField.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
         ])
-        self.responderClosure = { field in
-            print(field)
+        self.responderClosure = { [weak self] field in
+            self?.textField.text = field.text
+            self?.textField.selectedTextRange = field.selectedTextRange
+//            self?.textField.becomeFirstResponder()
+            return nil
         }
     }
 

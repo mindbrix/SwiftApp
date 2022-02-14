@@ -25,6 +25,15 @@ class TextField : UITextField {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    func copyFrom(_ field:  TextField) {
+        text = field.text
+        font = field.font
+        selectedTextRange = field.selectedTextRange
+        underline.backgroundColor = field.underline.backgroundColor
+        onSet = field.onSet
+    }
+    
     var responderClosure: ResponderClosure?
     override func becomeFirstResponder() -> Bool {
        return responderClosure?(self) ?? super.becomeFirstResponder()

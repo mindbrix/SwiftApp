@@ -26,12 +26,8 @@ class TableViewController: UITableViewController {
         textField.topConstraint = textField.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         self.responderClosure = { [weak self] field in
             guard let self = self else { return nil }
-            self.textField.text = field.text
-            self.textField.font = field.font
             self.textField.topConstraint = self.textField.topAnchor.constraint(equalTo: field.topAnchor)
-            self.textField.selectedTextRange = field.selectedTextRange
-            self.textField.underline.backgroundColor = field.underline.backgroundColor
-            self.textField.onSet = field.onSet
+            self.textField.copyFrom(field)
             self.textField.fadeToBackground(from: .red)
             _ = self.textField.becomeFirstResponder()
             return false

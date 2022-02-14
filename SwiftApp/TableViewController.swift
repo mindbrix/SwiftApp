@@ -17,8 +17,9 @@ class TableViewController: UITableViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        guard let nc = self.navigationController else { return }
-        nc.setNavigationBarHidden(nc.viewControllers.count == 1, animated: true)
+        if let nc = self.navigationController {
+            self.navigationController?.setNavigationBarHidden(nc.viewControllers.count == 1, animated: true)
+        }
         loadModel()
     }
     

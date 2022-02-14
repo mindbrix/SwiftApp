@@ -22,12 +22,11 @@ class TableViewController: UITableViewController {
         loadModel()
     }
     
+    var loadClosure: ViewModel.Closure = { ViewModel.emptyModel }
+    
     func loadModel() {
         model = loadClosure()
     }
-    
-    var loadClosure: ViewModel.Closure = { ViewModel.emptyModel }
-    
     private var model = ViewModel.emptyModel {
         didSet {
             guard oldValue != model else { return }

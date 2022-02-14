@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E913063F27BA6CC600460F22 /* InageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E913063D27BA6CC600460F22 /* InageView.swift */; };
+		E913064027BA6CC600460F22 /* InageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E913063D27BA6CC600460F22 /* InageView.swift */; };
+		E913064127BA6CC600460F22 /* InageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E913063D27BA6CC600460F22 /* InageView.swift */; };
+		E913064227BA6CC600460F22 /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E913063E27BA6CC600460F22 /* TextField.swift */; };
+		E913064327BA6CC600460F22 /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E913063E27BA6CC600460F22 /* TextField.swift */; };
+		E913064427BA6CC600460F22 /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E913063E27BA6CC600460F22 /* TextField.swift */; };
 		E977D00627AFC887007E4998 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E977D00527AFC887007E4998 /* AppDelegate.swift */; };
 		E977D00827AFC887007E4998 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E977D00727AFC887007E4998 /* SceneDelegate.swift */; };
 		E977D00A27AFC887007E4998 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E977D00927AFC887007E4998 /* TableViewController.swift */; };
@@ -54,6 +60,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E913063D27BA6CC600460F22 /* InageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InageView.swift; sourceTree = "<group>"; };
+		E913063E27BA6CC600460F22 /* TextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
 		E977D00227AFC887007E4998 /* SwiftApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E977D00527AFC887007E4998 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E977D00727AFC887007E4998 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -100,6 +108,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E913063C27BA6CC600460F22 /* views */ = {
+			isa = PBXGroup;
+			children = (
+				E913063D27BA6CC600460F22 /* InageView.swift */,
+				E913063E27BA6CC600460F22 /* TextField.swift */,
+			);
+			path = views;
+			sourceTree = "<group>";
+		};
 		E977CFF927AFC887007E4998 = {
 			isa = PBXGroup;
 			children = (
@@ -124,6 +141,7 @@
 			isa = PBXGroup;
 			children = (
 				E9A838BE27BA69B40096FAFB /* extensions */,
+				E913063C27BA6CC600460F22 /* views */,
 				E977D00527AFC887007E4998 /* AppDelegate.swift */,
 				E977D06C27B1A628007E4998 /* CellView.swift */,
 				E977D06427B1635A007E4998 /* CellViewCell.swift */,
@@ -295,6 +313,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E977D05227AFECA8007E4998 /* ViewModel.swift in Sources */,
+				E913064227BA6CC600460F22 /* TextField.swift in Sources */,
 				E977D00A27AFC887007E4998 /* TableViewController.swift in Sources */,
 				E977D00627AFC887007E4998 /* AppDelegate.swift in Sources */,
 				E977D07727B1A9C9007E4998 /* UIVIew+Extensions.swift in Sources */,
@@ -303,6 +322,7 @@
 				E977D00827AFC887007E4998 /* SceneDelegate.swift in Sources */,
 				E977D03F27AFDBBA007E4998 /* SwiftApp.swift in Sources */,
 				E977D06D27B1A628007E4998 /* CellView.swift in Sources */,
+				E913063F27BA6CC600460F22 /* InageView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -311,6 +331,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E977D08827B1D62C007E4998 /* TableViewController.swift in Sources */,
+				E913064027BA6CC600460F22 /* InageView.swift in Sources */,
 				E977D08027B1D625007E4998 /* CellViewCell.swift in Sources */,
 				E977D01D27AFC887007E4998 /* SwiftAppTests.swift in Sources */,
 				E977D04027AFDBBA007E4998 /* SwiftApp.swift in Sources */,
@@ -318,6 +339,7 @@
 				E977D06E27B1A628007E4998 /* CellView.swift in Sources */,
 				E977D07827B1A9C9007E4998 /* UIVIew+Extensions.swift in Sources */,
 				E977D09027B1D630007E4998 /* ViewModel.swift in Sources */,
+				E913064327BA6CC600460F22 /* TextField.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -326,6 +348,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E977D08C27B1D62D007E4998 /* TableViewController.swift in Sources */,
+				E913064127BA6CC600460F22 /* InageView.swift in Sources */,
 				E977D08427B1D626007E4998 /* CellViewCell.swift in Sources */,
 				E977D02827AFC887007E4998 /* SwiftAppUITests.swift in Sources */,
 				E977D04127AFDBBA007E4998 /* SwiftApp.swift in Sources */,
@@ -333,6 +356,7 @@
 				E977D06F27B1A628007E4998 /* CellView.swift in Sources */,
 				E977D07927B1A9C9007E4998 /* UIVIew+Extensions.swift in Sources */,
 				E977D09427B1D631007E4998 /* ViewModel.swift in Sources */,
+				E913064427BA6CC600460F22 /* TextField.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

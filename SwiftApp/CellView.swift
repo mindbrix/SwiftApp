@@ -26,50 +26,6 @@ extension Cell {
     }
 }
 
-class ImageView: UIImageView {
-    func setAspectImage(_ image: UIImage?, width: CGFloat? = nil) {
-        self.image = image
-        heightConstraint = nil
-        if let size = image?.size {
-            heightConstraint = heightAnchor.constraint(
-                lessThanOrEqualTo: widthAnchor,
-                multiplier: size.height / size.width)
-            heightConstraint?.isActive = true
-        }
-        widthConstraint.constant = width ?? 0
-        widthConstraint.isActive = width != nil
-    }
-    var heightConstraint: NSLayoutConstraint?
-    lazy var widthConstraint: NSLayoutConstraint = {
-        widthAnchor.constraint(equalToConstant: 0)
-    }()
-}
-
-class TextField : UITextField {
-    init() {
-        super.init(frame: .zero)
-        addSubview(underline)
-        NSLayoutConstraint.activate([
-            underline.leadingAnchor.constraint(equalTo: leadingAnchor),
-            underline.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.9),
-            underline.bottomAnchor.constraint(equalTo: bottomAnchor),
-            underline.heightAnchor.constraint(equalToConstant: 0.5)
-        ])
-    }
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    var canResign = true
-    override var canResignFirstResponder: Bool {
-        canResign
-    }
-    lazy var underline: UIView = {
-        let underline = UIView()
-        underline.translatesAutoresizingMaskIntoConstraints = false
-        return underline
-    }()
-}
-
 class CellView: UIView, UITextFieldDelegate {
     init() {
         super.init(frame: .zero)

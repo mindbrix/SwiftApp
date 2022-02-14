@@ -33,8 +33,7 @@ class CellView: UIView, UITextFieldDelegate {
         addSubview(stack)
         separator.translatesAutoresizingMaskIntoConstraints = false
         addSubview(separator)
-        NSLayoutConstraint.activate([
-            insetConstraints.top, insetConstraints.left, insetConstraints.bottom, insetConstraints.right,
+        NSLayoutConstraint.activate(insetConstraints + [
             heightAnchor.constraint(greaterThanOrEqualToConstant: 1),
             separator.leadingAnchor.constraint(equalTo: leadingAnchor),
             separator.trailingAnchor.constraint(equalTo: trailingAnchor),
@@ -74,15 +73,15 @@ class CellView: UIView, UITextFieldDelegate {
     let stack = UIStackView()
     static let spacing: CGFloat = 4
     
-    lazy var insetConstraints: ConstraintQuadtuple = {
+    lazy var insetConstraints: [NSLayoutConstraint] = {
         stack.constraintsToView(self)
     }()
     var stackInsets: UIEdgeInsets = .zero {
         didSet {
-            insetConstraints.top.constant = stackInsets.top
-            insetConstraints.left.constant = stackInsets.left
-            insetConstraints.bottom.constant = -stackInsets.bottom
-            insetConstraints.right.constant = -stackInsets.right
+            insetConstraints[0].constant = stackInsets.top
+            insetConstraints[1].constant = stackInsets.left
+            insetConstraints[2].constant = -stackInsets.bottom
+            insetConstraints[3].constant = -stackInsets.right
         }
     }
     

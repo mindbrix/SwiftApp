@@ -32,8 +32,8 @@ class TableViewController: UITableViewController {
             self.textField.topConstraint = self.textField.topAnchor.constraint(equalTo: field.topAnchor)
             self.textField.selectedTextRange = field.selectedTextRange
             self.textField.onSet = field.onSet
-            return self.textField.becomeFirstResponder()
-            return nil
+            _ = self.textField.becomeFirstResponder()
+            return false
         }
     }
 

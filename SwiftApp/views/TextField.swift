@@ -30,8 +30,7 @@ class TextField : UITextField {
     }
     var responderClosure: ResponderClosure?
     override func becomeFirstResponder() -> Bool {
-        let flag: Bool? = responderClosure?(self) ?? nil
-        return flag ?? super.becomeFirstResponder()
+       return responderClosure?(self) ?? super.becomeFirstResponder()
     }
     lazy var underline: UIView = {
         let underline = UIView()

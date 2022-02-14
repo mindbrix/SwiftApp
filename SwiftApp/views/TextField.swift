@@ -26,6 +26,12 @@ class TextField : UITextField {
     override var canResignFirstResponder: Bool {
         canResign
     }
+    var responderClosure: ResponderClosure?
+    override func becomeFirstResponder() -> Bool {
+        let didBecome = super.becomeFirstResponder()
+        responderClosure?(self)
+        return didBecome
+    }
     lazy var underline: UIView = {
         let underline = UIView()
         underline.translatesAutoresizingMaskIntoConstraints = false

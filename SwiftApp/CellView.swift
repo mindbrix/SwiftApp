@@ -8,6 +8,8 @@
 import Foundation
 import UIKit
 
+typealias ResponderClosure = (TextField) -> Void
+
 extension Cell {
     var atomsTypes: [String] {
         switch self {
@@ -46,8 +48,9 @@ class CellView: UIView, UITextFieldDelegate {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func apply(cell: Cell?, style: FontStyle, isHeader: Bool = false) {
+    func apply(cell: Cell?, style: FontStyle, isHeader: Bool = false, responderClosure: ResponderClosure? = nil) {
         self.cell = cell
+        self.responderClosure = responderClosure
         stackInsets = .zero
         stack.axis = .vertical
         stack.spacing = Self.spacing
@@ -68,6 +71,7 @@ class CellView: UIView, UITextFieldDelegate {
         backgroundColor = isHeader ? UIColor(white: 0.9, alpha: 1) : .white
     }
     private var cell: Cell?
+    private var responderClosure: ResponderClosure?
     private var atomsTypes: [String] = []
     let separator = UIView()
     let stack = UIStackView()
@@ -112,6 +116,7 @@ class CellView: UIView, UITextFieldDelegate {
                     field.delegate = self
                     field.translatesAutoresizingMaskIntoConstraints = false
                     field.isUserInteractionEnabled = onSet != nil
+                    field.responderClosure = self.responderClosure
                     stack.addArrangedSubview(field)
                 case .text(_, _, _, let onTap):
                     let label = UILabel()

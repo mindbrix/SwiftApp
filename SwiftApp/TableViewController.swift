@@ -25,6 +25,9 @@ class TableViewController: UITableViewController {
             textField.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             textField.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
         ])
+        self.responderClosure = { field in
+            print(field)
+        }
     }
 
     override func viewDidLayoutSubviews() {
@@ -55,6 +58,7 @@ class TableViewController: UITableViewController {
             first?.canResign = true
         }
     }
+    private var responderClosure: ResponderClosure?
     
     override func numberOfSections(in tableView: UITableView) -> Int {
         model.sections.count
@@ -69,7 +73,8 @@ class TableViewController: UITableViewController {
         cv.apply(
             cell: model.sections[section].header,
             style: model.style,
-            isHeader: true)
+            isHeader: true,
+            responderClosure: responderClosure)
         cv.fadeToBackground(from: .blue)
         return cv
     }
@@ -80,7 +85,8 @@ class TableViewController: UITableViewController {
         if let tvc = tvc as? CellViewCell {
             tvc.cellView.apply(
                 cell: model.sections[indexPath.section].cells[indexPath.row],
-                style: model.style)
+                style: model.style,
+                responderClosure: responderClosure)
             tvc.cellView.fadeToBackground(from: .red)
         }
         return tvc

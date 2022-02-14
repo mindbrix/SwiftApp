@@ -32,8 +32,8 @@ class TableViewController: UITableViewController {
             self.textField.selectedTextRange = field.selectedTextRange
             self.textField.underline.backgroundColor = field.underline.backgroundColor
             self.textField.onSet = field.onSet
-            _ = self.textField.becomeFirstResponder()
             self.textField.fadeToBackground(from: .red)
+            _ = self.textField.becomeFirstResponder()
             return false
         }
     }

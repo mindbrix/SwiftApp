@@ -26,6 +26,13 @@ class TextField : UITextField {
         fatalError("init(coder:) has not been implemented")
     }
     
+    var responderClosure: ResponderClosure?
+    var onSet: ((String) -> Void)?
+    
+    override func becomeFirstResponder() -> Bool {
+       return responderClosure?(self) ?? super.becomeFirstResponder()
+    }
+    
     func become(_ field:  TextField) {
         topConstraint = topAnchor.constraint(equalTo: field.topAnchor)
         leadingConstraint = leadingAnchor.constraint(equalTo: field.leadingAnchor)
@@ -38,11 +45,6 @@ class TextField : UITextField {
         fadeToBackground(from: .red)
     }
     
-    var responderClosure: ResponderClosure?
-    override func becomeFirstResponder() -> Bool {
-       return responderClosure?(self) ?? super.becomeFirstResponder()
-    }
-    var onSet: ((String) -> Void)?
     var leadingConstraint: NSLayoutConstraint? {
         didSet {
             oldValue?.isActive = false
@@ -61,6 +63,7 @@ class TextField : UITextField {
             trailngConstraint?.isActive = true
         }
     }
+    
     lazy var underline: UIView = {
         let underline = UIView()
         underline.translatesAutoresizingMaskIntoConstraints = false

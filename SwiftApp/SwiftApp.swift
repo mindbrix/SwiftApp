@@ -30,10 +30,10 @@ class SwiftApp {
         self.window = window
         Timer.scheduledTimer(withTimeInterval: 1 / 60, repeats: true) { [weak self] timer in
             guard let self = self else { return }
-            if self.needsRefresh {
-                self.topViewController?.getModel()
+            if self.needsReload {
+                self.topViewController?.loadModel()
             }
-            self.needsRefresh = false
+            self.needsReload = false
         }
     }
     
@@ -49,7 +49,7 @@ class SwiftApp {
     
     private var style: FontStyle = .defaultStyle {
         didSet {
-            refresh()
+            setNeedsReload()
         }
     }
     
@@ -60,7 +60,7 @@ class SwiftApp {
     private func setDefaultsItem(_ key: DefaultsKey, value: Any) {
         UserDefaults.standard.setValue(value, forKey: key.rawValue)
         UserDefaults.standard.synchronize()
-        refresh()
+        setNeedsReload()
     }
     
     private var topViewController: TableViewController? {
@@ -73,16 +73,16 @@ class SwiftApp {
         }
     }
     
-    private var needsRefresh = false
-    private func refresh() {
-        needsRefresh = true
+    private var needsReload = false
+    private func setNeedsReload() {
+        needsReload = true
     }
     
     private func makeViewController(for screen: Screen) -> TableViewController {
         let vc = TableViewController()
         switch screen {
         case .Main:
-            vc.modelClosure = { [weak self, weak vc] in
+            vc.loadClosure = { [weak self, weak vc] in
                 guard let self = self, let vc = vc else { return ViewModel.emptyModel }
                 
                 return ViewModel(style: self.style, title: screen.rawValue, sections: [
@@ -126,7 +126,7 @@ class SwiftApp {
                 ])
             }
         case .Counter:
-            vc.modelClosure = { [weak self] in
+            vc.loadClosure = { [weak self] in
                 guard let self = self else { return ViewModel.emptyModel }
                 let count = self.getDefaultsItem(.counter) as? Int ?? 0
                 
@@ -148,7 +148,7 @@ class SwiftApp {
                 ])
             }
         case .DefaultStore:
-            vc.modelClosure = { [weak self] in
+            vc.loadClosure = { [weak self] in
                 guard let self = self else { return ViewModel.emptyModel }
                 return ViewModel(style: self.style, title: screen.rawValue, sections: [
                     Section(
@@ -164,7 +164,7 @@ class SwiftApp {
                 )])
             }
         case .DequeueTest:
-            vc.modelClosure = {
+            vc.loadClosure = {
                 ViewModel(style: self.style, title: screen.rawValue, sections: [
                     Section(
                         header: .stack([.text(screen.rawValue)]),
@@ -178,7 +178,7 @@ class SwiftApp {
                 ])
             }
         case .Fonts:
-            vc.modelClosure = {
+            vc.loadClosure = {
                 return ViewModel(style: self.style, title: screen.rawValue, sections:
                     UIFont.familyNames.map({ familyName in
                         Section(
@@ -193,7 +193,7 @@ class SwiftApp {
                 )
             }
         case .Login:
-            vc.modelClosure = {
+            vc.loadClosure = {
                 return ViewModel(style: self.style, title: screen.rawValue, sections: [
                     Section(
                         header: nil,

@@ -19,10 +19,10 @@ class TableViewController: UITableViewController {
         super.viewWillAppear(animated)
         guard let nc = self.navigationController else { return }
         nc.setNavigationBarHidden(nc.viewControllers.count == 1, animated: true)
-        refresh()
+        getModel()
     }
     
-    func refresh() {
+    func getModel() {
         model = modelClosure()
     }
     

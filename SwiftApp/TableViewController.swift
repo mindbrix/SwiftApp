@@ -16,21 +16,21 @@ class TableViewController: UITableViewController {
         self.tableView.separatorStyle = .none
         self.view.backgroundColor = .white
         
-        textField.layer.borderWidth = 0.5
-        textField.backgroundColor = .white
+        textField.backgroundColor = UIColor(white: 0.9, alpha: 1)
         textField.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(textField)
         NSLayoutConstraint.activate([
             textField.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: CellView.spacing),
             textField.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -CellView.spacing),
         ])
-        textField.topConstraint = textField.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor)
+        textField.topConstraint = textField.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         self.responderClosure = { [weak self] field in
             guard let self = self else { return nil }
             self.textField.text = field.text
             self.textField.font = field.font
             self.textField.topConstraint = self.textField.topAnchor.constraint(equalTo: field.topAnchor)
             self.textField.selectedTextRange = field.selectedTextRange
+            self.textField.underline.backgroundColor = field.underline.backgroundColor
             self.textField.onSet = field.onSet
             _ = self.textField.becomeFirstResponder()
             return false

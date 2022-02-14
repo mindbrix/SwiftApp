@@ -14,12 +14,12 @@ extension Cell {
         case .stack(let atoms, _, _):
             return atoms.map( { atom in
                 switch atom{
-                case .image:
-                    return UIImageView.description()
+                case .image(_, _, let onTap):
+                    return ImageView.description() + (onTap != nil ? ".onTap" : "")
                 case .input:
-                    return UITextField.description()
-                case .text:
-                    return UILabel.description()
+                    return TextField.description()
+                case .text(_, _, _, let onTap):
+                    return UILabel.description() + (onTap != nil ? ".onTap" : "")
                 }
             })
         }

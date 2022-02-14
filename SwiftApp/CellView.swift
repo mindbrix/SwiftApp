@@ -110,7 +110,6 @@ class CellView: UIView, UITextFieldDelegate {
                     }
                 case .input(_, let onSet, _):
                     let field = TextField()
-                    field.delegate = self
                     field.translatesAutoresizingMaskIntoConstraints = false
                     field.isUserInteractionEnabled = onSet != nil
                     field.responderClosure = responderClosure
@@ -136,18 +135,19 @@ class CellView: UIView, UITextFieldDelegate {
             image.setAspectImage(UIImage(named: url), width: width)
         case .input(let value, let onSet, let scale):
             guard let field = view as? TextField else { return }
-            field.textColor = onSet == nil ? .gray : .black
+            field.onSet = onSet
             field.text = value
             field.font = UIFont(name: style.name, size: style.size * scale / 100)
             field.textAlignment = .left
+            field.textColor = onSet == nil ? .gray : .black
             separator.backgroundColor = onSet == nil ? .lightGray : .clear
             field.underline.backgroundColor = onSet == nil ? .clear : .lightGray
         case .text(let string, let scale, let alignment, let onTap):
             guard let label = view as? UILabel else { return }
-            label.textColor = onTap == nil ? .black : .blue
             label.text = string
             label.font = UIFont(name: style.name, size: style.size * scale / 100)
             label.textAlignment = alignment
+            label.textColor = onTap == nil ? .black : .blue
         }
     }
     
@@ -164,23 +164,5 @@ class CellView: UIView, UITextFieldDelegate {
                 onTap?()
             }
         }
-    }
-    
-    // MARK: - UITextFieldDelegate
-    
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        if let cell = cell, let index = stack.subviews.firstIndex(of: textField),
-           let text = textField.text, let textRange = Range(range, in: text) {
-            switch cell {
-            case .stack(let atoms, _, _):
-                switch atoms[index] {
-                case .input(_, let onSet, _):
-                    onSet?(text.replacingCharacters(in: textRange, with: string))
-                default:
-                    break
-                }
-            }
-        }
-        return true
     }
 }

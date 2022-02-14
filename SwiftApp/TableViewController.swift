@@ -29,7 +29,7 @@ class TableViewController: UITableViewController {
             guard let self = self else { return nil }
             self.textField.text = field.text
             self.textField.font = field.font
-            self.textField.topConstraint = self.textField.topAnchor.constraint(equalTo: field.topAnchor)
+//            self.textField.topConstraint = self.textField.topAnchor.constraint(equalTo: field.topAnchor)
             self.textField.selectedTextRange = field.selectedTextRange
 //            return self.textField.becomeFirstResponder()
             return nil

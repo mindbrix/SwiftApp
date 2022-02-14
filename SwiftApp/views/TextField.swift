@@ -20,6 +20,7 @@ class TextField : UITextField {
             underline.bottomAnchor.constraint(equalTo: bottomAnchor),
             underline.heightAnchor.constraint(equalToConstant: 0.5)
         ])
+        delegate = self
     }
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -32,6 +33,7 @@ class TextField : UITextField {
     override func becomeFirstResponder() -> Bool {
        return responderClosure?(self) ?? super.becomeFirstResponder()
     }
+    var onSet: ((String) -> Void)?
     var topConstraint: NSLayoutConstraint? {
         didSet {
             oldValue?.isActive = false
@@ -43,4 +45,13 @@ class TextField : UITextField {
         underline.translatesAutoresizingMaskIntoConstraints = false
         return underline
     }()
+}
+
+extension TextField: UITextFieldDelegate {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if let text = textField.text, let textRange = Range(range, in: text) {
+            onSet?(text.replacingCharacters(in: textRange, with: string))
+        }
+        return true
+    }
 }

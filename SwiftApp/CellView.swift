@@ -74,7 +74,7 @@ class CellView: UIView, UITextFieldDelegate {
     static let spacing: CGFloat = 4
     
     lazy var insetConstraints: [NSLayoutConstraint] = {
-        stack.constraintsToView(self)
+        stack.insetConstraintsTo(self)
     }()
     var stackInsets: UIEdgeInsets = .zero {
         didSet {

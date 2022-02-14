@@ -9,14 +9,7 @@ import Foundation
 import UIKit
 
 extension UIView {
-//    enum Edge: Int {
-//        case top
-//        case left
-//        case bottom
-//        case right
-//    }
-
-    func constraintsToView(_ view: UIView, insets: UIEdgeInsets = .zero) -> [NSLayoutConstraint] {
+    func insetConstraintsTo(_ view: UIView, insets: UIEdgeInsets = .zero) -> [NSLayoutConstraint] {
         [
             topAnchor.constraint(equalTo: view.topAnchor, constant: insets.top),
             leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: insets.left),
@@ -26,7 +19,7 @@ extension UIView {
     }
     func constrainToSuperview(insets: UIEdgeInsets = .zero) {
         guard let superview = self.superview else { return }
-        NSLayoutConstraint.activate(constraintsToView(superview, insets: insets))
+        NSLayoutConstraint.activate(insetConstraintsTo(superview, insets: insets))
     }
     
     func fadeToBackground(from color: UIColor, duration: TimeInterval = 0.66) {

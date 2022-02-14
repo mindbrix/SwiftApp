@@ -21,14 +21,17 @@ class TableViewController: UITableViewController {
         textField.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(textField)
         NSLayoutConstraint.activate([
-            textField.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            textField.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            textField.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            textField.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: CellView.spacing),
+            textField.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -CellView.spacing),
         ])
+        textField.topConstraint = textField.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor)
         self.responderClosure = { [weak self] field in
-            self?.textField.text = field.text
-            self?.textField.selectedTextRange = field.selectedTextRange
-//            self?.textField.becomeFirstResponder()
+            guard let self = self else { return nil }
+            self.textField.text = field.text
+            self.textField.font = field.font
+            self.textField.topConstraint = self.textField.topAnchor.constraint(equalTo: field.topAnchor)
+            self.textField.selectedTextRange = field.selectedTextRange
+//            return self.textField.becomeFirstResponder()
             return nil
         }
     }

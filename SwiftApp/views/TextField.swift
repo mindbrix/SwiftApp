@@ -32,6 +32,12 @@ class TextField : UITextField {
     override func becomeFirstResponder() -> Bool {
        return responderClosure?(self) ?? super.becomeFirstResponder()
     }
+    var topConstraint: NSLayoutConstraint? {
+        didSet {
+            oldValue?.isActive = false
+            topConstraint?.isActive = true
+        }
+    }
     lazy var underline: UIView = {
         let underline = UIView()
         underline.translatesAutoresizingMaskIntoConstraints = false

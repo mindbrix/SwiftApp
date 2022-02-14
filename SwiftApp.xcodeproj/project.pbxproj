@@ -119,10 +119,10 @@
 		E977D00427AFC887007E4998 /* SwiftApp */ = {
 			isa = PBXGroup;
 			children = (
+				E9A838BE27BA69B40096FAFB /* Extensions */,
 				E977D00527AFC887007E4998 /* AppDelegate.swift */,
 				E977D06C27B1A628007E4998 /* CellView.swift */,
 				E977D06427B1635A007E4998 /* CellViewCell.swift */,
-				E977D07627B1A9C9007E4998 /* Extensions.swift */,
 				E977D00727AFC887007E4998 /* SceneDelegate.swift */,
 				E977D03E27AFDBBA007E4998 /* SwiftApp.swift */,
 				E977D00927AFC887007E4998 /* TableViewController.swift */,
@@ -150,6 +150,14 @@
 				E977D02927AFC887007E4998 /* Info.plist */,
 			);
 			path = SwiftAppUITests;
+			sourceTree = "<group>";
+		};
+		E9A838BE27BA69B40096FAFB /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				E977D07627B1A9C9007E4998 /* Extensions.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

@@ -28,6 +28,8 @@ class TextField : UITextField {
     
     func become(_ field:  TextField) {
         topConstraint = topAnchor.constraint(equalTo: field.topAnchor)
+        leadingConstraint = leadingAnchor.constraint(equalTo: field.leadingAnchor)
+        trailngConstraint = trailingAnchor.constraint(equalTo: field.trailingAnchor)
         text = field.text
         font = field.font
         selectedTextRange = field.selectedTextRange
@@ -41,10 +43,22 @@ class TextField : UITextField {
        return responderClosure?(self) ?? super.becomeFirstResponder()
     }
     var onSet: ((String) -> Void)?
+    var leadingConstraint: NSLayoutConstraint? {
+        didSet {
+            oldValue?.isActive = false
+            leadingConstraint?.isActive = true
+        }
+    }
     var topConstraint: NSLayoutConstraint? {
         didSet {
             oldValue?.isActive = false
             topConstraint?.isActive = true
+        }
+    }
+    var trailngConstraint: NSLayoutConstraint? {
+        didSet {
+            oldValue?.isActive = false
+            trailngConstraint?.isActive = true
         }
     }
     lazy var underline: UIView = {

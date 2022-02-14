@@ -19,10 +19,6 @@ class TableViewController: UITableViewController {
         textField.backgroundColor = UIColor(white: 0.9, alpha: 1)
         textField.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(textField)
-        NSLayoutConstraint.activate([
-            textField.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: CellView.spacing),
-            textField.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -CellView.spacing),
-        ])
         textField.topConstraint = textField.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         self.responderClosure = { [weak self] field in
             guard let self = self else { return nil }

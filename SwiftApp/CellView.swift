@@ -50,14 +50,13 @@ class CellView: UIView, UITextFieldDelegate {
     
     func apply(cell: Cell?, style: FontStyle, isHeader: Bool = false, responderClosure: ResponderClosure? = nil) {
         self.cell = cell
-        self.responderClosure = responderClosure
         stackInsets = .zero
         stack.axis = .vertical
         stack.spacing = Self.spacing
         let types = cell?.atomsTypes ?? []
         if types != atomsTypes {
             atomsTypes = types
-            setupStack()
+            setupStack(responderClosure: responderClosure)
         }
         guard let cell = cell else { return }
         switch cell {
@@ -71,7 +70,6 @@ class CellView: UIView, UITextFieldDelegate {
         backgroundColor = isHeader ? UIColor(white: 0.9, alpha: 1) : .white
     }
     private var cell: Cell?
-    private var responderClosure: ResponderClosure?
     private var atomsTypes: [String] = []
     let separator = UIView()
     let stack = UIStackView()
@@ -89,7 +87,7 @@ class CellView: UIView, UITextFieldDelegate {
         }
     }
     
-    private func setupStack() {
+    private func setupStack(responderClosure: ResponderClosure? = nil) {
         for subview in stack.subviews {
             subview.removeFromSuperview()
             for recognizer in subview.gestureRecognizers ?? [] {
@@ -116,7 +114,7 @@ class CellView: UIView, UITextFieldDelegate {
                     field.delegate = self
                     field.translatesAutoresizingMaskIntoConstraints = false
                     field.isUserInteractionEnabled = onSet != nil
-                    field.responderClosure = self.responderClosure
+                    field.responderClosure = responderClosure
                     stack.addArrangedSubview(field)
                 case .text(_, _, _, let onTap):
                     let label = UILabel()

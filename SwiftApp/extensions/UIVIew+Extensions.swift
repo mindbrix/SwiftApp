@@ -26,14 +26,4 @@ extension UIView {
         animation.repeatCount = 1
         layer.add(animation, forKey: #keyPath(CALayer.backgroundColor))
     }
-    
-    var firstResponder: UIView? {
-        guard !isFirstResponder else { return self }
-        for subview in subviews {
-            if let firstResponder = subview.firstResponder {
-                return firstResponder
-            }
-        }
-        return nil
-    }
 }

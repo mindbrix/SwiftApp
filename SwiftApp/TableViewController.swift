@@ -33,6 +33,7 @@ class TableViewController: UITableViewController {
             self.textField.underline.backgroundColor = field.underline.backgroundColor
             self.textField.onSet = field.onSet
             _ = self.textField.becomeFirstResponder()
+            self.textField.fadeToBackground(from: .red)
             return false
         }
     }
@@ -59,10 +60,7 @@ class TableViewController: UITableViewController {
         didSet {
             guard oldValue != model else { return }
             self.title = model.title
-            let first = self.tableView.firstResponder as? TextField
-            first?.canResign = false
             self.tableView.reloadData()
-            first?.canResign = true
         }
     }
     private var responderClosure: ResponderClosure?

@@ -157,7 +157,7 @@ class SwiftApp {
                             .stack([
                                 .text(key.rawValue),
                                 .input(
-                                    get: String(describing: self.getDefaultsItem(key)),
+                                    value: String(describing: self.getDefaultsItem(key)),
                                     scale: 120)
                             ], isVertical: true)
                         })
@@ -201,8 +201,8 @@ class SwiftApp {
                             .stack([
                                 .text("User", scale: 86),
                                 .input(
-                                    get: self.getDefaultsItem(.username) as? String ?? "",
-                                    set: { string in
+                                    value: self.getDefaultsItem(.username) as? String ?? "",
+                                    onSet: { string in
                                         self.setDefaultsItem(.username, value: string)
                                     },
                                     scale: 120),
@@ -210,8 +210,8 @@ class SwiftApp {
                             .stack([
                                 .text("Password", scale: 86),
                                 .input(
-                                    get: self.getDefaultsItem(.password) as? String ?? "",
-                                    set: { string in
+                                    value: self.getDefaultsItem(.password) as? String ?? "",
+                                    onSet: { string in
                                         self.setDefaultsItem(.password, value: string)
                                     },
                                     scale: 120),

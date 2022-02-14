@@ -13,7 +13,7 @@ class CellViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.contentView.addSubview(cellView)
-        cellView.constrainToSuperview()
+        NSLayoutConstraint.activate(cellView.insetConstraintsFrom(self.contentView))
     }
     
     required init?(coder: NSCoder) {

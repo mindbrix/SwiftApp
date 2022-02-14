@@ -180,7 +180,7 @@ class CellView: UIView, UITextFieldDelegate {
         case .input(let get, let set, let scale):
             guard let field = view as? TextField else { return }
             field.textColor = set == nil ? .gray : .black
-            field.text = get()
+            field.text = get
             field.font = UIFont(name: style.name, size: style.size * scale / 100)
             field.textAlignment = .left
             separator.backgroundColor = set == nil ? .lightGray : .clear

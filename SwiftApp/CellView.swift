@@ -152,11 +152,11 @@ class CellView: UIView, UITextFieldDelegate {
                         image.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onTapper)))
                         image.isUserInteractionEnabled = true
                     }
-                case .input(_, let set, _):
+                case .input(_, let onSet, _):
                     let field = TextField()
                     field.delegate = self
                     field.translatesAutoresizingMaskIntoConstraints = false
-                    field.isUserInteractionEnabled = set != nil
+                    field.isUserInteractionEnabled = onSet != nil
                     stack.addArrangedSubview(field)
                 case .text(_, _, _, let onTap):
                     let label = UILabel()
@@ -177,14 +177,14 @@ class CellView: UIView, UITextFieldDelegate {
         case .image(let url, let width, _):
             guard let image = view as? ImageView else { return }
             image.setAspectImage(UIImage(named: url), width: width)
-        case .input(let get, let set, let scale):
+        case .input(let value, let onSet, let scale):
             guard let field = view as? TextField else { return }
-            field.textColor = set == nil ? .gray : .black
-            field.text = get
+            field.textColor = onSet == nil ? .gray : .black
+            field.text = value
             field.font = UIFont(name: style.name, size: style.size * scale / 100)
             field.textAlignment = .left
-            separator.backgroundColor = set == nil ? .lightGray : .clear
-            field.underline.backgroundColor = set == nil ? .clear : .lightGray
+            separator.backgroundColor = onSet == nil ? .lightGray : .clear
+            field.underline.backgroundColor = onSet == nil ? .clear : .lightGray
         case .text(let string, let scale, let alignment, let onTap):
             guard let label = view as? UILabel else { return }
             label.textColor = onTap == nil ? .black : .blue
@@ -217,8 +217,8 @@ class CellView: UIView, UITextFieldDelegate {
             switch cell {
             case .stack(let atoms, _, _):
                 switch atoms[index] {
-                case .input(_, let set, _):
-                    set?(text.replacingCharacters(in: textRange, with: string))
+                case .input(_, let onSet, _):
+                    onSet?(text.replacingCharacters(in: textRange, with: string))
                 default:
                     break
                 }

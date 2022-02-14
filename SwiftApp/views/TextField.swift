@@ -26,12 +26,14 @@ class TextField : UITextField {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func copyFrom(_ field:  TextField) {
+    func become(_ field:  TextField) {
+        topConstraint = topAnchor.constraint(equalTo: field.topAnchor)
         text = field.text
         font = field.font
         selectedTextRange = field.selectedTextRange
         underline.backgroundColor = field.underline.backgroundColor
         onSet = field.onSet
+        fadeToBackground(from: .red)
     }
     
     var responderClosure: ResponderClosure?

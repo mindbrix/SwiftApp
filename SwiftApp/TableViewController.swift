@@ -26,9 +26,7 @@ class TableViewController: UITableViewController {
         textField.topConstraint = textField.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         self.responderClosure = { [weak self] field in
             guard let self = self else { return nil }
-            self.textField.topConstraint = self.textField.topAnchor.constraint(equalTo: field.topAnchor)
-            self.textField.copyFrom(field)
-            self.textField.fadeToBackground(from: .red)
+            self.textField.become(field)
             _ = self.textField.becomeFirstResponder()
             return false
         }

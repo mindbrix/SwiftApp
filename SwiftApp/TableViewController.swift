@@ -8,13 +8,30 @@
 import UIKit
 
 class TableViewController: UITableViewController {
+    let textField = TextField()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.register(CellViewCell.self, forCellReuseIdentifier: CellViewCell.reuseID)
         self.tableView.separatorStyle = .none
         self.view.backgroundColor = .white
+        
+        textField.layer.borderWidth = 0.5
+        textField.backgroundColor = .white
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(textField)
+        NSLayoutConstraint.activate([
+            textField.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            textField.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            textField.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+        ])
     }
 
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        view.bringSubviewToFront(textField)
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         if let nc = self.navigationController {

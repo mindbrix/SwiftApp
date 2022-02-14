@@ -80,12 +80,13 @@ class SwiftApp {
     
     private func makeViewController(for screen: Screen) -> TableViewController {
         let vc = TableViewController()
+        let title = screen.rawValue
         switch screen {
         case .Main:
             vc.loadClosure = { [weak self, weak vc] in
                 guard let self = self, let vc = vc else { return ViewModel.emptyModel }
                 
-                return ViewModel(style: self.style, title: screen.rawValue, sections: [
+                return ViewModel(style: self.style, title: title, sections: [
                     Section(
                         header: .stack([
                             .text(self.style.name, alignment: .left),
@@ -130,7 +131,7 @@ class SwiftApp {
                 guard let self = self else { return ViewModel.emptyModel }
                 let count = self.getDefaultsItem(.counter) as? Int ?? 0
                 
-                return ViewModel(style: self.style, title: screen.rawValue, sections: [
+                return ViewModel(style: self.style, title: title, sections: [
                     Section(
                         header: nil,
                         cells: [
@@ -150,9 +151,9 @@ class SwiftApp {
         case .DefaultStore:
             vc.loadClosure = { [weak self] in
                 guard let self = self else { return ViewModel.emptyModel }
-                return ViewModel(style: self.style, title: screen.rawValue, sections: [
+                return ViewModel(style: self.style, title: title, sections: [
                     Section(
-                        header: .stack([.text(screen.rawValue)]),
+                        header: .stack([.text(title)]),
                         cells: DefaultsKey.allCases.map({ key in
                             .stack([
                                 .text(key.rawValue),
@@ -165,9 +166,9 @@ class SwiftApp {
             }
         case .DequeueTest:
             vc.loadClosure = {
-                ViewModel(style: self.style, title: screen.rawValue, sections: [
+                ViewModel(style: self.style, title: title, sections: [
                     Section(
-                        header: .stack([.text(screen.rawValue)]),
+                        header: .stack([.text(title)]),
                         cells: Array(1...100).map({ int in
                             .stack([
                                 .text(String(int)),
@@ -179,7 +180,7 @@ class SwiftApp {
             }
         case .Fonts:
             vc.loadClosure = {
-                return ViewModel(style: self.style, title: screen.rawValue, sections:
+                return ViewModel(style: self.style, title: title, sections:
                     UIFont.familyNames.map({ familyName in
                         Section(
                             header: .stack([.text(familyName)]),
@@ -194,7 +195,7 @@ class SwiftApp {
             }
         case .Login:
             vc.loadClosure = {
-                return ViewModel(style: self.style, title: screen.rawValue, sections: [
+                return ViewModel(style: self.style, title: title, sections: [
                     Section(
                         header: nil,
                         cells: [

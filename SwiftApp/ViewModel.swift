@@ -31,18 +31,19 @@ struct Section: Equatable {
     let cells: [Cell]
 }
 
+struct FontStyle: Equatable {
+    let name: String
+    let size: CGFloat
+    
+    static let defaultStyle = Self(name: "HelveticaNeue", size: 18)
+}
+
 struct ViewModel: Equatable {
     let style: FontStyle
     let title: String
     let sections: [Section]
     
     static let emptyModel = Self(style: .defaultStyle, title: "", sections: [])
-    typealias Closure = () -> ViewModel
-}
-
-struct FontStyle: Equatable {
-    let name: String
-    let size: CGFloat
     
-    static let defaultStyle = Self(name: "HelveticaNeue", size: 18)
+    typealias Closure = () -> ViewModel
 }

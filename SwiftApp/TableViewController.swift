@@ -26,7 +26,7 @@ class TableViewController: UITableViewController {
         model = modelClosure()
     }
     
-    var modelClosure: ModelClosure = { ViewModel.emptyModel }
+    var modelClosure: ViewModel.Closure = { ViewModel.emptyModel }
     
     private var model = ViewModel.emptyModel {
         didSet {

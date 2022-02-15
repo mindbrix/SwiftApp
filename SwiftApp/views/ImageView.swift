@@ -9,15 +9,16 @@ import Foundation
 import UIKit
 
 class ImageView: UIImageView {
-    func setAspectImage(_ image: UIImage?, width: CGFloat? = nil) {
+    func setAspectImage(_ image: UIImage, width: CGFloat? = nil) {
         self.image = image
-        heightConstraint = nil
-        if let size = image?.size {
-            heightConstraint = heightAnchor.constraint(
-                lessThanOrEqualTo: widthAnchor,
-                multiplier: size.height / size.width)
-            heightConstraint?.isActive = true
-        }
+        heightConstraint?.isActive = false
+        widthConstraint.isActive = false
+        let size = image.size
+        guard size.height > 0 && size.width > 0 else { return }
+        heightConstraint = heightAnchor.constraint(
+            lessThanOrEqualTo: widthAnchor,
+            multiplier: size.height / size.width)
+        heightConstraint?.isActive = true
         widthConstraint.constant = width ?? 0
         widthConstraint.isActive = width != nil
     }

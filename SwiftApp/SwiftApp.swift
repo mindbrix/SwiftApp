@@ -87,7 +87,7 @@ class SwiftApp {
         let smallStyle: Atom.TextStyle = .init(scale: 86)
         let largeStyle: Atom.TextStyle = .init(scale: largeScale)
         let counterStyle: Atom.TextStyle = .init(scale: largeScale, alignment: .center)
-        let grab0 = UIImage(named: "grab0")
+        let grab0 = UIImage(named: "grab0") ?? UIImage()
         
         switch screen {
         case .Main:

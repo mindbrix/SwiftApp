@@ -8,33 +8,6 @@
 import Foundation
 import UIKit
 
-struct CellStyle: Equatable {
-    let color: UIColor
-    let isVertical: Bool
-    let insets: UIEdgeInsets?
-    init(color: UIColor = .white, isVertical: Bool = false, insets: UIEdgeInsets? = nil) {
-        self.color = color
-        self.isVertical = isVertical
-        self.insets = insets
-    }
-    func withColor(_ color: UIColor) -> Self {
-        return Self(color: color, isVertical: isVertical, insets: insets)
-    }
-}
-
-struct TextStyle: Equatable {
-    let color: UIColor
-    let font: UIFont?
-    let alignment: NSTextAlignment
-    init(color: UIColor = .black, font: UIFont? = nil, alignment: NSTextAlignment = .left) {
-        self.color = color
-        self.font = font
-        self.alignment = alignment
-    }
-    func withAlignment(_ alignment: NSTextAlignment) -> Self {
-        return Self(color: color, font: font, alignment: alignment)
-    }
-}
 
 enum Atom: Hashable {
     case text(_ string: String, style: TextStyle? = nil, onTap: (() -> Void)? = nil)

@@ -13,8 +13,9 @@ enum Atom: Hashable {
     struct TextStyle {
         let scale: CGFloat
         let alignment: NSTextAlignment
-        static func make(scale: CGFloat = 100, alignment: NSTextAlignment = .left) -> Self {
-            Self(scale: scale, alignment: alignment)
+        init(scale: CGFloat = 100, alignment: NSTextAlignment = .left) {
+            self.scale = scale
+            self.alignment = alignment
         }
     }
     case text(_ string: String, style: TextStyle? = nil, onTap: (() -> Void)? = nil)

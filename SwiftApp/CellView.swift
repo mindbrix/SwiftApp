@@ -144,7 +144,7 @@ class CellView: UIView, UITextFieldDelegate {
             field.underline.backgroundColor = onSet == nil ? .clear : .lightGray
         case .text(let string, let style, let onTap):
             guard let label = view as? UILabel else { return }
-            let textStyle = style ?? .make()
+            let textStyle = style ?? .init()
             label.text = string
             label.font = UIFont(name: fontStyle.name, size: fontStyle.size * textStyle.scale / 100)
             label.textAlignment = textStyle.alignment

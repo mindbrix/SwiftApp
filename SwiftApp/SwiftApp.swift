@@ -83,10 +83,10 @@ class SwiftApp {
         let title = screen.rawValue
         let largeScale: CGFloat = 120
         let hugeScale: CGFloat = 200
-        let tinyStyle: Atom.TextStyle = .make(scale: 50)
-        let smallStyle: Atom.TextStyle = .make(scale: 86)
-        let largeStyle: Atom.TextStyle = .make(scale: largeScale)
-        let counterStyle: Atom.TextStyle = .make(scale: largeScale, alignment: .center)
+        let tinyStyle: Atom.TextStyle = .init(scale: 50)
+        let smallStyle: Atom.TextStyle = .init(scale: 86)
+        let largeStyle: Atom.TextStyle = .init(scale: largeScale)
+        let counterStyle: Atom.TextStyle = .init(scale: largeScale, alignment: .center)
         
         switch screen {
         case .Main:
@@ -96,7 +96,7 @@ class SwiftApp {
                 return ViewModel(style: self.style, title: title, sections: [
                     Section(
                         header: .stack([
-                            .text(self.style.name, style: .make(alignment: .center), onTap: {
+                            .text(self.style.name, style: .init(alignment: .center), onTap: {
                                 guard let nc = vc.navigationController else { return }
                                 nc.pushViewController(self.makeViewController(for: .Fonts), animated: true)
                             }),
@@ -145,7 +145,7 @@ class SwiftApp {
                     Section(
                         header: nil,
                         cells: [
-                            .stack([.text(String(count), style: .make(scale: hugeScale, alignment: .center))]),
+                            .stack([.text(String(count), style: .init(scale: hugeScale, alignment: .center))]),
                             .stack([
                                 .text("Down", style: counterStyle, onTap: {
                                     self.setDefaultsItem(.counter, value: max(0, count - 1))

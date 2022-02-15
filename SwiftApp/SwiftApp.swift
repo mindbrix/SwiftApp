@@ -57,6 +57,7 @@ class SwiftApp {
     
     private var style: FontStyle = .defaultStyle {
         didSet {
+            guard style != oldValue else { return }
             updateStyles()
             setNeedsReload()
         }

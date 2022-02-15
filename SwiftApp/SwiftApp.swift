@@ -86,18 +86,19 @@ class SwiftApp {
             vc.loadClosure = { [weak self, weak vc] in
                 guard let self = self, let vc = vc else { return ViewModel.emptyModel }
                 
+                let counterScale: CGFloat = 160
                 return ViewModel(style: self.style, title: title, sections: [
                     Section(
                         header: .stack([
-                            .text(self.style.name, alignment: .left),
-                            .text("size: \(self.style.size)", alignment: .right)
+                            .text(self.style.name, alignment: .center),
                         ]),
                         cells: [
                             .stack([
-                                .text("--fontSize", alignment: .center, onTap: {
+                                .text("--", scale: counterScale, alignment: .center, onTap: {
                                     self.style = .init(name: self.style.name, size: max(4, self.style.size - 1))
                                 }),
-                                .text("fontSize++", alignment: .center, onTap: {
+                                .text("\(self.style.size)", scale: counterScale, alignment: .center),
+                                .text("++", scale: counterScale, alignment: .center, onTap: {
                                     self.style = .init(name: self.style.name, size: self.style.size + 1)
                                 })
                             ]),

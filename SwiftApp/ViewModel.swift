@@ -17,7 +17,7 @@ enum Atom: Hashable {
             Self(scale: scale, alignment: alignment)
         }
     }
-    case text(_ string: String, style: TextStyle? = nil, scale: CGFloat = 100, alignment: NSTextAlignment = .left, onTap: (() -> Void)? = nil)
+    case text(_ string: String, style: TextStyle? = nil, onTap: (() -> Void)? = nil)
     case image(url: String, width: CGFloat? = nil, onTap: (() -> Void)? = nil)
     case input(value: String, onSet: ((String) -> Void)? = nil, scale: CGFloat = 100)
     

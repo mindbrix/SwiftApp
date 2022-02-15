@@ -81,10 +81,11 @@ class SwiftApp {
     private func makeViewController(for screen: Screen) -> TableViewController {
         let vc = TableViewController()
         let title = screen.rawValue
-        let tinyScale: CGFloat = 50
-        let smallScale: CGFloat = 86
         let largeScale: CGFloat = 120
         let hugeScale: CGFloat = 200
+        let tinyStyle: Atom.TextStyle = .make(scale: 50)
+        let smallStyle: Atom.TextStyle = .make(scale: 86)
+        let largeStyle: Atom.TextStyle = .make(scale: largeScale)
         let counterStyle: Atom.TextStyle = .make(scale: largeScale, alignment: .center)
         
         switch screen {
@@ -125,11 +126,11 @@ class SwiftApp {
                         cells: [
                             .stack([
                                 .image(url: "grab0", onTap: { print("grab0") }),
-                                .text(.longText, scale: tinyScale)
+                                .text(.longText, style: tinyStyle)
                             ], isVertical: true),
                             .stack([
                                 .image(url: "grab0", width: 64, onTap: { print("grab0") }),
-                                .text(.longText, scale: tinyScale),
+                                .text(.longText, style: tinyStyle),
                                 .image(url: "grab0", width: 64, onTap: { print("grab0") }),
                             ], isVertical: false),
                         ])
@@ -194,7 +195,7 @@ class SwiftApp {
                         Section(
                             header: .stack([.text(familyName)]),
                             cells: UIFont.fontNames(forFamilyName: familyName).map({ fontName in
-                                .stack([.text(fontName, scale: smallScale, onTap: {
+                                .stack([.text(fontName, style: smallStyle, onTap: {
                                     self.style = .init(name: fontName, size: self.style.size)
                                 })])
                             })
@@ -209,7 +210,7 @@ class SwiftApp {
                         header: nil,
                         cells: [
                             .stack([
-                                .text("User", scale: smallScale),
+                                .text("User", style: smallStyle),
                                 .input(
                                     value: self.getDefaultsItem(.username) as? String ?? "",
                                     onSet: { string in
@@ -218,7 +219,7 @@ class SwiftApp {
                                     scale: largeScale),
                                 ], isVertical: true),
                             .stack([
-                                .text("Password", scale: smallScale),
+                                .text("Password", style: smallStyle),
                                 .input(
                                     value: self.getDefaultsItem(.password) as? String ?? "",
                                     onSet: { string in

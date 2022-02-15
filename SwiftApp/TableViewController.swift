@@ -17,7 +17,7 @@ class TableViewController: UITableViewController {
         self.tableView.separatorStyle = .none
         self.view.backgroundColor = .white
         
-        textField.backgroundColor = UIColor(white: 0.9, alpha: 1)
+        textField.backgroundColor = .white
         textField.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(textField)
         textField.topConstraint = textField.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)

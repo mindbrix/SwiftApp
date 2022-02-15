@@ -39,4 +39,8 @@ struct TextStyle: Equatable {
 struct Style: Equatable  {
     let cell: CellStyle
     let text: TextStyle
+    init(cell: CellStyle = .init(), text: TextStyle = .init()) {
+        self.cell = cell
+        self.text = text
+    }
 }

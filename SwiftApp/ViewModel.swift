@@ -36,7 +36,7 @@ struct ViewModel: Equatable {
     let title: String
     let sections: [Section]
     
-    static let emptyModel = Self(style: .init(cell: .init(), text: .init()), title: "", sections: [])
+    static let emptyModel = Self(style: .init(), title: "", sections: [])
     
     typealias Closure = () -> ViewModel
 }

@@ -10,10 +10,12 @@ import UIKit
 
 
 enum Atom: Hashable {
-    struct TextStyle {
+    struct TextStyle: Equatable {
+        let font: UIFont?
         let scale: CGFloat
         let alignment: NSTextAlignment
-        init(scale: CGFloat = 100, alignment: NSTextAlignment = .left) {
+        init(font: UIFont? = nil, scale: CGFloat = 100, alignment: NSTextAlignment = .left) {
+            self.font = font
             self.scale = scale
             self.alignment = alignment
         }
@@ -47,11 +49,11 @@ struct FontStyle: Equatable {
 }
 
 struct ViewModel: Equatable {
-    let style: FontStyle
+    let style: Atom.TextStyle
     let title: String
     let sections: [Section]
     
-    static let emptyModel = Self(style: .defaultStyle, title: "", sections: [])
+    static let emptyModel = Self(style: .init(), title: "", sections: [])
     
     typealias Closure = () -> ViewModel
 }

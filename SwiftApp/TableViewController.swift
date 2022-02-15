@@ -69,7 +69,7 @@ class TableViewController: UITableViewController {
         let cv = CellView()
         cv.apply(
             cell: model.sections[section].header,
-            style: model.style,
+            modelStyle: model.style,
             isHeader: true,
             responderClosure: responderClosure)
         cv.fadeToBackground(from: .blue)
@@ -82,7 +82,7 @@ class TableViewController: UITableViewController {
         if let tvc = tvc as? CellViewCell {
             tvc.cellView.apply(
                 cell: model.sections[indexPath.section].cells[indexPath.row],
-                style: model.style,
+                modelStyle: model.style,
                 responderClosure: responderClosure)
             tvc.cellView.fadeToBackground(from: .red)
         }

@@ -47,7 +47,7 @@ class CellView: UIView, UITextFieldDelegate {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func apply(cell: Cell?, style: FontStyle, isHeader: Bool = false, responderClosure: ResponderClosure? = nil) {
+    func apply(cell: Cell?, modelStyle: Atom.TextStyle, isHeader: Bool = false, responderClosure: ResponderClosure? = nil) {
         self.cell = cell
         stackInsets = .zero
         stack.axis = .vertical
@@ -63,7 +63,7 @@ class CellView: UIView, UITextFieldDelegate {
             stackInsets = insets ?? UIEdgeInsets(top: Self.spacing, left: Self.spacing, bottom: Self.spacing, right: Self.spacing)
             stack.axis = isVertical ? .vertical : .horizontal
             for (index, atom) in atoms.enumerated() {
-                applyAtom(atom, fontStyle: style, view: stack.subviews[index])
+                applyAtom(atom, modelStyle: modelStyle, view: stack.subviews[index])
             }
         }
         backgroundColor = isHeader ? UIColor(white: 0.9, alpha: 1) : .white
@@ -128,26 +128,26 @@ class CellView: UIView, UITextFieldDelegate {
         }
     }
     
-    private func applyAtom(_ atom: Atom, fontStyle: FontStyle, view: UIView) {
+    private func applyAtom(_ atom: Atom, modelStyle: Atom.TextStyle, view: UIView) {
         switch atom {
         case .image(let image, let width, _):
             guard let iv = view as? ImageView else { return }
             iv.setAspectImage(image, width: width)
         case .input(let value, let style, let onSet):
             guard let field = view as? TextField else { return }
-            let textStyle = style ?? .init()
+            let textStyle = style ?? modelStyle
             field.onSet = onSet
             field.text = value
-            field.font = UIFont(name: fontStyle.name, size: fontStyle.size * textStyle.scale / 100)
+            field.font = textStyle.font
             field.textAlignment = textStyle.alignment
             field.textColor = onSet == nil ? .gray : .black
             separator.backgroundColor = onSet == nil ? .lightGray : .clear
             field.underline.backgroundColor = onSet == nil ? .clear : .lightGray
         case .text(let string, let style, let onTap):
             guard let label = view as? UILabel else { return }
-            let textStyle = style ?? .init()
+            let textStyle = style ?? modelStyle
             label.text = string
-            label.font = UIFont(name: fontStyle.name, size: fontStyle.size * textStyle.scale / 100)
+            label.font = textStyle.font
             label.textAlignment = textStyle.alignment
             label.textColor = onTap == nil ? .black : .blue
         }

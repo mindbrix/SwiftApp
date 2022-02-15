@@ -28,6 +28,7 @@ class SwiftApp {
     
     init(window: UIWindow) {
         self.window = window
+        updateStyles()
         Timer.scheduledTimer(withTimeInterval: 1 / 60, repeats: true) { [weak self] timer in
             guard let self = self else { return }
             if self.needsReload {
@@ -49,10 +50,30 @@ class SwiftApp {
     
     private var style: FontStyle = .defaultStyle {
         didSet {
+            updateStyles()
             setNeedsReload()
         }
     }
+    var smallStyle = Atom.TextStyle()
+    var defaultStyle = Atom.TextStyle()
+    var largeStyle = Atom.TextStyle()
+    var hugeStyle = Atom.TextStyle()
+    var counterStyle = Atom.TextStyle()
     
+    private func updateStyles() {
+        let smallScale: CGFloat = 86
+        let largeScale: CGFloat = 120
+        let hugeScale: CGFloat = 200
+        let smallFont = UIFont(name: self.style.name, size: self.style.size * smallScale / 100)
+        let defaultFont = UIFont(name: self.style.name, size: self.style.size)
+        let largeFont = UIFont(name: self.style.name, size: self.style.size * largeScale / 100)
+        let hugeFont = UIFont(name: self.style.name, size: self.style.size * hugeScale / 100)
+        smallStyle = .init(font: smallFont, scale: smallScale)
+        defaultStyle = .init(font: defaultFont)
+        largeStyle = .init(font: largeFont, scale: largeScale)
+        hugeStyle = .init(font: hugeFont, scale: hugeScale, alignment: .center)
+        counterStyle = .init(font: largeFont, scale: largeScale, alignment: .center)
+    }
     private func getDefaultsItem(_ key: DefaultsKey) -> Any? {
         UserDefaults.standard.object(forKey: key.rawValue)
     }
@@ -81,13 +102,6 @@ class SwiftApp {
     private func makeViewController(for screen: Screen) -> TableViewController {
         let vc = TableViewController()
         let title = screen.rawValue
-        let smallScale: CGFloat = 86
-        let largeScale: CGFloat = 120
-        let hugeScale: CGFloat = 200
-        let hugeStyle: Atom.TextStyle = .init(scale: hugeScale, alignment: .center)
-        let smallStyle: Atom.TextStyle = .init(scale: smallScale)
-        let largeStyle: Atom.TextStyle = .init(scale: largeScale)
-        let counterStyle: Atom.TextStyle = .init(scale: largeScale, alignment: .center)
         let grab0 = UIImage(named: "grab0") ?? UIImage()
         
         switch screen {
@@ -95,7 +109,7 @@ class SwiftApp {
             vc.loadClosure = { [weak self, weak vc] in
                 guard let self = self, let vc = vc else { return ViewModel.emptyModel }
                 
-                return ViewModel(style: self.style, title: title, sections: [
+                return ViewModel(style: self.defaultStyle, title: title, sections: [
                     Section(
                         header: .stack([
                             .text(self.style.name, style: .init(alignment: .center), onTap: {
@@ -105,11 +119,11 @@ class SwiftApp {
                         ]),
                         cells: [
                             .stack([
-                                .text("--", style: counterStyle, onTap: {
+                                .text("--", style: self.counterStyle, onTap: {
                                     self.style = .init(name: self.style.name, size: max(4, self.style.size - 1))
                                 }),
-                                .text("\(self.style.size)", style: counterStyle),
-                                .text("++", style: counterStyle, onTap: {
+                                .text("\(self.style.size)", style: self.counterStyle),
+                                .text("++", style: self.counterStyle, onTap: {
                                     self.style = .init(name: self.style.name, size: self.style.size + 1)
                                 })
                             ]),
@@ -128,11 +142,11 @@ class SwiftApp {
                         cells: [
                             .stack([
                                 .image(grab0, onTap: { print("grab0") }),
-                                .text(.longText, style: smallStyle)
+                                .text(.longText, style: self.smallStyle)
                             ], isVertical: true),
                             .stack([
                                 .image(grab0, width: 64, onTap: { print("grab0") }),
-                                .text(.longText, style: smallStyle),
+                                .text(.longText, style: self.smallStyle),
                                 .image(grab0, width: 64, onTap: { print("grab0") }),
                             ], isVertical: false),
                         ])
@@ -143,16 +157,16 @@ class SwiftApp {
                 guard let self = self else { return ViewModel.emptyModel }
                 let count = self.getDefaultsItem(.counter) as? Int ?? 0
                 
-                return ViewModel(style: self.style, title: title, sections: [
+                return ViewModel(style: self.defaultStyle, title: title, sections: [
                     Section(
                         header: nil,
                         cells: [
-                            .stack([.text(String(count), style: hugeStyle)]),
+                            .stack([.text(String(count), style: self.hugeStyle)]),
                             .stack([
-                                .text("Down", style: counterStyle, onTap: {
+                                .text("Down", style: self.counterStyle, onTap: {
                                     self.setDefaultsItem(.counter, value: max(0, count - 1))
                                 }),
-                                .text("Up", style: counterStyle, onTap: {
+                                .text("Up", style: self.counterStyle, onTap: {
                                     self.setDefaultsItem(.counter, value: count + 1)
                                 })
                             ]),
@@ -163,20 +177,20 @@ class SwiftApp {
         case .DefaultStore:
             vc.loadClosure = { [weak self] in
                 guard let self = self else { return ViewModel.emptyModel }
-                return ViewModel(style: self.style, title: title, sections: [
+                return ViewModel(style: self.defaultStyle, title: title, sections: [
                     Section(
                         header: .stack([.text(title)]),
                         cells: DefaultsKey.allCases.map({ key in
                             .stack([
                                 .text(key.rawValue),
-                                .input(String(describing: self.getDefaultsItem(key)), style: largeStyle)
+                                .input(String(describing: self.getDefaultsItem(key)), style: self.largeStyle)
                             ], isVertical: true)
                         })
                 )])
             }
         case .DequeueTest:
             vc.loadClosure = {
-                ViewModel(style: self.style, title: title, sections: [
+                ViewModel(style: self.defaultStyle, title: title, sections: [
                     Section(
                         header: .stack([.text(title)]),
                         cells: Array(1...100).map({ int in
@@ -190,12 +204,12 @@ class SwiftApp {
             }
         case .Fonts:
             vc.loadClosure = {
-                return ViewModel(style: self.style, title: title, sections:
+                return ViewModel(style: self.defaultStyle, title: title, sections:
                     UIFont.familyNames.map({ familyName in
                         Section(
                             header: .stack([.text(familyName)]),
                             cells: UIFont.fontNames(forFamilyName: familyName).map({ fontName in
-                                .stack([.text(fontName, style: smallStyle, onTap: {
+                                .stack([.text(fontName, style: self.smallStyle, onTap: {
                                     self.style = .init(name: fontName, size: self.style.size)
                                 })])
                             })
@@ -205,22 +219,22 @@ class SwiftApp {
             }
         case .Login:
             vc.loadClosure = {
-                return ViewModel(style: self.style, title: title, sections: [
+                return ViewModel(style: self.defaultStyle, title: title, sections: [
                     Section(
                         header: nil,
                         cells: [
                             .stack([
-                                .text("User", style: smallStyle),
+                                .text("User", style: self.smallStyle),
                                 .input(self.getDefaultsItem(.username) as? String ?? "",
-                                    style: largeStyle,
+                                       style: self.largeStyle,
                                     onSet: { string in
                                         self.setDefaultsItem(.username, value: string)
                                     }),
                                 ], isVertical: true),
                             .stack([
-                                .text("Password", style: smallStyle),
+                                .text("Password", style: self.smallStyle),
                                 .input(self.getDefaultsItem(.password) as? String ?? "",
-                                    style: largeStyle,
+                                       style: self.largeStyle,
                                     onSet: { string in
                                         self.setDefaultsItem(.password, value: string)
                                     }),

@@ -169,9 +169,7 @@ class SwiftApp {
                         cells: DefaultsKey.allCases.map({ key in
                             .stack([
                                 .text(key.rawValue),
-                                .input(
-                                    value: String(describing: self.getDefaultsItem(key)),
-                                    style: largeStyle)
+                                .input(String(describing: self.getDefaultsItem(key)), style: largeStyle)
                             ], isVertical: true)
                         })
                 )])
@@ -213,8 +211,7 @@ class SwiftApp {
                         cells: [
                             .stack([
                                 .text("User", style: smallStyle),
-                                .input(
-                                    value: self.getDefaultsItem(.username) as? String ?? "",
+                                .input(self.getDefaultsItem(.username) as? String ?? "",
                                     style: largeStyle,
                                     onSet: { string in
                                         self.setDefaultsItem(.username, value: string)
@@ -222,8 +219,7 @@ class SwiftApp {
                                 ], isVertical: true),
                             .stack([
                                 .text("Password", style: smallStyle),
-                                .input(
-                                    value: self.getDefaultsItem(.password) as? String ?? "",
+                                .input(self.getDefaultsItem(.password) as? String ?? "",
                                     style: largeStyle,
                                     onSet: { string in
                                         self.setDefaultsItem(.password, value: string)

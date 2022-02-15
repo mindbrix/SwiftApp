@@ -20,7 +20,7 @@ enum Atom: Hashable {
     }
     case text(_ string: String, style: TextStyle? = nil, onTap: (() -> Void)? = nil)
     case image(_ image: UIImage, width: CGFloat? = nil, onTap: (() -> Void)? = nil)
-    case input(value: String, style: TextStyle? = nil, onSet: ((String) -> Void)? = nil)
+    case input(_ value: String, style: TextStyle? = nil, onSet: ((String) -> Void)? = nil)
     
     static func == (lhs: Atom, rhs: Atom) -> Bool {
         lhs.hashValue == rhs.hashValue

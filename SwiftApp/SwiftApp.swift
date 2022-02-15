@@ -85,6 +85,7 @@ class SwiftApp {
         let smallScale: CGFloat = 86
         let largeScale: CGFloat = 120
         let hugeScale: CGFloat = 200
+        let counterStyle: Atom.TextStyle = .make(scale: largeScale, alignment: .center)
         
         switch screen {
         case .Main:
@@ -94,18 +95,18 @@ class SwiftApp {
                 return ViewModel(style: self.style, title: title, sections: [
                     Section(
                         header: .stack([
-                            .text(self.style.name, style: .make(alignment: .left), alignment: .center, onTap: {
+                            .text(self.style.name, style: .make(alignment: .center), onTap: {
                                 guard let nc = vc.navigationController else { return }
                                 nc.pushViewController(self.makeViewController(for: .Fonts), animated: true)
                             }),
                         ]),
                         cells: [
                             .stack([
-                                .text("--", scale: largeScale, alignment: .center, onTap: {
+                                .text("--", style: counterStyle, onTap: {
                                     self.style = .init(name: self.style.name, size: max(4, self.style.size - 1))
                                 }),
-                                .text("\(self.style.size)", scale: largeScale, alignment: .center),
-                                .text("++", scale: largeScale, alignment: .center, onTap: {
+                                .text("\(self.style.size)", style: counterStyle),
+                                .text("++", style: counterStyle, onTap: {
                                     self.style = .init(name: self.style.name, size: self.style.size + 1)
                                 })
                             ]),
@@ -113,7 +114,7 @@ class SwiftApp {
                     Section(
                         header: .stack([.text("Menu")]),
                         cells: Screen.allCases.filter({ !$0.embedInNavController }).map({ screen in
-                            .stack([.text(screen.rawValue, alignment: .left, onTap: {
+                            .stack([.text(screen.rawValue, onTap: {
                                 guard let nc = vc.navigationController else { return }
                                 nc.pushViewController(self.makeViewController(for: screen), animated: true)
                             })])
@@ -143,12 +144,12 @@ class SwiftApp {
                     Section(
                         header: nil,
                         cells: [
-                            .stack([.text(String(count), scale: hugeScale, alignment: .center)]),
+                            .stack([.text(String(count), style: .make(scale: hugeScale, alignment: .center))]),
                             .stack([
-                                .text("Down", scale: largeScale, alignment: .center, onTap: {
+                                .text("Down", style: counterStyle, onTap: {
                                     self.setDefaultsItem(.counter, value: max(0, count - 1))
                                 }),
-                                .text("Up", scale: largeScale, alignment: .center, onTap: {
+                                .text("Up", style: counterStyle, onTap: {
                                     self.setDefaultsItem(.counter, value: count + 1)
                                 })
                             ]),

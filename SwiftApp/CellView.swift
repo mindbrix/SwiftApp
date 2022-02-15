@@ -63,7 +63,7 @@ class CellView: UIView, UITextFieldDelegate {
             stackInsets = insets ?? UIEdgeInsets(top: Self.spacing, left: Self.spacing, bottom: Self.spacing, right: Self.spacing)
             stack.axis = isVertical ? .vertical : .horizontal
             for (index, atom) in atoms.enumerated() {
-                applyAtom(atom, style: style, view: stack.subviews[index])
+                applyAtom(atom, fontStyle: style, view: stack.subviews[index])
             }
         }
         backgroundColor = isHeader ? UIColor(white: 0.9, alpha: 1) : .white
@@ -128,7 +128,7 @@ class CellView: UIView, UITextFieldDelegate {
         }
     }
     
-    private func applyAtom(_ atom: Atom, style: FontStyle, view: UIView) {
+    private func applyAtom(_ atom: Atom, fontStyle: FontStyle, view: UIView) {
         switch atom {
         case .image(let url, let width, _):
             guard let image = view as? ImageView else { return }
@@ -137,16 +137,16 @@ class CellView: UIView, UITextFieldDelegate {
             guard let field = view as? TextField else { return }
             field.onSet = onSet
             field.text = value
-            field.font = UIFont(name: style.name, size: style.size * scale / 100)
+            field.font = UIFont(name: fontStyle.name, size: fontStyle.size * scale / 100)
             field.textAlignment = .left
             field.textColor = onSet == nil ? .gray : .black
             separator.backgroundColor = onSet == nil ? .lightGray : .clear
             field.underline.backgroundColor = onSet == nil ? .clear : .lightGray
-        case .text(let string, _, let scale, let alignment, let onTap):
+        case .text(let string, let style, let scale, let alignment, let onTap):
             guard let label = view as? UILabel else { return }
             label.text = string
-            label.font = UIFont(name: style.name, size: style.size * scale / 100)
-            label.textAlignment = alignment
+            label.font = UIFont(name: fontStyle.name, size: fontStyle.size * (style?.scale ?? scale) / 100)
+            label.textAlignment = style?.alignment ?? alignment
             label.textColor = onTap == nil ? .black : .blue
         }
     }

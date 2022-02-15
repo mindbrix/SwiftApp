@@ -47,7 +47,7 @@ class CellView: UIView, UITextFieldDelegate {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func apply(cell: Cell?, modelStyle: Atom.TextStyle, isHeader: Bool = false, responderClosure: ResponderClosure? = nil) {
+    func apply(cell: Cell?, modelStyle: TextStyle, isHeader: Bool = false, responderClosure: ResponderClosure? = nil) {
         self.cell = cell
         stackInsets = .zero
         stack.axis = .vertical
@@ -128,7 +128,7 @@ class CellView: UIView, UITextFieldDelegate {
         }
     }
     
-    private func applyAtom(_ atom: Atom, modelStyle: Atom.TextStyle, view: UIView) {
+    private func applyAtom(_ atom: Atom, modelStyle: TextStyle, view: UIView) {
         switch atom {
         case .image(let image, let width, _):
             guard let iv = view as? ImageView else { return }

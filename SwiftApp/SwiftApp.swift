@@ -61,11 +61,11 @@ class SwiftApp {
             setNeedsReload()
         }
     }
-    var smallStyle = Atom.TextStyle()
-    var defaultStyle = Atom.TextStyle()
-    var largeStyle = Atom.TextStyle()
-    var hugeStyle = Atom.TextStyle()
-    var counterStyle = Atom.TextStyle()
+    var smallStyle = TextStyle()
+    var defaultStyle = TextStyle()
+    var largeStyle = TextStyle()
+    var hugeStyle = TextStyle()
+    var counterStyle = TextStyle()
     
     private func updateStyles() {
         let smallFont = UIFont(name: self.style.name, size: self.style.size * 0.86)

@@ -9,15 +9,16 @@ import Foundation
 import UIKit
 
 
-enum Atom: Hashable {
-    struct TextStyle: Equatable {
-        let font: UIFont?
-        let alignment: NSTextAlignment
-        init(font: UIFont? = nil, alignment: NSTextAlignment = .left) {
-            self.font = font
-            self.alignment = alignment
-        }
+struct TextStyle: Equatable {
+    let font: UIFont?
+    let alignment: NSTextAlignment
+    init(font: UIFont? = nil, alignment: NSTextAlignment = .left) {
+        self.font = font
+        self.alignment = alignment
     }
+}
+
+enum Atom: Hashable {
     case text(_ string: String, style: TextStyle? = nil, onTap: (() -> Void)? = nil)
     case image(_ image: UIImage, width: CGFloat? = nil, onTap: (() -> Void)? = nil)
     case input(_ value: String, style: TextStyle? = nil, onSet: ((String) -> Void)? = nil)
@@ -40,7 +41,7 @@ struct Section: Equatable {
 }
 
 struct ViewModel: Equatable {
-    let style: Atom.TextStyle
+    let style: TextStyle
     let title: String
     let sections: [Section]
     

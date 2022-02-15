@@ -84,7 +84,7 @@ class SwiftApp {
         let tinyScale: CGFloat = 50
         let smallScale: CGFloat = 86
         let largeScale: CGFloat = 120
-        let extraLargeScale: CGFloat = 200
+        let hugeScale: CGFloat = 200
         
         switch screen {
         case .Main:
@@ -143,7 +143,7 @@ class SwiftApp {
                     Section(
                         header: nil,
                         cells: [
-                            .stack([.text(String(count), scale: extraLargeScale, alignment: .center)]),
+                            .stack([.text(String(count), scale: hugeScale, alignment: .center)]),
                             .stack([
                                 .text("Down", scale: largeScale, alignment: .center, onTap: {
                                     self.setDefaultsItem(.counter, value: max(0, count - 1))

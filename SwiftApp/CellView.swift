@@ -32,15 +32,10 @@ class CellView: UIView, UITextFieldDelegate {
         super.init(frame: .zero)
         stack.translatesAutoresizingMaskIntoConstraints = false
         addSubview(stack)
-        separator.translatesAutoresizingMaskIntoConstraints = false
-        addSubview(separator)
-        NSLayoutConstraint.activate(insetConstraints + [
-            heightAnchor.constraint(greaterThanOrEqualToConstant: 1),
-            separator.leadingAnchor.constraint(equalTo: leadingAnchor),
-            separator.trailingAnchor.constraint(equalTo: trailingAnchor),
-            separator.bottomAnchor.constraint(equalTo: bottomAnchor),
-            separator.heightAnchor.constraint(equalToConstant: 0.5)
-        ])
+        underline.translatesAutoresizingMaskIntoConstraints = false
+        addSubview(underline)
+        addUnderlineConstraints(underline)
+        NSLayoutConstraint.activate(insetConstraints + [heightAnchor.constraint(greaterThanOrEqualToConstant: 1)])
     }
     
     required init?(coder: NSCoder) {
@@ -70,7 +65,7 @@ class CellView: UIView, UITextFieldDelegate {
     }
     private var cell: Cell?
     private var atomsTypes: [String] = []
-    let separator = UIView()
+    let underline = UIView()
     let stack = UIStackView()
     static let spacing: CGFloat = 4
     
@@ -142,7 +137,7 @@ class CellView: UIView, UITextFieldDelegate {
             field.font = textStyle.font
             field.textAlignment = textStyle.alignment
             field.textColor = textStyle.color
-            separator.backgroundColor = onSet == nil ? .lightGray : .clear
+            underline.backgroundColor = onSet == nil ? .lightGray : .clear
             field.underline.backgroundColor = onSet == nil ? .clear : .lightGray
         case .text(let string, let style, let onTap):
             guard let label = view as? UILabel else { return }

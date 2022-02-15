@@ -14,12 +14,7 @@ class TextField : UITextField {
     init() {
         super.init(frame: .zero)
         addSubview(underline)
-        NSLayoutConstraint.activate([
-            underline.topAnchor.constraint(equalTo: bottomAnchor),
-            underline.leadingAnchor.constraint(equalTo: leadingAnchor),
-            underline.trailingAnchor.constraint(equalTo: trailingAnchor),
-            underline.heightAnchor.constraint(equalToConstant: 0.5),
-        ])
+        addUnderlineConstraints(underline)
         delegate = self
     }
     required init?(coder: NSCoder) {

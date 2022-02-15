@@ -81,12 +81,16 @@ class SwiftApp {
     private func makeViewController(for screen: Screen) -> TableViewController {
         let vc = TableViewController()
         let title = screen.rawValue
+        let tinyScale: CGFloat = 50
+        let smallScale: CGFloat = 86
+        let largeScale: CGFloat = 120
+        let extraLargeScale: CGFloat = 200
+        
         switch screen {
         case .Main:
             vc.loadClosure = { [weak self, weak vc] in
                 guard let self = self, let vc = vc else { return ViewModel.emptyModel }
                 
-                let counterScale: CGFloat = 160
                 return ViewModel(style: self.style, title: title, sections: [
                     Section(
                         header: .stack([
@@ -97,11 +101,11 @@ class SwiftApp {
                         ]),
                         cells: [
                             .stack([
-                                .text("--", scale: counterScale, alignment: .center, onTap: {
+                                .text("--", scale: largeScale, alignment: .center, onTap: {
                                     self.style = .init(name: self.style.name, size: max(4, self.style.size - 1))
                                 }),
-                                .text("\(self.style.size)", scale: counterScale, alignment: .center),
-                                .text("++", scale: counterScale, alignment: .center, onTap: {
+                                .text("\(self.style.size)", scale: largeScale, alignment: .center),
+                                .text("++", scale: largeScale, alignment: .center, onTap: {
                                     self.style = .init(name: self.style.name, size: self.style.size + 1)
                                 })
                             ]),
@@ -109,7 +113,7 @@ class SwiftApp {
                     Section(
                         header: .stack([.text("Menu")]),
                         cells: Screen.allCases.filter({ !$0.embedInNavController }).map({ screen in
-                            .stack([.text(screen.rawValue, scale: 100, alignment: .left, onTap: {
+                            .stack([.text(screen.rawValue, alignment: .left, onTap: {
                                 guard let nc = vc.navigationController else { return }
                                 nc.pushViewController(self.makeViewController(for: screen), animated: true)
                             })])
@@ -120,11 +124,11 @@ class SwiftApp {
                         cells: [
                             .stack([
                                 .image(url: "grab0", onTap: { print("grab0") }),
-                                .text(.longText, scale: 50)
+                                .text(.longText, scale: tinyScale)
                             ], isVertical: true),
                             .stack([
                                 .image(url: "grab0", width: 64, onTap: { print("grab0") }),
-                                .text(.longText, scale: 50),
+                                .text(.longText, scale: tinyScale),
                                 .image(url: "grab0", width: 64, onTap: { print("grab0") }),
                             ], isVertical: false),
                         ])
@@ -139,12 +143,12 @@ class SwiftApp {
                     Section(
                         header: nil,
                         cells: [
-                            .stack([.text(String(count), scale: 200, alignment: .center)]),
+                            .stack([.text(String(count), scale: extraLargeScale, alignment: .center)]),
                             .stack([
-                                .text("Down", scale: 120, alignment: .center, onTap: {
+                                .text("Down", scale: largeScale, alignment: .center, onTap: {
                                     self.setDefaultsItem(.counter, value: max(0, count - 1))
                                 }),
-                                .text("Up", scale: 120, alignment: .center, onTap: {
+                                .text("Up", scale: largeScale, alignment: .center, onTap: {
                                     self.setDefaultsItem(.counter, value: count + 1)
                                 })
                             ]),
@@ -163,7 +167,7 @@ class SwiftApp {
                                 .text(key.rawValue),
                                 .input(
                                     value: String(describing: self.getDefaultsItem(key)),
-                                    scale: 120)
+                                    scale: largeScale)
                             ], isVertical: true)
                         })
                 )])
@@ -189,7 +193,7 @@ class SwiftApp {
                         Section(
                             header: .stack([.text(familyName)]),
                             cells: UIFont.fontNames(forFamilyName: familyName).map({ fontName in
-                                .stack([.text(fontName, scale: 86, onTap: {
+                                .stack([.text(fontName, scale: smallScale, onTap: {
                                     self.style = .init(name: fontName, size: self.style.size)
                                 })])
                             })
@@ -204,22 +208,22 @@ class SwiftApp {
                         header: nil,
                         cells: [
                             .stack([
-                                .text("User", scale: 86),
+                                .text("User", scale: smallScale),
                                 .input(
                                     value: self.getDefaultsItem(.username) as? String ?? "",
                                     onSet: { string in
                                         self.setDefaultsItem(.username, value: string)
                                     },
-                                    scale: 120),
+                                    scale: largeScale),
                                 ], isVertical: true),
                             .stack([
-                                .text("Password", scale: 86),
+                                .text("Password", scale: smallScale),
                                 .input(
                                     value: self.getDefaultsItem(.password) as? String ?? "",
                                     onSet: { string in
                                         self.setDefaultsItem(.password, value: string)
                                     },
-                                    scale: 120),
+                                    scale: largeScale),
                             ], isVertical: true)
                         ]
                     )

@@ -61,18 +61,15 @@ class SwiftApp {
     var counterStyle = Atom.TextStyle()
     
     private func updateStyles() {
-        let smallScale: CGFloat = 86
-        let largeScale: CGFloat = 120
-        let hugeScale: CGFloat = 200
-        let smallFont = UIFont(name: self.style.name, size: self.style.size * smallScale / 100)
+        let smallFont = UIFont(name: self.style.name, size: self.style.size * 0.86)
         let defaultFont = UIFont(name: self.style.name, size: self.style.size)
-        let largeFont = UIFont(name: self.style.name, size: self.style.size * largeScale / 100)
-        let hugeFont = UIFont(name: self.style.name, size: self.style.size * hugeScale / 100)
-        smallStyle = .init(font: smallFont, scale: smallScale)
+        let largeFont = UIFont(name: self.style.name, size: self.style.size * 1.2)
+        let hugeFont = UIFont(name: self.style.name, size: self.style.size * 2)
+        smallStyle = .init(font: smallFont)
         defaultStyle = .init(font: defaultFont)
-        largeStyle = .init(font: largeFont, scale: largeScale)
-        hugeStyle = .init(font: hugeFont, scale: hugeScale, alignment: .center)
-        counterStyle = .init(font: largeFont, scale: largeScale, alignment: .center)
+        largeStyle = .init(font: largeFont)
+        hugeStyle = .init(font: hugeFont, alignment: .center)
+        counterStyle = .init(font: largeFont, alignment: .center)
     }
     private func getDefaultsItem(_ key: DefaultsKey) -> Any? {
         UserDefaults.standard.object(forKey: key.rawValue)

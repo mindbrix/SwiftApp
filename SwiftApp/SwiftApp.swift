@@ -251,7 +251,10 @@ class SwiftApp {
                                     onSet: { string in
                                         self.setDefaultsItem(.password, value: string)
                                     }),
-                                .text("forgot password", style: self.smallStyle.withAlignment(.center), onTap: {}),
+                                .text("forgot password?",
+                                    style: self.smallStyle.withAlignment(.center),
+                                    onTap: {
+                                    }),
                             ], isVertical: true)
                         ]
                     )

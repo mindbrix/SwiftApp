@@ -15,10 +15,10 @@ class TextField : UITextField {
         super.init(frame: .zero)
         addSubview(underline)
         NSLayoutConstraint.activate([
+            underline.topAnchor.constraint(equalTo: bottomAnchor),
             underline.leadingAnchor.constraint(equalTo: leadingAnchor),
-            underline.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.9),
-            underline.bottomAnchor.constraint(equalTo: bottomAnchor),
-            underline.heightAnchor.constraint(equalToConstant: 0.5)
+            underline.trailingAnchor.constraint(equalTo: trailingAnchor),
+            underline.heightAnchor.constraint(equalToConstant: 0.5),
         ])
         delegate = self
     }

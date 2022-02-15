@@ -237,21 +237,21 @@ class SwiftApp {
                         header: nil,
                         cells: [
                             .stack([
-                                .text("User", style: self.smallStyle),
                                 .input(self.getDefaultsItem(.username) as? String ?? "",
                                        placeholder: "User",
-                                       style: self.largeStyle,
+                                       style: self.hugeStyle,
                                     onSet: { string in
                                         self.setDefaultsItem(.username, value: string)
                                     }),
                                 ], isVertical: true),
                             .stack([
-                                .text("Password", style: self.smallStyle),
                                 .input(self.getDefaultsItem(.password) as? String ?? "",
-                                       style: self.largeStyle,
+                                    placeholder: "Password",
+                                    style: self.hugeStyle,
                                     onSet: { string in
                                         self.setDefaultsItem(.password, value: string)
                                     }),
+                                .text("forgot password", style: self.smallStyle.withAlignment(.center), onTap: {}),
                             ], isVertical: true)
                         ]
                     )

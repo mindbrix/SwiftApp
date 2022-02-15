@@ -18,6 +18,9 @@ struct TextStyle: Equatable {
         self.font = font
         self.alignment = alignment
     }
+    func withAlignment(_ alignment: NSTextAlignment) -> Self {
+        return Self(color: color, font: font, alignment: alignment)
+    }
 }
 
 enum Atom: Hashable {

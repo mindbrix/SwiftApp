@@ -239,6 +239,7 @@ class SwiftApp {
                             .stack([
                                 .text("User", style: self.smallStyle),
                                 .input(self.getDefaultsItem(.username) as? String ?? "",
+                                       placeholder: "User",
                                        style: self.largeStyle,
                                     onSet: { string in
                                         self.setDefaultsItem(.username, value: string)

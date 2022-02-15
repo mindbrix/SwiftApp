@@ -17,7 +17,7 @@ extension Cell {
                 switch atom{
                 case .image(_, let width, let onTap):
                     return ImageView.description() + (width != nil ? ".width" : "") + (onTap != nil ? ".onTap" : "")
-                case .input(_, let onSet, _):
+                case .input(_, _, let onSet, _):
                     return TextField.description() + (onSet != nil ? ".onSet" : "")
                 case .text( _, _, let onTap):
                     return UILabel.description() + (onTap != nil ? ".onTap" : "")
@@ -108,7 +108,7 @@ class CellView: UIView, UITextFieldDelegate {
                         image.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onTapper)))
                         image.isUserInteractionEnabled = true
                     }
-                case .input(_, _, let onSet):
+                case .input(_, _, _, let onSet):
                     let field = TextField()
                     field.translatesAutoresizingMaskIntoConstraints = false
                     field.isUserInteractionEnabled = onSet != nil
@@ -133,11 +133,12 @@ class CellView: UIView, UITextFieldDelegate {
         case .image(let image, let width, _):
             guard let iv = view as? ImageView else { return }
             iv.setAspectImage(image, width: width)
-        case .input(let value, let style, let onSet):
+        case .input(let value, let placeholder, let style, let onSet):
             guard let field = view as? TextField else { return }
             let textStyle = style ?? modelStyle
             field.onSet = onSet
             field.text = value
+            field.placeholder = placeholder
             field.font = textStyle.font
             field.textAlignment = textStyle.alignment
             field.textColor = textStyle.color

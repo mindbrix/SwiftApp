@@ -130,9 +130,9 @@ class CellView: UIView, UITextFieldDelegate {
     
     private func applyAtom(_ atom: Atom, fontStyle: FontStyle, view: UIView) {
         switch atom {
-        case .image(let url, let width, _):
-            guard let image = view as? ImageView else { return }
-            image.setAspectImage(UIImage(named: url), width: width)
+        case .image(let image, let width, _):
+            guard let iv = view as? ImageView else { return }
+            iv.setAspectImage(image, width: width)
         case .input(let value, let style, let onSet):
             guard let field = view as? TextField else { return }
             let textStyle = style ?? .init()

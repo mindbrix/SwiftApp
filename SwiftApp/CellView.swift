@@ -140,7 +140,7 @@ class CellView: UIView, UITextFieldDelegate {
             field.text = value
             field.font = textStyle.font
             field.textAlignment = textStyle.alignment
-            field.textColor = onSet == nil ? .gray : textStyle.color
+            field.textColor = textStyle.color
             separator.backgroundColor = onSet == nil ? .lightGray : .clear
             field.underline.backgroundColor = onSet == nil ? .clear : .lightGray
         case .text(let string, let style, let onTap):

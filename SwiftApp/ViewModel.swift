@@ -31,8 +31,8 @@ enum Atom: Hashable {
 
 enum Cell: Equatable {
     case stack(_ atoms: [Atom],
-        isVertical: Bool = false,
-        inset: UIEdgeInsets? = nil)
+        style: CellStyle? = nil,
+        isVertical: Bool = false)
 }
 
 struct Section: Equatable {

@@ -52,12 +52,15 @@ class CellView: UIView, UITextFieldDelegate {
             atomsTypes = types
             setupStack(responderClosure: responderClosure)
         }
-        backgroundColor = modelStyle.cell.color
+        backgroundColor = .white
         guard let cell = cell else { return }
         switch cell {
-        case .stack(let atoms, let isVertical, let insets):
-            stackInsets = insets ?? UIEdgeInsets(top: Self.spacing, left: Self.spacing, bottom: Self.spacing, right: Self.spacing)
-            stack.axis = isVertical ? .vertical : .horizontal
+        case .stack(let atoms, let style, let isVertical):
+            backgroundColor = style?.color ?? modelStyle.cell.color
+            stackInsets = style?.insets
+                ?? modelStyle.cell.insets
+                ?? UIEdgeInsets(top: Self.spacing, left: Self.spacing, bottom: Self.spacing, right: Self.spacing)
+            stack.axis = (style?.isVertical ?? isVertical) ? .vertical : .horizontal
             for (index, atom) in atoms.enumerated() {
                 applyAtom(atom, modelStyle: modelStyle, view: stack.subviews[index])
             }

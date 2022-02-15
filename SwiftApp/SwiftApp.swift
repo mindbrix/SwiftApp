@@ -9,6 +9,13 @@ import Foundation
 import UIKit
 
 class SwiftApp {
+    struct FontStyle: Equatable {
+        let name: String
+        let size: CGFloat
+        
+        static let defaultStyle = Self(name: "HelveticaNeue", size: 18)
+    }
+    
     enum DefaultsKey: String, CaseIterable {
         case counter
         case password

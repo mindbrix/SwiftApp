@@ -39,13 +39,6 @@ struct Section: Equatable {
     let cells: [Cell]
 }
 
-struct FontStyle: Equatable {
-    let name: String
-    let size: CGFloat
-    
-    static let defaultStyle = Self(name: "HelveticaNeue", size: 18)
-}
-
 struct ViewModel: Equatable {
     let style: Atom.TextStyle
     let title: String

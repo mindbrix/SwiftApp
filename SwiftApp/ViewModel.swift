@@ -10,9 +10,11 @@ import UIKit
 
 
 struct TextStyle: Equatable {
+    let color: UIColor
     let font: UIFont?
     let alignment: NSTextAlignment
-    init(font: UIFont? = nil, alignment: NSTextAlignment = .left) {
+    init(color: UIColor = .black, font: UIFont? = nil, alignment: NSTextAlignment = .left) {
+        self.color = color
         self.font = font
         self.alignment = alignment
     }

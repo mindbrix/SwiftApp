@@ -38,6 +38,7 @@ class TextField : UITextField {
         leadingConstraint = leadingAnchor.constraint(equalTo: field.leadingAnchor)
         trailngConstraint = trailingAnchor.constraint(equalTo: field.trailingAnchor)
         text = field.text
+        textColor = field.textColor
         font = field.font
         selectedTextRange = field.selectedTextRange
         underline.backgroundColor = field.underline.backgroundColor

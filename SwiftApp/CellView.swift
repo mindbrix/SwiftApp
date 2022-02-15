@@ -140,7 +140,7 @@ class CellView: UIView, UITextFieldDelegate {
             field.text = value
             field.font = textStyle.font
             field.textAlignment = textStyle.alignment
-            field.textColor = onSet == nil ? .gray : .black
+            field.textColor = onSet == nil ? .gray : textStyle.color
             separator.backgroundColor = onSet == nil ? .lightGray : .clear
             field.underline.backgroundColor = onSet == nil ? .clear : .lightGray
         case .text(let string, let style, let onTap):
@@ -149,7 +149,7 @@ class CellView: UIView, UITextFieldDelegate {
             label.text = string
             label.font = textStyle.font
             label.textAlignment = textStyle.alignment
-            label.textColor = onTap == nil ? .black : .blue
+            label.textColor = onTap == nil ? textStyle.color : .blue
         }
     }
     

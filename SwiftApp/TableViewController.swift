@@ -69,8 +69,9 @@ class TableViewController: UITableViewController {
         let cv = CellView()
         cv.apply(
             cell: model.sections[section].header,
-            modelStyle: model.style,
-            cellStyle: model.cellStyle.withColor(UIColor(white: 0.9, alpha: 1)),
+            modelStyle: .init(
+                cell: model.style.cell.withColor(UIColor(white: 0.9, alpha: 1)),
+                text: model.style.text),
             responderClosure: responderClosure)
         cv.fadeToBackground(from: .blue)
         return cv
@@ -83,7 +84,6 @@ class TableViewController: UITableViewController {
             tvc.cellView.apply(
                 cell: model.sections[indexPath.section].cells[indexPath.row],
                 modelStyle: model.style,
-                cellStyle: model.cellStyle,
                 responderClosure: responderClosure)
             tvc.cellView.fadeToBackground(from: .red)
         }

@@ -36,7 +36,7 @@ struct TextStyle: Equatable {
     }
 }
 
-struct Style {
+struct Style: Equatable  {
     let cell: CellStyle
     let text: TextStyle
 }

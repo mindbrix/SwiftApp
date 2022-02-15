@@ -114,7 +114,7 @@ class SwiftApp {
             vc.loadClosure = { [weak self, weak vc] in
                 guard let self = self, let vc = vc else { return ViewModel.emptyModel }
                 
-                return ViewModel(style: self.defaultStyle, cellStyle: .init(), title: title, sections: [
+                return ViewModel(style: .init(cell: .init(), text: self.defaultStyle), title: title, sections: [
                     Section(
                         header: .stack([
                             .text(self.style.name, style: .init(alignment: .center), onTap: {
@@ -153,7 +153,7 @@ class SwiftApp {
                                 .image(grab0, width: 64, onTap: { print("grab0") }),
                                 .text(.longText, style: self.smallStyle),
                                 .image(grab0, width: 64, onTap: { print("grab0") }),
-                            ], isVertical: false),
+                            ]),
                         ])
                 ])
             }
@@ -162,7 +162,7 @@ class SwiftApp {
                 guard let self = self else { return ViewModel.emptyModel }
                 let count = self.getDefaultsItem(.counter) as? Int ?? 0
                 
-                return ViewModel(style: self.defaultStyle, cellStyle: .init(), title: title, sections: [
+                return ViewModel(style: .init(cell: .init(), text: self.defaultStyle), title: title, sections: [
                     Section(
                         header: nil,
                         cells: [
@@ -188,7 +188,7 @@ class SwiftApp {
         case .DefaultStore:
             vc.loadClosure = { [weak self] in
                 guard let self = self else { return ViewModel.emptyModel }
-                return ViewModel(style: self.defaultStyle, cellStyle: .init(), title: title, sections: [
+                return ViewModel(style: .init(cell: .init(), text: self.defaultStyle), title: title, sections: [
                     Section(
                         header: .stack([.text(title)]),
                         cells: DefaultsKey.allCases.map({ key in
@@ -203,7 +203,7 @@ class SwiftApp {
             }
         case .DequeueTest:
             vc.loadClosure = {
-                ViewModel(style: self.defaultStyle, cellStyle: .init(), title: title, sections: [
+                ViewModel(style: .init(cell: .init(), text: self.defaultStyle), title: title, sections: [
                     Section(
                         header: .stack([.text(title)]),
                         cells: Array(1...100).map({ int in
@@ -217,7 +217,7 @@ class SwiftApp {
             }
         case .Fonts:
             vc.loadClosure = {
-                return ViewModel(style: self.defaultStyle, cellStyle: .init(), title: title, sections:
+                return ViewModel(style: .init(cell: .init(), text: self.defaultStyle), title: title, sections:
                     UIFont.familyNames.map({ familyName in
                         Section(
                             header: .stack([.text(familyName)]),
@@ -232,7 +232,7 @@ class SwiftApp {
             }
         case .Login:
             vc.loadClosure = {
-                return ViewModel(style: self.defaultStyle, cellStyle: .init(), title: title, sections: [
+                return ViewModel(style: .init(cell: .init(), text: self.defaultStyle), title: title, sections: [
                     Section(
                         header: nil,
                         cells: [

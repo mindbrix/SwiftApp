@@ -42,7 +42,7 @@ class CellView: UIView, UITextFieldDelegate {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func apply(cell: Cell?, modelStyle: TextStyle, cellStyle: CellStyle, responderClosure: ResponderClosure? = nil) {
+    func apply(cell: Cell?, modelStyle: Style,responderClosure: ResponderClosure? = nil) {
         self.cell = cell
         stackInsets = .zero
         stack.axis = .vertical
@@ -52,7 +52,7 @@ class CellView: UIView, UITextFieldDelegate {
             atomsTypes = types
             setupStack(responderClosure: responderClosure)
         }
-        backgroundColor = cellStyle.color
+        backgroundColor = modelStyle.cell.color
         guard let cell = cell else { return }
         switch cell {
         case .stack(let atoms, let isVertical, let insets):
@@ -123,14 +123,14 @@ class CellView: UIView, UITextFieldDelegate {
         }
     }
     
-    private func applyAtom(_ atom: Atom, modelStyle: TextStyle, view: UIView) {
+    private func applyAtom(_ atom: Atom, modelStyle: Style, view: UIView) {
         switch atom {
         case .image(let image, let width, _):
             guard let iv = view as? ImageView else { return }
             iv.setAspectImage(image, width: width)
         case .input(let value, let placeholder, let style, let onSet):
             guard let field = view as? TextField else { return }
-            let textStyle = style ?? modelStyle
+            let textStyle = style ?? modelStyle.text
             field.onSet = onSet
             field.text = value
             field.placeholder = placeholder
@@ -141,7 +141,7 @@ class CellView: UIView, UITextFieldDelegate {
             field.underline.backgroundColor = onSet == nil ? .clear : .lightGray
         case .text(let string, let style, let onTap):
             guard let label = view as? UILabel else { return }
-            let textStyle = style ?? modelStyle
+            let textStyle = style ?? modelStyle.text
             label.text = string
             label.font = textStyle.font
             label.textAlignment = textStyle.alignment

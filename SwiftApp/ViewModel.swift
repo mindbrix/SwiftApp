@@ -32,12 +32,11 @@ struct Section: Equatable {
 }
 
 struct ViewModel: Equatable {
-    let style: TextStyle
-    let cellStyle: CellStyle
+    let style: Style
     let title: String
     let sections: [Section]
     
-    static let emptyModel = Self(style: .init(), cellStyle: .init(), title: "", sections: [])
+    static let emptyModel = Self(style: .init(cell: .init(), text: .init()), title: "", sections: [])
     
     typealias Closure = () -> ViewModel
 }

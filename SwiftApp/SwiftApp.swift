@@ -81,10 +81,11 @@ class SwiftApp {
     private func makeViewController(for screen: Screen) -> TableViewController {
         let vc = TableViewController()
         let title = screen.rawValue
+        let smallScale: CGFloat = 86
         let largeScale: CGFloat = 120
-        let hugeStyle: Atom.TextStyle = .init(scale: 200, alignment: .center)
-        let tinyStyle: Atom.TextStyle = .init(scale: 50)
-        let smallStyle: Atom.TextStyle = .init(scale: 86)
+        let hugeScale: CGFloat = 200
+        let hugeStyle: Atom.TextStyle = .init(scale: hugeScale, alignment: .center)
+        let smallStyle: Atom.TextStyle = .init(scale: smallScale)
         let largeStyle: Atom.TextStyle = .init(scale: largeScale)
         let counterStyle: Atom.TextStyle = .init(scale: largeScale, alignment: .center)
         let grab0 = UIImage(named: "grab0") ?? UIImage()
@@ -127,11 +128,11 @@ class SwiftApp {
                         cells: [
                             .stack([
                                 .image(grab0, onTap: { print("grab0") }),
-                                .text(.longText, style: tinyStyle)
+                                .text(.longText, style: smallStyle)
                             ], isVertical: true),
                             .stack([
                                 .image(grab0, width: 64, onTap: { print("grab0") }),
-                                .text(.longText, style: tinyStyle),
+                                .text(.longText, style: smallStyle),
                                 .image(grab0, width: 64, onTap: { print("grab0") }),
                             ], isVertical: false),
                         ])

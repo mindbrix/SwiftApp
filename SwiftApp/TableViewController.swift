@@ -24,7 +24,9 @@ class TableViewController: UITableViewController {
         self.responderClosure = { [weak self] field in
             guard let self = self else { return nil }
             self.textField.become(field)
-            _ = self.textField.becomeFirstResponder()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1 / 60, execute: {
+                _ = self.textField.becomeFirstResponder()
+            })
             return false
         }
     }

@@ -27,7 +27,7 @@ extension Cell {
     }
 }
 
-class CellView: UIView, UITextFieldDelegate {
+class CellView: UIView {
     init() {
         super.init(frame: .zero)
         stack.translatesAutoresizingMaskIntoConstraints = false

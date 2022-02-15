@@ -42,16 +42,16 @@ class TextField : UITextField {
         onSet = field.onSet
     }
     
-    var leadingConstraint: NSLayoutConstraint? {
-        didSet {
-            oldValue?.isActive = false
-            leadingConstraint?.isActive = true
-        }
-    }
     var topConstraint: NSLayoutConstraint? {
         didSet {
             oldValue?.isActive = false
             topConstraint?.isActive = true
+        }
+    }
+    var leadingConstraint: NSLayoutConstraint? {
+        didSet {
+            oldValue?.isActive = false
+            leadingConstraint?.isActive = true
         }
     }
     var trailngConstraint: NSLayoutConstraint? {

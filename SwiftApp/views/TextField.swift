@@ -42,7 +42,6 @@ class TextField : UITextField {
         selectedTextRange = field.selectedTextRange
         underline.backgroundColor = field.underline.backgroundColor
         onSet = field.onSet
-        fadeToBackground(from: .red)
     }
     
     var leadingConstraint: NSLayoutConstraint? {

@@ -14,6 +14,7 @@ class TextField : UITextField {
     init() {
         super.init(frame: .zero)
         addSubview(underline)
+        underline.translatesAutoresizingMaskIntoConstraints = false
         addUnderlineConstraints(underline)
         delegate = self
     }
@@ -60,12 +61,7 @@ class TextField : UITextField {
             trailngConstraint?.isActive = true
         }
     }
-    
-    lazy var underline: UIView = {
-        let underline = UIView()
-        underline.translatesAutoresizingMaskIntoConstraints = false
-        return underline
-    }()
+    let underline = UIView()
 }
 
 extension TextField: UITextFieldDelegate {

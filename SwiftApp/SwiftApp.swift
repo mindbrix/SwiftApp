@@ -90,7 +90,10 @@ class SwiftApp {
                 return ViewModel(style: self.style, title: title, sections: [
                     Section(
                         header: .stack([
-                            .text(self.style.name, alignment: .center),
+                            .text(self.style.name, alignment: .center, onTap: {
+                                guard let nc = vc.navigationController else { return }
+                                nc.pushViewController(self.makeViewController(for: .Fonts), animated: true)
+                            }),
                         ]),
                         cells: [
                             .stack([

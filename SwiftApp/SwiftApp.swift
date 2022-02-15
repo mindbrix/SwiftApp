@@ -67,6 +67,7 @@ class SwiftApp {
     var largeStyle = TextStyle()
     var hugeStyle = TextStyle()
     var counterStyle = TextStyle()
+    var modelStyle = Style()
     
     private func updateStyles() {
         let smallFont = UIFont(name: self.style.name, size: self.style.size * 0.86)
@@ -78,6 +79,7 @@ class SwiftApp {
         largeStyle = .init(font: largeFont)
         hugeStyle = .init(font: hugeFont, alignment: .center)
         counterStyle = .init(font: largeFont, alignment: .center)
+        modelStyle = .init(text: defaultStyle)
     }
     private func getDefaultsItem(_ key: DefaultsKey) -> Any? {
         UserDefaults.standard.object(forKey: key.rawValue)
@@ -115,7 +117,7 @@ class SwiftApp {
             vc.loadClosure = { [weak self, weak vc] in
                 guard let self = self, let vc = vc else { return ViewModel.emptyModel }
                 
-                return ViewModel(style: .init(text: self.defaultStyle), title: title, sections: [
+                return ViewModel(style: self.modelStyle, title: title, sections: [
                     Section(
                         header: .stack([
                             .text(self.style.name, style: .init(alignment: .center), onTap: {
@@ -163,7 +165,7 @@ class SwiftApp {
                 guard let self = self else { return ViewModel.emptyModel }
                 let count = self.getDefaultsItem(.counter) as? Int ?? 0
                 
-                return ViewModel(style: .init(text: self.defaultStyle), title: title, sections: [
+                return ViewModel(style: self.modelStyle, title: title, sections: [
                     Section(
                         header: nil,
                         cells: [
@@ -189,7 +191,7 @@ class SwiftApp {
         case .DefaultStore:
             vc.loadClosure = { [weak self] in
                 guard let self = self else { return ViewModel.emptyModel }
-                return ViewModel(style: .init(text: self.defaultStyle), title: title, sections: [
+                return ViewModel(style: self.modelStyle, title: title, sections: [
                     Section(
                         header: .stack([.text(title)]),
                         cells: DefaultsKey.allCases.map({ key in
@@ -204,7 +206,7 @@ class SwiftApp {
             }
         case .DequeueTest:
             vc.loadClosure = {
-                ViewModel(style: .init(text: self.defaultStyle), title: title, sections: [
+                ViewModel(style: self.modelStyle, title: title, sections: [
                     Section(
                         header: .stack([.text(title)]),
                         cells: Array(1...100).map({ int in
@@ -218,7 +220,7 @@ class SwiftApp {
             }
         case .Fonts:
             vc.loadClosure = {
-                return ViewModel(style: .init(text: self.defaultStyle), title: title, sections:
+                return ViewModel(style: self.modelStyle, title: title, sections:
                     UIFont.familyNames.map({ familyName in
                         Section(
                             header: .stack([.text(familyName)]),
@@ -233,7 +235,7 @@ class SwiftApp {
             }
         case .Login:
             vc.loadClosure = {
-                return ViewModel(style: .init(text: self.defaultStyle), title: title, sections: [
+                return ViewModel(style: self.modelStyle, title: title, sections: [
                     Section(
                         header: nil,
                         cells: [

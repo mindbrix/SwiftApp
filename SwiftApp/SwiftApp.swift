@@ -94,7 +94,7 @@ class SwiftApp {
                 return ViewModel(style: self.style, title: title, sections: [
                     Section(
                         header: .stack([
-                            .text(self.style.name, alignment: .center, onTap: {
+                            .text(self.style.name, style: .make(alignment: .left), alignment: .center, onTap: {
                                 guard let nc = vc.navigationController else { return }
                                 nc.pushViewController(self.makeViewController(for: .Fonts), animated: true)
                             }),

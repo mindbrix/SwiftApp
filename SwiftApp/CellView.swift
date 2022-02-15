@@ -19,7 +19,7 @@ extension Cell {
                     return ImageView.description() + (width != nil ? ".width" : "") + (onTap != nil ? ".onTap" : "")
                 case .input(_, let onSet, _):
                     return TextField.description() + (onSet != nil ? ".onSet" : "")
-                case .text(_, _, _, let onTap):
+                case .text( _, _, _, _, let onTap):
                     return UILabel.description() + (onTap != nil ? ".onTap" : "")
                 }
             })
@@ -114,7 +114,7 @@ class CellView: UIView, UITextFieldDelegate {
                     field.isUserInteractionEnabled = onSet != nil
                     field.responderClosure = responderClosure
                     stack.addArrangedSubview(field)
-                case .text(_, _, _, let onTap):
+                case .text(_, _, _, _, let onTap):
                     let label = UILabel()
                     label.numberOfLines = 0
                     label.translatesAutoresizingMaskIntoConstraints = false
@@ -142,7 +142,7 @@ class CellView: UIView, UITextFieldDelegate {
             field.textColor = onSet == nil ? .gray : .black
             separator.backgroundColor = onSet == nil ? .lightGray : .clear
             field.underline.backgroundColor = onSet == nil ? .clear : .lightGray
-        case .text(let string, let scale, let alignment, let onTap):
+        case .text(let string, _, let scale, let alignment, let onTap):
             guard let label = view as? UILabel else { return }
             label.text = string
             label.font = UIFont(name: style.name, size: style.size * scale / 100)
@@ -160,7 +160,7 @@ class CellView: UIView, UITextFieldDelegate {
                 onTap?()
             case .input:
                 break
-            case .text(_, _, _, let onTap):
+            case .text(_, _, _, _, let onTap):
                 onTap?()
             }
         }

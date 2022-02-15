@@ -10,7 +10,14 @@ import UIKit
 
 
 enum Atom: Hashable {
-    case text(_ string: String, scale: CGFloat = 100, alignment: NSTextAlignment = .left, onTap: (() -> Void)? = nil)
+    struct TextStyle {
+        let scale: CGFloat
+        let alignment: NSTextAlignment
+        static func make(scale: CGFloat = 100, alignment: NSTextAlignment = .left) -> Self {
+            Self(scale: scale, alignment: alignment)
+        }
+    }
+    case text(_ string: String, style: TextStyle? = nil, scale: CGFloat = 100, alignment: NSTextAlignment = .left, onTap: (() -> Void)? = nil)
     case image(url: String, width: CGFloat? = nil, onTap: (() -> Void)? = nil)
     case input(value: String, onSet: ((String) -> Void)? = nil, scale: CGFloat = 100)
     

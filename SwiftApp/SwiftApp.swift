@@ -166,14 +166,20 @@ class SwiftApp {
                     Section(
                         header: nil,
                         cells: [
-                            .stack([.text(String(count), style: self.hugeStyle)]),
                             .stack([
-                                .text("Down", style: self.counterStyle, onTap: {
-                                    self.setDefaultsItem(.counter, value: max(0, count - 1))
-                                }),
-                                .text("Up", style: self.counterStyle, onTap: {
-                                    self.setDefaultsItem(.counter, value: count + 1)
-                                })
+                                .text(String(count),
+                                    style: self.hugeStyle)]),
+                            .stack([
+                                .text("Down",
+                                    style: self.counterStyle,
+                                    onTap: {
+                                        self.setDefaultsItem(.counter, value: max(0, count - 1))
+                                    }),
+                                .text("Up",
+                                    style: self.counterStyle,
+                                    onTap: {
+                                        self.setDefaultsItem(.counter, value: count + 1)
+                                    })
                             ]),
                         ]
                     )
@@ -187,8 +193,10 @@ class SwiftApp {
                         header: .stack([.text(title)]),
                         cells: DefaultsKey.allCases.map({ key in
                             .stack([
-                                .text(key.rawValue),
-                                .input(String(describing: self.getDefaultsItem(key)), style: self.largeStyle)
+                                .text(key.rawValue,
+                                    style: self.smallStyle),
+                                .input(String(describing: self.getDefaultsItem(key)),
+                                    style: self.largeStyle)
                             ], isVertical: true)
                         })
                 )])

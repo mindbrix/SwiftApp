@@ -73,7 +73,7 @@ class SwiftApp {
         let defaultFont = UIFont(name: self.style.name, size: self.style.size)
         let largeFont = UIFont(name: self.style.name, size: self.style.size * 1.2)
         let hugeFont = UIFont(name: self.style.name, size: self.style.size * 2)
-        smallStyle = .init(font: smallFont)
+        smallStyle = .init(color: .gray, font: smallFont)
         defaultStyle = .init(font: defaultFont)
         largeStyle = .init(font: largeFont)
         hugeStyle = .init(font: hugeFont, alignment: .center)

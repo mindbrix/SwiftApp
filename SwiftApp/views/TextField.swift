@@ -40,6 +40,7 @@ class TextField : UITextField {
         text = field.text
         placeholder = field.placeholder
         textColor = field.textColor
+        textAlignment = field.textAlignment
         font = field.font
         selectedTextRange = field.selectedTextRange
         underline.backgroundColor = field.underline.backgroundColor

@@ -241,8 +241,8 @@ class SwiftApp {
                         cells: [
                             .stack([
                                 .input(self.getDefaultsItem(.username) as? String ?? "",
-                                       placeholder: "User",
-                                       style: self.hugeStyle,
+                                    placeholder: "User",
+                                    style: self.hugeStyle,
                                     onSet: { string in
                                         self.setDefaultsItem(.username, value: string)
                                     }),

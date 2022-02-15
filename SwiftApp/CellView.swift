@@ -108,7 +108,7 @@ class CellView: UIView, UITextFieldDelegate {
                         image.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onTapper)))
                         image.isUserInteractionEnabled = true
                     }
-                case .input(_, let onSet, _):
+                case .input(_, _, let onSet):
                     let field = TextField()
                     field.translatesAutoresizingMaskIntoConstraints = false
                     field.isUserInteractionEnabled = onSet != nil
@@ -133,12 +133,13 @@ class CellView: UIView, UITextFieldDelegate {
         case .image(let url, let width, _):
             guard let image = view as? ImageView else { return }
             image.setAspectImage(UIImage(named: url), width: width)
-        case .input(let value, let onSet, let scale):
+        case .input(let value, let style, let onSet):
             guard let field = view as? TextField else { return }
+            let textStyle = style ?? .init()
             field.onSet = onSet
             field.text = value
-            field.font = UIFont(name: fontStyle.name, size: fontStyle.size * scale / 100)
-            field.textAlignment = .left
+            field.font = UIFont(name: fontStyle.name, size: fontStyle.size * textStyle.scale / 100)
+            field.textAlignment = textStyle.alignment
             field.textColor = onSet == nil ? .gray : .black
             separator.backgroundColor = onSet == nil ? .lightGray : .clear
             field.underline.backgroundColor = onSet == nil ? .clear : .lightGray

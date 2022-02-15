@@ -169,7 +169,7 @@ class SwiftApp {
                                 .text(key.rawValue),
                                 .input(
                                     value: String(describing: self.getDefaultsItem(key)),
-                                    scale: largeScale)
+                                    style: largeStyle)
                             ], isVertical: true)
                         })
                 )])
@@ -213,19 +213,19 @@ class SwiftApp {
                                 .text("User", style: smallStyle),
                                 .input(
                                     value: self.getDefaultsItem(.username) as? String ?? "",
+                                    style: largeStyle,
                                     onSet: { string in
                                         self.setDefaultsItem(.username, value: string)
-                                    },
-                                    scale: largeScale),
+                                    }),
                                 ], isVertical: true),
                             .stack([
                                 .text("Password", style: smallStyle),
                                 .input(
                                     value: self.getDefaultsItem(.password) as? String ?? "",
+                                    style: largeStyle,
                                     onSet: { string in
                                         self.setDefaultsItem(.password, value: string)
-                                    },
-                                    scale: largeScale),
+                                    }),
                             ], isVertical: true)
                         ]
                     )

@@ -70,7 +70,7 @@ class TableViewController: UITableViewController {
         cv.apply(
             cell: model.sections[section].header,
             modelStyle: model.style,
-            isHeader: true,
+            cellStyle: model.cellStyle.withColor(UIColor(white: 0.9, alpha: 1)),
             responderClosure: responderClosure)
         cv.fadeToBackground(from: .blue)
         return cv
@@ -83,6 +83,7 @@ class TableViewController: UITableViewController {
             tvc.cellView.apply(
                 cell: model.sections[indexPath.section].cells[indexPath.row],
                 modelStyle: model.style,
+                cellStyle: model.cellStyle,
                 responderClosure: responderClosure)
             tvc.cellView.fadeToBackground(from: .red)
         }

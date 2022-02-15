@@ -8,6 +8,19 @@
 import Foundation
 import UIKit
 
+struct CellStyle: Equatable {
+    let color: UIColor
+    let isVertical: Bool
+    let insets: UIEdgeInsets?
+    init(color: UIColor = .white, isVertical: Bool = false, insets: UIEdgeInsets? = nil) {
+        self.color = color
+        self.isVertical = isVertical
+        self.insets = insets
+    }
+    func withColor(_ color: UIColor) -> Self {
+        return Self(color: color, isVertical: isVertical, insets: insets)
+    }
+}
 
 struct TextStyle: Equatable {
     let color: UIColor
@@ -47,10 +60,11 @@ struct Section: Equatable {
 
 struct ViewModel: Equatable {
     let style: TextStyle
+    let cellStyle: CellStyle
     let title: String
     let sections: [Section]
     
-    static let emptyModel = Self(style: .init(), title: "", sections: [])
+    static let emptyModel = Self(style: .init(), cellStyle: .init(), title: "", sections: [])
     
     typealias Closure = () -> ViewModel
 }

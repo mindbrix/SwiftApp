@@ -42,7 +42,7 @@ class CellView: UIView, UITextFieldDelegate {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func apply(cell: Cell?, modelStyle: TextStyle, isHeader: Bool = false, responderClosure: ResponderClosure? = nil) {
+    func apply(cell: Cell?, modelStyle: TextStyle, cellStyle: CellStyle, responderClosure: ResponderClosure? = nil) {
         self.cell = cell
         stackInsets = .zero
         stack.axis = .vertical
@@ -52,6 +52,7 @@ class CellView: UIView, UITextFieldDelegate {
             atomsTypes = types
             setupStack(responderClosure: responderClosure)
         }
+        backgroundColor = cellStyle.color
         guard let cell = cell else { return }
         switch cell {
         case .stack(let atoms, let isVertical, let insets):
@@ -61,7 +62,6 @@ class CellView: UIView, UITextFieldDelegate {
                 applyAtom(atom, modelStyle: modelStyle, view: stack.subviews[index])
             }
         }
-        backgroundColor = isHeader ? UIColor(white: 0.9, alpha: 1) : .white
     }
     private var cell: Cell?
     private var atomsTypes: [String] = []

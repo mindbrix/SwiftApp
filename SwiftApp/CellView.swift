@@ -12,7 +12,7 @@ import UIKit
 extension Cell {
     var atomsTypes: [String] {
         switch self {
-        case .stack(let atoms, _, _):
+        case .stack(let atoms, _):
             return atoms.map( { atom in
                 switch atom{
                 case .image(_, let width, let onTap):
@@ -55,12 +55,12 @@ class CellView: UIView, UITextFieldDelegate {
         backgroundColor = .white
         guard let cell = cell else { return }
         switch cell {
-        case .stack(let atoms, let style, let isVertical):
+        case .stack(let atoms, let style):
             backgroundColor = style?.color ?? modelStyle.cell.color
             stackInsets = style?.insets
                 ?? modelStyle.cell.insets
                 ?? UIEdgeInsets(top: Self.spacing, left: Self.spacing, bottom: Self.spacing, right: Self.spacing)
-            stack.axis = (style?.isVertical ?? isVertical) ? .vertical : .horizontal
+            stack.axis = (style?.isVertical ?? false) ? .vertical : .horizontal
             for (index, atom) in atoms.enumerated() {
                 applyAtom(atom, modelStyle: modelStyle, view: stack.subviews[index])
             }
@@ -94,7 +94,7 @@ class CellView: UIView, UITextFieldDelegate {
         stack.alignment = .fill
         guard let cell = cell else { return }
         switch cell {
-        case .stack(let atoms, _, _):
+        case .stack(let atoms, _):
             for (_, atom) in atoms.enumerated() {
                switch atom {
                 case .image(_, let width, let onTap):
@@ -155,7 +155,7 @@ class CellView: UIView, UITextFieldDelegate {
     @objc func onTapper(_ sender: UITapGestureRecognizer) {
         guard let cell = cell, let view = sender.view, let index = stack.subviews.firstIndex(of: view) else { return }
         switch cell {
-        case .stack(let atoms, _, _):
+        case .stack(let atoms, _):
             switch atoms[index] {
             case .image(_ , _, let onTap):
                 onTap?()

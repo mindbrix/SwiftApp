@@ -108,6 +108,7 @@ class SwiftApp {
         let vc = TableViewController()
         let title = screen.rawValue
         let grab0 = UIImage(named: "grab0") ?? UIImage()
+        let vertical: CellStyle = .init(isVertical: true)
         
         switch screen {
         case .Main:
@@ -148,7 +149,7 @@ class SwiftApp {
                             .stack([
                                 .image(grab0, onTap: { print("grab0") }),
                                 .text(.longText, style: self.smallStyle)
-                            ], isVertical: true),
+                            ], style: vertical),
                             .stack([
                                 .image(grab0, width: 64, onTap: { print("grab0") }),
                                 .text(.longText, style: self.smallStyle),
@@ -197,7 +198,7 @@ class SwiftApp {
                                     style: self.smallStyle),
                                 .input(String(describing: self.getDefaultsItem(key)),
                                     style: self.largeStyle)
-                            ], isVertical: true)
+                            ], style: vertical)
                         })
                 )])
             }
@@ -210,7 +211,7 @@ class SwiftApp {
                             .stack([
                                 .text(String(int)),
                                 .text(int % 2 == 0 ? "" : .longText)],
-                                isVertical: true)
+                                style: vertical)
                         })
                     )
                 ])
@@ -243,7 +244,7 @@ class SwiftApp {
                                     onSet: { string in
                                         self.setDefaultsItem(.username, value: string)
                                     }),
-                                ], isVertical: true),
+                                ], style: vertical),
                             .stack([
                                 .input(self.getDefaultsItem(.password) as? String ?? "",
                                     placeholder: "Password",
@@ -255,7 +256,7 @@ class SwiftApp {
                                     style: self.smallStyle.withAlignment(.center),
                                     onTap: {
                                     }),
-                            ], isVertical: true)
+                            ], style: vertical)
                         ]
                     )
                 ])

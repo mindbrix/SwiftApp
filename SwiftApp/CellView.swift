@@ -60,12 +60,11 @@ class CellView: UIView {
             emptyStack()
             setupStack(responderClosure: responderClosure)
         }
-        backgroundColor = .white
+        backgroundColor = modelStyle.cell.color
         guard let cell = cell else { return }
         switch cell {
         case .stack(let atoms, let style):
             let cellStyle = style ?? modelStyle.cell
-            
             stackInsets = cellStyle.insets ?? Style.defaultInsets
             stack.axis = cellStyle.isVertical ? .vertical : .horizontal
             for (index, atom) in atoms.enumerated() {

@@ -69,6 +69,8 @@ class SwiftApp {
     var hugeStyle = TextStyle()
     var counterStyle = TextStyle()
     var modelStyle = Style()
+    var minusImage = UIImage()
+    var plusImage = UIImage()
     
     private func updateStyles() {
         let name = self.style.name, size = self.style.size
@@ -83,6 +85,15 @@ class SwiftApp {
         hugeStyle = .init(font: hugeFont, alignment: .center)
         counterStyle = .init(font: largeFont, alignment: .center)
         modelStyle = .init(text: defaultStyle)
+        let config = UIImage.SymbolConfiguration(pointSize: size, weight: .bold)
+        minusImage = UIImage(
+            systemName: "minus.circle",
+            withConfiguration: config
+        ) ?? UIImage()
+        plusImage = UIImage(
+            systemName: "plus.circle",
+            withConfiguration: config
+        ) ?? UIImage()
     }
     private func getDefaultsItem(_ key: DefaultsKey) -> Any? {
         UserDefaults.standard.object(forKey: key.rawValue)
@@ -113,7 +124,6 @@ class SwiftApp {
     private func makeViewController(for screen: Screen) -> TableViewController {
         let vc = TableViewController()
         let title = screen.rawValue
-        let minus = UIImage(systemName: "minus.circle") ?? UIImage()
         let grab0 = UIImage(named: "grab0") ?? UIImage()
         let vertical: CellStyle = .init(isVertical: true)
         
@@ -135,11 +145,11 @@ class SwiftApp {
                         ]),
                         cells: [
                             .stack([
-                                .text("--", style: self.counterStyle, onTap: {
+                                .image(self.minusImage, width: self.style.size, onTap: {
                                     self.style = .init(name: self.style.name, size: max(4, self.style.size - 1))
                                 }),
                                 .text("\(self.style.size)", style: self.counterStyle),
-                                .text("++", style: self.counterStyle, onTap: {
+                                .image(self.plusImage, width: self.style.size, onTap: {
                                     self.style = .init(name: self.style.name, size: self.style.size + 1)
                                 })
                             ]),
@@ -165,7 +175,6 @@ class SwiftApp {
                             .stack([
                                 .image(grab0, width: 64, onTap: { print("grab0") }),
                                 .text(.longText, style: self.smallStyle),
-                                .image(minus, width: 32, onTap: { print("minus") }),
                             ]),
                         ])
                 ])

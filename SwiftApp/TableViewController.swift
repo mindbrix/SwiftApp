@@ -21,7 +21,8 @@ class TableViewController: UITableViewController {
         textField.backgroundColor = .white
         textField.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(textField)
-        textField.topConstraint = textField.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+        let bottomConstraint = textField.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+        textField.topConstraint = bottomConstraint
         self.responderClosure = { [weak self] field in
             guard let self = self else { return nil }
             self.textField.become(field)
@@ -43,7 +44,8 @@ class TableViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         if let nc = self.navigationController {
-            nc.setNavigationBarHidden(nc.viewControllers.count == 1, animated: true)
+            let hidden = nc.viewControllers.count == 1
+            nc.setNavigationBarHidden(hidden, animated: true)
         }
         loadModel()
     }
@@ -70,12 +72,12 @@ class TableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let cv = CellView()
-        let cell = model.sections[section].header
         let headerColor = UIColor(white: 0.9, alpha: 1)
         let headerStyle = Style(
             cell: model.style.cell.withColor(headerColor),
             text: model.style.text)
+        let cv = CellView()
+        let cell = model.sections[section].header
         cv.apply(cell,
             modelStyle: headerStyle,
             responderClosure: responderClosure)
@@ -84,15 +86,18 @@ class TableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let tvc = tableView.dequeueReusableCell(withIdentifier: CellViewCell.reuseID, for: indexPath)
-        tvc.selectionStyle = .none
-        if let tvc = tvc as? CellViewCell {
+        let tableViewCell = tableView.dequeueReusableCell(
+            withIdentifier: CellViewCell.reuseID,
+            for: indexPath)
+        tableViewCell.selectionStyle = .none
+        
+        if let cv = (tableViewCell as? CellViewCell)?.cellView {
             let cell = model.sections[indexPath.section].cells[indexPath.row]
-            tvc.cellView.apply(cell,
+            cv.apply(cell,
                 modelStyle: model.style,
                 responderClosure: responderClosure)
-            tvc.cellView.fadeToBackground(from: .red)
+            cv.fadeToBackground(from: .red)
         }
-        return tvc
+        return tableViewCell
     }
 }

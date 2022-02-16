@@ -70,10 +70,12 @@ class SwiftApp {
     var modelStyle = Style()
     
     private func updateStyles() {
-        let smallFont = UIFont(name: self.style.name, size: self.style.size * 0.86)
-        let defaultFont = UIFont(name: self.style.name, size: self.style.size)
-        let largeFont = UIFont(name: self.style.name, size: self.style.size * 1.2)
-        let hugeFont = UIFont(name: self.style.name, size: self.style.size * 1.6)
+        let name = self.style.name, size = self.style.size
+        let smallFont = UIFont(name: name, size: size * 0.86)
+        let defaultFont = UIFont(name: name, size: size)
+        let largeFont = UIFont(name: name, size: size * 1.2)
+        let hugeFont = UIFont(name: name, size: size * 1.6)
+        
         smallStyle = .init(color: .gray, font: smallFont)
         defaultStyle = .init(font: defaultFont)
         largeStyle = .init(font: largeFont)
@@ -92,7 +94,8 @@ class SwiftApp {
     }
     
     private var topViewController: TableViewController? {
-        if let nc = window.rootViewController as? UINavigationController, let vc = nc.topViewController as? TableViewController {
+        if let nc = window.rootViewController as? UINavigationController,
+            let vc = nc.topViewController as? TableViewController {
             return vc
         } else if let vc = window.rootViewController as? TableViewController {
             return vc
@@ -115,14 +118,17 @@ class SwiftApp {
         switch screen {
         case .Main:
             vc.loadClosure = { [weak self, weak vc] in
-                guard let self = self, let vc = vc else { return ViewModel.emptyModel }
-                
+                guard let self = self, let vc = vc else {
+                    return ViewModel.emptyModel
+                }
                 return ViewModel(style: self.modelStyle, title: title, sections: [
                     Section(
                         header: .stack([
                             .text(self.style.name, style: .init(alignment: .center), onTap: {
                                 guard let nc = vc.navigationController else { return }
-                                nc.pushViewController(self.makeViewController(for: .Fonts), animated: true)
+                                
+                                nc.pushViewController(self.makeViewController(for: .Fonts),
+                                    animated: true)
                             }),
                         ]),
                         cells: [
@@ -141,7 +147,9 @@ class SwiftApp {
                         cells: Screen.allCases.filter({ !$0.embedInNavController }).map({ screen in
                             .stack([.text(screen.rawValue, onTap: {
                                 guard let nc = vc.navigationController else { return }
-                                nc.pushViewController(self.makeViewController(for: screen), animated: true)
+                                
+                                nc.pushViewController(self.makeViewController(for: screen),
+                                    animated: true)
                             })])
                         })
                     ),
@@ -223,11 +231,18 @@ class SwiftApp {
                 return ViewModel(style: self.modelStyle, title: title, sections:
                     UIFont.familyNames.map({ familyName in
                         Section(
-                            header: .stack([.text(familyName)]),
+                            header: .stack([
+                                .text(familyName)]
+                            ),
                             cells: UIFont.fontNames(forFamilyName: familyName).map({ fontName in
-                                .stack([.text(fontName, style: self.smallStyle, onTap: {
-                                    self.style = .init(name: fontName, size: self.style.size)
-                                })])
+                                .stack([
+                                    .text(fontName,
+                                        style: self.smallStyle,
+                                        onTap: {
+                                            self.style = .init(name: fontName, size: self.style.size)
+                                        }
+                                    )
+                                ])
                             })
                         )
                     })

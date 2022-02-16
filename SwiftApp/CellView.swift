@@ -81,7 +81,7 @@ class CellView: UIView {
     private let stack = UIStackView()
     
     lazy var insetConstraints: [NSLayoutConstraint] = {
-        stack.insetConstraintsFrom(self)
+        edgeConstraints(for: stack)
     }()
     var stackInsets: UIEdgeInsets = .zero {
         didSet {

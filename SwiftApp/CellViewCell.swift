@@ -17,7 +17,7 @@ class CellViewCell: UITableViewCell {
         
         cellView.translatesAutoresizingMaskIntoConstraints = false
         self.contentView.addSubview(cellView)
-        NSLayoutConstraint.activate(cellView.insetConstraintsFrom(self.contentView))
+        NSLayoutConstraint.activate(self.contentView.edgeConstraints(for: cellView))
     }
     
     required init?(coder: NSCoder) {

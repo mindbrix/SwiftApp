@@ -17,12 +17,13 @@ extension UIView {
             separator.heightAnchor.constraint(equalToConstant: height)
         ])
     }
-    func insetConstraintsFrom(_ view: UIView, insets: UIEdgeInsets = .zero) -> [NSLayoutConstraint] {
+    
+    func edgeConstraints(for subview: UIView, insets: UIEdgeInsets = .zero) -> [NSLayoutConstraint] {
         [
-            topAnchor.constraint(equalTo: view.topAnchor, constant: insets.top),
-            leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: insets.left),
-            bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -insets.bottom),
-            trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -insets.right)
+            subview.topAnchor.constraint(equalTo: topAnchor, constant: insets.top),
+            subview.leadingAnchor.constraint(equalTo: leadingAnchor, constant: insets.left),
+            subview.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -insets.bottom),
+            subview.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -insets.right)
         ]
     }
     

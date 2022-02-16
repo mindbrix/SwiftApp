@@ -53,7 +53,7 @@ class CellView: UIView {
         self.cell = cell
         stackInsets = .zero
         stack.axis = .vertical
-        stack.spacing = Self.spacing
+        stack.spacing = Style.spacing
         let types = cell?.atomsTypes ?? []
         if types != atomsTypes {
             atomsTypes = types
@@ -65,12 +65,8 @@ class CellView: UIView {
         switch cell {
         case .stack(let atoms, let style):
             let cellStyle = style ?? modelStyle.cell
-            let defaultInsets = UIEdgeInsets(
-                top: Self.spacing,
-                left: Self.spacing,
-                bottom: Self.spacing,
-                right: Self.spacing)
-            stackInsets = cellStyle.insets ?? defaultInsets
+            
+            stackInsets = cellStyle.insets ?? Style.defaultInsets
             stack.axis = cellStyle.isVertical ? .vertical : .horizontal
             for (index, atom) in atoms.enumerated() {
                 applyAtom(atom,
@@ -82,9 +78,8 @@ class CellView: UIView {
     }
     private var cell: Cell?
     private var atomsTypes: [String] = []
-    let underline = UIView()
-    let stack = UIStackView()
-    static let spacing: CGFloat = 4
+    private let underline = UIView()
+    private let stack = UIStackView()
     
     lazy var insetConstraints: [NSLayoutConstraint] = {
         stack.insetConstraintsFrom(self)

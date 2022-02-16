@@ -8,37 +8,37 @@
 import UIKit
 
 class TableViewController: UITableViewController {
-    private let textField = TextField()
+    private let floatingField = TextField()
     private var responderClosure: ResponderClosure?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.tableView.register(CellViewCell.self,
+        tableView.register(CellViewCell.self,
             forCellReuseIdentifier: CellViewCell.reuseID)
-        self.tableView.separatorStyle = .none
-        self.view.backgroundColor = .white
-        
-        textField.backgroundColor = .white
-        textField.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(textField)
-        let bottomConstraint = textField.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
-        textField.topConstraint = bottomConstraint
-        self.responderClosure = { [weak self] field in
-            guard let self = self else { return nil }
-            self.textField.become(field)
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1 / 60, execute: {
-                _ = self.textField.becomeFirstResponder()
-            })
-            return false
-        }
+        tableView.separatorStyle = .none
+        tableView.backgroundColor = .white
         if #available(iOS 15.0, *) {
             tableView.sectionHeaderTopPadding = 0
+        }
+        floatingField.backgroundColor = CellStyle().color
+        floatingField.translatesAutoresizingMaskIntoConstraints = false
+        tableView.addSubview(floatingField)
+        let bottomConstraint = floatingField.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+        floatingField.topConstraint = bottomConstraint
+        
+        self.responderClosure = { [weak self] field in
+            guard let self = self else { return nil }
+            self.floatingField.become(field)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1 / 60, execute: {
+                _ = self.floatingField.becomeFirstResponder()
+            })
+            return false
         }
     }
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        view.bringSubviewToFront(textField)
+        view.bringSubviewToFront(floatingField)
     }
     
     override func viewWillAppear(_ animated: Bool) {

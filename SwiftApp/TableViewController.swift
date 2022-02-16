@@ -13,7 +13,8 @@ class TableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.tableView.register(CellViewCell.self, forCellReuseIdentifier: CellViewCell.reuseID)
+        self.tableView.register(CellViewCell.self,
+            forCellReuseIdentifier: CellViewCell.reuseID)
         self.tableView.separatorStyle = .none
         self.view.backgroundColor = .white
         
@@ -42,7 +43,7 @@ class TableViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         if let nc = self.navigationController {
-            self.navigationController?.setNavigationBarHidden(nc.viewControllers.count == 1, animated: true)
+            nc.setNavigationBarHidden(nc.viewControllers.count == 1, animated: true)
         }
         loadModel()
     }
@@ -70,11 +71,13 @@ class TableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let cv = CellView()
-        cv.apply(
-            cell: model.sections[section].header,
-            modelStyle: .init(
-                cell: model.style.cell.withColor(UIColor(white: 0.9, alpha: 1)),
-                text: model.style.text),
+        let cell = model.sections[section].header
+        let headerColor = UIColor(white: 0.9, alpha: 1)
+        let headerStyle = Style(
+            cell: model.style.cell.withColor(headerColor),
+            text: model.style.text)
+        cv.apply(cell,
+            modelStyle: headerStyle,
             responderClosure: responderClosure)
         cv.fadeToBackground(from: .blue)
         return cv
@@ -84,8 +87,8 @@ class TableViewController: UITableViewController {
         let tvc = tableView.dequeueReusableCell(withIdentifier: CellViewCell.reuseID, for: indexPath)
         tvc.selectionStyle = .none
         if let tvc = tvc as? CellViewCell {
-            tvc.cellView.apply(
-                cell: model.sections[indexPath.section].cells[indexPath.row],
+            let cell = model.sections[indexPath.section].cells[indexPath.row]
+            tvc.cellView.apply(cell,
                 modelStyle: model.style,
                 responderClosure: responderClosure)
             tvc.cellView.fadeToBackground(from: .red)

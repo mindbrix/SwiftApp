@@ -16,11 +16,15 @@ extension Cell {
             return atoms.map( { atom in
                 switch atom{
                 case .image(_, let width, let onTap):
-                    return ImageView.description() + (width != nil ? ".width" : "") + (onTap != nil ? ".onTap" : "")
+                    return ImageView.description()
+                        + (width != nil ? ".width" : "")
+                        + (onTap != nil ? ".onTap" : "")
                 case .input( _, _, _, let onSet, _):
-                    return TextField.description() + (onSet != nil ? ".onSet" : "")
+                    return TextField.description()
+                        + (onSet != nil ? ".onSet" : "")
                 case .text( _, _, let onTap):
-                    return UILabel.description() + (onTap != nil ? ".onTap" : "")
+                    return UILabel.description()
+                        + (onTap != nil ? ".onTap" : "")
                 }
             })
         }
@@ -36,15 +40,16 @@ class CellView: UIView {
         addSubview(underline)
         addUnderlineConstraints(underline)
         NSLayoutConstraint.activate(
-            insetConstraints +
-            [heightAnchor.constraint(greaterThanOrEqualToConstant: 1)])
+            insetConstraints
+            + [heightAnchor.constraint(greaterThanOrEqualToConstant: 1)]
+        )
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func apply(cell: Cell?, modelStyle: Style,responderClosure: ResponderClosure? = nil) {
+    func apply(_ cell: Cell?, modelStyle: Style,responderClosure: ResponderClosure? = nil) {
         self.cell = cell
         stackInsets = .zero
         stack.axis = .vertical

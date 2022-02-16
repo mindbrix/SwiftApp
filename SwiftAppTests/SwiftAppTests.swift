@@ -21,8 +21,8 @@ class SwiftAppTests: XCTestCase {
     func testExample() throws {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
-        let c0 = Cell.cell([.text("Title0")])
-        let c1 = Cell.cell([.text("Title1")])
+        let c0 = Cell.stack([.text("Title0")])
+        let c1 = Cell.stack([.text("Title1")])
         assert("\(c0)" == String(describing: c0))
         XCTAssertEqual(c0, c0)
         XCTAssertNotEqual(c0, c1)

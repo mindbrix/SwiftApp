@@ -29,6 +29,9 @@ class TableViewController: UITableViewController {
             })
             return false
         }
+        if #available(iOS 15.0, *) {
+            tableView.sectionHeaderTopPadding = 0
+        }
     }
 
     override func viewDidLayoutSubviews() {

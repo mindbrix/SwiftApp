@@ -240,6 +240,7 @@ class SwiftApp {
                         header: nil,
                         cells: [
                             .stack([
+                                .text("\n"),
                                 .input(self.getDefaultsItem(.username) as? String ?? "",
                                     placeholder: "User",
                                     style: self.hugeStyle,

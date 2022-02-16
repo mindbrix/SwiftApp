@@ -36,6 +36,7 @@ class SwiftApp {
     init(window: UIWindow) {
         self.window = window
         updateStyles()
+        
         Timer.scheduledTimer(withTimeInterval: 1 / 60, repeats: true) { [weak self] timer in
             guard let self = self else { return }
             if self.needsReload {
@@ -229,7 +230,7 @@ class SwiftApp {
         case .Fonts:
             vc.loadClosure = {
                 return ViewModel(style: self.modelStyle, title: title, sections:
-                        UIFont.familyNames.filter({ $0 != "System Font" }).map({ familyName in
+                    UIFont.familyNames.filter({ $0 != "System Font" }).map({ familyName in
                         Section(
                             header: .stack([
                                 .text(familyName)]

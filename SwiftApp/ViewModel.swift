@@ -44,7 +44,7 @@ struct ViewModel: Equatable {
     let title: String
     let sections: [Section]
     
-    func debugModel() -> Self {
+    func description() -> Self {
         Self(
             style: style,
             title: title,
@@ -56,7 +56,7 @@ struct ViewModel: Equatable {
                         case .stack(let atoms, style: let style):
                             return Cell.stack(
                                 atoms.map({ atom in
-                                    Atom.text(String(describing: atom))
+                                    Atom.text("\(atom.hashValue)\n\n" + String(describing: atom))
                                 }),
                                 style: style
                             )

@@ -111,6 +111,7 @@ class CellView: UIView {
                     field.translatesAutoresizingMaskIntoConstraints = false
                     field.isUserInteractionEnabled = onSet != nil
                     field.responderClosure = responderClosure
+                    field.autocapitalizationType = .none
                     stack.addArrangedSubview(field)
                 case .text(_, _, let onTap):
                     let label = UILabel()

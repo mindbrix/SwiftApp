@@ -246,8 +246,6 @@ class SwiftApp {
                                     onSet: { string in
                                         self.setDefaultsItem(.username, value: string)
                                     }),
-                                ], style: vertical),
-                            .stack([
                                 .input(self.getDefaultsItem(.password) as? String ?? "",
                                     placeholder: "Password",
                                     style: self.hugeStyle,
@@ -258,7 +256,7 @@ class SwiftApp {
                                     style: self.smallStyle.withAlignment(.center),
                                     onTap: {
                                     }),
-                            ], style: vertical)
+                                ], style: vertical),
                         ]
                     )
                 ])

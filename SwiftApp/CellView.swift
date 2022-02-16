@@ -67,6 +67,7 @@ class CellView: UIView {
             let cellStyle = style ?? modelStyle.cell
             stackInsets = cellStyle.insets ?? Style.defaultInsets
             stack.axis = cellStyle.isVertical ? .vertical : .horizontal
+            stack.alignment = cellStyle.isVertical ? .fill : .leading
             for (index, atom) in atoms.enumerated() {
                 applyAtom(atom,
                     modelStyle: modelStyle,
@@ -107,7 +108,7 @@ class CellView: UIView {
         case .stack(let atoms, _):
             for atom in atoms {
                switch atom {
-               case .image(_, let width, let onTap):
+               case .image(_, _, let onTap):
                     let iv = ImageView()
                     if onTap != nil {
                         iv.addGestureRecognizer(UITapGestureRecognizer(
@@ -117,7 +118,6 @@ class CellView: UIView {
                     }
                     iv.translatesAutoresizingMaskIntoConstraints = false
                     stack.addArrangedSubview(iv)
-                    stack.alignment = width != nil ? .leading : .fill
                 case .input(_, _, _, _, let onSet):
                     let tf = TextField()
                     tf.isUserInteractionEnabled = onSet != nil

@@ -49,7 +49,7 @@ class CellView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func apply(_ cell: Cell?, modelStyle: Style,responderClosure: ResponderClosure? = nil) {
+    func apply(_ cell: Cell?, modelStyle: Style, responderClosure: ResponderClosure? = nil) {
         self.cell = cell
         stackInsets = .zero
         stack.axis = .vertical
@@ -71,7 +71,7 @@ class CellView: UIView {
             for (index, atom) in atoms.enumerated() {
                 applyAtom(atom,
                     modelStyle: modelStyle,
-                    view: stack.subviews[index])
+                    atomView: stack.subviews[index])
             }
             backgroundColor = cellStyle.color
         }
@@ -141,13 +141,13 @@ class CellView: UIView {
         }
     }
     
-    private func applyAtom(_ atom: Atom, modelStyle: Style, view: UIView) {
+    private func applyAtom(_ atom: Atom, modelStyle: Style, atomView: UIView) {
         switch atom {
         case .image(let image, let width, _):
-            guard let iv = view as? ImageView else { return }
+            guard let iv = atomView as? ImageView else { return }
             iv.setAspectImage(image, width: width)
         case .input(let value, let isSecure, let placeholder, let style, let onSet):
-            guard let tf = view as? TextField else { return }
+            guard let tf = atomView as? TextField else { return }
             let textStyle = style ?? modelStyle.text
             tf.onSet = onSet
             tf.text = value
@@ -161,7 +161,7 @@ class CellView: UIView {
             underline.backgroundColor = onSet == nil ? .lightGray : .clear
             tf.underline.backgroundColor = onSet == nil ? .clear : .lightGray
         case .text(let string, let style, let onTap):
-            guard let lb = view as? UILabel else { return }
+            guard let lb = atomView as? UILabel else { return }
             let textStyle = style ?? modelStyle.text
             lb.text = string
             lb.font = textStyle.font

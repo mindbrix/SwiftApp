@@ -102,7 +102,6 @@ class CellView: UIView {
         }
     }
     private func setupStack(responderClosure: ResponderClosure? = nil) {
-        stack.alignment = .fill
         guard let cell = cell else { return }
         switch cell {
         case .stack(let atoms, _):

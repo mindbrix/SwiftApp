@@ -40,8 +40,8 @@ class SwiftApp {
             guard let self = self else { return }
             if self.needsReload {
                 self.topViewController?.loadModel()
+                self.needsReload = false
             }
-            self.needsReload = false
         }
     }
     

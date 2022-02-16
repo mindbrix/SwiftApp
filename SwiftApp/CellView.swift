@@ -35,7 +35,9 @@ class CellView: UIView {
         underline.translatesAutoresizingMaskIntoConstraints = false
         addSubview(underline)
         addUnderlineConstraints(underline)
-        NSLayoutConstraint.activate(insetConstraints + [heightAnchor.constraint(greaterThanOrEqualToConstant: 1)])
+        NSLayoutConstraint.activate(
+            insetConstraints +
+            [heightAnchor.constraint(greaterThanOrEqualToConstant: 1)])
     }
     
     required init?(coder: NSCoder) {
@@ -57,10 +59,17 @@ class CellView: UIView {
         switch cell {
         case .stack(let atoms, let style):
             let cellStyle = style ?? modelStyle.cell
-            stackInsets = cellStyle.insets ?? UIEdgeInsets(top: Self.spacing, left: Self.spacing, bottom: Self.spacing, right: Self.spacing)
+            let defaultInsets = UIEdgeInsets(
+                top: Self.spacing,
+                left: Self.spacing,
+                bottom: Self.spacing,
+                right: Self.spacing)
+            stackInsets = cellStyle.insets ?? defaultInsets
             stack.axis = cellStyle.isVertical ? .vertical : .horizontal
             for (index, atom) in atoms.enumerated() {
-                applyAtom(atom, modelStyle: modelStyle, view: stack.subviews[index])
+                applyAtom(atom,
+                    modelStyle: modelStyle,
+                    view: stack.subviews[index])
             }
             backgroundColor = cellStyle.color
         }
@@ -102,7 +111,9 @@ class CellView: UIView {
                     image.translatesAutoresizingMaskIntoConstraints = false
                     stack.addArrangedSubview(image)
                     if onTap != nil {
-                        image.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onTapper)))
+                        image.addGestureRecognizer(UITapGestureRecognizer(
+                            target: self,
+                            action: #selector(onTapper)))
                         image.isUserInteractionEnabled = true
                     }
                 case .input(_, _, _, _, let onSet):
@@ -117,7 +128,9 @@ class CellView: UIView {
                     label.translatesAutoresizingMaskIntoConstraints = false
                     stack.addArrangedSubview(label)
                     if onTap != nil {
-                        label.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onTapper)))
+                        label.addGestureRecognizer(UITapGestureRecognizer(
+                            target: self,
+                            action: #selector(onTapper)))
                         label.isUserInteractionEnabled = true
                     }
                 }
@@ -155,7 +168,8 @@ class CellView: UIView {
     }
     
     @objc func onTapper(_ sender: UITapGestureRecognizer) {
-        guard let cell = cell, let view = sender.view, let index = stack.subviews.firstIndex(of: view) else { return }
+        guard let cell = cell, let view = sender.view,
+                let index = stack.subviews.firstIndex(of: view) else { return }
         switch cell {
         case .stack(let atoms, _):
             switch atoms[index] {

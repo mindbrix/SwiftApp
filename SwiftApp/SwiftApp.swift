@@ -229,7 +229,7 @@ class SwiftApp {
         case .Fonts:
             vc.loadClosure = {
                 return ViewModel(style: self.modelStyle, title: title, sections:
-                    UIFont.familyNames.map({ familyName in
+                        UIFont.familyNames.filter({ $0 != "System Font" }).map({ familyName in
                         Section(
                             header: .stack([
                                 .text(familyName)]

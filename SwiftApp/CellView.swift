@@ -56,11 +56,10 @@ class CellView: UIView {
         guard let cell = cell else { return }
         switch cell {
         case .stack(let atoms, let style):
+            let cellStyle = style ?? modelStyle.cell
             backgroundColor = style?.color ?? modelStyle.cell.color
-            stackInsets = style?.insets
-                ?? modelStyle.cell.insets
-                ?? UIEdgeInsets(top: Self.spacing, left: Self.spacing, bottom: Self.spacing, right: Self.spacing)
-            stack.axis = (style?.isVertical ?? false) ? .vertical : .horizontal
+            stackInsets = cellStyle.insets ?? UIEdgeInsets(top: Self.spacing, left: Self.spacing, bottom: Self.spacing, right: Self.spacing)
+            stack.axis = cellStyle.isVertical ? .vertical : .horizontal
             for (index, atom) in atoms.enumerated() {
                 applyAtom(atom, modelStyle: modelStyle, view: stack.subviews[index])
             }

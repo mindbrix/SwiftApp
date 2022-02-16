@@ -11,6 +11,7 @@ import UIKit
 class ImageView: UIImageView {
     func setAspectImage(_ image: UIImage, width: CGFloat? = nil) {
         self.image = image
+        contentMode = .scaleAspectFit
         heightConstraint?.isActive = false
         widthConstraint.isActive = false
         let size = image.size

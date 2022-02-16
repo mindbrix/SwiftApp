@@ -113,6 +113,7 @@ class SwiftApp {
     private func makeViewController(for screen: Screen) -> TableViewController {
         let vc = TableViewController()
         let title = screen.rawValue
+        let minus = UIImage(systemName: "minus.circle") ?? UIImage()
         let grab0 = UIImage(named: "grab0") ?? UIImage()
         let vertical: CellStyle = .init(isVertical: true)
         
@@ -164,7 +165,7 @@ class SwiftApp {
                             .stack([
                                 .image(grab0, width: 64, onTap: { print("grab0") }),
                                 .text(.longText, style: self.smallStyle),
-                                .image(grab0, width: 64, onTap: { print("grab0") }),
+                                .image(minus, width: 32, onTap: { print("minus") }),
                             ]),
                         ])
                 ])

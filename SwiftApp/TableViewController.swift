@@ -53,7 +53,7 @@ class TableViewController: UITableViewController {
     var loadClosure: ViewModel.Closure = { ViewModel.emptyModel }
     
     func loadModel() {
-        model = loadClosure()
+        model = loadClosure().debugModel()
     }
     private var model = ViewModel.emptyModel {
         didSet {

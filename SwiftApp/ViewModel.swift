@@ -44,6 +44,28 @@ struct ViewModel: Equatable {
     let title: String
     let sections: [Section]
     
+    func debugModel() -> Self {
+        Self(
+            style: style,
+            title: title,
+            sections: sections.map({ section in
+                Section(
+                    header: .stack([.text(String(describing: section.header))]),
+                    cells: section.cells.map({ cell in
+                        switch cell {
+                        case .stack(let atoms, style: let style):
+                            return Cell.stack(
+                                atoms.map({ atom in
+                                    Atom.text(String(describing: atom))
+                                }),
+                                style: style
+                            )
+                        }
+                    })
+                )
+            })
+        )
+    }
     static let emptyModel = Self(style: .init(), title: "", sections: [])
     
     typealias Closure = () -> ViewModel

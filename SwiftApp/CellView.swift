@@ -158,6 +158,7 @@ class CellView: UIView {
             tf.clearButtonMode = .whileEditing
             tf.autocapitalizationType = .none
             tf.isSecureTextEntry = isSecure
+            
             underline.backgroundColor = onSet == nil ? .lightGray : .clear
             tf.underline.backgroundColor = onSet == nil ? .clear : .lightGray
         case .text(let string, let style, let onTap):

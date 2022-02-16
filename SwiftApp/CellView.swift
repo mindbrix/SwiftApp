@@ -114,33 +114,33 @@ class CellView: UIView {
             for atom in atoms {
                switch atom {
                case .image(_, let width, let onTap):
-                    let image = ImageView()
+                    let iv = ImageView()
                     if onTap != nil {
-                        image.addGestureRecognizer(UITapGestureRecognizer(
+                        iv.addGestureRecognizer(UITapGestureRecognizer(
                             target: self,
                             action: #selector(onTapper)))
-                        image.isUserInteractionEnabled = true
+                        iv.isUserInteractionEnabled = true
                     }
-                    image.translatesAutoresizingMaskIntoConstraints = false
-                    stack.addArrangedSubview(image)
+                    iv.translatesAutoresizingMaskIntoConstraints = false
+                    stack.addArrangedSubview(iv)
                     stack.alignment = width != nil ? .leading : .fill
                 case .input(_, _, _, _, let onSet):
-                    let field = TextField()
-                    field.isUserInteractionEnabled = onSet != nil
-                    field.responderClosure = responderClosure
-                    field.translatesAutoresizingMaskIntoConstraints = false
-                    stack.addArrangedSubview(field)
+                    let tf = TextField()
+                    tf.isUserInteractionEnabled = onSet != nil
+                    tf.responderClosure = responderClosure
+                    tf.translatesAutoresizingMaskIntoConstraints = false
+                    stack.addArrangedSubview(tf)
                 case .text(_, _, let onTap):
-                    let label = UILabel()
-                    label.numberOfLines = 0
+                    let lb = UILabel()
+                    lb.numberOfLines = 0
                     if onTap != nil {
-                        label.addGestureRecognizer(UITapGestureRecognizer(
+                        lb.addGestureRecognizer(UITapGestureRecognizer(
                             target: self,
                             action: #selector(onTapper)))
-                        label.isUserInteractionEnabled = true
+                        lb.isUserInteractionEnabled = true
                     }
-                    label.translatesAutoresizingMaskIntoConstraints = false
-                    stack.addArrangedSubview(label)
+                    lb.translatesAutoresizingMaskIntoConstraints = false
+                    stack.addArrangedSubview(lb)
                 }
             }
         }
@@ -152,26 +152,26 @@ class CellView: UIView {
             guard let iv = view as? ImageView else { return }
             iv.setAspectImage(image, width: width)
         case .input(let value, let isSecure, let placeholder, let style, let onSet):
-            guard let field = view as? TextField else { return }
+            guard let tf = view as? TextField else { return }
             let textStyle = style ?? modelStyle.text
-            field.onSet = onSet
-            field.text = value
-            field.placeholder = placeholder
-            field.font = textStyle.font
-            field.textAlignment = textStyle.alignment
-            field.textColor = textStyle.color
-            field.clearButtonMode = .whileEditing
-            field.autocapitalizationType = .none
-            field.isSecureTextEntry = isSecure
+            tf.onSet = onSet
+            tf.text = value
+            tf.placeholder = placeholder
+            tf.font = textStyle.font
+            tf.textAlignment = textStyle.alignment
+            tf.textColor = textStyle.color
+            tf.clearButtonMode = .whileEditing
+            tf.autocapitalizationType = .none
+            tf.isSecureTextEntry = isSecure
             underline.backgroundColor = onSet == nil ? .lightGray : .clear
-            field.underline.backgroundColor = onSet == nil ? .clear : .lightGray
+            tf.underline.backgroundColor = onSet == nil ? .clear : .lightGray
         case .text(let string, let style, let onTap):
-            guard let label = view as? UILabel else { return }
+            guard let lb = view as? UILabel else { return }
             let textStyle = style ?? modelStyle.text
-            label.text = string
-            label.font = textStyle.font
-            label.textAlignment = textStyle.alignment
-            label.textColor = onTap == nil ? textStyle.color : .blue
+            lb.text = string
+            lb.font = textStyle.font
+            lb.textAlignment = textStyle.alignment
+            lb.textColor = onTap == nil ? textStyle.color : .blue
         }
     }
     

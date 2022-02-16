@@ -103,36 +103,36 @@ class CellView: UIView {
         guard let cell = cell else { return }
         switch cell {
         case .stack(let atoms, _):
-            for (_, atom) in atoms.enumerated() {
+            for atom in atoms {
                switch atom {
-                case .image(_, let width, let onTap):
-                    stack.alignment = width != nil ? .leading : .fill
+               case .image(_, let width, let onTap):
                     let image = ImageView()
-                    image.translatesAutoresizingMaskIntoConstraints = false
-                    stack.addArrangedSubview(image)
                     if onTap != nil {
                         image.addGestureRecognizer(UITapGestureRecognizer(
                             target: self,
                             action: #selector(onTapper)))
                         image.isUserInteractionEnabled = true
                     }
+                    image.translatesAutoresizingMaskIntoConstraints = false
+                    stack.addArrangedSubview(image)
+                    stack.alignment = width != nil ? .leading : .fill
                 case .input(_, _, _, _, let onSet):
                     let field = TextField()
-                    field.translatesAutoresizingMaskIntoConstraints = false
                     field.isUserInteractionEnabled = onSet != nil
                     field.responderClosure = responderClosure
+                    field.translatesAutoresizingMaskIntoConstraints = false
                     stack.addArrangedSubview(field)
                 case .text(_, _, let onTap):
                     let label = UILabel()
                     label.numberOfLines = 0
-                    label.translatesAutoresizingMaskIntoConstraints = false
-                    stack.addArrangedSubview(label)
                     if onTap != nil {
                         label.addGestureRecognizer(UITapGestureRecognizer(
                             target: self,
                             action: #selector(onTapper)))
                         label.isUserInteractionEnabled = true
                     }
+                    label.translatesAutoresizingMaskIntoConstraints = false
+                    stack.addArrangedSubview(label)
                 }
             }
         }

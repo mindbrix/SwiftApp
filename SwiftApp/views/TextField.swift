@@ -17,6 +17,7 @@ class TextField : UITextField {
         underline.translatesAutoresizingMaskIntoConstraints = false
         addUnderlineConstraints(underline)
         delegate = self
+        clearButtonMode = .whileEditing
     }
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -39,6 +40,7 @@ class TextField : UITextField {
         textAlignment = field.textAlignment
         font = field.font
         selectedTextRange = field.selectedTextRange
+        clearButtonMode = field.clearButtonMode
         underline.backgroundColor = field.underline.backgroundColor
         onSet = field.onSet
     }
@@ -69,6 +71,11 @@ extension TextField: UITextFieldDelegate {
         if let text = textField.text, let textRange = Range(range, in: text) {
             onSet?(text.replacingCharacters(in: textRange, with: string))
         }
+        return true
+    }
+    
+    func textFieldShouldClear(_ textField: UITextField) -> Bool {
+        onSet?("")
         return true
     }
 }

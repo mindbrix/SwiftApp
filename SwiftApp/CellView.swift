@@ -17,7 +17,7 @@ extension Cell {
                 switch atom{
                 case .image(_, let width, let onTap):
                     return ImageView.description() + (width != nil ? ".width" : "") + (onTap != nil ? ".onTap" : "")
-                case .input(_, _, let onSet, _):
+                case .input( _, _, _, let onSet, _):
                     return TextField.description() + (onSet != nil ? ".onSet" : "")
                 case .text( _, _, let onTap):
                     return UILabel.description() + (onTap != nil ? ".onTap" : "")
@@ -106,12 +106,11 @@ class CellView: UIView {
                         image.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onTapper)))
                         image.isUserInteractionEnabled = true
                     }
-                case .input(_, _, _, let onSet):
+                case .input(_, _, _, _, let onSet):
                     let field = TextField()
                     field.translatesAutoresizingMaskIntoConstraints = false
                     field.isUserInteractionEnabled = onSet != nil
                     field.responderClosure = responderClosure
-                    field.autocapitalizationType = .none
                     stack.addArrangedSubview(field)
                 case .text(_, _, let onTap):
                     let label = UILabel()
@@ -132,7 +131,7 @@ class CellView: UIView {
         case .image(let image, let width, _):
             guard let iv = view as? ImageView else { return }
             iv.setAspectImage(image, width: width)
-        case .input(let value, let placeholder, let style, let onSet):
+        case .input(let value, let isSecure, let placeholder, let style, let onSet):
             guard let field = view as? TextField else { return }
             let textStyle = style ?? modelStyle.text
             field.onSet = onSet
@@ -141,6 +140,9 @@ class CellView: UIView {
             field.font = textStyle.font
             field.textAlignment = textStyle.alignment
             field.textColor = textStyle.color
+            field.clearButtonMode = .whileEditing
+            field.autocapitalizationType = .none
+            field.isSecureTextEntry = isSecure
             underline.backgroundColor = onSet == nil ? .lightGray : .clear
             field.underline.backgroundColor = onSet == nil ? .clear : .lightGray
         case .text(let string, let style, let onTap):

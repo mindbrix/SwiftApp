@@ -247,6 +247,7 @@ class SwiftApp {
                                         self.setDefaultsItem(.username, value: string)
                                     }),
                                 .input(self.getDefaultsItem(.password) as? String ?? "",
+                                    isSecure: true,
                                     placeholder: "Password",
                                     style: self.hugeStyle,
                                     onSet: { string in

@@ -17,6 +17,7 @@ enum Atom: Hashable {
             width: CGFloat? = nil,
             onTap: (() -> Void)? = nil)
     case input(_ value: String,
+            isSecure: Bool = false,
             placeholder: String? = nil,
             style: TextStyle? = nil,
             onSet: ((String) -> Void)? = nil)

@@ -17,7 +17,6 @@ class TextField : UITextField {
         underline.translatesAutoresizingMaskIntoConstraints = false
         addUnderlineConstraints(underline)
         delegate = self
-        clearButtonMode = .whileEditing
     }
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -40,7 +39,9 @@ class TextField : UITextField {
         textAlignment = field.textAlignment
         font = field.font
         selectedTextRange = field.selectedTextRange
+        autocapitalizationType = field.autocapitalizationType
         clearButtonMode = field.clearButtonMode
+        isSecureTextEntry = field.isSecureTextEntry
         underline.backgroundColor = field.underline.backgroundColor
         onSet = field.onSet
     }

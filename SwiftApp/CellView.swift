@@ -57,6 +57,7 @@ class CellView: UIView {
         let types = cell?.atomsTypes ?? []
         if types != atomsTypes {
             atomsTypes = types
+            emptyStack()
             setupStack(responderClosure: responderClosure)
         }
         backgroundColor = .white
@@ -97,13 +98,15 @@ class CellView: UIView {
         }
     }
     
-    private func setupStack(responderClosure: ResponderClosure? = nil) {
+    private func emptyStack() {
         for subview in stack.subviews {
             subview.removeFromSuperview()
             for recognizer in subview.gestureRecognizers ?? [] {
                 subview.removeGestureRecognizer(recognizer)
             }
         }
+    }
+    private func setupStack(responderClosure: ResponderClosure? = nil) {
         stack.alignment = .fill
         guard let cell = cell else { return }
         switch cell {

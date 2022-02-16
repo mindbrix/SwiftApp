@@ -51,9 +51,10 @@ class TableViewController: UITableViewController {
     }
     
     var loadClosure: ViewModel.Closure = { ViewModel.emptyModel }
+    var useDescription = false
     
     func loadModel() {
-        model = loadClosure().description()
+        model = useDescription ? loadClosure().description() : loadClosure()
     }
     private var model = ViewModel.emptyModel {
         didSet {

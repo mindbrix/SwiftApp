@@ -44,6 +44,12 @@ struct ViewModel: Equatable {
     let title: String
     let sections: [Section]
     
+    static let emptyModel = Self(style: .init(), title: "", sections: [])
+    
+    typealias Closure = () -> ViewModel
+}
+
+extension ViewModel {
     func description() -> Self {
         Self(
             style: style,
@@ -66,7 +72,4 @@ struct ViewModel: Equatable {
             })
         )
     }
-    static let emptyModel = Self(style: .init(), title: "", sections: [])
-    
-    typealias Closure = () -> ViewModel
 }

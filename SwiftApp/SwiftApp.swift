@@ -133,6 +133,7 @@ class SwiftApp {
                 guard let self = self, let vc = vc else {
                     return ViewModel.emptyModel
                 }
+                let name = self.style.name, size = self.style.size
                 return ViewModel(style: self.modelStyle, title: title, sections: [
                     Section(
                         header: .stack([
@@ -145,12 +146,12 @@ class SwiftApp {
                         ]),
                         cells: [
                             .stack([
-                                .image(self.minusImage, width: self.style.size, onTap: {
-                                    self.style = .init(name: self.style.name, size: max(4, self.style.size - 1))
+                                .image(self.minusImage, width: size, onTap: {
+                                    self.style = .init(name: name, size: max(4, size - 1))
                                 }),
-                                .text("\(self.style.size)", style: self.counterStyle),
-                                .image(self.plusImage, width: self.style.size, onTap: {
-                                    self.style = .init(name: self.style.name, size: self.style.size + 1)
+                                .text("\(size)", style: self.counterStyle),
+                                .image(self.plusImage, width: size, onTap: {
+                                    self.style = .init(name: name, size: size + 1)
                                 })
                             ]),
                         ]),

@@ -67,7 +67,7 @@ class CellView: UIView {
             let cellStyle = style ?? modelStyle.cell
             stackInsets = cellStyle.insets ?? Style.defaultInsets
             stack.axis = cellStyle.isVertical ? .vertical : .horizontal
-            stack.alignment = cellStyle.isVertical ? .fill : .leading
+            stack.alignment = cellStyle.isVertical ? .fill : .center
             for (index, atom) in atoms.enumerated() {
                 applyAtom(atom,
                     modelStyle: modelStyle,

@@ -61,3 +61,56 @@ struct Style: Equatable  {
         right: Style.spacing
     )
 }
+
+struct FontStyle: Equatable {
+    let name: String
+    let size: CGFloat
+    
+    static let defaultStyle = Self(name: "HelveticaNeue", size: 18)
+}
+
+struct AppStyle {
+    var onSet: (() -> Void)?
+    init() {
+        updateStyles()
+    }
+    var style: FontStyle = .defaultStyle {
+        didSet {
+            guard style != oldValue else { return }
+            updateStyles()
+            onSet?()
+        }
+    }
+    var smallStyle = TextStyle()
+    var defaultStyle = TextStyle()
+    var largeStyle = TextStyle()
+    var hugeStyle = TextStyle()
+    var counterStyle = TextStyle()
+    var modelStyle = Style()
+    var minusImage = UIImage()
+    var plusImage = UIImage()
+    
+    mutating func updateStyles() {
+        let name = self.style.name, size = self.style.size
+        let smallFont = UIFont(name: name, size: size * 0.86)
+        let defaultFont = UIFont(name: name, size: size)
+        let largeFont = UIFont(name: name, size: size * 1.2)
+        let hugeFont = UIFont(name: name, size: size * 1.6)
+        
+        smallStyle = .init(color: .gray, font: smallFont)
+        defaultStyle = .init(font: defaultFont)
+        largeStyle = .init(font: largeFont)
+        hugeStyle = .init(font: hugeFont, alignment: .center)
+        counterStyle = .init(font: largeFont, alignment: .center)
+        modelStyle = .init(text: defaultStyle)
+        let config = UIImage.SymbolConfiguration(pointSize: size, weight: .medium)
+        minusImage = UIImage(
+            systemName: "minus.circle",
+            withConfiguration: config
+        ) ?? UIImage()
+        plusImage = UIImage(
+            systemName: "plus.circle",
+            withConfiguration: config
+        ) ?? UIImage()
+    }
+}

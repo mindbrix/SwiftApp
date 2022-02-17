@@ -29,22 +29,23 @@ enum Screen: String, CaseIterable {
                 guard let app = app else {
                     return ViewModel.emptyModel
                 }
-                let name = app.style.name, size = app.style.size
-                return ViewModel(style: app.modelStyle, title: title, sections: [
+                let style = app.style 
+                let name = style.style.name, size = style.style.size
+                return ViewModel(style: style.modelStyle, title: title, sections: [
                     Section(
                         header: .stack([
-                            .text(app.style.name, style: .init(alignment: .center), onTap: {
+                            .text(style.style.name, style: .init(alignment: .center), onTap: {
                                 app.push(.Fonts)
                             }),
                         ]),
                         cells: [
                             .stack([
-                                .image(app.minusImage, width: size, onTap: {
-                                    app.style = .init(name: name, size: max(4, size - 1))
+                                .image(style.minusImage, width: size, onTap: {
+                                    app.style.style = .init(name: name, size: max(4, size - 1))
                                 }),
-                                .text("\(size)", style: app.counterStyle),
-                                .image(app.plusImage, width: size, onTap: {
-                                    app.style = .init(name: name, size: size + 1)
+                                .text("\(size)", style: style.counterStyle),
+                                .image(style.plusImage, width: size, onTap: {
+                                    app.style.style = .init(name: name, size: size + 1)
                                 })
                             ]),
                         ]),
@@ -61,11 +62,11 @@ enum Screen: String, CaseIterable {
                         cells: [
                             .stack([
                                 .image(grab0, onTap: { print("grab0") }),
-                                .text(.longText, style: app.smallStyle)
+                                .text(.longText, style: style.smallStyle)
                             ], style: vertical),
                             .stack([
                                 .image(grab0, width: 64, onTap: { print("grab0") }),
-                                .text(.longText, style: app.smallStyle),
+                                .text(.longText, style: style.smallStyle),
                             ]),
                         ])
                 ])
@@ -73,23 +74,24 @@ enum Screen: String, CaseIterable {
         case .Counter:
             return { [weak app] in
                 guard let app = app else { return ViewModel.emptyModel }
+                let style = app.style
                 let count = app.getDefaultsItem(.counter) as? Int ?? 0
                 
-                return ViewModel(style: app.modelStyle, title: title, sections: [
+                return ViewModel(style: style.modelStyle, title: title, sections: [
                     Section(
                         header: nil,
                         cells: [
                             .stack([
                                 .text(String(count),
-                                    style: app.hugeStyle)]),
+                                    style: style.hugeStyle)]),
                             .stack([
                                 .text("Down",
-                                    style: app.counterStyle,
+                                    style: style.counterStyle,
                                     onTap: {
                                         app.setDefaultsItem(.counter, value: max(0, count - 1))
                                     }),
                                 .text("Up",
-                                    style: app.counterStyle,
+                                    style: style.counterStyle,
                                     onTap: {
                                         app.setDefaultsItem(.counter, value: count + 1)
                                     })
@@ -101,15 +103,16 @@ enum Screen: String, CaseIterable {
         case .DefaultStore:
             return { [weak app] in
                 guard let app = app else { return ViewModel.emptyModel }
-                return ViewModel(style: app.modelStyle, title: title, sections: [
+                let style = app.style
+                return ViewModel(style: style.modelStyle, title: title, sections: [
                     Section(
                         header: .stack([.text(title)]),
                         cells: DefaultsKey.allCases.map({ key in
                             .stack([
                                 .text(key.rawValue,
-                                    style: app.smallStyle),
+                                    style: style.smallStyle),
                                 .input(String(describing: app.getDefaultsItem(key)),
-                                    style: app.largeStyle)
+                                    style: style.largeStyle)
                             ], style: vertical)
                         })
                 )])
@@ -117,7 +120,8 @@ enum Screen: String, CaseIterable {
         case .DequeueTest:
             return { [weak app] in
                 guard let app = app else { return ViewModel.emptyModel }
-                return ViewModel(style: app.modelStyle, title: title, sections: [
+                let style = app.style
+                return ViewModel(style: style.modelStyle, title: title, sections: [
                     Section(
                         header: .stack([.text(title)]),
                         cells: Array(1...100).map({ int in
@@ -132,7 +136,8 @@ enum Screen: String, CaseIterable {
         case .Fonts:
             return {  [weak app] in
                 guard let app = app else { return ViewModel.emptyModel }
-                return ViewModel(style: app.modelStyle, title: title, sections:
+                let style = app.style
+                return ViewModel(style: style.modelStyle, title: title, sections:
                     UIFont.familyNames.filter({ $0 != "System Font" }).map({ familyName in
                         Section(
                             header: .stack([
@@ -141,9 +146,9 @@ enum Screen: String, CaseIterable {
                             cells: UIFont.fontNames(forFamilyName: familyName).map({ fontName in
                                 .stack([
                                     .text(fontName,
-                                        style: TextStyle(font: UIFont.init(name: fontName, size: app.style.size)),
+                                        style: TextStyle(font: UIFont.init(name: fontName, size: style.style.size)),
                                         onTap: {
-                                            app.style = .init(name: fontName, size: app.style.size)
+                                            app.style.style = .init(name: fontName, size: style.style.size)
                                         }
                                     )
                                 ])
@@ -155,7 +160,8 @@ enum Screen: String, CaseIterable {
         case .Login:
             return {  [weak app] in
                 guard let app = app else { return ViewModel.emptyModel }
-                return ViewModel(style: app.modelStyle, title: title, sections: [
+                let style = app.style 
+                return ViewModel(style: style.modelStyle, title: title, sections: [
                     Section(
                         header: nil,
                         cells: [
@@ -163,19 +169,19 @@ enum Screen: String, CaseIterable {
                                 .text("\n"),
                                 .input(app.getDefaultsItem(.username) as? String ?? "",
                                     placeholder: "User",
-                                    style: app.hugeStyle,
+                                    style: style.hugeStyle,
                                     onSet: { string in
                                         app.setDefaultsItem(.username, value: string)
                                     }),
                                 .input(app.getDefaultsItem(.password) as? String ?? "",
                                     isSecure: true,
                                     placeholder: "Password",
-                                    style: app.hugeStyle,
+                                    style: style.hugeStyle,
                                     onSet: { string in
                                         app.setDefaultsItem(.password, value: string)
                                     }),
                                 .text("forgot password?",
-                                    style: app.smallStyle.withAlignment(.center),
+                                    style: style.smallStyle.withAlignment(.center),
                                     onTap: {
                                     }),
                                 ], style: vertical),

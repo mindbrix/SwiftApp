@@ -15,16 +15,13 @@ enum DefaultsKey: String, CaseIterable {
 }
 
 class SwiftApp {
-    struct FontStyle: Equatable {
-        let name: String
-        let size: CGFloat
-        
-        static let defaultStyle = Self(name: "HelveticaNeue", size: 18)
-    }
-    
     init(_ window: UIWindow, rootScreen: Screen) {
         self.window = window
-        updateStyles()
+        self.style = AppStyle()
+        self.style.onSet = { [ weak self] in
+            guard let self = self else { return }
+            self.setNeedsReload()
+        }
         let vc = TableViewController(rootScreen.modelClosure(app: self))
         window.rootViewController = rootScreen.embedInNavController ? UINavigationController(rootViewController: vc) : vc
         window.makeKeyAndVisible()
@@ -39,46 +36,9 @@ class SwiftApp {
     }
    
     private let window: UIWindow
+    var style: AppStyle
     
-    var style: FontStyle = .defaultStyle {
-        didSet {
-            guard style != oldValue else { return }
-            updateStyles()
-            setNeedsReload()
-        }
-    }
-    var smallStyle = TextStyle()
-    var defaultStyle = TextStyle()
-    var largeStyle = TextStyle()
-    var hugeStyle = TextStyle()
-    var counterStyle = TextStyle()
-    var modelStyle = Style()
-    var minusImage = UIImage()
-    var plusImage = UIImage()
     
-    private func updateStyles() {
-        let name = self.style.name, size = self.style.size
-        let smallFont = UIFont(name: name, size: size * 0.86)
-        let defaultFont = UIFont(name: name, size: size)
-        let largeFont = UIFont(name: name, size: size * 1.2)
-        let hugeFont = UIFont(name: name, size: size * 1.6)
-        
-        smallStyle = .init(color: .gray, font: smallFont)
-        defaultStyle = .init(font: defaultFont)
-        largeStyle = .init(font: largeFont)
-        hugeStyle = .init(font: hugeFont, alignment: .center)
-        counterStyle = .init(font: largeFont, alignment: .center)
-        modelStyle = .init(text: defaultStyle)
-        let config = UIImage.SymbolConfiguration(pointSize: size, weight: .medium)
-        minusImage = UIImage(
-            systemName: "minus.circle",
-            withConfiguration: config
-        ) ?? UIImage()
-        plusImage = UIImage(
-            systemName: "plus.circle",
-            withConfiguration: config
-        ) ?? UIImage()
-    }
     func getDefaultsItem(_ key: DefaultsKey) -> Any? {
         UserDefaults.standard.object(forKey: key.rawValue)
     }
@@ -88,6 +48,7 @@ class SwiftApp {
         UserDefaults.standard.synchronize()
         setNeedsReload()
     }
+    
     
     private var topViewController: TableViewController? {
         if let nc = window.rootViewController as? UINavigationController,

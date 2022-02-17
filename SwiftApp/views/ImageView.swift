@@ -27,6 +27,6 @@ class ImageView: UIImageView {
     var heightConstraint: NSLayoutConstraint?
     
     lazy var widthConstraint: NSLayoutConstraint = {
-        widthAnchor.constraint(equalToConstant: 0)
+        widthAnchor.constraint(lessThanOrEqualToConstant: 0)
     }()
 }

@@ -51,22 +51,14 @@ struct Style: Equatable  {
         self.cell = cell
         self.text = text
     }
-    
-    static let spacing: CGFloat = 4
-    
-    static let defaultInsets = UIEdgeInsets(
-        top: Style.spacing,
-        left: Style.spacing,
-        bottom: Style.spacing,
-        right: Style.spacing
-    )
 }
 
 struct AppStyle {
-    var onSet: (() -> Void)?
     init() {
         updateStyles()
     }
+    
+    var onSet: (() -> Void)?
     var name = "HelveticaNeue" {
         didSet {
             guard name != oldValue else { return }
@@ -112,4 +104,12 @@ struct AppStyle {
             withConfiguration: config
         ) ?? UIImage()
     }
+    static let spacing: CGFloat = 4
+    
+    static let defaultInsets = UIEdgeInsets(
+        top: AppStyle.spacing,
+        left: AppStyle.spacing,
+        bottom: AppStyle.spacing,
+        right: AppStyle.spacing
+    )
 }

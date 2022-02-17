@@ -25,7 +25,6 @@ struct CellStyle: Equatable {
     }
 }
 
-
 struct TextStyle: Equatable {
     let color: UIColor
     let font: UIFont?
@@ -42,11 +41,10 @@ struct TextStyle: Equatable {
     }
 }
 
-
 struct Style: Equatable  {
     let cell: CellStyle
     let text: TextStyle
-    
+
     init(cell: CellStyle = .init(), text: TextStyle = .init()) {
         self.cell = cell
         self.text = text
@@ -104,12 +102,12 @@ struct AppStyle {
             withConfiguration: config
         ) ?? UIImage()
     }
-    static let spacing: CGFloat = 4
     
+    static let spacing: CGFloat = 4
     static let defaultInsets = UIEdgeInsets(
-        top: AppStyle.spacing,
-        left: AppStyle.spacing,
-        bottom: AppStyle.spacing,
-        right: AppStyle.spacing
+        top: Self.spacing,
+        left: Self.spacing,
+        bottom: Self.spacing,
+        right: Self.spacing
     )
 }

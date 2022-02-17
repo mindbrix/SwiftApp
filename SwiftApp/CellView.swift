@@ -53,7 +53,7 @@ class CellView: UIView {
         self.cell = cell
         stackInsets = .zero
         stack.axis = .vertical
-        stack.spacing = Style.spacing
+        stack.spacing = AppStyle.spacing
         let types = cell?.atomsTypes ?? []
         if types != atomsTypes {
             atomsTypes = types
@@ -65,7 +65,7 @@ class CellView: UIView {
         switch cell {
         case .stack(let atoms, let style):
             let cellStyle = style ?? modelStyle.cell
-            stackInsets = cellStyle.insets ?? Style.defaultInsets
+            stackInsets = cellStyle.insets ?? AppStyle.defaultInsets
             stack.axis = cellStyle.isVertical ? .vertical : .horizontal
             stack.alignment = cellStyle.isVertical ? .fill : .center
             for (index, atom) in atoms.enumerated() {

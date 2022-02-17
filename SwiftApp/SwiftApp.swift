@@ -33,9 +33,12 @@ class SwiftApp {
         var embedInNavController: Bool { self == .Main }
     }
     
-    init(window: UIWindow) {
+    init(_ window: UIWindow, rootScreen: Screen) {
         self.window = window
         updateStyles()
+        let vc = makeViewController(for: rootScreen)
+        window.rootViewController = rootScreen.embedInNavController ? UINavigationController(rootViewController: vc) : vc
+        window.makeKeyAndVisible()
         
         Timer.scheduledTimer(withTimeInterval: 1 / 60, repeats: true) { [weak self] timer in
             guard let self = self else { return }
@@ -43,14 +46,6 @@ class SwiftApp {
                 self.topViewController?.loadModel()
                 self.needsReload = false
             }
-        }
-    }
-    
-    var rootScreen: Screen = .Main {
-        didSet {
-            let vc = makeViewController(for: rootScreen)
-            window.rootViewController = rootScreen.embedInNavController ? UINavigationController(rootViewController: vc) : vc
-            window.makeKeyAndVisible()
         }
     }
    

@@ -58,24 +58,25 @@ struct ModelStyle: Equatable {
     )
 }
 
-struct AppStyle {
+struct StyleCache {
     init() {
         updateStyles()
     }
     
-    var onSet: (() -> Void)?
+    var didUpdate: (() -> Void)?
+
     var name = "HelveticaNeue" {
         didSet {
             guard name != oldValue else { return }
             updateStyles()
-            onSet?()
+            didUpdate?()
         }
     }
     var size: CGFloat = 18 {
         didSet {
             guard size != oldValue else { return }
             updateStyles()
-            onSet?()
+            didUpdate?()
         }
     }
     var smallStyle = TextStyle()

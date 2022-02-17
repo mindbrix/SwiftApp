@@ -17,8 +17,8 @@ enum DefaultsKey: String, CaseIterable {
 class SwiftApp {
     init(_ window: UIWindow, rootScreen: Screen) {
         self.window = window
-        self.style = AppStyle()
-        self.style.onSet = { [ weak self] in
+        self.styleCache = StyleCache()
+        self.styleCache.didUpdate = { [ weak self] in
             guard let self = self else { return }
             self.setNeedsReload()
         }
@@ -36,7 +36,7 @@ class SwiftApp {
     }
    
     private let window: UIWindow
-    var style: AppStyle
+    var styleCache: StyleCache
     
     
     func getDefaultsItem(_ key: DefaultsKey) -> Any? {

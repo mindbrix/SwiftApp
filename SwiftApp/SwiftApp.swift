@@ -85,7 +85,7 @@ class SwiftApp {
         hugeStyle = .init(font: hugeFont, alignment: .center)
         counterStyle = .init(font: largeFont, alignment: .center)
         modelStyle = .init(text: defaultStyle)
-        let config = UIImage.SymbolConfiguration(pointSize: size, weight: .bold)
+        let config = UIImage.SymbolConfiguration(pointSize: size, weight: .medium)
         minusImage = UIImage(
             systemName: "minus.circle",
             withConfiguration: config

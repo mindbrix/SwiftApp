@@ -22,17 +22,6 @@ class SwiftApp {
         case username
     }
     
-    enum Screen: String, CaseIterable {
-        case Main
-        case Counter
-        case DefaultStore
-        case DequeueTest
-        case Fonts
-        case Login
-        
-        var embedInNavController: Bool { self == .Main }
-    }
-    
     init(_ window: UIWindow, rootScreen: Screen) {
         self.window = window
         updateStyles()
@@ -116,6 +105,15 @@ class SwiftApp {
         needsReload = true
     }
     
+    func push(_ screen: Screen) {
+        guard let nc = window.rootViewController as? UINavigationController
+        else {
+            return
+        }
+        let vc = makeViewController(for: screen)
+        nc.pushViewController(vc, animated: true)
+    }
+    
     private func makeViewController(for screen: Screen) -> TableViewController {
         let vc = TableViewController()
         let title = screen.rawValue
@@ -124,8 +122,8 @@ class SwiftApp {
         
         switch screen {
         case .Main:
-            vc.loadClosure = { [weak self, weak vc] in
-                guard let self = self, let vc = vc else {
+            vc.loadClosure = { [weak self] in
+                guard let self = self else {
                     return ViewModel.emptyModel
                 }
                 let name = self.style.name, size = self.style.size
@@ -133,10 +131,7 @@ class SwiftApp {
                     Section(
                         header: .stack([
                             .text(self.style.name, style: .init(alignment: .center), onTap: {
-                                guard let nc = vc.navigationController else { return }
-                                
-                                nc.pushViewController(self.makeViewController(for: .Fonts),
-                                    animated: true)
+                                self.push(.Fonts)
                             }),
                         ]),
                         cells: [
@@ -154,10 +149,7 @@ class SwiftApp {
                         header: .stack([.text("Menu")]),
                         cells: Screen.allCases.filter({ !$0.embedInNavController }).map({ screen in
                             .stack([.text(screen.rawValue, onTap: {
-                                guard let nc = vc.navigationController else { return }
-                                
-                                nc.pushViewController(self.makeViewController(for: screen),
-                                    animated: true)
+                                self.push(screen)
                             })])
                         })
                     ),

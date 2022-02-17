@@ -25,7 +25,7 @@ class SwiftApp {
     init(_ window: UIWindow, rootScreen: Screen) {
         self.window = window
         updateStyles()
-        let vc = makeViewController(for: rootScreen)
+        let vc = TableViewController(rootScreen.modelClosure(app: self))
         window.rootViewController = rootScreen.embedInNavController ? UINavigationController(rootViewController: vc) : vc
         window.makeKeyAndVisible()
         
@@ -110,13 +110,7 @@ class SwiftApp {
         else {
             return
         }
-        let vc = makeViewController(for: screen)
+        let vc = TableViewController(screen.modelClosure(app: self))
         nc.pushViewController(vc, animated: true)
-    }
-    
-    private func makeViewController(for screen: Screen) -> TableViewController {
-        let vc = TableViewController()
-        vc.loadClosure = screen.modelClosure(app: self)
-        return vc
     }
 }

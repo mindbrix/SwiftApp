@@ -8,9 +8,14 @@
 import UIKit
 
 class TableViewController: UITableViewController {
-    private let floatingField = TextField()
-    private var responderClosure: ResponderClosure?
-    
+    init(_ loadClosure: @escaping ViewModel.Closure) {
+        self.loadClosure = loadClosure
+        super.init(style: .plain)
+    }
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.register(CellViewCell.self,
@@ -50,7 +55,9 @@ class TableViewController: UITableViewController {
         loadModel()
     }
     
-    var loadClosure: ViewModel.Closure = { ViewModel.emptyModel }
+    private let loadClosure: ViewModel.Closure
+    private let floatingField = TextField()
+    private var responderClosure: ResponderClosure?
     var useDescription = false
     
     func loadModel() {

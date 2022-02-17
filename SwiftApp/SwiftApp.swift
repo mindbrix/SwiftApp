@@ -18,9 +18,9 @@ class SwiftApp {
     init(_ window: UIWindow, rootScreen: Screen) {
         self.window = window
         self.styleCache = StyleCache()
-        self.styleCache.didUpdate = { [ weak self] in
+        self.styleCache.didUpdate = { [weak self] in
             guard let self = self else { return }
-            self.setNeedsReload()
+            self.needsReload = true
         }
         let vc = TableViewController(rootScreen.modelClosure(app: self))
         window.rootViewController = rootScreen.embedInNavController ? UINavigationController(rootViewController: vc) : vc
@@ -35,8 +35,9 @@ class SwiftApp {
         }
     }
    
-    private let window: UIWindow
     var styleCache: StyleCache
+    private let window: UIWindow
+    private var needsReload = false
     
     
     func getDefaultsItem(_ key: DefaultsKey) -> Any? {
@@ -46,15 +47,9 @@ class SwiftApp {
     func setDefaultsItem(_ key: DefaultsKey, value: Any) {
         UserDefaults.standard.setValue(value, forKey: key.rawValue)
         UserDefaults.standard.synchronize()
-        setNeedsReload()
-    }
-    
-    
-    private var needsReload = false
-    
-    private func setNeedsReload() {
         needsReload = true
     }
+    
     
     func push(_ screen: Screen) {
         guard let nc = window.rootViewController as? UINavigationController

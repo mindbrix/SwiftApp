@@ -49,6 +49,13 @@ struct ModelStyle: Equatable {
         self.cell = cell
         self.text = text
     }
+    static let spacing: CGFloat = 4
+    static let defaultInsets = UIEdgeInsets(
+        top: Self.spacing,
+        left: Self.spacing,
+        bottom: Self.spacing,
+        right: Self.spacing
+    )
 }
 
 struct AppStyle {
@@ -102,12 +109,4 @@ struct AppStyle {
             withConfiguration: config
         ) ?? UIImage()
     }
-    
-    static let spacing: CGFloat = 4
-    static let defaultInsets = UIEdgeInsets(
-        top: Self.spacing,
-        left: Self.spacing,
-        bottom: Self.spacing,
-        right: Self.spacing
-    )
 }

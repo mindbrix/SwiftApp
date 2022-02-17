@@ -18,23 +18,31 @@ class SwiftAppTests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
+    func testImages() throws {
+        guard let img0 = UIImage(systemName: "plus.circle"),
+                let img1 = UIImage(systemName: "minus.circle"),
+                let cg0 = img0.cgImage,
+                let cg1 = img1.cgImage
+        else {
+            return
+        }
+        
+        XCTAssertTrue(img0 != img1)
+        XCTAssertTrue(img0.hashValue != img1.hashValue)
+        XCTAssertTrue(cg0.hashValue != cg1.hashValue)
+        XCTAssertTrue(String(img0.hashValue).count >= String(cg0.hashValue).count)
+        
+        let rawImg0 = UIImage(cgImage: cg0)
+        let rawImg1 = UIImage(cgImage: cg0)
+        XCTAssertTrue(rawImg0 == rawImg1)
+    }
+
     func testModel() throws {
         let c0 = Cell.stack([.text("Title0")])
         let c1 = Cell.stack([.text("Title1")])
-        assert("\(c0)" == String(describing: c0))
+        XCTAssertTrue("\(c0)" == String(describing: c0))
         XCTAssertEqual(c0, c0)
         XCTAssertNotEqual(c0, c1)
-        
-        let img0 = UIImage(systemName: "plus.circle") ?? UIImage()
-        let img1 = UIImage(systemName: "minus.circle") ?? UIImage()
-        assert(img0 != img1)
-        
-        guard let cg0 = img0.cgImage else { return }
-        let cgImage0 = UIImage(cgImage: cg0)
-        let cgImage1 = UIImage(cgImage: cg0)
-        print("\(cgImage0.hashValue)")
-        print("\(cgImage1)")
-        assert(cgImage0 == cgImage1)
     }
 
     func testPerformanceExample() throws {

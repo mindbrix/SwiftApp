@@ -62,21 +62,21 @@ struct Style: Equatable  {
     )
 }
 
-struct FontStyle: Equatable {
-    let name: String
-    let size: CGFloat
-    
-    static let defaultStyle = Self(name: "HelveticaNeue", size: 18)
-}
-
 struct AppStyle {
     var onSet: (() -> Void)?
     init() {
         updateStyles()
     }
-    var style: FontStyle = .defaultStyle {
+    var name = "HelveticaNeue" {
         didSet {
-            guard style != oldValue else { return }
+            guard name != oldValue else { return }
+            updateStyles()
+            onSet?()
+        }
+    }
+    var size: CGFloat = 18 {
+        didSet {
+            guard size != oldValue else { return }
             updateStyles()
             onSet?()
         }
@@ -90,8 +90,7 @@ struct AppStyle {
     var minusImage = UIImage()
     var plusImage = UIImage()
     
-    mutating func updateStyles() {
-        let name = self.style.name, size = self.style.size
+    mutating private func updateStyles() {
         let smallFont = UIFont(name: name, size: size * 0.86)
         let defaultFont = UIFont(name: name, size: size)
         let largeFont = UIFont(name: name, size: size * 1.2)

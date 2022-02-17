@@ -29,23 +29,22 @@ enum Screen: String, CaseIterable {
                 guard let app = app else {
                     return ViewModel.emptyModel
                 }
-                let style = app.style 
-                let name = style.style.name, size = style.style.size
+                let style = app.style
                 return ViewModel(style: style.modelStyle, title: title, sections: [
                     Section(
                         header: .stack([
-                            .text(style.style.name, style: .init(alignment: .center), onTap: {
+                            .text(style.name, style: .init(alignment: .center), onTap: {
                                 app.push(.Fonts)
                             }),
                         ]),
                         cells: [
                             .stack([
-                                .image(style.minusImage, width: size, onTap: {
-                                    app.style.style = .init(name: name, size: max(4, size - 1))
+                                .image(style.minusImage, width: style.size, onTap: {
+                                    app.style.size = max(4, style.size - 1)
                                 }),
-                                .text("\(size)", style: style.counterStyle),
-                                .image(style.plusImage, width: size, onTap: {
-                                    app.style.style = .init(name: name, size: size + 1)
+                                .text("\(style.size)", style: style.counterStyle),
+                                .image(style.plusImage, width: style.size, onTap: {
+                                    app.style.size = style.size + 1
                                 })
                             ]),
                         ]),
@@ -146,9 +145,9 @@ enum Screen: String, CaseIterable {
                             cells: UIFont.fontNames(forFamilyName: familyName).map({ fontName in
                                 .stack([
                                     .text(fontName,
-                                        style: TextStyle(font: UIFont.init(name: fontName, size: style.style.size)),
+                                        style: TextStyle(font: UIFont.init(name: fontName, size: style.size)),
                                         onTap: {
-                                            app.style.style = .init(name: fontName, size: style.style.size)
+                                            app.style.name = fontName
                                         }
                                     )
                                 ])

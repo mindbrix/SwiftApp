@@ -38,7 +38,7 @@ class CellView: UIView {
         addSubview(stack)
         underline.translatesAutoresizingMaskIntoConstraints = false
         addSubview(underline)
-        addUnderlineConstraints(underline)
+        NSLayoutConstraint.activate(underlineConstraints(for: underline))
         NSLayoutConstraint.activate(
             insetConstraints
             + [heightAnchor.constraint(greaterThanOrEqualToConstant: 1)]

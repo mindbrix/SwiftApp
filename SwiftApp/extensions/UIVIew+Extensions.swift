@@ -9,21 +9,21 @@ import Foundation
 import UIKit
 
 extension UIView {
-    func addUnderlineConstraints(_ separator: UIView, height: CGFloat = 0.5) {
-        NSLayoutConstraint.activate([
-            separator.topAnchor.constraint(equalTo: bottomAnchor),
-            separator.leadingAnchor.constraint(equalTo: leadingAnchor),
-            separator.trailingAnchor.constraint(equalTo: trailingAnchor),
-            separator.heightAnchor.constraint(equalToConstant: height)
-        ])
-    }
-    
-    func edgeConstraints(for subview: UIView, insets: UIEdgeInsets = .zero) -> [NSLayoutConstraint] {
+   func edgeConstraints(for subview: UIView, insets: UIEdgeInsets = .zero) -> [NSLayoutConstraint] {
         [
             subview.topAnchor.constraint(equalTo: topAnchor, constant: insets.top),
             subview.leadingAnchor.constraint(equalTo: leadingAnchor, constant: insets.left),
             subview.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -insets.bottom),
             subview.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -insets.right)
+        ]
+    }
+    
+    func underlineConstraints(for subview: UIView, height: CGFloat = 0.5) -> [NSLayoutConstraint] {
+        [
+            subview.topAnchor.constraint(equalTo: bottomAnchor),
+            subview.leadingAnchor.constraint(equalTo: leadingAnchor),
+            subview.trailingAnchor.constraint(equalTo: trailingAnchor),
+            subview.heightAnchor.constraint(equalToConstant: height)
         ]
     }
     

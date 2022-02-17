@@ -13,15 +13,16 @@ typealias ResponderClosure = (TextField) -> Bool?
 class TextField : UITextField {
     init() {
         super.init(frame: .zero)
-        addSubview(underline)
         underline.translatesAutoresizingMaskIntoConstraints = false
-        addUnderlineConstraints(underline)
+        addSubview(underline)
+        NSLayoutConstraint.activate(underlineConstraints(for: underline))
         delegate = self
     }
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
+    let underline = UIView()
     var responderClosure: ResponderClosure?
     var onSet: ((String) -> Void)?
     
@@ -64,7 +65,6 @@ class TextField : UITextField {
             trailngConstraint?.isActive = true
         }
     }
-    let underline = UIView()
 }
 
 extension TextField: UITextFieldDelegate {

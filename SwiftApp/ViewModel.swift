@@ -40,7 +40,7 @@ struct Section: Equatable {
 }
 
 struct ViewModel: Equatable {
-    let style: Style
+    let style: ModelStyle
     let title: String
     let sections: [Section]
     

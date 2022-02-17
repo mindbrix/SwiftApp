@@ -41,7 +41,7 @@ struct TextStyle: Equatable {
     }
 }
 
-struct Style: Equatable  {
+struct ModelStyle: Equatable {
     let cell: CellStyle
     let text: TextStyle
 
@@ -76,7 +76,7 @@ struct AppStyle {
     var largeStyle = TextStyle()
     var hugeStyle = TextStyle()
     var counterStyle = TextStyle()
-    var modelStyle = Style()
+    var modelStyle = ModelStyle()
     var minusImage = UIImage()
     var plusImage = UIImage()
     

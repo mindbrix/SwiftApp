@@ -49,7 +49,7 @@ class CellView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func apply(_ cell: Cell?, modelStyle: Style, responderClosure: ResponderClosure? = nil) {
+    func apply(_ cell: Cell?, modelStyle: ModelStyle, responderClosure: ResponderClosure? = nil) {
         self.cell = cell
         stackInsets = .zero
         stack.axis = .vertical
@@ -139,7 +139,7 @@ class CellView: UIView {
         }
     }
     
-    private func applyAtom(_ atom: Atom, modelStyle: Style, atomView: UIView) {
+    private func applyAtom(_ atom: Atom, modelStyle: ModelStyle, atomView: UIView) {
         switch atom {
         case .image(let image, let width, let onTap):
             guard let iv = atomView as? ImageView else { return }

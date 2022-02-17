@@ -82,7 +82,7 @@ class TableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerColor = UIColor(white: 0.9, alpha: 1)
-        let headerStyle = Style(
+        let headerStyle = ModelStyle(
             cell: model.style.cell.withColor(headerColor),
             text: model.style.text)
         let cv = CellView()

@@ -123,25 +123,25 @@ class SwiftApp {
         switch screen {
         case .Main:
             vc.loadClosure = { [weak self] in
-                guard let self = self else {
+                guard let app = self else {
                     return ViewModel.emptyModel
                 }
-                let name = self.style.name, size = self.style.size
-                return ViewModel(style: self.modelStyle, title: title, sections: [
+                let name = app.style.name, size = app.style.size
+                return ViewModel(style: app.modelStyle, title: title, sections: [
                     Section(
                         header: .stack([
-                            .text(self.style.name, style: .init(alignment: .center), onTap: {
-                                self.push(.Fonts)
+                            .text(app.style.name, style: .init(alignment: .center), onTap: {
+                                app.push(.Fonts)
                             }),
                         ]),
                         cells: [
                             .stack([
-                                .image(self.minusImage, width: size, onTap: {
-                                    self.style = .init(name: name, size: max(4, size - 1))
+                                .image(app.minusImage, width: size, onTap: {
+                                    app.style = .init(name: name, size: max(4, size - 1))
                                 }),
-                                .text("\(size)", style: self.counterStyle),
-                                .image(self.plusImage, width: size, onTap: {
-                                    self.style = .init(name: name, size: size + 1)
+                                .text("\(size)", style: app.counterStyle),
+                                .image(app.plusImage, width: size, onTap: {
+                                    app.style = .init(name: name, size: size + 1)
                                 })
                             ]),
                         ]),
@@ -149,7 +149,7 @@ class SwiftApp {
                         header: .stack([.text("Menu")]),
                         cells: Screen.allCases.filter({ !$0.embedInNavController }).map({ screen in
                             .stack([.text(screen.rawValue, onTap: {
-                                self.push(screen)
+                                app.push(screen)
                             })])
                         })
                     ),
@@ -158,37 +158,37 @@ class SwiftApp {
                         cells: [
                             .stack([
                                 .image(grab0, onTap: { print("grab0") }),
-                                .text(.longText, style: self.smallStyle)
+                                .text(.longText, style: app.smallStyle)
                             ], style: vertical),
                             .stack([
                                 .image(grab0, width: 64, onTap: { print("grab0") }),
-                                .text(.longText, style: self.smallStyle),
+                                .text(.longText, style: app.smallStyle),
                             ]),
                         ])
                 ])
             }
         case .Counter:
             vc.loadClosure = { [weak self] in
-                guard let self = self else { return ViewModel.emptyModel }
-                let count = self.getDefaultsItem(.counter) as? Int ?? 0
+                guard let app = self else { return ViewModel.emptyModel }
+                let count = app.getDefaultsItem(.counter) as? Int ?? 0
                 
-                return ViewModel(style: self.modelStyle, title: title, sections: [
+                return ViewModel(style: app.modelStyle, title: title, sections: [
                     Section(
                         header: nil,
                         cells: [
                             .stack([
                                 .text(String(count),
-                                    style: self.hugeStyle)]),
+                                    style: app.hugeStyle)]),
                             .stack([
                                 .text("Down",
-                                    style: self.counterStyle,
+                                    style: app.counterStyle,
                                     onTap: {
-                                        self.setDefaultsItem(.counter, value: max(0, count - 1))
+                                        app.setDefaultsItem(.counter, value: max(0, count - 1))
                                     }),
                                 .text("Up",
-                                    style: self.counterStyle,
+                                    style: app.counterStyle,
                                     onTap: {
-                                        self.setDefaultsItem(.counter, value: count + 1)
+                                        app.setDefaultsItem(.counter, value: count + 1)
                                     })
                             ]),
                         ]
@@ -197,16 +197,16 @@ class SwiftApp {
             }
         case .DefaultStore:
             vc.loadClosure = { [weak self] in
-                guard let self = self else { return ViewModel.emptyModel }
-                return ViewModel(style: self.modelStyle, title: title, sections: [
+                guard let app = self else { return ViewModel.emptyModel }
+                return ViewModel(style: app.modelStyle, title: title, sections: [
                     Section(
                         header: .stack([.text(title)]),
                         cells: DefaultsKey.allCases.map({ key in
                             .stack([
                                 .text(key.rawValue,
-                                    style: self.smallStyle),
-                                .input(String(describing: self.getDefaultsItem(key)),
-                                    style: self.largeStyle)
+                                    style: app.smallStyle),
+                                .input(String(describing: app.getDefaultsItem(key)),
+                                    style: app.largeStyle)
                             ], style: vertical)
                         })
                 )])
@@ -226,8 +226,9 @@ class SwiftApp {
                 ])
             }
         case .Fonts:
-            vc.loadClosure = {
-                return ViewModel(style: self.modelStyle, title: title, sections:
+            vc.loadClosure = {  [weak self] in
+                guard let app = self else { return ViewModel.emptyModel }
+                return ViewModel(style: app.modelStyle, title: title, sections:
                     UIFont.familyNames.filter({ $0 != "System Font" }).map({ familyName in
                         Section(
                             header: .stack([
@@ -236,9 +237,9 @@ class SwiftApp {
                             cells: UIFont.fontNames(forFamilyName: familyName).map({ fontName in
                                 .stack([
                                     .text(fontName,
-                                        style: TextStyle(font: UIFont.init(name: fontName, size: self.style.size)),
+                                        style: TextStyle(font: UIFont.init(name: fontName, size: app.style.size)),
                                         onTap: {
-                                            self.style = .init(name: fontName, size: self.style.size)
+                                            app.style = .init(name: fontName, size: app.style.size)
                                         }
                                     )
                                 ])
@@ -248,28 +249,29 @@ class SwiftApp {
                 )
             }
         case .Login:
-            vc.loadClosure = {
-                return ViewModel(style: self.modelStyle, title: title, sections: [
+            vc.loadClosure = {  [weak self] in
+                guard let app = self else { return ViewModel.emptyModel }
+                return ViewModel(style: app.modelStyle, title: title, sections: [
                     Section(
                         header: nil,
                         cells: [
                             .stack([
                                 .text("\n"),
-                                .input(self.getDefaultsItem(.username) as? String ?? "",
+                                .input(app.getDefaultsItem(.username) as? String ?? "",
                                     placeholder: "User",
-                                    style: self.hugeStyle,
+                                    style: app.hugeStyle,
                                     onSet: { string in
-                                        self.setDefaultsItem(.username, value: string)
+                                        app.setDefaultsItem(.username, value: string)
                                     }),
-                                .input(self.getDefaultsItem(.password) as? String ?? "",
+                                .input(app.getDefaultsItem(.password) as? String ?? "",
                                     isSecure: true,
                                     placeholder: "Password",
-                                    style: self.hugeStyle,
+                                    style: app.hugeStyle,
                                     onSet: { string in
-                                        self.setDefaultsItem(.password, value: string)
+                                        app.setDefaultsItem(.password, value: string)
                                     }),
                                 .text("forgot password?",
-                                    style: self.smallStyle.withAlignment(.center),
+                                    style: app.smallStyle.withAlignment(.center),
                                     onTap: {
                                     }),
                                 ], style: vertical),

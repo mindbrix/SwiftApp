@@ -50,18 +50,8 @@ class SwiftApp {
     }
     
     
-    private var topViewController: TableViewController? {
-        if let nc = window.rootViewController as? UINavigationController,
-            let vc = nc.topViewController as? TableViewController {
-            return vc
-        } else if let vc = window.rootViewController as? TableViewController {
-            return vc
-        } else {
-            return nil
-        }
-    }
-    
     private var needsReload = false
+    
     private func setNeedsReload() {
         needsReload = true
     }
@@ -73,5 +63,16 @@ class SwiftApp {
         }
         let vc = TableViewController(screen.modelClosure(app: self))
         nc.pushViewController(vc, animated: true)
+    }
+    
+    private var topViewController: TableViewController? {
+        if let nc = window.rootViewController as? UINavigationController,
+            let vc = nc.topViewController as? TableViewController {
+            return vc
+        } else if let vc = window.rootViewController as? TableViewController {
+            return vc
+        } else {
+            return nil
+        }
     }
 }

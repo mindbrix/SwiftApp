@@ -7,20 +7,20 @@
 
 import Foundation
 
-enum DefaultsKey: String, CaseIterable {
-    case counter
-    case password
-    case username
-}
-
 class Store {
+    enum Key: String, CaseIterable {
+        case counter
+        case password
+        case username
+    }
+    
     var didUpdate: (() -> Void)?
     
-    func getDefaultsItem(_ key: DefaultsKey) -> Any? {
+    func getDefaultsItem(_ key: Key) -> Any? {
         UserDefaults.standard.object(forKey: key.rawValue)
     }
     
-    func setDefaultsItem(_ key: DefaultsKey, value: Any) {
+    func setDefaultsItem(_ key: Key, value: Any) {
         UserDefaults.standard.setValue(value, forKey: key.rawValue)
         UserDefaults.standard.synchronize()
         didUpdate?()

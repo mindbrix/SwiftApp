@@ -107,7 +107,7 @@ enum Screen: String, CaseIterable {
                 return ViewModel(style: cache.modelStyle, title: title, sections: [
                     Section(
                         header: .stack([.text(title)]),
-                        cells: DefaultsKey.allCases.map({ key in
+                        cells: Store.Key.allCases.map({ key in
                             .stack([
                                 .text(key.rawValue,
                                     style: cache.smallStyle),

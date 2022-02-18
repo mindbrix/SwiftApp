@@ -13,9 +13,8 @@ extension Cell {
     var atomsTypes: [String] {
         return atoms.map( { atom in
             switch atom{
-            case .image(_, let width, let onTap):
+            case .image(_, _, let onTap):
                 return ImageView.description()
-                    + (width != nil ? ".width" : "")
                     + (onTap != nil ? ".onTap" : "")
             case .input( _, _, _, let onSet, _):
                 return TextField.description()

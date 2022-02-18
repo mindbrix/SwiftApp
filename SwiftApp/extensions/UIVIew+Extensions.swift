@@ -20,7 +20,7 @@ extension UIView {
     
     func underlineConstraints(for subview: UIView, height: CGFloat = 0.5) -> [NSLayoutConstraint] {
         [
-            subview.topAnchor.constraint(equalTo: bottomAnchor),
+            subview.bottomAnchor.constraint(equalTo: bottomAnchor),
             subview.leadingAnchor.constraint(equalTo: leadingAnchor),
             subview.trailingAnchor.constraint(equalTo: trailingAnchor),
             subview.heightAnchor.constraint(equalToConstant: height)

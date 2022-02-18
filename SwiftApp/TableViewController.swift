@@ -80,6 +80,12 @@ class TableViewController: UITableViewController {
         return model.sections[section].cells.count
     }
 
+    override func sectionIndexTitles(for tableView: UITableView) -> [String]? {
+        let empty = ""
+        let titles: [String] = model.sections.map({ _ in empty })
+        return model.style.showIndex ? titles : nil
+    }
+    
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerColor = UIColor(white: 0.9, alpha: 1)
         let headerStyle = ModelStyle(

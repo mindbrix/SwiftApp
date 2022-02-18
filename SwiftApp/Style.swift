@@ -44,12 +44,20 @@ struct TextStyle: Equatable {
 struct ModelStyle: Equatable {
     let cell: CellStyle
     let text: TextStyle
-
-    init(cell: CellStyle = .init(), text: TextStyle = .init()) {
+    let showIndex: Bool
+    
+    init(cell: CellStyle = .init(), text: TextStyle = .init(), showIndex: Bool = false) {
         self.cell = cell
         self.text = text
+        self.showIndex = showIndex
     }
+    
+    func withShowIndex() -> Self {
+        Self(cell: cell, text: text, showIndex: true)
+    }
+    
     static let spacing: CGFloat = 4
+    
     static let defaultInsets = UIEdgeInsets(
         top: Self.spacing,
         left: Self.spacing,

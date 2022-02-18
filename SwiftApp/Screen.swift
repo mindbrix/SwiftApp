@@ -139,7 +139,7 @@ enum Screen: String, CaseIterable {
                 guard let app = app else { return ViewModel.emptyModel }
                 let cache = app.styleCache
                 
-                return ViewModel(style: cache.modelStyle, title: title, sections:
+                return ViewModel(style: cache.modelStyle.withShowIndex(), title: title, sections:
                     UIFont.familyNames.filter({ $0 != "System Font" }).map({ familyName in
                         Section(
                             header: Cell([

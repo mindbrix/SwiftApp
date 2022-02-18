@@ -32,13 +32,13 @@ enum Screen: String, CaseIterable {
                 let cache = app.styleCache
                 return ViewModel(style: cache.modelStyle, title: title, sections: [
                     Section(
-                        header: .stack([
+                        header: Cell([
                             .text(cache.name, style: .init(alignment: .center), onTap: {
                                 app.push(.Fonts)
                             }),
                         ]),
                         cells: [
-                            .stack([
+                            Cell([
                                 .image(cache.minusImage, width: cache.size, onTap: {
                                     app.styleCache.size = max(4, cache.size - 1)
                                 }),
@@ -49,21 +49,21 @@ enum Screen: String, CaseIterable {
                             ]),
                         ]),
                     Section(
-                        header: .stack([.text("Menu")]),
+                        header: Cell([.text("Menu")]),
                         cells: Screen.allCases.filter({ !$0.embedInNavController }).map({ screen in
-                            .stack([.text(screen.rawValue, onTap: {
+                            Cell([.text(screen.rawValue, onTap: {
                                 app.push(screen)
                             })])
                         })
                     ),
                     Section(
-                        header: .stack([.text("Images")]),
+                        header: Cell([.text("Images")]),
                         cells: [
-                            .stack([
+                            Cell([
                                 .image(grab0, onTap: { print("grab0") }),
                                 .text(.longText, style: cache.smallStyle)
                             ], style: vertical),
-                            .stack([
+                            Cell([
                                 .image(grab0, width: 64, onTap: { print("grab0") }),
                                 .text(.longText, style: cache.smallStyle),
                             ]),
@@ -80,10 +80,10 @@ enum Screen: String, CaseIterable {
                     Section(
                         header: nil,
                         cells: [
-                            .stack([
+                            Cell([
                                 .text(String(count),
                                     style: cache.hugeStyle)]),
-                            .stack([
+                            Cell([
                                 .text("Down",
                                     style: cache.counterStyle,
                                     onTap: {
@@ -106,9 +106,9 @@ enum Screen: String, CaseIterable {
                 
                 return ViewModel(style: cache.modelStyle, title: title, sections: [
                     Section(
-                        header: .stack([.text(title)]),
+                        header: Cell([.text(title)]),
                         cells: Store.Key.allCases.map({ key in
-                            .stack([
+                            Cell([
                                 .text(key.rawValue,
                                     style: cache.smallStyle),
                                 .input(String(describing: store.getDefaultsItem(key)),
@@ -124,9 +124,9 @@ enum Screen: String, CaseIterable {
                 
                 return ViewModel(style: cache.modelStyle, title: title, sections: [
                     Section(
-                        header: .stack([.text(title)]),
+                        header: Cell([.text(title)]),
                         cells: Array(1...100).map({ int in
-                            .stack([
+                            Cell([
                                 .text(String(int)),
                                 .text(int % 2 == 0 ? "" : .longText)],
                                 style: vertical)
@@ -142,11 +142,11 @@ enum Screen: String, CaseIterable {
                 return ViewModel(style: cache.modelStyle, title: title, sections:
                     UIFont.familyNames.filter({ $0 != "System Font" }).map({ familyName in
                         Section(
-                            header: .stack([
+                            header: Cell([
                                 .text(familyName)]
                             ),
                             cells: UIFont.fontNames(forFamilyName: familyName).map({ fontName in
-                                .stack([
+                                Cell([
                                     .text(fontName,
                                         style: TextStyle(font: UIFont.init(name: fontName, size: cache.size)),
                                         onTap: {
@@ -168,7 +168,7 @@ enum Screen: String, CaseIterable {
                     Section(
                         header: nil,
                         cells: [
-                            .stack([
+                            Cell([
                                 .text("\n"),
                                 .input(store.getDefaultsItem(.username) as? String ?? "",
                                     placeholder: "User",

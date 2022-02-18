@@ -14,17 +14,13 @@ extension ViewModel {
             title: title,
             sections: sections.map({ section in
                 Section(
-                    header: .stack([.text(String(describing: section.header))]),
+                    header: Cell([.text(String(describing: section.header))]),
                     cells: section.cells.map({ cell in
-                        switch cell {
-                        case .stack(let atoms, let style):
-                            return Cell.stack(
-                                atoms.map({ atom in
-                                    Atom.text("\(atom.hashValue)\n\n" + String(describing: atom))
-                                }),
-                                style: style
-                            )
-                        }
+                        return Cell(cell.atoms.map({ atom in
+                                Atom.text("\(atom.hashValue)\n\n" + String(describing: atom))
+                            }),
+                            style: cell.style
+                        )
                     })
                 )
             })

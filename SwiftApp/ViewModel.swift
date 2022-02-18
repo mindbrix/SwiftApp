@@ -30,8 +30,14 @@ enum Atom: Hashable {
     }
 }
 
-enum Cell: Equatable {
-    case stack(_ atoms: [Atom], style: CellStyle? = nil)
+struct Cell: Equatable {
+    let atoms: [Atom]
+    let style: CellStyle?
+    
+    init(_ atoms: [Atom], style: CellStyle? = nil) {
+        self.atoms = atoms
+        self.style = style
+    }
 }
 
 struct Section: Equatable {

@@ -34,6 +34,10 @@ struct Cell: Equatable {
     let atoms: [Atom]
     let style: CellStyle?
     
+    init(_ atom: Atom, style: CellStyle? = nil) {
+        self.atoms = [atom]
+        self.style = style
+    }
     init(_ atoms: [Atom], style: CellStyle? = nil) {
         self.atoms = atoms
         self.style = style

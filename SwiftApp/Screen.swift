@@ -32,11 +32,11 @@ enum Screen: String, CaseIterable {
                 let cache = app.styleCache
                 return ViewModel(style: cache.modelStyle, title: title, sections: [
                     Section(
-                        header: Cell([
+                        header: Cell(
                             .text(cache.name, style: .init(alignment: .center), onTap: {
                                 app.push(.Fonts)
-                            }),
-                        ]),
+                            })
+                        ),
                         cells: [
                             Cell([
                                 .image(cache.minusImage, width: cache.size, onTap: {
@@ -49,7 +49,7 @@ enum Screen: String, CaseIterable {
                             ]),
                         ]),
                     Section(
-                        header: Cell([.text("Menu")]),
+                        header: Cell(.text("Menu")),
                         cells: Screen.allCases.filter({ !$0.embedInNavController }).map({ screen in
                             Cell([.text(screen.rawValue, onTap: {
                                 app.push(screen)
@@ -57,7 +57,7 @@ enum Screen: String, CaseIterable {
                         })
                     ),
                     Section(
-                        header: Cell([.text("Images")]),
+                        header: Cell(.text("Images")),
                         cells: [
                             Cell([
                                 .image(grab0, onTap: { print("grab0") }),
@@ -80,9 +80,8 @@ enum Screen: String, CaseIterable {
                     Section(
                         header: nil,
                         cells: [
-                            Cell([
-                                .text(String(count),
-                                    style: cache.hugeStyle)]),
+                            Cell(.text(String(count),
+                                    style: cache.hugeStyle)),
                             Cell([
                                 .text("Down",
                                     style: cache.counterStyle,
@@ -106,7 +105,7 @@ enum Screen: String, CaseIterable {
                 
                 return ViewModel(style: cache.modelStyle, title: title, sections: [
                     Section(
-                        header: Cell([.text(title)]),
+                        header: Cell(.text(title)),
                         cells: Store.Key.allCases.map({ key in
                             Cell([
                                 .text(key.rawValue,
@@ -124,7 +123,7 @@ enum Screen: String, CaseIterable {
                 
                 return ViewModel(style: cache.modelStyle, title: title, sections: [
                     Section(
-                        header: Cell([.text(title)]),
+                        header: Cell(.text(title)),
                         cells: Array(1...100).map({ int in
                             Cell([
                                 .text(String(int)),
@@ -142,18 +141,15 @@ enum Screen: String, CaseIterable {
                 return ViewModel(style: cache.modelStyle.withShowIndex(), title: title, sections:
                     UIFont.familyNames.filter({ $0 != "System Font" }).map({ familyName in
                         Section(
-                            header: Cell([
-                                .text(familyName)]
-                            ),
+                            header: Cell(.text(familyName)),
                             cells: UIFont.fontNames(forFamilyName: familyName).map({ fontName in
-                                Cell([
-                                    .text(fontName,
+                                Cell(.text(fontName,
                                         style: TextStyle(font: UIFont.init(name: fontName, size: cache.size)),
                                         onTap: {
                                             app.styleCache.name = fontName
                                         }
                                     )
-                                ])
+                                )
                             })
                         )
                     })

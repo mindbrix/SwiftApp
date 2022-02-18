@@ -16,15 +16,17 @@ protocol AtomAView {
 class CellView: UIView {
     init() {
         super.init(frame: .zero)
+        stack.isLayoutMarginsRelativeArrangement = true
         stack.translatesAutoresizingMaskIntoConstraints = false
         addSubview(stack)
         underline.translatesAutoresizingMaskIntoConstraints = false
         addSubview(underline)
         NSLayoutConstraint.activate(
-            underlineConstraints(for: underline)
-            + insetConstraints
+            edgeConstraints(for: stack)
+            + underlineConstraints(for: underline)
             + [heightAnchor.constraint(greaterThanOrEqualToConstant: 1)]
         )
+        
     }
     
     required init?(coder: NSCoder) {
@@ -33,7 +35,7 @@ class CellView: UIView {
     
     func apply(_ cell: Cell?, modelStyle: ModelStyle, responderClosure: ResponderClosure? = nil) {
         self.cell = cell
-        stackInsets = .zero
+        stack.directionalLayoutMargins = .zero
         stack.axis = .vertical
         stack.spacing = ModelStyle.spacing
         let types = cell?.atomsTypes ?? []
@@ -47,7 +49,13 @@ class CellView: UIView {
         guard let cell = cell else { return }
         
         let cellStyle = cell.style ?? modelStyle.cell
-        stackInsets = cellStyle.insets ?? ModelStyle.defaultInsets
+        let insets = cellStyle.insets ?? ModelStyle.defaultInsets
+        stack.directionalLayoutMargins = .init(
+            top: insets.top,
+            leading: insets.left,
+            bottom: insets.bottom,
+            trailing: insets.right
+        )
         stack.axis = cellStyle.isVertical ? .vertical : .horizontal
         stack.alignment = cellStyle.isVertical ? .fill : .center
         for (index, atom) in cell.atoms.enumerated() {
@@ -62,18 +70,6 @@ class CellView: UIView {
     private let underline = UIView()
     private let stack = UIStackView()
     
-    lazy var insetConstraints: [NSLayoutConstraint] = {
-        edgeConstraints(for: stack)
-    }()
-    var stackInsets: UIEdgeInsets = .zero {
-        didSet {
-            insetConstraints[0].constant = stackInsets.top
-            insetConstraints[1].constant = stackInsets.left
-            insetConstraints[2].constant = -stackInsets.bottom
-            insetConstraints[3].constant = -stackInsets.right
-        }
-    }
-    
     private func emptyStack() {
         for subview in stack.subviews {
             subview.removeFromSuperview()
@@ -82,6 +78,7 @@ class CellView: UIView {
             }
         }
     }
+    
     private func setupStack(responderClosure: ResponderClosure? = nil) {
         guard let cell = cell else { return }
         

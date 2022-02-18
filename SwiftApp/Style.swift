@@ -58,7 +58,7 @@ struct ModelStyle: Equatable {
     )
 }
 
-struct StyleCache {
+class StyleCache {
     init() {
         updateStyles()
     }
@@ -88,7 +88,7 @@ struct StyleCache {
     var minusImage = UIImage()
     var plusImage = UIImage()
     
-    mutating private func updateStyles() {
+    private func updateStyles() {
         let smallFont = UIFont(name: name, size: size * 0.86)
         let defaultFont = UIFont(name: name, size: size)
         let largeFont = UIFont(name: name, size: size * 1.2)

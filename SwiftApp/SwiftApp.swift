@@ -31,8 +31,8 @@ class SwiftApp {
         }
     }
     
-    var store = Store()
-    var styleCache = StyleCache()
+    let store = Store()
+    let styleCache = StyleCache()
     private let window: UIWindow
     private var needsReload = false
 

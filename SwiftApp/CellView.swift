@@ -9,10 +9,6 @@ import Foundation
 import UIKit
 
 
-protocol AtomAView {
-    func apply(_ atom: Atom, modelStyle: ModelStyle)
-}
-
 class CellView: UIView {
     init() {
         super.init(frame: .zero)
@@ -58,10 +54,9 @@ class CellView: UIView {
         )
         stack.axis = cellStyle.isVertical ? .vertical : .horizontal
         stack.alignment = cellStyle.isVertical ? .fill : .center
+        
         for (index, atom) in cell.atoms.enumerated() {
-            guard let atomView = stack.subviews[index] as? AtomAView else { return }
-            
-            atomView.apply(atom, modelStyle: modelStyle)
+            (stack.subviews[index] as? AtomAView)?.apply(atom, modelStyle: modelStyle)
         }
         backgroundColor = cellStyle.color
     }
@@ -87,11 +82,11 @@ class CellView: UIView {
            case .image(_, _, let onTap):
                 let iv = ImageView()
                 if onTap != nil {
-                    let recognizer = UITapGestureRecognizer(
-                        target: self,
-                        action: #selector(onAtomTap)
+                    iv.addGestureRecognizer(
+                        UITapGestureRecognizer(
+                            target: self,
+                            action: #selector(onAtomTap))
                     )
-                    iv.addGestureRecognizer(recognizer)
                     iv.isUserInteractionEnabled = true
                 }
                 iv.translatesAutoresizingMaskIntoConstraints = false
@@ -106,11 +101,11 @@ class CellView: UIView {
                 let lb = Label()
                 lb.numberOfLines = 0
                 if onTap != nil {
-                    let recognizer = UITapGestureRecognizer(
-                        target: self,
-                        action: #selector(onAtomTap)
+                    lb.addGestureRecognizer(
+                        UITapGestureRecognizer(
+                            target: self,
+                            action: #selector(onAtomTap))
                     )
-                    lb.addGestureRecognizer(recognizer)
                     lb.isUserInteractionEnabled = true
                 }
                 lb.translatesAutoresizingMaskIntoConstraints = false

@@ -74,7 +74,9 @@ class CellView: UIView {
             stack.axis = cellStyle.isVertical ? .vertical : .horizontal
             stack.alignment = cellStyle.isVertical ? .fill : .center
             for (index, atom) in atoms.enumerated() {
-                (stack.subviews[index] as? AtomAView)?.apply(atom, modelStyle: modelStyle)
+                guard let atomView = stack.subviews[index] as? AtomAView else { return }
+                
+                atomView.apply(atom, modelStyle: modelStyle)
             }
             backgroundColor = cellStyle.color
         }

@@ -23,7 +23,7 @@ extension Cell {
                     return TextField.description()
                         + (onSet != nil ? ".onSet" : "")
                 case .text( _, _, let onTap):
-                    return UILabel.description()
+                    return Label.description()
                         + (onTap != nil ? ".onTap" : "")
                 }
             })
@@ -125,7 +125,7 @@ class CellView: UIView {
                     tf.translatesAutoresizingMaskIntoConstraints = false
                     stack.addArrangedSubview(tf)
                 case .text(_, _, let onTap):
-                    let lb = UILabel()
+                    let lb = Label()
                     lb.numberOfLines = 0
                     if onTap != nil {
                         lb.addGestureRecognizer(UITapGestureRecognizer(
@@ -148,13 +148,9 @@ class CellView: UIView {
         case .input:
             guard let tf = atomView as? TextField else { return }
             tf.apply(atom, modelStyle: modelStyle)
-        case .text(let string, let style, let onTap):
-            guard let lb = atomView as? UILabel else { return }
-            let textStyle = style ?? modelStyle.text
-            lb.text = string
-            lb.font = textStyle.font
-            lb.textAlignment = textStyle.alignment
-            lb.textColor = onTap == nil ? textStyle.color : .blue
+        case .text:
+            guard let lb = atomView as? Label else { return }
+            lb.apply(atom, modelStyle: modelStyle)
         }
     }
     

@@ -9,24 +9,6 @@ import Foundation
 import UIKit
 
 
-extension Cell {
-    var atomsTypes: [String] {
-        return atoms.map( { atom in
-            switch atom{
-            case .image(_, _, let onTap):
-                return ImageView.description()
-                    + (onTap != nil ? ".onTap" : "")
-            case .input( _, _, _, let onSet, _):
-                return TextField.description()
-                    + (onSet != nil ? ".onSet" : "")
-            case .text( _, _, let onTap):
-                return Label.description()
-                    + (onTap != nil ? ".onTap" : "")
-            }
-        })
-    }
-}
-
 protocol AtomAView {
     func apply(_ atom: Atom, modelStyle: ModelStyle)
 }
@@ -108,9 +90,11 @@ class CellView: UIView {
            case .image(_, _, let onTap):
                 let iv = ImageView()
                 if onTap != nil {
-                    iv.addGestureRecognizer(UITapGestureRecognizer(
+                    let recognizer = UITapGestureRecognizer(
                         target: self,
-                        action: #selector(onAtomTap)))
+                        action: #selector(onAtomTap)
+                    )
+                    iv.addGestureRecognizer(recognizer)
                     iv.isUserInteractionEnabled = true
                 }
                 iv.translatesAutoresizingMaskIntoConstraints = false
@@ -125,9 +109,11 @@ class CellView: UIView {
                 let lb = Label()
                 lb.numberOfLines = 0
                 if onTap != nil {
-                    lb.addGestureRecognizer(UITapGestureRecognizer(
+                    let recognizer = UITapGestureRecognizer(
                         target: self,
-                        action: #selector(onAtomTap)))
+                        action: #selector(onAtomTap)
+                    )
+                    lb.addGestureRecognizer(recognizer)
                     lb.isUserInteractionEnabled = true
                 }
                 lb.translatesAutoresizingMaskIntoConstraints = false

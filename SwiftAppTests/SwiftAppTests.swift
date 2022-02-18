@@ -38,8 +38,8 @@ class SwiftAppTests: XCTestCase {
     }
 
     func testModel() throws {
-        let c0 = Cell.stack([.text("Title0")])
-        let c1 = Cell.stack([.text("Title1")])
+        let c0 = Cell([.text("Title0")])
+        let c1 = Cell([.text("Title1")])
         XCTAssertTrue("\(c0)" == String(describing: c0))
         XCTAssertEqual(c0, c0)
         XCTAssertNotEqual(c0, c1)

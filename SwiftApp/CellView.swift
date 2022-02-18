@@ -38,9 +38,9 @@ class CellView: UIView {
         addSubview(stack)
         underline.translatesAutoresizingMaskIntoConstraints = false
         addSubview(underline)
-        NSLayoutConstraint.activate(underlineConstraints(for: underline))
         NSLayoutConstraint.activate(
-            insetConstraints
+            underlineConstraints(for: underline)
+            + insetConstraints
             + [heightAnchor.constraint(greaterThanOrEqualToConstant: 1)]
         )
     }
@@ -61,6 +61,7 @@ class CellView: UIView {
             setupStack(responderClosure: responderClosure)
         }
         backgroundColor = modelStyle.cell.color
+        underline.backgroundColor = .lightGray
         guard let cell = cell else { return }
         switch cell {
         case .stack(let atoms, let style):
@@ -159,8 +160,6 @@ class CellView: UIView {
             tf.clearButtonMode = .whileEditing
             tf.autocapitalizationType = .none
             tf.isSecureTextEntry = isSecure
-            
-            underline.backgroundColor = onSet == nil ? .lightGray : .clear
             tf.underline.backgroundColor = onSet == nil ? .clear : .lightGray
         case .text(let string, let style, let onTap):
             guard let lb = atomView as? UILabel else { return }

@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class Label: UILabel {
+class Label: UILabel, AtomAView {
     func apply(_ atom: Atom, modelStyle: ModelStyle) {
         switch atom {
         case .text(let string, let style, let onTap):

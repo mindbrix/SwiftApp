@@ -31,6 +31,10 @@ extension Cell {
     }
 }
 
+protocol AtomAView {
+    func apply(_ atom: Atom, modelStyle: ModelStyle)
+}
+
 class CellView: UIView {
     init() {
         super.init(frame: .zero)
@@ -70,9 +74,7 @@ class CellView: UIView {
             stack.axis = cellStyle.isVertical ? .vertical : .horizontal
             stack.alignment = cellStyle.isVertical ? .fill : .center
             for (index, atom) in atoms.enumerated() {
-                applyAtom(atom,
-                    modelStyle: modelStyle,
-                    atomView: stack.subviews[index])
+                (stack.subviews[index] as? AtomAView)?.apply(atom, modelStyle: modelStyle)
             }
             backgroundColor = cellStyle.color
         }
@@ -137,20 +139,6 @@ class CellView: UIView {
                     stack.addArrangedSubview(lb)
                 }
             }
-        }
-    }
-    
-    private func applyAtom(_ atom: Atom, modelStyle: ModelStyle, atomView: UIView) {
-        switch atom {
-        case .image:
-            guard let iv = atomView as? ImageView else { return }
-            iv.apply(atom, modelStyle: modelStyle)
-        case .input:
-            guard let tf = atomView as? TextField else { return }
-            tf.apply(atom, modelStyle: modelStyle)
-        case .text:
-            guard let lb = atomView as? Label else { return }
-            lb.apply(atom, modelStyle: modelStyle)
         }
     }
     

@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class ImageView: UIImageView {
+class ImageView: UIImageView, AtomAView {
     func setAspectImage(_ image: UIImage, width: CGFloat? = nil) {
         self.image = image
         contentMode = .scaleAspectFit

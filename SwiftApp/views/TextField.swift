@@ -10,7 +10,7 @@ import UIKit
 
 typealias ResponderClosure = (TextField) -> Bool?
 
-class TextField : UITextField {
+class TextField : UITextField, AtomAView {
     init() {
         super.init(frame: .zero)
         underline.translatesAutoresizingMaskIntoConstraints = false

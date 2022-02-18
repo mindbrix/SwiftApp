@@ -54,13 +54,10 @@ class SwiftApp {
     private var needsReload = false
 
     private var topViewController: TableViewController? {
-        if let nc = window.rootViewController as? UINavigationController,
-            let vc = nc.topViewController as? TableViewController {
-            return vc
-        } else if let vc = window.rootViewController as? TableViewController {
-            return vc
+        if let nc = window.rootViewController as? UINavigationController {
+            return nc.topViewController as? TableViewController
         } else {
-            return nil
+            return window.rootViewController as? TableViewController
         }
     }
 }

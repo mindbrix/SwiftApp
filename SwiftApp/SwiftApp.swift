@@ -10,6 +10,9 @@ import UIKit
 
 
 class SwiftApp {
+    let store = Store()
+    let styleCache = StyleCache()
+    
     init(_ window: UIWindow, rootScreen: Screen) {
         self.window = window
         self.styleCache.didUpdate = { [weak self] in
@@ -31,11 +34,6 @@ class SwiftApp {
         }
     }
     
-    let store = Store()
-    let styleCache = StyleCache()
-    private let window: UIWindow
-    private var needsReload = false
-
     func push(_ screen: Screen) {
         guard let nc = window.rootViewController as? UINavigationController
         else {
@@ -45,6 +43,9 @@ class SwiftApp {
         nc.pushViewController(vc, animated: true)
     }
     
+    private let window: UIWindow
+    private var needsReload = false
+
     private var topViewController: TableViewController? {
         if let nc = window.rootViewController as? UINavigationController,
             let vc = nc.topViewController as? TableViewController {

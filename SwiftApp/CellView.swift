@@ -111,7 +111,7 @@ class CellView: UIView {
                 if onTap != nil {
                     iv.addGestureRecognizer(UITapGestureRecognizer(
                         target: self,
-                        action: #selector(onTapper)))
+                        action: #selector(onAtomTap)))
                     iv.isUserInteractionEnabled = true
                 }
                 iv.translatesAutoresizingMaskIntoConstraints = false
@@ -128,7 +128,7 @@ class CellView: UIView {
                 if onTap != nil {
                     lb.addGestureRecognizer(UITapGestureRecognizer(
                         target: self,
-                        action: #selector(onTapper)))
+                        action: #selector(onAtomTap)))
                     lb.isUserInteractionEnabled = true
                 }
                 lb.translatesAutoresizingMaskIntoConstraints = false
@@ -137,7 +137,7 @@ class CellView: UIView {
         }
     }
     
-    @objc func onTapper(_ sender: UITapGestureRecognizer) {
+    @objc func onAtomTap(_ sender: UITapGestureRecognizer) {
         guard let cell = cell,
                 let view = sender.view,
                 let index = stack.subviews.firstIndex(of: view)

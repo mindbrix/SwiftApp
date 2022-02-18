@@ -30,6 +30,25 @@ class TextField : UITextField {
        return responderClosure?(self) ?? super.becomeFirstResponder()
     }
     
+    func apply(_ atom: Atom, modelStyle: ModelStyle) {
+        switch atom {
+        case .input(let value, let isSecure, let placeholder, let style, let onSet):
+            let textStyle = style ?? modelStyle.text
+            self.onSet = onSet
+            text = value
+            self.placeholder = placeholder
+            font = textStyle.font
+            textAlignment = textStyle.alignment
+            textColor = textStyle.color
+            clearButtonMode = .whileEditing
+            autocapitalizationType = .none
+            isSecureTextEntry = isSecure
+            underline.backgroundColor = onSet == nil ? .clear : .lightGray
+        default:
+            break
+        }
+    }
+    
     func become(_ field:  TextField) {
         topConstraint = topAnchor.constraint(equalTo: field.topAnchor)
         leadingConstraint = leadingAnchor.constraint(equalTo: field.leadingAnchor)

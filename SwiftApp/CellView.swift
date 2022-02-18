@@ -142,25 +142,12 @@ class CellView: UIView {
     
     private func applyAtom(_ atom: Atom, modelStyle: ModelStyle, atomView: UIView) {
         switch atom {
-        case .image(let image, let width, let onTap):
+        case .image:
             guard let iv = atomView as? ImageView else { return }
-            iv.setAspectImage(image, width: width)
-            if image.isSymbolImage {
-                iv.tintColor = onTap == nil ? modelStyle.text.color : .blue
-            }
-        case .input(let value, let isSecure, let placeholder, let style, let onSet):
+            iv.apply(atom, modelStyle: modelStyle)
+        case .input:
             guard let tf = atomView as? TextField else { return }
-            let textStyle = style ?? modelStyle.text
-            tf.onSet = onSet
-            tf.text = value
-            tf.placeholder = placeholder
-            tf.font = textStyle.font
-            tf.textAlignment = textStyle.alignment
-            tf.textColor = textStyle.color
-            tf.clearButtonMode = .whileEditing
-            tf.autocapitalizationType = .none
-            tf.isSecureTextEntry = isSecure
-            tf.underline.backgroundColor = onSet == nil ? .clear : .lightGray
+            tf.apply(atom, modelStyle: modelStyle)
         case .text(let string, let style, let onTap):
             guard let lb = atomView as? UILabel else { return }
             let textStyle = style ?? modelStyle.text

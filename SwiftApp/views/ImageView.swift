@@ -29,4 +29,17 @@ class ImageView: UIImageView {
     lazy var widthConstraint: NSLayoutConstraint = {
         widthAnchor.constraint(lessThanOrEqualToConstant: 0)
     }()
+    
+    func apply(_ atom: Atom, modelStyle: ModelStyle) {
+        switch atom {
+        case .image(let image, let width, let onTap):
+            setAspectImage(image, width: width)
+            
+            if image.isSymbolImage {
+                tintColor = onTap == nil ? modelStyle.text.color : .blue
+            }
+        default:
+            break
+        }
+    }
 }

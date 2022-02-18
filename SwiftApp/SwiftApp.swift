@@ -8,19 +8,15 @@
 import Foundation
 import UIKit
 
-enum DefaultsKey: String, CaseIterable {
-    case counter
-    case password
-    case username
-}
 
 class SwiftApp {
     init(_ window: UIWindow, rootScreen: Screen) {
         self.window = window
-        self.styleCache = StyleCache()
         self.styleCache.didUpdate = { [weak self] in
-            guard let self = self else { return }
-            self.needsReload = true
+            self?.needsReload = true
+        }
+        self.store.didUpdate = { [weak self] in
+            self?.needsReload = true
         }
         let vc = TableViewController(rootScreen.modelClosure(app: self))
         window.rootViewController = rootScreen.embedInNavController ? UINavigationController(rootViewController: vc) : vc
@@ -34,23 +30,12 @@ class SwiftApp {
             }
         }
     }
-   
-    var styleCache: StyleCache
+    
+    var store = Store()
+    var styleCache = StyleCache()
     private let window: UIWindow
     private var needsReload = false
-    
-    
-    func getDefaultsItem(_ key: DefaultsKey) -> Any? {
-        UserDefaults.standard.object(forKey: key.rawValue)
-    }
-    
-    func setDefaultsItem(_ key: DefaultsKey, value: Any) {
-        UserDefaults.standard.setValue(value, forKey: key.rawValue)
-        UserDefaults.standard.synchronize()
-        needsReload = true
-    }
-    
-    
+
     func push(_ screen: Screen) {
         guard let nc = window.rootViewController as? UINavigationController
         else {

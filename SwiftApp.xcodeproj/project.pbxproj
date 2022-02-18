@@ -16,6 +16,9 @@
 		E913064227BA6CC600460F22 /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E913063E27BA6CC600460F22 /* TextField.swift */; };
 		E913064327BA6CC600460F22 /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E913063E27BA6CC600460F22 /* TextField.swift */; };
 		E913064427BA6CC600460F22 /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E913063E27BA6CC600460F22 /* TextField.swift */; };
+		E925920227BF167200D40925 /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = E925920127BF167200D40925 /* Store.swift */; };
+		E925920327BF167200D40925 /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = E925920127BF167200D40925 /* Store.swift */; };
+		E925920427BF167200D40925 /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = E925920127BF167200D40925 /* Store.swift */; };
 		E952E7A627BC309100068D8C /* Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = E952E7A527BC309100068D8C /* Style.swift */; };
 		E952E7A727BC309100068D8C /* Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = E952E7A527BC309100068D8C /* Style.swift */; };
 		E952E7A827BC309100068D8C /* Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = E952E7A527BC309100068D8C /* Style.swift */; };
@@ -69,6 +72,7 @@
 		E903CB2527BE5A2200B58113 /* Screen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Screen.swift; sourceTree = "<group>"; };
 		E913063D27BA6CC600460F22 /* ImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageView.swift; sourceTree = "<group>"; };
 		E913063E27BA6CC600460F22 /* TextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
+		E925920127BF167200D40925 /* Store.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
 		E952E7A527BC309100068D8C /* Style.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Style.swift; sourceTree = "<group>"; };
 		E977D00227AFC887007E4998 /* SwiftApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E977D00527AFC887007E4998 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -155,6 +159,7 @@
 				E977D06427B1635A007E4998 /* CellViewCell.swift */,
 				E977D00727AFC887007E4998 /* SceneDelegate.swift */,
 				E903CB2527BE5A2200B58113 /* Screen.swift */,
+				E925920127BF167200D40925 /* Store.swift */,
 				E952E7A527BC309100068D8C /* Style.swift */,
 				E977D03E27AFDBBA007E4998 /* SwiftApp.swift */,
 				E977D00927AFC887007E4998 /* TableViewController.swift */,
@@ -329,6 +334,7 @@
 				E977D00627AFC887007E4998 /* AppDelegate.swift in Sources */,
 				E977D07727B1A9C9007E4998 /* UIVIew+Extensions.swift in Sources */,
 				E9A838CC27BA6ADC0096FAFB /* String+Extensions.swift in Sources */,
+				E925920227BF167200D40925 /* Store.swift in Sources */,
 				E977D06527B1635A007E4998 /* CellViewCell.swift in Sources */,
 				E952E7A627BC309100068D8C /* Style.swift in Sources */,
 				E977D00827AFC887007E4998 /* SceneDelegate.swift in Sources */,
@@ -349,6 +355,7 @@
 				E977D04027AFDBBA007E4998 /* SwiftApp.swift in Sources */,
 				E9A838CD27BA6ADC0096FAFB /* String+Extensions.swift in Sources */,
 				E977D06E27B1A628007E4998 /* CellView.swift in Sources */,
+				E925920327BF167200D40925 /* Store.swift in Sources */,
 				E977D07827B1A9C9007E4998 /* UIVIew+Extensions.swift in Sources */,
 				E977D09027B1D630007E4998 /* ViewModel.swift in Sources */,
 				E913064327BA6CC600460F22 /* TextField.swift in Sources */,
@@ -368,6 +375,7 @@
 				E977D04127AFDBBA007E4998 /* SwiftApp.swift in Sources */,
 				E9A838CE27BA6ADC0096FAFB /* String+Extensions.swift in Sources */,
 				E977D06F27B1A628007E4998 /* CellView.swift in Sources */,
+				E925920427BF167200D40925 /* Store.swift in Sources */,
 				E977D07927B1A9C9007E4998 /* UIVIew+Extensions.swift in Sources */,
 				E977D09427B1D631007E4998 /* ViewModel.swift in Sources */,
 				E913064427BA6CC600460F22 /* TextField.swift in Sources */,

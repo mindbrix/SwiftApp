@@ -16,11 +16,11 @@ class Store {
     
     var didUpdate: (() -> Void)?
     
-    func getDefaultsItem(_ key: Key) -> Any? {
+    func get(_ key: Key) -> Any? {
         UserDefaults.standard.object(forKey: key.rawValue)
     }
     
-    func setDefaultsItem(_ key: Key, value: Any) {
+    func set(_ key: Key, value: Any) {
         UserDefaults.standard.setValue(value, forKey: key.rawValue)
         UserDefaults.standard.synchronize()
         didUpdate?()

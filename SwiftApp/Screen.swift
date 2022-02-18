@@ -74,7 +74,7 @@ enum Screen: String, CaseIterable {
             return { [weak app] in
                 guard let app = app else { return ViewModel.emptyModel }
                 let cache = app.styleCache, store = app.store
-                let count = store.getDefaultsItem(.counter) as? Int ?? 0
+                let count = store.get(.counter) as? Int ?? 0
                 
                 return ViewModel(style: cache.modelStyle, title: title, sections: [
                     Section(
@@ -86,12 +86,12 @@ enum Screen: String, CaseIterable {
                                 .text("Down",
                                     style: cache.counterStyle,
                                     onTap: {
-                                        store.setDefaultsItem(.counter, value: max(0, count - 1))
+                                        store.set(.counter, value: max(0, count - 1))
                                     }),
                                 .text("Up",
                                     style: cache.counterStyle,
                                     onTap: {
-                                        store.setDefaultsItem(.counter, value: count + 1)
+                                        store.set(.counter, value: count + 1)
                                     })
                             ]),
                         ]
@@ -110,7 +110,7 @@ enum Screen: String, CaseIterable {
                             Cell([
                                 .text(key.rawValue,
                                     style: cache.smallStyle),
-                                .input(String(describing: store.getDefaultsItem(key)),
+                                .input(String(describing: store.get(key)),
                                     style: cache.largeStyle)
                             ], style: vertical)
                         })
@@ -166,18 +166,18 @@ enum Screen: String, CaseIterable {
                         cells: [
                             Cell([
                                 .text("\n"),
-                                .input(store.getDefaultsItem(.username) as? String ?? "",
+                                .input(store.get(.username) as? String ?? "",
                                     placeholder: "User",
                                     style: cache.hugeStyle,
                                     onSet: { string in
-                                        store.setDefaultsItem(.username, value: string)
+                                        store.set(.username, value: string)
                                     }),
-                                .input(store.getDefaultsItem(.password) as? String ?? "",
+                                .input(store.get(.password) as? String ?? "",
                                     isSecure: true,
                                     placeholder: "Password",
                                     style: cache.hugeStyle,
                                     onSet: { string in
-                                        store.setDefaultsItem(.password, value: string)
+                                        store.set(.password, value: string)
                                     }),
                                 .text("forgot password?",
                                     style: cache.smallStyle.withAlignment(.center),

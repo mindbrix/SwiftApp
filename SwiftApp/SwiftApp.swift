@@ -15,12 +15,14 @@ class SwiftApp {
     
     init(_ window: UIWindow, rootScreen: Screen) {
         self.window = window
+        
         self.styleCache.didUpdate = { [weak self] in
-            self?.needsReload = true
+            self?.reload()
         }
         self.store.didUpdate = { [weak self] in
-            self?.needsReload = true
+            self?.reload()
         }
+        
         let vc = TableViewController(rootScreen.modelClosure(app: self))
         window.rootViewController = rootScreen.embedInNavController ? UINavigationController(rootViewController: vc) : vc
         window.makeKeyAndVisible()
@@ -42,6 +44,11 @@ class SwiftApp {
         let vc = TableViewController(screen.modelClosure(app: self))
         nc.pushViewController(vc, animated: true)
     }
+    
+    func reload() {
+        self.needsReload = true
+    }
+    
     
     private let window: UIWindow
     private var needsReload = false

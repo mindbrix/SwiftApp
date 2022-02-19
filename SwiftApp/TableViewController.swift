@@ -88,8 +88,7 @@ class TableViewController: UITableViewController {
     }
 
     override func sectionIndexTitles(for tableView: UITableView) -> [String]? {
-        let empty = ""
-        let titles: [String] = model.sections.map({ _ in empty })
+        let titles: [String] = model.sections.map({ _ in "" })
         return model.style.showIndex ? titles : nil
     }
     

@@ -28,7 +28,7 @@ class SwiftApp {
         window.makeKeyAndVisible()
         
         let size = window.frame.size
-        let scale = max(1,  size.width / size.height)
+        let scale = max(1, size.width / size.height)
         self.styleCache.size = round(scale * self.styleCache.size)
         
         Timer.scheduledTimer(withTimeInterval: 1 / 60, repeats: true) { [weak self] timer in

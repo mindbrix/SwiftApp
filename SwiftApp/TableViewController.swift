@@ -56,14 +56,20 @@ class TableViewController: UITableViewController {
         loadModel()
     }
     
+    var onRotate: ((TableViewController) -> Void)?
+    override func didRotate(from fromInterfaceOrientation: UIInterfaceOrientation) {
+        onRotate?(self)
+    }
+    
     private let loadClosure: ViewModel.Closure
     private let floatingField = TextField()
     private var responderClosure: ResponderClosure?
+   
     var useDescription = false
-    
     func loadModel() {
         model = useDescription ? loadClosure().description() : loadClosure()
     }
+    
     private var model = ViewModel.emptyModel {
         didSet {
             guard oldValue != model else { return }

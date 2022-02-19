@@ -24,6 +24,9 @@ class SwiftApp {
         }
         
         let vc = TableViewController(rootScreen.modelClosure(app: self))
+        vc.onRotate = { _ in
+            print()
+        }
         window.rootViewController = rootScreen.embedInNavController ? UINavigationController(rootViewController: vc) : vc
         window.makeKeyAndVisible()
         

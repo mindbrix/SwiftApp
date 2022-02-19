@@ -32,42 +32,66 @@ enum Screen: String, CaseIterable {
                 return ViewModel(style: cache.modelStyle, title: title, sections: [
                     Section(
                         header: Cell(
-                            .text(cache.name, style: cache.defaultStyle.withAlignment(.center), onTap: {
-                                app.push(.Fonts)
-                            })
+                            .text(cache.name,
+                                style: cache.defaultStyle.withAlignment(.center),
+                                onTap: {
+                                    app.push(.Fonts)
+                                })
                         ),
                         cells: [
                             Cell([
-                                .image(cache.minusImage, width: cache.size, onTap: {
-                                    app.styleCache.size = max(4, cache.size - 1)
-                                }),
-                                .text("\(cache.size)", style: cache.counterStyle),
-                                .image(cache.plusImage, width: cache.size, onTap: {
-                                    app.styleCache.size = cache.size + 1
-                                })
+                                .image(cache.minusImage,
+                                    width: cache.size,
+                                    onTap: {
+                                        app.styleCache.size = max(4, cache.size - 1)
+                                    }
+                                ),
+                                .text("\(cache.size)",
+                                    style: cache.counterStyle
+                                ),
+                                .image(cache.plusImage,
+                                    width: cache.size,
+                                    onTap: {
+                                        app.styleCache.size = cache.size + 1
+                                    }
+                                )
                             ]),
                         ]),
                     Section(
                         header: Cell(.text("Menu")),
-                        cells: Screen.allCases.filter({ !$0.embedInNavController }).map({ screen in
-                            Cell([.text(screen.rawValue,
+                        cells: Screen.allCases.filter({ !$0.embedInNavController }).map({ menuScreen in
+                            Cell(.text(menuScreen.rawValue,
                                     onTap: {
-                                        app.push(screen)
+                                        app.push(menuScreen)
                                     }
-                                )],
-                                 style: cache.modelStyle.cell.withInsets(.init(spacing: 8)))
+                                ),
+                                style: cache.modelStyle.cell.withInsets(.init(spacing: 8))
+                            )
                         })
                     ),
                     Section(
                         header: Cell(.text("Images")),
                         cells: [
                             Cell([
-                                .image(grab0, onTap: { print("grab0") }),
-                                .text(.longText, style: cache.smallStyle)
-                            ], style: cache.modelStyle.cell.withVertical()),
+                                .image(grab0,
+                                    onTap: {
+                                        print("grab0")
+                                    }
+                                ),
+                                .text(.longText,
+                                    style: cache.smallStyle
+                                )],
+                                style: cache.modelStyle.cell.withVertical()),
                             Cell([
-                                .image(grab0, width: 64, onTap: { print("grab0") }),
-                                .text(.longText, style: cache.smallStyle),
+                                .image(grab0,
+                                    width: 64,
+                                    onTap: {
+                                        print("grab0")
+                                    }
+                                ),
+                                .text(.longText,
+                                    style: cache.smallStyle
+                                ),
                             ]),
                         ])
                 ])
@@ -83,7 +107,8 @@ enum Screen: String, CaseIterable {
                         header: nil,
                         cells: [
                             Cell(.text(String(count),
-                                    style: cache.hugeStyle)),
+                                    style: cache.hugeStyle)
+                            ),
                             Cell([
                                 .text("Down",
                                     style: cache.counterStyle,
@@ -114,9 +139,12 @@ enum Screen: String, CaseIterable {
                                     style: cache.smallStyle),
                                 .input(String(describing: store.get(key)),
                                     style: cache.largeStyle)
-                            ], style: cache.modelStyle.cell.withVertical())
+                                ],
+                                style: cache.modelStyle.cell.withVertical()
+                            )
                         })
-                )])
+                    )
+                ])
             }
         case .DequeueTest:
             return { [weak app] in
@@ -129,8 +157,10 @@ enum Screen: String, CaseIterable {
                         cells: Array(1...100).map({ int in
                             Cell([
                                 .text(String(int)),
-                                .text(int % 2 == 0 ? "" : .longText)],
-                                style: cache.modelStyle.cell.withVertical())
+                                .text(int % 2 == 0 ? "" : .longText)
+                                ],
+                                style: cache.modelStyle.cell.withVertical()
+                            )
                         })
                     )
                 ])
@@ -146,11 +176,15 @@ enum Screen: String, CaseIterable {
                             header: Cell(.text(familyName)),
                             cells: UIFont.fontNames(forFamilyName: familyName).map({ fontName in
                                 Cell(.text(fontName,
-                                        style: TextStyle(font: UIFont.init(name: fontName, size: cache.size)),
-                                        onTap: {
-                                            app.styleCache.name = fontName
-                                        }
-                                    )
+                                    style: TextStyle(
+                                        font: UIFont.init(
+                                            name: fontName,
+                                            size: cache.size
+                                        )
+                                    ),
+                                    onTap: {
+                                        app.styleCache.name = fontName
+                                    })
                                 )
                             })
                         )
@@ -173,19 +207,23 @@ enum Screen: String, CaseIterable {
                                     style: cache.hugeStyle,
                                     onSet: { string in
                                         store.set(.username, value: string)
-                                    }),
+                                    }
+                                ),
                                 .input(store.get(.password) as? String ?? "",
                                     isSecure: true,
                                     placeholder: "Password",
                                     style: cache.hugeStyle,
                                     onSet: { string in
                                         store.set(.password, value: string)
-                                    }),
+                                    }
+                                ),
                                 .text("forgot password?",
                                     style: cache.smallStyle.withAlignment(.center),
                                     onTap: {
-                                    }),
-                                ], style: cache.modelStyle.cell.withVertical()),
+                                    }
+                                )],
+                                style: cache.modelStyle.cell.withVertical()
+                            ),
                         ]
                     )
                 ])

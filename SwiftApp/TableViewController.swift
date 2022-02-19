@@ -10,6 +10,7 @@ import UIKit
 class TableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         tableView.register(CellViewCell.self,
             forCellReuseIdentifier: CellViewCell.reuseID)
         tableView.separatorStyle = .none
@@ -17,11 +18,12 @@ class TableViewController: UITableViewController {
         if #available(iOS 15.0, *) {
             tableView.sectionHeaderTopPadding = 0
         }
-        floatingField.backgroundColor = CellStyle().color
+        
         floatingField.translatesAutoresizingMaskIntoConstraints = false
         tableView.addSubview(floatingField)
         let bottomConstraint = floatingField.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         floatingField.topConstraint = bottomConstraint
+        floatingField.backgroundColor = model.style.cell.color
         
         self.responderClosure = { [weak self] field in
             guard let self = self else { return nil }
@@ -35,11 +37,13 @@ class TableViewController: UITableViewController {
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+        
         view.bringSubviewToFront(floatingField)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
         if let nc = self.navigationController {
             let hidden = nc.viewControllers.count == 1
             nc.setNavigationBarHidden(hidden, animated: true)
@@ -53,6 +57,7 @@ class TableViewController: UITableViewController {
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
+        
         willResize?(self, size)
     }
     

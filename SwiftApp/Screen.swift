@@ -81,7 +81,8 @@ enum Screen: String, CaseIterable {
                                 .text(.longText,
                                     style: cache.smallStyle
                                 )],
-                                style: cache.modelStyle.cell.withVertical()),
+                                style: cache.modelStyle.cell.withVertical()
+                            ),
                             Cell([
                                 .image(grab0,
                                     width: 64,
@@ -114,12 +115,14 @@ enum Screen: String, CaseIterable {
                                     style: cache.counterStyle,
                                     onTap: {
                                         store.set(.counter, value: max(0, count - 1))
-                                    }),
+                                    }
+                                ),
                                 .text("Up",
                                     style: cache.counterStyle,
                                     onTap: {
                                         store.set(.counter, value: count + 1)
-                                    })
+                                    }
+                                )
                             ]),
                         ]
                     )
@@ -136,10 +139,11 @@ enum Screen: String, CaseIterable {
                         cells: Store.Key.allCases.map({ key in
                             Cell([
                                 .text(key.rawValue,
-                                    style: cache.smallStyle),
+                                    style: cache.smallStyle
+                                ),
                                 .input(String(describing: store.get(key)),
-                                    style: cache.largeStyle)
-                                ],
+                                    style: cache.largeStyle
+                                )],
                                 style: cache.modelStyle.cell.withVertical()
                             )
                         })

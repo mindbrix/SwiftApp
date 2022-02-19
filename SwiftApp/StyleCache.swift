@@ -8,12 +8,6 @@
 import Foundation
 import UIKit
 
-extension UIEdgeInsets {
-    init(spacing: CGFloat) {
-        self.init(top: spacing, left: spacing, bottom: spacing, right: spacing)
-    }
-}
-
 
 class StyleCache {
     init() {

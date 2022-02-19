@@ -21,7 +21,6 @@ enum Screen: String, CaseIterable {
     func modelClosure(app: SwiftApp) -> ViewModel.Closure {
         let title = self.rawValue
         let grab0 = UIImage(named: "grab0") ?? UIImage()
-        let vertical: CellStyle = .init(isVertical: true)
         
         switch self {
         case .Main:
@@ -65,7 +64,7 @@ enum Screen: String, CaseIterable {
                             Cell([
                                 .image(grab0, onTap: { print("grab0") }),
                                 .text(.longText, style: cache.smallStyle)
-                            ], style: vertical),
+                            ], style: cache.modelStyle.cell.withVertical()),
                             Cell([
                                 .image(grab0, width: 64, onTap: { print("grab0") }),
                                 .text(.longText, style: cache.smallStyle),
@@ -115,7 +114,7 @@ enum Screen: String, CaseIterable {
                                     style: cache.smallStyle),
                                 .input(String(describing: store.get(key)),
                                     style: cache.largeStyle)
-                            ], style: vertical)
+                            ], style: cache.modelStyle.cell.withVertical())
                         })
                 )])
             }
@@ -131,7 +130,7 @@ enum Screen: String, CaseIterable {
                             Cell([
                                 .text(String(int)),
                                 .text(int % 2 == 0 ? "" : .longText)],
-                                style: vertical)
+                                style: cache.modelStyle.cell.withVertical())
                         })
                     )
                 ])
@@ -186,7 +185,7 @@ enum Screen: String, CaseIterable {
                                     style: cache.smallStyle.withAlignment(.center),
                                     onTap: {
                                     }),
-                                ], style: vertical),
+                                ], style: cache.modelStyle.cell.withVertical()),
                         ]
                     )
                 ])

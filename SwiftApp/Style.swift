@@ -28,6 +28,9 @@ struct CellStyle: Equatable {
     func withInsets(_ insets: UIEdgeInsets?) -> Self {
         return Self(color: color, isVertical: isVertical, insets: insets, spacing: spacing)
     }
+    func withVertical() -> Self {
+        return Self(color: color, isVertical: true, insets: insets, spacing: spacing)
+    }
 }
 
 struct TextStyle: Equatable {

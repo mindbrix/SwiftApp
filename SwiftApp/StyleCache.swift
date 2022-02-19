@@ -8,6 +8,13 @@
 import Foundation
 import UIKit
 
+extension UIEdgeInsets {
+    init(spacing: CGFloat) {
+        self.init(top: spacing, left: spacing, bottom: spacing, right: spacing)
+    }
+}
+
+
 class StyleCache {
     init() {
         updateStyles()
@@ -60,7 +67,7 @@ class StyleCache {
         ) ?? UIImage()
         
         let spacing: CGFloat = 4
-        let insets = UIEdgeInsets(top: spacing, left: spacing, bottom: spacing, right: spacing)
+        let insets = UIEdgeInsets(spacing: spacing)
         modelStyle = ModelStyle(
             cell: CellStyle(insets: insets, spacing: spacing),
             text: defaultStyle)

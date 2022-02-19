@@ -34,9 +34,9 @@ class StyleCache {
     var largeStyle = TextStyle()
     var hugeStyle = TextStyle()
     var counterStyle = TextStyle()
-    var modelStyle = ModelStyle()
     var minusImage = UIImage()
     var plusImage = UIImage()
+    var modelStyle = ModelStyle()
     
     private func updateStyles() {
         let smallFont = UIFont(name: name, size: size * 0.86)
@@ -49,7 +49,6 @@ class StyleCache {
         largeStyle = .init(font: largeFont)
         hugeStyle = .init(font: hugeFont, alignment: .center)
         counterStyle = .init(font: largeFont, alignment: .center)
-        modelStyle = .init(text: defaultStyle)
         let config = UIImage.SymbolConfiguration(pointSize: size, weight: .medium)
         minusImage = UIImage(
             systemName: "minus.circle",
@@ -59,5 +58,11 @@ class StyleCache {
             systemName: "plus.circle",
             withConfiguration: config
         ) ?? UIImage()
+        
+        let spacing = ModelStyle.spacing
+        let insets = UIEdgeInsets(top: spacing, left: spacing, bottom: spacing, right: spacing)
+        modelStyle = ModelStyle(
+            cell: CellStyle(insets: insets),
+            text: defaultStyle)
     }
 }

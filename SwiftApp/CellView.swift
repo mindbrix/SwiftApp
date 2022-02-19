@@ -45,7 +45,7 @@ class CellView: UIView {
         guard let cell = cell else { return }
         
         let cellStyle = cell.style ?? modelStyle.cell
-        let insets = cellStyle.insets ?? ModelStyle.defaultInsets
+        let insets = cellStyle.insets ?? .zero
         stack.directionalLayoutMargins = .init(
             top: insets.top,
             leading: insets.left,

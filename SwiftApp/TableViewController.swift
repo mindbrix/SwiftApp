@@ -56,9 +56,9 @@ class TableViewController: UITableViewController {
         loadModel()
     }
     
-    var onRotate: ((TableViewController) -> Void)?
+    var onRotate: ((TableViewController, UIInterfaceOrientation) -> Void)?
     override func didRotate(from fromInterfaceOrientation: UIInterfaceOrientation) {
-        onRotate?(self)
+        onRotate?(self, fromInterfaceOrientation)
     }
     
     private let loadClosure: ViewModel.Closure

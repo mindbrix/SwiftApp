@@ -8,6 +8,16 @@
 import Foundation
 import UIKit
 
+extension UIInterfaceOrientation {
+    var scale: CGFloat {
+        switch self {
+        case .portrait, .portraitUpsideDown:
+            return 1
+        default:
+            return 1.6
+        }
+    }
+}
 
 class SwiftApp {
     let store = Store()
@@ -24,8 +34,8 @@ class SwiftApp {
         }
         
         let vc = TableViewController(rootScreen.modelClosure(app: self))
-        vc.onRotate = { _ in
-            print()
+        vc.onRotate = { vc, previous in
+            self.styleCache.size *= vc.interfaceOrientation.scale / previous.scale
         }
         window.rootViewController = rootScreen.embedInNavController ? UINavigationController(rootViewController: vc) : vc
         window.makeKeyAndVisible()

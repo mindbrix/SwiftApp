@@ -23,7 +23,10 @@ struct CellStyle: Equatable {
     }
     
     func withColor(_ color: UIColor) -> Self {
-        return Self(color: color, isVertical: isVertical, insets: insets)
+        return Self(color: color, isVertical: isVertical, insets: insets, spacing: spacing)
+    }
+    func withInsets(_ insets: UIEdgeInsets?) -> Self {
+        return Self(color: color, isVertical: isVertical, insets: insets, spacing: spacing)
     }
 }
 

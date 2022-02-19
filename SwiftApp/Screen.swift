@@ -51,9 +51,12 @@ enum Screen: String, CaseIterable {
                     Section(
                         header: Cell(.text("Menu")),
                         cells: Screen.allCases.filter({ !$0.embedInNavController }).map({ screen in
-                            Cell([.text(screen.rawValue, onTap: {
-                                app.push(screen)
-                            })])
+                            Cell([.text(screen.rawValue,
+                                    onTap: {
+                                        app.push(screen)
+                                    }
+                                )],
+                                 style: cache.modelStyle.cell.withInsets(.init(spacing: 8)))
                         })
                     ),
                     Section(

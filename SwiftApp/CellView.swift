@@ -33,7 +33,8 @@ class CellView: UIView {
         self.cell = cell
         stack.directionalLayoutMargins = .zero
         stack.axis = .vertical
-        stack.spacing = ModelStyle.spacing
+        stack.spacing = modelStyle.cell.spacing
+        
         let types = cell?.atomsTypes ?? []
         if types != atomsTypes {
             atomsTypes = types
@@ -54,6 +55,7 @@ class CellView: UIView {
         )
         stack.axis = cellStyle.isVertical ? .vertical : .horizontal
         stack.alignment = cellStyle.isVertical ? .fill : .center
+        stack.spacing = cellStyle.spacing
         
         for (index, atom) in cell.atoms.enumerated() {
             (stack.subviews[index] as? AtomAView)?.apply(atom, modelStyle: modelStyle)

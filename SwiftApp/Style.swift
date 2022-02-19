@@ -13,11 +13,13 @@ struct CellStyle: Equatable {
     let color: UIColor
     let isVertical: Bool
     let insets: UIEdgeInsets?
+    let spacing: CGFloat
     
-    init(color: UIColor = .white, isVertical: Bool = false, insets: UIEdgeInsets? = nil) {
+    init(color: UIColor = .white, isVertical: Bool = false, insets: UIEdgeInsets? = nil, spacing: CGFloat = 4) {
         self.color = color
         self.isVertical = isVertical
         self.insets = insets
+        self.spacing = spacing
     }
     
     func withColor(_ color: UIColor) -> Self {
@@ -55,6 +57,4 @@ struct ModelStyle: Equatable {
     func withShowIndex() -> Self {
         Self(cell: cell, text: text, showIndex: true)
     }
-    
-    static let spacing: CGFloat = 4
 }

@@ -59,10 +59,10 @@ class StyleCache {
             withConfiguration: config
         ) ?? UIImage()
         
-        let spacing = ModelStyle.spacing
+        let spacing: CGFloat = 4
         let insets = UIEdgeInsets(top: spacing, left: spacing, bottom: spacing, right: spacing)
         modelStyle = ModelStyle(
-            cell: CellStyle(insets: insets),
+            cell: CellStyle(insets: insets, spacing: spacing),
             text: defaultStyle)
     }
 }

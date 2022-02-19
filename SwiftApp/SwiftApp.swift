@@ -34,6 +34,7 @@ class SwiftApp {
         }
         
         let vc = makeScreenController(rootScreen)
+        self.styleCache.size = round(self.styleCache.size * vc.interfaceOrientation.scale)
         window.rootViewController = rootScreen.embedInNavController ? UINavigationController(rootViewController: vc) : vc
         window.makeKeyAndVisible()
         

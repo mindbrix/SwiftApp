@@ -79,6 +79,9 @@ class TableViewController: UITableViewController {
         }
     }
     
+    
+    // MARK: - UITableViewDelegate, UITableViewDataSource
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
         model.sections.count
     }
@@ -107,11 +110,7 @@ class TableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let tableViewCell = tableView.dequeueReusableCell(
-            withIdentifier: CellViewCell.reuseID,
-            for: indexPath)
-        tableViewCell.selectionStyle = .none
-        
+        let tableViewCell = tableView.dequeueReusableCell(withIdentifier: CellViewCell.reuseID, for: indexPath)
         if let cv = (tableViewCell as? CellViewCell)?.cellView {
             let cell = model.sections[indexPath.section].cells[indexPath.row]
             cv.apply(cell,
@@ -119,6 +118,7 @@ class TableViewController: UITableViewController {
                 responderClosure: responderClosure)
             cv.fadeToBackground(from: .red)
         }
+        tableViewCell.selectionStyle = .none
         return tableViewCell
     }
 }

@@ -65,7 +65,11 @@ class SwiftApp {
     private func makeScreenController(_ screen: Screen) -> TableViewController {
         let vc = TableViewController(screen.modelClosure(app: self))
         vc.onRotate = { [weak self] vc, previous in
-            self?.styleCache.size *= vc.interfaceOrientation.scale / previous.scale
+            guard let self = self
+            else { return }
+            
+            let scale = vc.interfaceOrientation.scale / previous.scale
+            self.styleCache.size = round(scale * self.styleCache.size)
         }
         return vc
     }

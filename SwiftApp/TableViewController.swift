@@ -8,15 +8,6 @@
 import UIKit
 
 class TableViewController: UITableViewController {
-    init(_ loadClosure: @escaping ViewModel.Closure) {
-        self.loadClosure = loadClosure
-        super.init(style: .plain)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.register(CellViewCell.self,
@@ -56,24 +47,37 @@ class TableViewController: UITableViewController {
         loadModel()
     }
     
+    // MARK: - Resize event handling
+    
     var willResize: ((TableViewController, CGSize) -> Void)?
+    
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
         willResize?(self, size)
     }
     
-    private let loadClosure: ViewModel.Closure
+    
+    // MARK: - Floating field
+    
     private let floatingField = TextField()
     private var responderClosure: ResponderClosure?
    
+    
+    // MARK: - ViewModel
+    
+    var loadClosure: ViewModel.Closure?
     var useDescription = false
+    
     func loadModel() {
-        model = useDescription ? loadClosure().description() : loadClosure()
+        let newModel = loadClosure?() ?? ViewModel.emptyModel
+        
+        model = useDescription ? newModel.description() : newModel
     }
     
     private var model = ViewModel.emptyModel {
         didSet {
             guard oldValue != model else { return }
+            
             self.title = model.title
             self.tableView.reloadData()
         }

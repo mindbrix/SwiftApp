@@ -57,7 +57,8 @@ class SwiftApp {
     private var needsReload = false
 
     private func makeScreenController(_ screen: Screen) -> TableViewController {
-        let vc = TableViewController(screen.modelClosure(app: self))
+        let vc = TableViewController()
+        vc.loadClosure = screen.modelClosure(app: self)
         vc.willResize = { [weak self] vc, newSize in
             guard let self = self,
                     vc == self.topViewController

@@ -33,10 +33,7 @@ class SwiftApp {
             self?.reload()
         }
         
-        let vc = TableViewController(rootScreen.modelClosure(app: self))
-        vc.onRotate = { vc, previous in
-            self.styleCache.size *= vc.interfaceOrientation.scale / previous.scale
-        }
+        let vc = makeScreenController(rootScreen)
         window.rootViewController = rootScreen.embedInNavController ? UINavigationController(rootViewController: vc) : vc
         window.makeKeyAndVisible()
         
@@ -51,10 +48,9 @@ class SwiftApp {
     
     func push(_ screen: Screen) {
         guard let nc = window.rootViewController as? UINavigationController
-        else {
-            return
-        }
-        let vc = TableViewController(screen.modelClosure(app: self))
+        else { return }
+        
+        let vc = makeScreenController(screen)
         nc.pushViewController(vc, animated: true)
     }
     
@@ -66,6 +62,14 @@ class SwiftApp {
     private let window: UIWindow
     private var needsReload = false
 
+    private func makeScreenController(_ screen: Screen) -> TableViewController {
+        let vc = TableViewController(screen.modelClosure(app: self))
+        vc.onRotate = { [weak self] vc, previous in
+            self?.styleCache.size *= vc.interfaceOrientation.scale / previous.scale
+        }
+        return vc
+    }
+    
     private var topViewController: TableViewController? {
         if let nc = window.rootViewController as? UINavigationController {
             return nc.topViewController as? TableViewController

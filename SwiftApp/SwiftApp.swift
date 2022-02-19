@@ -8,16 +8,6 @@
 import Foundation
 import UIKit
 
-extension UIInterfaceOrientation {
-    var scale: CGFloat {
-        switch self {
-        case .portrait, .portraitUpsideDown:
-            return 1
-        default:
-            return 1.6
-        }
-    }
-}
 
 class SwiftApp {
     let store = Store()
@@ -34,9 +24,12 @@ class SwiftApp {
         }
         
         let vc = makeScreenController(rootScreen)
-        self.styleCache.size = round(self.styleCache.size * vc.interfaceOrientation.scale)
         window.rootViewController = rootScreen.embedInNavController ? UINavigationController(rootViewController: vc) : vc
         window.makeKeyAndVisible()
+        
+        let size = window.frame.size
+        let scale = max(1,  size.width / size.height)
+        self.styleCache.size = round(scale * self.styleCache.size)
         
         Timer.scheduledTimer(withTimeInterval: 1 / 60, repeats: true) { [weak self] timer in
             guard let self = self else { return }
@@ -65,11 +58,13 @@ class SwiftApp {
 
     private func makeScreenController(_ screen: Screen) -> TableViewController {
         let vc = TableViewController(screen.modelClosure(app: self))
-        vc.onRotate = { [weak self] vc, previous in
-            guard let self = self
+        vc.willResize = { [weak self] vc, newSize in
+            guard let self = self,
+                    vc == self.topViewController
             else { return }
             
-            let scale = vc.interfaceOrientation.scale / previous.scale
+            let size = vc.view.frame.size
+            let scale = newSize.width / size.width
             self.styleCache.size = round(scale * self.styleCache.size)
         }
         return vc

@@ -56,9 +56,10 @@ class TableViewController: UITableViewController {
         loadModel()
     }
     
-    var onRotate: ((TableViewController, UIInterfaceOrientation) -> Void)?
-    override func didRotate(from fromInterfaceOrientation: UIInterfaceOrientation) {
-        onRotate?(self, fromInterfaceOrientation)
+    var willResize: ((TableViewController, CGSize) -> Void)?
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        willResize?(self, size)
     }
     
     private let loadClosure: ViewModel.Closure

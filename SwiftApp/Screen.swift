@@ -33,7 +33,7 @@ enum Screen: String, CaseIterable {
                 return ViewModel(style: cache.modelStyle, title: title, sections: [
                     Section(
                         header: Cell(
-                            .text(cache.name, style: .init(alignment: .center), onTap: {
+                            .text(cache.name, style: cache.defaultStyle.withAlignment(.center), onTap: {
                                 app.push(.Fonts)
                             })
                         ),

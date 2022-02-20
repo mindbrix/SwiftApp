@@ -171,7 +171,7 @@ enum Screen: String, CaseIterable {
                 ])
             }
         case .Fonts:
-            return {  [weak app] in
+            return { [weak app] in
                 guard let cache = app?.styleCache, let app = app
                 else { return nil }
                 
@@ -197,7 +197,7 @@ enum Screen: String, CaseIterable {
                 )
             }
         case .Login:
-            return {  [weak app] in
+            return { [weak app] in
                 guard let cache = app?.styleCache, let store = app?.store
                 else { return nil }
                 

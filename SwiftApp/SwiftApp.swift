@@ -34,7 +34,7 @@ class SwiftApp {
         Timer.scheduledTimer(withTimeInterval: 1 / 60, repeats: true) { [weak self] timer in
             guard let self = self else { return }
             if self.needsReload {
-                self.topViewController?.loadModel()
+                self.topViewController?.reloadModel()
                 self.needsReload = false
             }
         }
@@ -58,7 +58,7 @@ class SwiftApp {
 
     private func makeScreenController(_ screen: Screen) -> TableViewController {
         let vc = TableViewController()
-        vc.loadClosure = screen.modelClosure(app: self)
+        vc.modelClosure = screen.modelClosure(app: self)
         
         vc.onWillResize = { [weak self] vc, newSize in
             if let self = self, vc == self.topViewController {

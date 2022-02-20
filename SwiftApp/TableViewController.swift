@@ -51,7 +51,7 @@ class TableViewController: UITableViewController {
             let hidden = nc.viewControllers.count == 1
             nc.setNavigationBarHidden(hidden, animated: true)
         }
-        loadModel()
+        reloadModel()
     }
     
     // MARK: - Resize event handling
@@ -75,11 +75,11 @@ class TableViewController: UITableViewController {
     
     // MARK: - ViewModel
     
-    var loadClosure: ViewModel.Closure?
+    var modelClosure: ViewModel.Closure?
     var useDescription = false
     
-    func loadModel() {
-        let newModel = loadClosure?() ?? ViewModel.emptyModel
+    func reloadModel() {
+        let newModel = modelClosure?() ?? ViewModel.emptyModel
         
         model = useDescription ? newModel.description() : newModel
     }

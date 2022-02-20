@@ -53,6 +53,8 @@ class SwiftApp {
     }
     
     
+    // MARK: - Private
+    
     private let window: UIWindow
     private var needsReload = false
 

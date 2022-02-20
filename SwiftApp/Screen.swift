@@ -28,6 +28,8 @@ enum Screen: String, CaseIterable {
                 guard let cache = app?.styleCache, let app = app
                 else { return nil }
                 
+                let iconSize: CGFloat = 36
+                
                 return ViewModel(style: cache.modelStyle, title: title, sections: [
                     Section(
                         header: Cell(
@@ -40,16 +42,16 @@ enum Screen: String, CaseIterable {
                         cells: [
                             Cell([
                                 .image(cache.minusImage,
-                                    width: cache.size,
+                                    width: iconSize,
                                     onTap: {
                                         app.styleCache.size = max(4, cache.size - 1)
                                     }
                                 ),
-                                .text("\(cache.size)",
+                                .text("\(cache.size)\n\(cache.size)",
                                     style: cache.counterStyle
                                 ),
                                 .image(cache.plusImage,
-                                    width: cache.size,
+                                    width: iconSize,
                                     onTap: {
                                         app.styleCache.size = cache.size + 1
                                     }
@@ -57,7 +59,7 @@ enum Screen: String, CaseIterable {
                             ]),
                             Cell([
                                 .image(cache.minusImage,
-                                    width: cache.size,
+                                    width: iconSize,
                                     onTap: {
                                         app.styleCache.spacing = max(0, cache.spacing - 1)
                                     }
@@ -66,7 +68,7 @@ enum Screen: String, CaseIterable {
                                     style: cache.counterStyle
                                 ),
                                 .image(cache.plusImage,
-                                    width: cache.size,
+                                    width: iconSize,
                                     onTap: {
                                         app.styleCache.spacing = cache.spacing + 1
                                     }

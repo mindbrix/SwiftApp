@@ -12,7 +12,7 @@ class ImageView: UIImageView, AtomAView {
     var heightConstraint: NSLayoutConstraint?
     
     lazy var widthConstraint: NSLayoutConstraint = {
-        widthAnchor.constraint(lessThanOrEqualToConstant: 0)
+        widthAnchor.constraint(equalToConstant: 0)
     }()
     
     func apply(_ atom: Atom, modelStyle: ModelStyle) {
@@ -21,16 +21,25 @@ class ImageView: UIImageView, AtomAView {
             self.image = image
             contentMode = .scaleAspectFit
             heightConstraint?.isActive = false
-            widthConstraint.isActive = false
-            let size = image.size
-            guard size.height > 0 && size.width > 0 else { return }
-            heightConstraint = heightAnchor.constraint(
-                lessThanOrEqualTo: widthAnchor,
-                multiplier: size.height / size.width)
-            heightConstraint?.isActive = true
-            widthConstraint.constant = width ?? 0
-            widthConstraint.isActive = width != nil
             
+            let size = image.size
+            guard size.height > 0 && size.width > 0
+            else { return }
+            
+            if let width = width {
+                heightConstraint = heightAnchor.constraint(
+                    lessThanOrEqualToConstant: width * size.height / size.width)
+                heightConstraint?.isActive = true
+                widthConstraint.constant = width
+                widthConstraint.isActive = true
+            } else {
+                heightConstraint = heightAnchor.constraint(
+                    lessThanOrEqualTo: widthAnchor,
+                    multiplier: size.height / size.width)
+                heightConstraint?.isActive = true
+                widthConstraint.isActive = false
+            }
+
             if image.isSymbolImage {
                 tintColor = onTap == nil ? modelStyle.text.color : .blue
             }

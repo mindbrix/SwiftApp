@@ -39,11 +39,11 @@ class TextField : UITextField, AtomAView {
             self.onSet = onSet
             text = value
             self.placeholder = placeholder
+            textColor = textStyle.color
             font = textStyle.font
             textAlignment = textStyle.alignment
-            textColor = textStyle.color
-            clearButtonMode = .whileEditing
             autocapitalizationType = .none
+            clearButtonMode = .whileEditing
             isSecureTextEntry = isSecure
             underline.backgroundColor = onSet == nil ? .clear : .lightGray
         default:
@@ -57,10 +57,10 @@ class TextField : UITextField, AtomAView {
         trailngConstraint = trailingAnchor.constraint(equalTo: field.trailingAnchor)
         text = field.text
         placeholder = field.placeholder
-        textColor = field.textColor
-        textAlignment = field.textAlignment
-        font = field.font
         selectedTextRange = field.selectedTextRange
+        textColor = field.textColor
+        font = field.font
+        textAlignment = field.textAlignment
         autocapitalizationType = field.autocapitalizationType
         clearButtonMode = field.clearButtonMode
         isSecureTextEntry = field.isSecureTextEntry

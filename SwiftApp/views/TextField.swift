@@ -89,7 +89,8 @@ class TextField : UITextField, AtomAView {
 extension TextField: UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         if let text = textField.text, let textRange = Range(range, in: text) {
-            onSet?(text.replacingCharacters(in: textRange, with: string))
+            let newText = text.replacingCharacters(in: textRange, with: string)
+            onSet?(newText)
         }
         return true
     }

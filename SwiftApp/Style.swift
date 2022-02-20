@@ -11,28 +11,23 @@ import UIKit
 
 struct CellStyle: Equatable {
     let color: UIColor
-    let isVertical: Bool
     let insets: UIEdgeInsets?
     let spacing: CGFloat
     
-    init(color: UIColor = .white, isVertical: Bool = false, insets: UIEdgeInsets? = nil, spacing: CGFloat = 4) {
+    init(color: UIColor = .white, insets: UIEdgeInsets? = nil, spacing: CGFloat = 4) {
         self.color = color
-        self.isVertical = isVertical
         self.insets = insets
         self.spacing = spacing
     }
     
     func withColor(_ color: UIColor) -> Self {
-        return Self(color: color, isVertical: isVertical, insets: insets, spacing: spacing)
+        return Self(color: color, insets: insets, spacing: spacing)
     }
     func withInsets(_ insets: UIEdgeInsets?) -> Self {
-        return Self(color: color, isVertical: isVertical, insets: insets, spacing: spacing)
+        return Self(color: color, insets: insets, spacing: spacing)
     }
     func withSpacing(_ spacing: CGFloat) -> Self {
-        return Self(color: color, isVertical: isVertical, insets: insets, spacing: spacing)
-    }
-    func withVertical() -> Self {
-        return Self(color: color, isVertical: true, insets: insets, spacing: spacing)
+        return Self(color: color, insets: insets, spacing: spacing)
     }
 }
 

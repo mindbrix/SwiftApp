@@ -98,7 +98,7 @@ enum Screen: String, CaseIterable {
                                 .text(.longText,
                                     style: cache.smallStyle
                                 )],
-                                style: cache.modelStyle.cell.withVertical()
+                                axis: .vertical
                             ),
                             Cell([
                                 .image(grab0,
@@ -162,7 +162,7 @@ enum Screen: String, CaseIterable {
                                 .input(String(describing: store.get(key)),
                                     style: cache.largeStyle
                                 )],
-                                style: cache.modelStyle.cell.withVertical()
+                                axis: .vertical
                             )
                         })
                     )
@@ -181,7 +181,7 @@ enum Screen: String, CaseIterable {
                                 .text(String(int)),
                                 .text(int % 2 == 0 ? "" : .longText)
                                 ],
-                                style: cache.modelStyle.cell.withVertical()
+                                axis: .vertical
                             )
                         })
                     )
@@ -244,7 +244,7 @@ enum Screen: String, CaseIterable {
                                     onTap: {
                                     }
                                 )],
-                                style: cache.modelStyle.cell.withVertical()
+                                axis: .vertical
                             ),
                         ]
                     )

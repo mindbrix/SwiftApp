@@ -31,15 +31,21 @@ enum Atom: Hashable {
 }
 
 struct Cell: Equatable {
+    enum Axis {
+        case horizontal
+        case vertical
+    }
+    
     let atoms: [Atom]
     let style: CellStyle?
+    let axis: Axis
     
-    init(_ atom: Atom, style: CellStyle? = nil) {
-        self.atoms = [atom]
-        self.style = style
+    init(_ atom: Atom, axis: Axis = .horizontal, style: CellStyle? = nil) {
+        self.init([atom], axis: axis, style: style)        
     }
-    init(_ atoms: [Atom], style: CellStyle? = nil) {
+    init(_ atoms: [Atom], axis: Axis = .horizontal, style: CellStyle? = nil) {
         self.atoms = atoms
+        self.axis = axis
         self.style = style
     }
 }

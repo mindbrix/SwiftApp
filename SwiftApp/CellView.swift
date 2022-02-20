@@ -32,7 +32,7 @@ class CellView: UIView {
     func apply(_ cell: Cell?, modelStyle: ModelStyle, onBecomeFirstResponder: OnBecomeFirstResponder? = nil) {
         self.cell = cell
         stack.directionalLayoutMargins = .zero
-        stack.axis = .vertical
+        stack.axis = .horizontal
         stack.spacing = modelStyle.cell.spacing
         
         let types = cell?.atomsTypes ?? []
@@ -53,8 +53,8 @@ class CellView: UIView {
             bottom: insets.bottom,
             trailing: insets.right
         )
-        stack.axis = cellStyle.isVertical ? .vertical : .horizontal
-        stack.alignment = cellStyle.isVertical ? .fill : .center
+        stack.axis = cell.axis == .horizontal ? .horizontal : .vertical
+        stack.alignment = cell.axis == .vertical ? .fill : .center
         stack.spacing = cellStyle.spacing
         
         for (index, atom) in cell.atoms.enumerated() {

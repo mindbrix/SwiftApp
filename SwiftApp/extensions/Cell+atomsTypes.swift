@@ -9,18 +9,19 @@ import Foundation
 
 extension Cell {
     var atomsTypes: [String] {
-        return atoms.map( { atom in
-            switch atom{
-            case .image(_, _, let onTap):
-                return ImageView.description()
-                    + (onTap != nil ? ".onTap" : "")
-            case .input( _, _, _, let onSet, _):
-                return TextField.description()
-                    + (onSet != nil ? ".onSet" : "")
-            case .text( _, _, let onTap):
-                return Label.description()
-                    + (onTap != nil ? ".onTap" : "")
-            }
-        })
+        return [axis == .horizontal ? "horizontal." : "vertical."]
+            + atoms.map( { atom in
+                switch atom{
+                case .image(_, _, let onTap):
+                    return ImageView.description()
+                        + (onTap != nil ? ".onTap" : "")
+                case .input( _, _, _, let onSet, _):
+                    return TextField.description()
+                        + (onSet != nil ? ".onSet" : "")
+                case .text( _, _, let onTap):
+                    return Label.description()
+                        + (onTap != nil ? ".onTap" : "")
+                }
+            })
     }
 }

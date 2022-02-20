@@ -27,6 +27,7 @@ class TableViewController: UITableViewController {
         
         self.responderClosure = { [weak self] field in
             guard let self = self else { return nil }
+            self.sourceField = field
             self.floatingField.become(field)
             DispatchQueue.main.asyncAfter(deadline: .now() + 1 / 60, execute: {
                 _ = self.floatingField.becomeFirstResponder()
@@ -53,12 +54,20 @@ class TableViewController: UITableViewController {
     
     // MARK: - Resize event handling
     
-    var willResize: ((TableViewController, CGSize) -> Void)?
+    var onWillResize: ((TableViewController, CGSize) -> Bool)?
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
         
-        willResize?(self, size)
+        let didResize = onWillResize?(self, size) ?? false
+        if didResize {
+            coordinator.animate(alongsideTransition: nil, completion: { _ in
+                if self.floatingField.isFirstResponder, let source = self.sourceField {
+                    self.floatingField.become(source)
+                    self.floatingField.setNeedsDisplay()
+                }
+            })
+        }
     }
     
     
@@ -66,7 +75,7 @@ class TableViewController: UITableViewController {
     
     private let floatingField = TextField()
     private var responderClosure: ResponderClosure?
-   
+    private weak var sourceField: TextField?
     
     // MARK: - ViewModel
     

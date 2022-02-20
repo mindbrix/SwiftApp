@@ -59,14 +59,16 @@ class SwiftApp {
     private func makeScreenController(_ screen: Screen) -> TableViewController {
         let vc = TableViewController()
         vc.loadClosure = screen.modelClosure(app: self)
-        vc.willResize = { [weak self] vc, newSize in
-            guard let self = self,
-                    vc == self.topViewController
-            else { return }
+        vc.onWillResize = { [weak self] vc, newSize in
+            var didResize = false
             
-            let size = vc.view.frame.size
-            let scale = newSize.width / size.width
-            self.styleCache.size = round(scale * self.styleCache.size)
+            if let self = self, vc == self.topViewController {
+                let size = vc.view.frame.size
+                let scale = newSize.width / size.width
+                self.styleCache.size = round(scale * self.styleCache.size)
+                didResize = true
+            }
+            return didResize
         }
         return vc
     }

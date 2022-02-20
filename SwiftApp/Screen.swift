@@ -25,10 +25,9 @@ enum Screen: String, CaseIterable {
         switch self {
         case .Main:
             return { [weak app] in
-                guard let app = app else {
-                    return ViewModel.emptyModel
-                }
-                let cache = app.styleCache
+                guard let cache = app?.styleCache, let app = app
+                else { return nil }
+                
                 return ViewModel(style: cache.modelStyle, title: title, sections: [
                     Section(
                         header: Cell(
@@ -99,8 +98,9 @@ enum Screen: String, CaseIterable {
             }
         case .Counter:
             return { [weak app] in
-                guard let app = app else { return ViewModel.emptyModel }
-                let cache = app.styleCache, store = app.store
+                guard let cache = app?.styleCache, let store = app?.store
+                else { return nil }
+                
                 let count = store.get(.counter) as? Int ?? 0
                 
                 return ViewModel(style: cache.modelStyle, title: title, sections: [
@@ -130,8 +130,8 @@ enum Screen: String, CaseIterable {
             }
         case .DefaultStore:
             return { [weak app] in
-                guard let app = app else { return ViewModel.emptyModel }
-                let cache = app.styleCache, store = app.store
+                guard let cache = app?.styleCache, let store = app?.store
+                else { return nil }
                 
                 return ViewModel(style: cache.modelStyle, title: title, sections: [
                     Section(
@@ -152,9 +152,9 @@ enum Screen: String, CaseIterable {
             }
         case .DequeueTest:
             return { [weak app] in
-                guard let app = app else { return ViewModel.emptyModel }
-                let cache = app.styleCache
-                
+                guard let cache = app?.styleCache
+                else { return nil }
+            
                 return ViewModel(style: cache.modelStyle, title: title, sections: [
                     Section(
                         header: Cell(.text(title)),
@@ -171,8 +171,8 @@ enum Screen: String, CaseIterable {
             }
         case .Fonts:
             return {  [weak app] in
-                guard let app = app else { return ViewModel.emptyModel }
-                let cache = app.styleCache
+                guard let cache = app?.styleCache, let app = app
+                else { return nil }
                 
                 return ViewModel(style: cache.modelStyle.withShowIndex(), title: title, sections:
                     UIFont.familyNames.filter({ $0 != "System Font" }).map({ familyName in
@@ -197,8 +197,8 @@ enum Screen: String, CaseIterable {
             }
         case .Login:
             return {  [weak app] in
-                guard let app = app else { return ViewModel.emptyModel }
-                let cache = app.styleCache, store = app.store
+                guard let cache = app?.styleCache, let store = app?.store
+                else { return nil }
                 
                 return ViewModel(style: cache.modelStyle, title: title, sections: [
                     Section(

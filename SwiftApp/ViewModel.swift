@@ -56,7 +56,7 @@ struct ViewModel: Equatable {
     
     static let emptyModel = Self(style: .init(), title: "", sections: [])
     
-    typealias Closure = () -> ViewModel
+    typealias Closure = () -> ViewModel?
 }
 
 protocol AtomAView {

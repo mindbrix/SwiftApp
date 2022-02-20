@@ -30,6 +30,14 @@ class StyleCache {
             onDidUpdate?()
         }
     }
+    var spacing: CGFloat = 4 {
+        didSet {
+            guard spacing != oldValue else { return }
+            updateStyles()
+            onDidUpdate?()
+        }
+    }
+    
     var smallStyle = TextStyle()
     var defaultStyle = TextStyle()
     var largeStyle = TextStyle()
@@ -50,7 +58,10 @@ class StyleCache {
         largeStyle = .init(font: largeFont)
         hugeStyle = .init(font: hugeFont, alignment: .center)
         counterStyle = .init(font: largeFont, alignment: .center)
-        let config = UIImage.SymbolConfiguration(pointSize: size, weight: .medium)
+        
+        let config = UIImage.SymbolConfiguration(
+            pointSize: size,
+            weight: .medium)
         minusImage = UIImage(
             systemName: "minus.circle",
             withConfiguration: config
@@ -60,10 +71,10 @@ class StyleCache {
             withConfiguration: config
         ) ?? UIImage()
         
-        let spacing: CGFloat = 4
-        let insets = UIEdgeInsets(spacing: spacing)
         modelStyle = ModelStyle(
-            cell: CellStyle(insets: insets, spacing: spacing),
+            cell: CellStyle(
+                insets: UIEdgeInsets(spacing: spacing),
+                spacing: spacing),
             text: defaultStyle)
     }
 }

@@ -40,8 +40,8 @@ struct Cell: Equatable {
     let style: CellStyle?
     let axis: Axis
     
-    init(_ atom: Atom, axis: Axis = .horizontal, style: CellStyle? = nil) {
-        self.init([atom], axis: axis, style: style)        
+    init(_ atom: Atom, style: CellStyle? = nil) {
+        self.init([atom], style: style)        
     }
     init(_ atoms: [Atom], axis: Axis = .horizontal, style: CellStyle? = nil) {
         self.atoms = atoms

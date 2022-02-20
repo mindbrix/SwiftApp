@@ -60,6 +60,7 @@ enum Screen: String, CaseIterable {
                         header: Cell(.text("Menu")),
                         cells: Screen.allCases.filter({ !$0.embedInNavController }).map({ menuScreen in
                             Cell(.text(menuScreen.rawValue,
+                                       style: cache.defaultStyle.withColor(.blue),
                                     onTap: {
                                         app.push(menuScreen)
                                     }

@@ -11,12 +11,12 @@ import UIKit
 class Label: UILabel, AtomAView {
     func apply(_ atom: Atom, modelStyle: ModelStyle) {
         switch atom {
-        case .text(let string, let style, let onTap):
+        case .text(let string, let style, _):
             let textStyle = style ?? modelStyle.text
             text = string
             font = textStyle.font
             textAlignment = textStyle.alignment
-            textColor = onTap == nil ? textStyle.color : .blue
+            textColor = textStyle.color
         default:
             break
         }

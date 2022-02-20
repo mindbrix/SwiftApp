@@ -55,6 +55,23 @@ enum Screen: String, CaseIterable {
                                     }
                                 )
                             ]),
+                            Cell([
+                                .image(cache.minusImage,
+                                    width: cache.size,
+                                    onTap: {
+                                        app.styleCache.spacing = max(0, cache.spacing - 1)
+                                    }
+                                ),
+                                .text("\(cache.spacing)",
+                                    style: cache.counterStyle
+                                ),
+                                .image(cache.plusImage,
+                                    width: cache.size,
+                                    onTap: {
+                                        app.styleCache.spacing = cache.spacing + 1
+                                    }
+                                )
+                            ]),
                         ]),
                     Section(
                         header: Cell(.text("Menu")),
@@ -65,7 +82,7 @@ enum Screen: String, CaseIterable {
                                         app.push(menuScreen)
                                     }
                                 ),
-                                style: cache.modelStyle.cell.withInsets(.init(spacing: 8))
+                                style: cache.modelStyle.cell
                             )
                         })
                     ),

@@ -61,11 +61,12 @@ class SwiftApp {
         vc.modelClosure = screen.modelClosure(app: self)
         
         vc.onWillResize = { [weak self] vc, newSize in
-            if let self = self, vc == self.topViewController {
-                let size = vc.view.frame.size
-                let scale = newSize.width / size.width
-                self.styleCache.size = round(scale * self.styleCache.size)
-            }
+            guard let self = self, vc == self.topViewController
+            else { return }
+            
+            let size = vc.view.frame.size
+            let scale = newSize.width / size.width
+            self.styleCache.size = round(scale * self.styleCache.size)
         }
         return vc
     }

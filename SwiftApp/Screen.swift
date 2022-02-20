@@ -113,13 +113,13 @@ enum Screen: String, CaseIterable {
                             ),
                             Cell([
                                 .text("Down",
-                                    style: cache.counterStyle,
+                                    style: cache.counterStyle.withColor(.blue),
                                     onTap: {
                                         store.set(.counter, value: max(0, count - 1))
                                     }
                                 ),
                                 .text("Up",
-                                    style: cache.counterStyle,
+                                    style: cache.counterStyle.withColor(.blue),
                                     onTap: {
                                         store.set(.counter, value: count + 1)
                                     }
@@ -223,7 +223,7 @@ enum Screen: String, CaseIterable {
                                     }
                                 ),
                                 .text("forgot password?",
-                                    style: cache.smallStyle.withAlignment(.center),
+                                      style: cache.smallStyle.withColor(.blue).withAlignment(.center),
                                     onTap: {
                                     }
                                 )],

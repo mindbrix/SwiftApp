@@ -29,7 +29,7 @@ class CellView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func apply(_ cell: Cell?, modelStyle: ModelStyle, responderClosure: ResponderClosure? = nil) {
+    func apply(_ cell: Cell?, modelStyle: ModelStyle, onBecomeFirstResponder: OnBecomeFirstResponder? = nil) {
         self.cell = cell
         stack.directionalLayoutMargins = .zero
         stack.axis = .vertical
@@ -39,7 +39,7 @@ class CellView: UIView {
         if types != atomsTypes {
             atomsTypes = types
             emptyStack()
-            setupStack(responderClosure: responderClosure)
+            setupStack(onBecomeFirstResponder: onBecomeFirstResponder)
         }
         backgroundColor = modelStyle.cell.color
         underline.backgroundColor = .lightGray
@@ -76,7 +76,7 @@ class CellView: UIView {
         }
     }
     
-    private func setupStack(responderClosure: ResponderClosure? = nil) {
+    private func setupStack(onBecomeFirstResponder: OnBecomeFirstResponder? = nil) {
         guard let cell = cell else { return }
         
         for atom in cell.atoms {
@@ -96,7 +96,7 @@ class CellView: UIView {
             case .input(_, _, _, _, let onSet):
                 let tf = TextField()
                 tf.isUserInteractionEnabled = onSet != nil
-                tf.responderClosure = responderClosure
+                tf.onBecomeFirstResponder = onBecomeFirstResponder
                 tf.translatesAutoresizingMaskIntoConstraints = false
                 stack.addArrangedSubview(tf)
             case .text(_, _, let onTap):

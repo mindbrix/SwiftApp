@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-typealias ResponderClosure = (TextField) -> Bool?
+typealias OnBecomeFirstResponder = (TextField) -> Bool?
 
 class TextField : UITextField, AtomAView {
     init() {
@@ -23,11 +23,11 @@ class TextField : UITextField, AtomAView {
     }
     
     let underline = UIView()
-    var responderClosure: ResponderClosure?
+    var onBecomeFirstResponder: OnBecomeFirstResponder?
     var onSet: ((String) -> Void)?
     
     override func becomeFirstResponder() -> Bool {
-       return responderClosure?(self) ?? super.becomeFirstResponder()
+       return onBecomeFirstResponder?(self) ?? super.becomeFirstResponder()
     }
     
     func apply(_ atom: Atom, modelStyle: ModelStyle) {

@@ -23,7 +23,7 @@ class TableViewController: UITableViewController {
         tableView.addSubview(floatingField)
         floatingField.isHidden = true
         
-        self.responderClosure = { [weak self] field in
+        self.onBecomeFirstResponder = { [weak self] field in
             guard let self = self
             else { return nil }
             
@@ -70,7 +70,7 @@ class TableViewController: UITableViewController {
     // MARK: - Floating field
     
     private let floatingField = TextField()
-    private var responderClosure: ResponderClosure?
+    private var onBecomeFirstResponder: OnBecomeFirstResponder?
     
     
     // MARK: - ViewModel
@@ -118,7 +118,7 @@ class TableViewController: UITableViewController {
         let cell = model.sections[section].header
         cv.apply(cell,
             modelStyle: headerStyle,
-            responderClosure: responderClosure)
+            onBecomeFirstResponder: onBecomeFirstResponder)
         cv.fadeToBackground(from: .blue)
         return cv
     }
@@ -129,7 +129,7 @@ class TableViewController: UITableViewController {
             let cell = model.sections[indexPath.section].cells[indexPath.row]
             cv.apply(cell,
                 modelStyle: model.style,
-                responderClosure: responderClosure)
+                onBecomeFirstResponder: onBecomeFirstResponder)
             cv.fadeToBackground(from: .red)
         }
         tableViewCell.selectionStyle = .none

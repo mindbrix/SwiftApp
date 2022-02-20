@@ -21,14 +21,16 @@ class TableViewController: UITableViewController {
         
         floatingField.translatesAutoresizingMaskIntoConstraints = false
         tableView.addSubview(floatingField)
-        let bottomConstraint = floatingField.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
-        floatingField.topConstraint = bottomConstraint
-        floatingField.backgroundColor = model.style.cell.color
+        floatingField.isHidden = true
         
         self.responderClosure = { [weak self] field in
-            guard let self = self else { return nil }
-            self.sourceField = field
+            guard let self = self
+            else { return nil }
+            
             self.floatingField.become(field)
+            self.floatingField.backgroundColor = self.model.style.cell.color
+            self.floatingField.isHidden = false
+            
             DispatchQueue.main.asyncAfter(deadline: .now() + 1 / 60, execute: {
                 _ = self.floatingField.becomeFirstResponder()
             })
@@ -54,20 +56,14 @@ class TableViewController: UITableViewController {
     
     // MARK: - Resize event handling
     
-    var onWillResize: ((TableViewController, CGSize) -> Bool)?
+    var onWillResize: ((TableViewController, CGSize) -> Void)?
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
         
-        let didResize = onWillResize?(self, size) ?? false
-        if didResize {
-            coordinator.animate(alongsideTransition: nil, completion: { _ in
-                if self.floatingField.isFirstResponder, let source = self.sourceField {
-                    self.floatingField.become(source)
-                    self.floatingField.setNeedsDisplay()
-                }
-            })
-        }
+        self.floatingField.isHidden = true
+        self.floatingField.resignFirstResponder()
+        onWillResize?(self, size)
     }
     
     
@@ -75,7 +71,7 @@ class TableViewController: UITableViewController {
     
     private let floatingField = TextField()
     private var responderClosure: ResponderClosure?
-    private weak var sourceField: TextField?
+    
     
     // MARK: - ViewModel
     

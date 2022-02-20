@@ -14,20 +14,20 @@ class StyleCache {
         updateStyles()
     }
     
-    var didUpdate: (() -> Void)?
+    var onDidUpdate: (() -> Void)?
 
     var name = "HelveticaNeue" {
         didSet {
             guard name != oldValue else { return }
             updateStyles()
-            didUpdate?()
+            onDidUpdate?()
         }
     }
     var size: CGFloat = 18 {
         didSet {
             guard size != oldValue else { return }
             updateStyles()
-            didUpdate?()
+            onDidUpdate?()
         }
     }
     var smallStyle = TextStyle()

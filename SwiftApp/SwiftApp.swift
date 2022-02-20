@@ -16,10 +16,10 @@ class SwiftApp {
     init(_ window: UIWindow, rootScreen: Screen) {
         self.window = window
         
-        self.styleCache.didUpdate = { [weak self] in
+        self.styleCache.onDidUpdate = { [weak self] in
             self?.reload()
         }
-        self.store.didUpdate = { [weak self] in
+        self.store.onDidUpdate = { [weak self] in
             self?.reload()
         }
         

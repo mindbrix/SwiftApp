@@ -14,7 +14,7 @@ class Store {
         case username
     }
     
-    var didUpdate: (() -> Void)?
+    var onDidUpdate: (() -> Void)?
     
     func get(_ key: Key) -> Any? {
         UserDefaults.standard.object(forKey: key.rawValue)
@@ -23,6 +23,6 @@ class Store {
     func set(_ key: Key, value: Any) {
         UserDefaults.standard.setValue(value, forKey: key.rawValue)
         UserDefaults.standard.synchronize()
-        didUpdate?()
+        onDidUpdate?()
     }
 }

@@ -15,7 +15,9 @@ class TextField : UITextField, AtomAView {
         super.init(frame: .zero)
         underline.translatesAutoresizingMaskIntoConstraints = false
         addSubview(underline)
-        NSLayoutConstraint.activate(underlineConstraints(for: underline))
+        NSLayoutConstraint.activate(
+            underlineConstraints(for: underline)
+        )
         delegate = self
     }
     required init?(coder: NSCoder) {

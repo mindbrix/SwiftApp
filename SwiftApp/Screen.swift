@@ -15,6 +15,7 @@ enum Screen: String, CaseIterable {
     case DequeueTest
     case Fonts
     case Login
+    case Style
     
     var embedInNavController: Bool { self == .Main }
     
@@ -28,59 +29,7 @@ enum Screen: String, CaseIterable {
                 guard let cache = app?.styleCache, let app = app
                 else { return nil }
                 
-                let iconSize: CGFloat = 36
-                
                 return ViewModel(style: cache.modelStyle, title: title, sections: [
-                    Section(
-                        header: Cell(
-                            .text(cache.name,
-                                style: cache.defaultStyle.withAlignment(.center),
-                                onTap: {
-                                    app.push(.Fonts)
-                                })
-                        ),
-                        cells: [
-                            Cell([
-                                .image(cache.minusImage,
-                                    width: iconSize,
-                                    onTap: {
-                                        app.styleCache.size = max(4, cache.size - 1)
-                                    }
-                                ),
-                                .text("\(cache.size)",
-                                    style: cache.counterStyle
-                                ),
-                                .image(cache.plusImage,
-                                    width: iconSize,
-                                    onTap: {
-                                        app.styleCache.size = cache.size + 1
-                                    }
-                                )
-                            ]),
-                            Cell([
-                                .image(cache.minusImage,
-                                    width: iconSize,
-                                    onTap: {
-                                        app.styleCache.spacing = max(0, cache.spacing - 1)
-                                    }
-                                ),
-                                .text("\(cache.spacing)",
-                                    style: cache.counterStyle
-                                ),
-                                .image(cache.plusImage,
-                                    width: iconSize,
-                                    onTap: {
-                                        app.styleCache.spacing = cache.spacing + 1
-                                    }
-                                )
-                            ]),
-                            Cell(.text("Underline: " + (cache.underline == nil ? "Off" : "On"),
-                                    style: cache.defaultStyle.withAlignment(.center),
-                                    onTap: {
-                                        app.styleCache.underline = cache.underline == nil ? .gray : nil
-                                    }
-                            ))
-                        ]),
                     Section(
                         header: Cell(.text("Menu")),
                         cells: Screen.allCases.filter({ !$0.embedInNavController }).map({ menuScreen in
@@ -258,6 +207,69 @@ enum Screen: String, CaseIterable {
                     )
                 ])
             }
+        case .Style:
+            return { [weak app] in
+                    guard let cache = app?.styleCache, let app = app
+                    else { return nil }
+                
+                let iconSize: CGFloat = 36
+                
+                return ViewModel(style: cache.modelStyle, title: title, sections: [
+                    Section(
+                        header: Cell(
+                            .text(cache.name,
+                                style: cache.defaultStyle.withAlignment(.center),
+                                onTap: {
+                                    app.push(.Fonts)
+                                })
+                        ),
+                        cells: [
+                            Cell([
+                                .image(cache.minusImage,
+                                    width: iconSize,
+                                    onTap: {
+                                        app.styleCache.size = max(4, cache.size - 1)
+                                    }
+                                ),
+                                .text("\(cache.size)",
+                                    style: cache.counterStyle
+                                ),
+                                .image(cache.plusImage,
+                                    width: iconSize,
+                                    onTap: {
+                                        app.styleCache.size = cache.size + 1
+                                    }
+                                )
+                            ]),
+                            Cell([
+                                .image(cache.minusImage,
+                                    width: iconSize,
+                                    onTap: {
+                                        app.styleCache.spacing = max(0, cache.spacing - 1)
+                                    }
+                                ),
+                                .text("\(cache.spacing)",
+                                    style: cache.counterStyle
+                                ),
+                                .image(cache.plusImage,
+                                    width: iconSize,
+                                    onTap: {
+                                        app.styleCache.spacing = cache.spacing + 1
+                                    }
+                                )
+                            ]),
+                            Cell(.text("Underline: " + (cache.underline == nil ? "Off" : "On"),
+                                    style: cache.defaultStyle.withAlignment(.center),
+                                    onTap: {
+                                        app.styleCache.underline = cache.underline == nil ? .gray : nil
+                                    }
+                            ))
+                        ]
+                        )
+                    ])
+                
+            }
         }
+    
     }
 }

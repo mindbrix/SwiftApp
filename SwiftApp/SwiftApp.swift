@@ -34,12 +34,31 @@ class SwiftApp {
         Timer.scheduledTimer(withTimeInterval: 1 / 60, repeats: true) { [weak self] timer in
             guard let self = self else { return }
             if self.needsReload {
-                self.topViewController?.reloadModel()
+                if let top = self.topViewController {
+                    top.reloadModel()
+                    if let presented = top.presentedViewController as? TableViewController {
+                        presented.reloadModel()
+                    }
+                }
                 self.needsReload = false
             }
         }
     }
     
+    func present(_ screen: Screen) {
+        guard let top = topViewController
+        else { return }
+                
+        
+        let vc = makeScreenController(screen)
+        if #available(iOS 15.0, *) {
+            if let presentationController = vc.presentationController as? UISheetPresentationController {
+                presentationController.detents = [.medium()]
+            }
+        }
+        top.present(vc, animated: true, completion: nil)
+    }
+        
     func push(_ screen: Screen) {
         guard let nc = window.rootViewController as? UINavigationController
         else { return }

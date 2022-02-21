@@ -74,6 +74,12 @@ enum Screen: String, CaseIterable {
                                     }
                                 )
                             ]),
+                            Cell(.text("Underline: " + (cache.underline == nil ? "Off" : "On"),
+                                    style: cache.defaultStyle.withAlignment(.center),
+                                    onTap: {
+                                        app.styleCache.underline = cache.underline == nil ? .gray : nil
+                                    }
+                            ))
                         ]),
                     Section(
                         header: Cell(.text("Menu")),

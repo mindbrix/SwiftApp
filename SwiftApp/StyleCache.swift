@@ -37,6 +37,13 @@ class StyleCache {
             onDidUpdate?()
         }
     }
+    var underline: UIColor? = nil {
+        didSet {
+            guard underline != oldValue else { return }
+            updateStyles()
+            onDidUpdate?()
+        }
+    }
     
     var smallStyle = TextStyle()
     var defaultStyle = TextStyle()
@@ -75,7 +82,7 @@ class StyleCache {
             cell: CellStyle(
                 insets: UIEdgeInsets(spacing: spacing),
                 spacing: spacing,
-                underline: .gray),
+                underline: underline),
             text: defaultStyle)
     }
 }

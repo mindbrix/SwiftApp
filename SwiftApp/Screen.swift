@@ -91,14 +91,17 @@ enum Screen: String, CaseIterable {
                     Section(
                         header: Cell(.text("Images")),
                         cells: [
-                            Cell(.image(grab0,
+                            Cell([
+                                .image(grab0,
                                     onTap: {
                                         print("grab0")
                                     }
-                            )),
-                            Cell(.text(.longText,
+                                ),
+                                .text(.longText,
                                     style: cache.smallStyle
-                            )),
+                                )],
+                                axis: .vertical
+                            ),
                             Cell([
                                 .image(grab0,
                                     width: 64,
@@ -150,21 +153,20 @@ enum Screen: String, CaseIterable {
                 guard let cache = app?.styleCache, let store = app?.store
                 else { return nil }
                 
-                let cells: [Cell] = Store.Key.allCases.reduce([], { array, key in
-                    array + [
-                        Cell(.text(key.rawValue,
-                                style: cache.smallStyle
-                        )),
-                        Cell(.input(String(describing: store.get(key)),
-                                style: cache.largeStyle
-                        ))
-                    ]
-                })
-                
                 return ViewModel(style: cache.modelStyle, title: title, sections: [
                     Section(
                         header: Cell(.text(title)),
-                        cells: cells
+                        cells: Store.Key.allCases.map({ key in
+                            Cell([
+                                .text(key.rawValue,
+                                    style: cache.smallStyle
+                                ),
+                                .input(String(describing: store.get(key)),
+                                    style: cache.largeStyle
+                                )],
+                                axis: .vertical
+                            )
+                        })
                     )
                 ])
             }
@@ -173,17 +175,17 @@ enum Screen: String, CaseIterable {
                 guard let cache = app?.styleCache
                 else { return nil }
             
-                let cells: [Cell] = Array(1...20).reduce([], { array, int in
-                    array + [
-                        Cell(.text(String(int))),
-                        Cell(.text(int % 2 == 0 ? "" : .longText))
-                    ]
-                })
-                
                 return ViewModel(style: cache.modelStyle, title: title, sections: [
                     Section(
                         header: Cell(.text(title)),
-                        cells: cells
+                        cells: Array(1...100).map({ int in
+                            Cell([
+                                .text(String(int)),
+                                .text(int % 2 == 0 ? "" : .longText)
+                                ],
+                                axis: .vertical
+                            )
+                        })
                     )
                 ])
             }
@@ -222,27 +224,30 @@ enum Screen: String, CaseIterable {
                     Section(
                         header: nil,
                         cells: [
-                            Cell(.text("\n")),
-                            Cell(.input(store.get(.username) as? String ?? "",
+                            Cell([
+                                .text("\n"),
+                                .input(store.get(.username) as? String ?? "",
                                     placeholder: "User",
                                     style: cache.hugeStyle,
                                     onSet: { string in
                                         store.set(.username, value: string)
                                     }
-                            )),
-                            Cell(.input(store.get(.password) as? String ?? "",
+                                ),
+                                .input(store.get(.password) as? String ?? "",
                                     isSecure: true,
                                     placeholder: "Password",
                                     style: cache.hugeStyle,
                                     onSet: { string in
                                         store.set(.password, value: string)
                                     }
-                            )),
-                            Cell(.text("forgot password?",
-                                    style: cache.smallStyle.withColor(.blue).withAlignment(.center),
+                                ),
+                                .text("forgot password?",
+                                      style: cache.smallStyle.withColor(.blue).withAlignment(.center),
                                     onTap: {
                                     }
-                            )),
+                                )],
+                                axis: .vertical
+                            ),
                         ]
                     )
                 ])

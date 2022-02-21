@@ -13,21 +13,26 @@ struct CellStyle: Equatable {
     let color: UIColor
     let insets: UIEdgeInsets?
     let spacing: CGFloat
+    let underline: UIColor?
     
-    init(color: UIColor = .white, insets: UIEdgeInsets? = nil, spacing: CGFloat = 4) {
+    init(color: UIColor = .white, insets: UIEdgeInsets? = nil, spacing: CGFloat = 4, underline: UIColor? = nil) {
         self.color = color
         self.insets = insets
         self.spacing = spacing
+        self.underline = underline
     }
     
     func withColor(_ color: UIColor) -> Self {
-        return Self(color: color, insets: insets, spacing: spacing)
+        return Self(color: color, insets: insets, spacing: spacing, underline: underline)
     }
     func withInsets(_ insets: UIEdgeInsets?) -> Self {
-        return Self(color: color, insets: insets, spacing: spacing)
+        return Self(color: color, insets: insets, spacing: spacing, underline: underline)
     }
     func withSpacing(_ spacing: CGFloat) -> Self {
-        return Self(color: color, insets: insets, spacing: spacing)
+        return Self(color: color, insets: insets, spacing: spacing, underline: underline)
+    }
+    func withUnderline(_ underline: UIColor) -> Self {
+        return Self(color: color, insets: insets, spacing: spacing, underline: underline)
     }
 }
 

@@ -47,8 +47,10 @@ class CellView: UIView {
             setupStack(onBecomeFirstResponder: onBecomeFirstResponder)
         }
         backgroundColor = modelStyle.cell.color
-        underline.backgroundColor = .lightGray
-        guard let cell = cell else { return }
+        underline.isHidden = true
+        
+        guard let cell = cell
+        else { return }
         
         let cellStyle = cell.style ?? modelStyle.cell
         let insets = cellStyle.insets ?? .zero
@@ -62,6 +64,10 @@ class CellView: UIView {
         stack.alignment = cell.axis == .vertical ? .fill : .center
         stack.spacing = cellStyle.spacing
         
+        if let color = cellStyle.underline {
+            underline.backgroundColor = color
+            underline.isHidden = false
+        }
         for (index, atom) in cell.atoms.enumerated() {
             (stack.subviews[index] as? AtomAView)?.apply(atom, modelStyle: modelStyle)
         }

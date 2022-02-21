@@ -74,7 +74,8 @@ class StyleCache {
         modelStyle = ModelStyle(
             cell: CellStyle(
                 insets: UIEdgeInsets(spacing: spacing),
-                spacing: spacing),
+                spacing: spacing,
+                underline: .gray),
             text: defaultStyle)
     }
 }

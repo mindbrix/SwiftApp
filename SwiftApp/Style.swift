@@ -31,7 +31,7 @@ struct CellStyle: Equatable {
     func withSpacing(_ spacing: CGFloat) -> Self {
         return Self(color: color, insets: insets, spacing: spacing, underline: underline)
     }
-    func withUnderline(_ underline: UIColor) -> Self {
+    func withUnderline(_ underline: UIColor?) -> Self {
         return Self(color: color, insets: insets, spacing: spacing, underline: underline)
     }
 }

@@ -47,7 +47,7 @@ enum Screen: String, CaseIterable {
                                         app.styleCache.size = max(4, cache.size - 1)
                                     }
                                 ),
-                                .text("\(cache.size)\n\(cache.size)",
+                                .text("\(cache.size)",
                                     style: cache.counterStyle
                                 ),
                                 .image(cache.plusImage,

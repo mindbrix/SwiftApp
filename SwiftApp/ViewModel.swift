@@ -64,7 +64,3 @@ struct ViewModel: Equatable {
     
     typealias Closure = () -> ViewModel?
 }
-
-protocol AtomAView {
-    func apply(_ atom: Atom, modelStyle: ModelStyle)
-}

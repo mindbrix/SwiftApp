@@ -9,6 +9,11 @@ import Foundation
 import UIKit
 
 
+protocol AtomAView {
+    func apply(_ atom: Atom, modelStyle: ModelStyle)
+}
+
+
 class CellView: UIView {
     init() {
         super.init(frame: .zero)

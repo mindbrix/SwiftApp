@@ -76,7 +76,7 @@ enum Screen: String, CaseIterable {
                 guard let cache = app?.styleCache, let store = app?.store
                 else { return nil }
                 
-                let count = store.get(.counter) as? Int ?? 0
+                let count = store.getInt(.counter)
                 
                 return ViewModel(style: cache.modelStyle, title: title, sections: [
                     Section(
@@ -182,14 +182,14 @@ enum Screen: String, CaseIterable {
                         cells: [
                             Cell([
                                 .text("\n"),
-                                .input(store.get(.username) as? String ?? "",
+                                .input(store.getString(.username),
                                     placeholder: "User",
                                     style: cache.hugeStyle,
                                     onSet: { string in
                                         store.set(.username, value: string)
                                     }
                                 ),
-                                .input(store.get(.password) as? String ?? "",
+                                .input(store.getString(.password),
                                     isSecure: true,
                                     placeholder: "Password",
                                     style: cache.hugeStyle,

@@ -35,6 +35,11 @@ class SwiftAppTests: XCTestCase {
         let rawImg0 = UIImage(cgImage: cg0)
         let rawImg1 = UIImage(cgImage: cg0)
         XCTAssertTrue(rawImg0 == rawImg1)
+        XCTAssertTrue(rawImg0.hashValue == rawImg1.hashValue)
+        
+        let c0 = Cell(.image(rawImg0))
+        let c1 = Cell(.image(rawImg1))
+        XCTAssertTrue(c0.atoms.hashValue != c1.atoms.hashValue)
     }
 
     func testModel() throws {

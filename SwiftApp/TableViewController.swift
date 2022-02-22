@@ -89,10 +89,28 @@ class TableViewController: UITableViewController {
             guard oldValue != model else { return }
             
             self.title = model.title
-            self.tableView.reloadData()
+            if oldValue.style == model.style
+                && oldValue.sections.count == model.sections.count {
+                self.reapplyVisibleCells()
+            } else {
+                self.tableView.reloadData()
+            }
         }
     }
     
+    private func reapplyVisibleCells() {
+        for tableViewCell in tableView.visibleCells {
+            if let cv = (tableViewCell as? CellViewCell)?.cellView,
+               let indexPath = tableView.indexPath(for: tableViewCell) {
+                let cell = model.sections[indexPath.section].cells[indexPath.row]
+                cv.apply(cell,
+                    modelStyle: model.style,
+                    onBecomeFirstResponder: onBecomeFirstResponder)
+                cv.fadeToBackground(from: .green)
+                
+            }
+        }
+    }
     
     // MARK: - UITableViewDelegate, UITableViewDataSource
     

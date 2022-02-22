@@ -22,7 +22,6 @@ class CellView: UIView {
             + underlineConstraints(for: underline)
             + [heightAnchor.constraint(greaterThanOrEqualToConstant: 1)]
         )
-        
     }
     
     required init?(coder: NSCoder) {
@@ -49,12 +48,7 @@ class CellView: UIView {
         
         let cellStyle = cell.style ?? modelStyle.cell
         let insets = cellStyle.insets ?? .zero
-        stack.directionalLayoutMargins = .init(
-            top: insets.top,
-            leading: insets.left,
-            bottom: insets.bottom,
-            trailing: insets.right
-        )
+        stack.directionalLayoutMargins = insets.directionalInsets
         stack.axis = cell.axis == .horizontal ? .horizontal : .vertical
         stack.alignment = cell.axis == .vertical ? .fill : .center
         stack.spacing = cellStyle.spacing

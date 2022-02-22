@@ -35,6 +35,7 @@ class TextField : UITextField, AtomAView {
             font = textStyle.font
             textAlignment = textStyle.alignment
             autocapitalizationType = .none
+            autocorrectionType = .no
             clearButtonMode = .whileEditing
             isSecureTextEntry = isSecure
             underline.backgroundColor = onSet == nil ? .clear : .lightGray

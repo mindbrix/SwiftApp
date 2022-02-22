@@ -55,12 +55,23 @@ struct Section: Equatable {
     let cells: [Cell]
 }
 
-struct ViewModel: Equatable {
+
+class ViewModel: Equatable {
     let style: ModelStyle
     let title: String
     let sections: [Section]
     
-    static let emptyModel = Self(style: .init(), title: "", sections: [])
+    init(style: ModelStyle = .init(), title: String = "", sections: [Section] = []) {
+        self.style = style
+        self.title = title
+        self.sections = sections
+    }
+    
+    static func == (lhs: ViewModel, rhs: ViewModel) -> Bool {
+        lhs.style == rhs.style &&
+        lhs.title == rhs.title &&
+        lhs.sections == rhs.sections
+    }
     
     typealias Closure = () -> ViewModel?
 }

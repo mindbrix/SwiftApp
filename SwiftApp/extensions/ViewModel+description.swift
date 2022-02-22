@@ -8,8 +8,8 @@
 import Foundation
 
 extension ViewModel {
-    func description() -> Self {
-        Self(
+    func description() -> ViewModel {
+        ViewModel(
             style: style,
             title: title,
             sections: sections.map({ section in

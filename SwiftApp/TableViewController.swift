@@ -48,12 +48,12 @@ class TableViewController: UITableViewController {
     var useDescription = false
     
     func reloadModel() {
-        let newModel = modelClosure?() ?? ViewModel.emptyModel
+        let newModel = modelClosure?() ?? ViewModel()
         
         model = useDescription ? newModel.description() : newModel
     }
     
-    private var model = ViewModel.emptyModel {
+    private var model = ViewModel() {
         didSet {
             guard oldValue != model else { return }
             

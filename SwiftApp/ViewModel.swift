@@ -14,7 +14,7 @@ enum Atom: Hashable {
             style: TextStyle? = nil,
             onTap: (() -> Void)? = nil)
     case image(_ image: UIImage,
-            width: CGFloat? = nil,
+            style: ImageStyle? = nil,
             onTap: (() -> Void)? = nil)
     case input(_ value: String,
             isSecure: Bool = false,

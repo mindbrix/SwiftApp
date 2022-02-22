@@ -18,7 +18,7 @@ class ImageView: UIImageView, AtomAView {
     
     func applyAtom(_ atom: Atom, modelStyle: ModelStyle) {
         switch atom {
-        case .image(let image, let width, let onTap):
+        case .image(let image, let style, _):
             self.image = image
             contentMode = .scaleAspectFit
             heightConstraint?.isActive = false
@@ -27,7 +27,8 @@ class ImageView: UIImageView, AtomAView {
             guard size.height > 0 && size.width > 0
             else { return }
             
-            if let width = width {
+            let imageStyle = style ?? modelStyle.image
+            if let width = imageStyle.width {
                 heightConstraint = heightAnchor.constraint(
                     lessThanOrEqualToConstant: width * size.height / size.width)
                 heightConstraint?.isActive = true
@@ -44,7 +45,7 @@ class ImageView: UIImageView, AtomAView {
             }
 
             if image.isSymbolImage {
-                tintColor = onTap == nil ? modelStyle.text.color : .blue
+                tintColor = imageStyle.color
             }
         default:
             break

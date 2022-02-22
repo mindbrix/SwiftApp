@@ -36,6 +36,24 @@ struct CellStyle: Equatable {
     }
 }
 
+struct ImageStyle: Equatable {
+    let color: UIColor
+    let width: CGFloat?
+    
+    init(color: UIColor = .blue, width: CGFloat? = nil) {
+        self.color = color
+        self.width = width
+    }
+    
+    func withColor(_ color: UIColor) -> Self {
+        return Self(color: color, width: width)
+    }
+    func withWidth(_ width: CGFloat?) -> Self {
+        return Self(color: color, width: width)
+    }
+}
+
+
 struct TextStyle: Equatable {
     let color: UIColor
     let font: UIFont?
@@ -60,16 +78,18 @@ struct TextStyle: Equatable {
 
 struct ModelStyle: Equatable {
     let cell: CellStyle
+    let image: ImageStyle
     let text: TextStyle
     let showIndex: Bool
     
-    init(cell: CellStyle = .init(), text: TextStyle = .init(), showIndex: Bool = false) {
+    init(cell: CellStyle = .init(), image: ImageStyle = .init(), text: TextStyle = .init(), showIndex: Bool = false) {
         self.cell = cell
+        self.image = image
         self.text = text
         self.showIndex = showIndex
     }
     
     func withShowIndex() -> Self {
-        Self(cell: cell, text: text, showIndex: true)
+        Self(cell: cell, image: image, text: text, showIndex: true)
     }
 }

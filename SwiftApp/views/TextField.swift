@@ -8,7 +8,6 @@
 import Foundation
 import UIKit
 
-typealias OnBecomeFirstResponder = (TextField) -> Bool?
 
 class TextField : UITextField, AtomAView {
     init() {

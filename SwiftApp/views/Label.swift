@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 
+
 class Label: UILabel, AtomAView {
     func applyAtom(_ atom: Atom, modelStyle: ModelStyle) {
         switch atom {

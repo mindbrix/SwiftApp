@@ -36,7 +36,7 @@ enum Screen: String, CaseIterable {
                             Cell(.text(menuScreen.rawValue,
                                        style: cache.defaultStyle.withColor(.blue),
                                     onTap: {
-                                        app.present(menuScreen)
+                                        app.push(menuScreen)
                                     }
                                 ),
                                 style: cache.modelStyle.cell

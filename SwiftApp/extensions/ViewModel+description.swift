@@ -17,7 +17,7 @@ extension ViewModel {
                     header: Cell([.text(String(describing: section.header))]),
                     cells: section.cells.map({ cell in
                         return Cell(cell.atoms.map({ atom in
-                                .text("\(atom.hashValue)\n\n" + String(describing: atom))
+                                .text(String(describing: atom))
                             })
                         )
                     })

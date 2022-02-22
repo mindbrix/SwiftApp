@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 
-enum Atom: Hashable {
+enum Atom: Equatable {
     case text(_ string: String,
             style: TextStyle? = nil,
             onTap: (() -> Void)? = nil)
@@ -23,10 +23,33 @@ enum Atom: Hashable {
             onSet: ((String) -> Void)? = nil)
     
     static func == (lhs: Atom, rhs: Atom) -> Bool {
-        lhs.hashValue == rhs.hashValue
-    }
-    func hash(into hasher: inout Hasher) {
-        hasher.combine(String(describing: self))
+        switch lhs {
+        case .text(let lstring, let lstyle, let lonTap):
+            switch rhs {
+            case .text(let rstring, let rstyle, let ronTap):
+                return lonTap == nil && ronTap == nil &&
+                        lstring == rstring && lstyle == rstyle
+            default:
+                return false
+            }
+        case .image(let limage, let lstyle, let lonTap):
+            switch rhs {
+            case .image(let rimage, let rstyle, let ronTap):
+                return lonTap == nil && ronTap == nil &&
+                        limage == rimage && lstyle == rstyle
+            default:
+                return false
+            }
+        case .input(let lvalue, let lisSecure, let lplaceholder, let lstyle, let lonSet):
+            switch rhs {
+            case .input(let rvalue, let risSecure, let rplaceholder, let rstyle, let ronSet):
+                return lonSet == nil && ronSet == nil &&
+                        lvalue == rvalue && lisSecure == risSecure &&
+                        lplaceholder == rplaceholder && lstyle == rstyle
+            default:
+                return false
+            }
+        }
     }
 }
 

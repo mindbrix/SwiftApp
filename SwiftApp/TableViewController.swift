@@ -72,8 +72,8 @@ class TableViewController: UITableViewController {
             if let cv = (tableViewCell as? CellViewCell)?.cellView,
                let indexPath = tableView.indexPath(for: tableViewCell) {
                 cv.applyCell(model.sections[indexPath.section].cells[indexPath.row],
-                    modelStyle: model.style)
-                cv.fadeToBackground(from: .green)
+                    modelStyle: model.style,
+                    fadeColor: .green)
             }
         }
     }
@@ -100,8 +100,8 @@ class TableViewController: UITableViewController {
             text: model.style.text)
         let cv = CellView()
         cv.applyCell(model.sections[section].header,
-            modelStyle: headerStyle)
-        cv.fadeToBackground(from: .blue)
+            modelStyle: headerStyle,
+            fadeColor: .blue)
         return cv
     }
 
@@ -109,8 +109,8 @@ class TableViewController: UITableViewController {
         let tableViewCell = tableView.dequeueReusableCell(withIdentifier: CellViewCell.reuseID, for: indexPath)
         if let cv = (tableViewCell as? CellViewCell)?.cellView {
             cv.applyCell(model.sections[indexPath.section].cells[indexPath.row],
-                modelStyle: model.style)
-            cv.fadeToBackground(from: .red)
+                modelStyle: model.style,
+                fadeColor: .red)
         }
         tableViewCell.selectionStyle = .none
         return tableViewCell

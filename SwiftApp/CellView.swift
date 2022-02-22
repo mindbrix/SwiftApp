@@ -29,7 +29,7 @@ class CellView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func applyCell(_ cell: Cell?, modelStyle: ModelStyle) {
+    func applyCell(_ cell: Cell?, modelStyle: ModelStyle, fadeColor: UIColor = .red) {
         self.cell = cell
         stack.directionalLayoutMargins = .zero
         stack.axis = .horizontal
@@ -67,6 +67,7 @@ class CellView: UIView {
             (stack.subviews[index] as? AtomAView)?.applyAtom(atom, modelStyle: modelStyle)
         }
         backgroundColor = cellStyle.color
+        fadeToBackground(from: fadeColor)
     }
     
     private var cell: Cell?

@@ -18,32 +18,8 @@ class TableViewController: UITableViewController {
         if #available(iOS 15.0, *) {
             tableView.sectionHeaderTopPadding = 0
         }
-        
-        floatingField.translatesAutoresizingMaskIntoConstraints = false
-        tableView.addSubview(floatingField)
-        floatingField.isHidden = true
-        
-        self.onBecomeFirstResponder = { [weak self] field in
-            guard let self = self
-            else { return nil }
-            
-            self.floatingField.become(field)
-            self.floatingField.backgroundColor = self.model.style.cell.color
-            self.floatingField.isHidden = false
-            
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1 / 60, execute: {
-                _ = self.floatingField.becomeFirstResponder()
-            })
-            return false
-        }
     }
 
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        
-        view.bringSubviewToFront(floatingField)
-    }
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -54,6 +30,7 @@ class TableViewController: UITableViewController {
         reloadModel()
     }
     
+    
     // MARK: - Resize event handling
     
     var onWillResize: ((TableViewController, CGSize) -> Void)?
@@ -61,16 +38,8 @@ class TableViewController: UITableViewController {
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
         
-        self.floatingField.isHidden = true
-        self.floatingField.resignFirstResponder()
         onWillResize?(self, size)
     }
-    
-    
-    // MARK: - Floating field
-    
-    private let floatingField = TextField()
-    private var onBecomeFirstResponder: OnBecomeFirstResponder?
     
     
     // MARK: - ViewModel
@@ -102,12 +71,9 @@ class TableViewController: UITableViewController {
         for tableViewCell in tableView.visibleCells {
             if let cv = (tableViewCell as? CellViewCell)?.cellView,
                let indexPath = tableView.indexPath(for: tableViewCell) {
-                let cell = model.sections[indexPath.section].cells[indexPath.row]
-                cv.apply(cell,
-                    modelStyle: model.style,
-                    onBecomeFirstResponder: onBecomeFirstResponder)
+                cv.applyCell(model.sections[indexPath.section].cells[indexPath.row],
+                    modelStyle: model.style)
                 cv.fadeToBackground(from: .green)
-                
             }
         }
     }
@@ -133,10 +99,8 @@ class TableViewController: UITableViewController {
             cell: model.style.cell.withColor(headerColor),
             text: model.style.text)
         let cv = CellView()
-        let cell = model.sections[section].header
-        cv.apply(cell,
-            modelStyle: headerStyle,
-            onBecomeFirstResponder: onBecomeFirstResponder)
+        cv.applyCell(model.sections[section].header,
+            modelStyle: headerStyle)
         cv.fadeToBackground(from: .blue)
         return cv
     }
@@ -144,10 +108,8 @@ class TableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let tableViewCell = tableView.dequeueReusableCell(withIdentifier: CellViewCell.reuseID, for: indexPath)
         if let cv = (tableViewCell as? CellViewCell)?.cellView {
-            let cell = model.sections[indexPath.section].cells[indexPath.row]
-            cv.apply(cell,
-                modelStyle: model.style,
-                onBecomeFirstResponder: onBecomeFirstResponder)
+            cv.applyCell(model.sections[indexPath.section].cells[indexPath.row],
+                modelStyle: model.style)
             cv.fadeToBackground(from: .red)
         }
         tableViewCell.selectionStyle = .none

@@ -15,7 +15,7 @@ class ImageView: UIImageView, AtomAView {
         widthAnchor.constraint(equalToConstant: 0)
     }()
     
-    func apply(_ atom: Atom, modelStyle: ModelStyle) {
+    func applyAtom(_ atom: Atom, modelStyle: ModelStyle) {
         switch atom {
         case .image(let image, let width, let onTap):
             self.image = image

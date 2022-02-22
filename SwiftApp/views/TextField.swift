@@ -24,15 +24,7 @@ class TextField : UITextField, AtomAView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    let underline = UIView()
-    var onBecomeFirstResponder: OnBecomeFirstResponder?
-    var onSet: ((String) -> Void)?
-    
-    override func becomeFirstResponder() -> Bool {
-       return onBecomeFirstResponder?(self) ?? super.becomeFirstResponder()
-    }
-    
-    func apply(_ atom: Atom, modelStyle: ModelStyle) {
+    func applyAtom(_ atom: Atom, modelStyle: ModelStyle) {
         switch atom {
         case .input(let value, let isSecure, let placeholder, let style, let onSet):
             let textStyle = style ?? modelStyle.text
@@ -51,41 +43,8 @@ class TextField : UITextField, AtomAView {
         }
     }
     
-    func become(_ field:  TextField) {
-        topConstraint = topAnchor.constraint(equalTo: field.topAnchor)
-        leadingConstraint = leadingAnchor.constraint(equalTo: field.leadingAnchor)
-        trailngConstraint = trailingAnchor.constraint(equalTo: field.trailingAnchor)
-        text = field.text
-        placeholder = field.placeholder
-        selectedTextRange = field.selectedTextRange
-        textColor = field.textColor
-        font = field.font
-        textAlignment = field.textAlignment
-        autocapitalizationType = field.autocapitalizationType
-        clearButtonMode = field.clearButtonMode
-        isSecureTextEntry = field.isSecureTextEntry
-        underline.backgroundColor = field.underline.backgroundColor
-        onSet = field.onSet
-    }
-    
-    var topConstraint: NSLayoutConstraint? {
-        didSet {
-            oldValue?.isActive = false
-            topConstraint?.isActive = true
-        }
-    }
-    var leadingConstraint: NSLayoutConstraint? {
-        didSet {
-            oldValue?.isActive = false
-            leadingConstraint?.isActive = true
-        }
-    }
-    var trailngConstraint: NSLayoutConstraint? {
-        didSet {
-            oldValue?.isActive = false
-            trailngConstraint?.isActive = true
-        }
-    }
+    private let underline = UIView()
+    private var onSet: ((String) -> Void)?
 }
 
 extension TextField: UITextFieldDelegate {

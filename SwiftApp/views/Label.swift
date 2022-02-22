@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 class Label: UILabel, AtomAView {
-    func apply(_ atom: Atom, modelStyle: ModelStyle) {
+    func applyAtom(_ atom: Atom, modelStyle: ModelStyle) {
         switch atom {
         case .text(let string, let style, _):
             let textStyle = style ?? modelStyle.text

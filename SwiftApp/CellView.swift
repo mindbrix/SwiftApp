@@ -10,7 +10,7 @@ import UIKit
 
 
 protocol AtomAView {
-    func apply(_ atom: Atom, modelStyle: ModelStyle)
+    func applyAtom(_ atom: Atom, modelStyle: ModelStyle)
 }
 
 
@@ -34,7 +34,7 @@ class CellView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func apply(_ cell: Cell?, modelStyle: ModelStyle, onBecomeFirstResponder: OnBecomeFirstResponder? = nil) {
+    func applyCell(_ cell: Cell?, modelStyle: ModelStyle) {
         self.cell = cell
         stack.directionalLayoutMargins = .zero
         stack.axis = .horizontal
@@ -44,7 +44,7 @@ class CellView: UIView {
         if types != atomsTypes {
             atomsTypes = types
             emptyStack()
-            setupStack(onBecomeFirstResponder: onBecomeFirstResponder)
+            setupStack()
         }
         backgroundColor = modelStyle.cell.color
         underline.isHidden = true
@@ -69,10 +69,11 @@ class CellView: UIView {
             underline.isHidden = false
         }
         for (index, atom) in cell.atoms.enumerated() {
-            (stack.subviews[index] as? AtomAView)?.apply(atom, modelStyle: modelStyle)
+            (stack.subviews[index] as? AtomAView)?.applyAtom(atom, modelStyle: modelStyle)
         }
         backgroundColor = cellStyle.color
     }
+    
     private var cell: Cell?
     private var atomsTypes: [String] = []
     private let underline = UIView()
@@ -87,7 +88,7 @@ class CellView: UIView {
         }
     }
     
-    private func setupStack(onBecomeFirstResponder: OnBecomeFirstResponder? = nil) {
+    private func setupStack() {
         guard let cell = cell else { return }
         
         for atom in cell.atoms {
@@ -107,7 +108,6 @@ class CellView: UIView {
             case .input(_, _, _, _, let onSet):
                 let tf = TextField()
                 tf.isUserInteractionEnabled = onSet != nil
-                tf.onBecomeFirstResponder = onBecomeFirstResponder
                 tf.translatesAutoresizingMaskIntoConstraints = false
                 stack.addArrangedSubview(tf)
             case .text(_, _, let onTap):

@@ -12,7 +12,6 @@ enum Screen: String, CaseIterable {
     case Main
     case Counter
     case DefaultStore
-    case DequeueTest
     case Fonts
     case Login
     case Style
@@ -121,25 +120,6 @@ enum Screen: String, CaseIterable {
                                 )],
                                 axis: .vertical,
                                 style: cache.modelStyle.cell.withSpacing(0)
-                            )
-                        })
-                    )
-                ])
-            }
-        case .DequeueTest:
-            return { [weak app] in
-                guard let cache = app?.styleCache
-                else { return nil }
-            
-                return ViewModel(style: cache.modelStyle, title: title, sections: [
-                    Section(
-                        header: Cell(.text(title)),
-                        cells: Array(1...100).map({ int in
-                            Cell([
-                                .text(String(int)),
-                                .text(int % 2 == 0 ? "" : .longText)
-                                ],
-                                axis: .vertical
                             )
                         })
                     )

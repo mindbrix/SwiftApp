@@ -1,5 +1,5 @@
 //
-//  UIEdgeInsets+spacing.swift
+//  UIEdgeInsets+Extensions.swift
 //  SwiftApp
 //
 //  Created by Nigel Barber on 19/02/2022.

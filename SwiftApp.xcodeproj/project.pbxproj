@@ -31,9 +31,9 @@
 		E925921227BFC0CA00D40925 /* Cell+atomsTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = E925921127BFC0CA00D40925 /* Cell+atomsTypes.swift */; };
 		E925921327BFC0CA00D40925 /* Cell+atomsTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = E925921127BFC0CA00D40925 /* Cell+atomsTypes.swift */; };
 		E925921427BFC0CA00D40925 /* Cell+atomsTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = E925921127BFC0CA00D40925 /* Cell+atomsTypes.swift */; };
-		E94A1F6827C1490600168123 /* UIEdgeInsets+spacing.swift in Sources */ = {isa = PBXBuildFile; fileRef = E94A1F6727C1490600168123 /* UIEdgeInsets+spacing.swift */; };
-		E94A1F6927C1490600168123 /* UIEdgeInsets+spacing.swift in Sources */ = {isa = PBXBuildFile; fileRef = E94A1F6727C1490600168123 /* UIEdgeInsets+spacing.swift */; };
-		E94A1F6A27C1490600168123 /* UIEdgeInsets+spacing.swift in Sources */ = {isa = PBXBuildFile; fileRef = E94A1F6727C1490600168123 /* UIEdgeInsets+spacing.swift */; };
+		E94A1F6827C1490600168123 /* UIEdgeInsets+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E94A1F6727C1490600168123 /* UIEdgeInsets+Extensions.swift */; };
+		E94A1F6927C1490600168123 /* UIEdgeInsets+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E94A1F6727C1490600168123 /* UIEdgeInsets+Extensions.swift */; };
+		E94A1F6A27C1490600168123 /* UIEdgeInsets+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E94A1F6727C1490600168123 /* UIEdgeInsets+Extensions.swift */; };
 		E94C6A2727C4FF5A00697DD7 /* AtomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E94C6A2627C4FF5A00697DD7 /* AtomView.swift */; };
 		E94C6A2827C4FF5A00697DD7 /* AtomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E94C6A2627C4FF5A00697DD7 /* AtomView.swift */; };
 		E94C6A2927C4FF5A00697DD7 /* AtomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E94C6A2627C4FF5A00697DD7 /* AtomView.swift */; };
@@ -95,7 +95,7 @@
 		E925920927BF8AE100D40925 /* ViewModel+description.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewModel+description.swift"; sourceTree = "<group>"; };
 		E925920D27BF8D3700D40925 /* StyleCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyleCache.swift; sourceTree = "<group>"; };
 		E925921127BFC0CA00D40925 /* Cell+atomsTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Cell+atomsTypes.swift"; sourceTree = "<group>"; };
-		E94A1F6727C1490600168123 /* UIEdgeInsets+spacing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIEdgeInsets+spacing.swift"; sourceTree = "<group>"; };
+		E94A1F6727C1490600168123 /* UIEdgeInsets+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIEdgeInsets+Extensions.swift"; sourceTree = "<group>"; };
 		E94C6A2627C4FF5A00697DD7 /* AtomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AtomView.swift; sourceTree = "<group>"; };
 		E952E7A527BC309100068D8C /* Style.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Style.swift; sourceTree = "<group>"; };
 		E977D00227AFC887007E4998 /* SwiftApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -221,7 +221,7 @@
 			children = (
 				E925921127BFC0CA00D40925 /* Cell+atomsTypes.swift */,
 				E9A838CB27BA6ADC0096FAFB /* String+Extensions.swift */,
-				E94A1F6727C1490600168123 /* UIEdgeInsets+spacing.swift */,
+				E94A1F6727C1490600168123 /* UIEdgeInsets+Extensions.swift */,
 				E977D07627B1A9C9007E4998 /* UIVIew+Extensions.swift */,
 				E925920927BF8AE100D40925 /* ViewModel+description.swift */,
 			);
@@ -359,7 +359,7 @@
 			files = (
 				E977D05227AFECA8007E4998 /* ViewModel.swift in Sources */,
 				E94C6A2727C4FF5A00697DD7 /* AtomView.swift in Sources */,
-				E94A1F6827C1490600168123 /* UIEdgeInsets+spacing.swift in Sources */,
+				E94A1F6827C1490600168123 /* UIEdgeInsets+Extensions.swift in Sources */,
 				E925920A27BF8AE100D40925 /* ViewModel+description.swift in Sources */,
 				E913064227BA6CC600460F22 /* TextField.swift in Sources */,
 				E977D00A27AFC887007E4998 /* TableViewController.swift in Sources */,
@@ -388,7 +388,7 @@
 				E977D08827B1D62C007E4998 /* TableViewController.swift in Sources */,
 				E913064027BA6CC600460F22 /* ImageView.swift in Sources */,
 				E977D08027B1D625007E4998 /* CellViewCell.swift in Sources */,
-				E94A1F6927C1490600168123 /* UIEdgeInsets+spacing.swift in Sources */,
+				E94A1F6927C1490600168123 /* UIEdgeInsets+Extensions.swift in Sources */,
 				E977D01D27AFC887007E4998 /* SwiftAppTests.swift in Sources */,
 				E977D04027AFDBBA007E4998 /* SwiftApp.swift in Sources */,
 				E9A838CD27BA6ADC0096FAFB /* String+Extensions.swift in Sources */,
@@ -414,7 +414,7 @@
 				E977D08C27B1D62D007E4998 /* TableViewController.swift in Sources */,
 				E913064127BA6CC600460F22 /* ImageView.swift in Sources */,
 				E977D08427B1D626007E4998 /* CellViewCell.swift in Sources */,
-				E94A1F6A27C1490600168123 /* UIEdgeInsets+spacing.swift in Sources */,
+				E94A1F6A27C1490600168123 /* UIEdgeInsets+Extensions.swift in Sources */,
 				E977D02827AFC887007E4998 /* SwiftAppUITests.swift in Sources */,
 				E977D04127AFDBBA007E4998 /* SwiftApp.swift in Sources */,
 				E9A838CE27BA6ADC0096FAFB /* String+Extensions.swift in Sources */,

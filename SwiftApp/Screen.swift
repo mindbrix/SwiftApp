@@ -119,7 +119,8 @@ enum Screen: String, CaseIterable {
                                 .input(String(describing: store.get(key)),
                                     style: cache.largeStyle
                                 )],
-                                axis: .vertical
+                                axis: .vertical,
+                                style: cache.modelStyle.cell.withSpacing(0)
                             )
                         })
                     )

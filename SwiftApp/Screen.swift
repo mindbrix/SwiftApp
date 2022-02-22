@@ -114,7 +114,7 @@ enum Screen: String, CaseIterable {
                         cells: Store.Key.allCases.map({ key in
                             Cell([
                                 .text(key.rawValue,
-                                    style: cache.smallStyle
+                                    style: cache.defaultStyle.withColor(.gray)
                                 ),
                                 .input(String(describing: store.get(key)),
                                     style: cache.largeStyle

@@ -10,17 +10,29 @@ import Foundation
 class Store {
     enum Key: String, CaseIterable {
         case counter
+        case fontName
+        case fontSize
         case password
+        case spacing
+        case underline
         case username
         
         var defaultValue: Any {
             switch self {
             case .counter:
                 return 0
+            case .fontName:
+                return "HelveticaNeue"
+            case .fontSize:
+                return 18
             case .password:
                 return ""
+            case .spacing:
+                return 4
             case .username:
                 return ""
+            case .underline:
+                return false
             }
         }
     }

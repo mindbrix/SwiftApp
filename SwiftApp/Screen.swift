@@ -181,13 +181,13 @@ enum Screen: String, CaseIterable {
                                     }
                                 ),
                                 .text("forgot password?",
-                                      style: cache.smallStyle.withColor(.blue).withAlignment(.center),
+                                    style: cache.smallStyle.withColor(.blue).withAlignment(.center),
                                     onTap: {
                                     }
                                 ),
                                 .text("\n"),
                                 .text("Login",
-                                      style: cache.hugeStyle.withColor(canLogin ? .blue : .gray).withAlignment(.center),
+                                    style: cache.hugeStyle.withColor(canLogin ? .blue : .gray).withAlignment(.center),
                                     onTap: {
                                     }
                                 )

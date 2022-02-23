@@ -37,8 +37,7 @@ enum Screen: String, CaseIterable {
                                     onTap: {
                                         app.push(menuScreen)
                                     }
-                                ),
-                                style: cache.modelStyle.cell
+                                )
                             )
                         })
                     ),

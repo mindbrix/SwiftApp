@@ -10,9 +10,25 @@ import UIKit
 
 
 class StyleCache {
+    static let symbolConfig = UIImage.SymbolConfiguration(
+        pointSize: 36,
+        weight: .medium)
+    
     init() {
+        minusImage = UIImage(
+            systemName: "minus.circle",
+            withConfiguration: Self.symbolConfig
+        ) ?? UIImage()
+        plusImage = UIImage(
+            systemName: "plus.circle",
+            withConfiguration: Self.symbolConfig
+        ) ?? UIImage()
+        
         updateStyles()
     }
+    
+    let minusImage: UIImage
+    let plusImage: UIImage
     
     var onDidUpdate: (() -> Void)?
 
@@ -50,8 +66,6 @@ class StyleCache {
     var largeStyle = TextStyle()
     var hugeStyle = TextStyle()
     var counterStyle = TextStyle()
-    var minusImage = UIImage()
-    var plusImage = UIImage()
     var modelStyle = ModelStyle()
     
     private func updateStyles() {
@@ -65,18 +79,6 @@ class StyleCache {
         largeStyle = .init(font: largeFont)
         hugeStyle = .init(font: hugeFont, alignment: .center)
         counterStyle = .init(font: largeFont, alignment: .center)
-        
-        let config = UIImage.SymbolConfiguration(
-            pointSize: size,
-            weight: .medium)
-        minusImage = UIImage(
-            systemName: "minus.circle",
-            withConfiguration: config
-        ) ?? UIImage()
-        plusImage = UIImage(
-            systemName: "plus.circle",
-            withConfiguration: config
-        ) ?? UIImage()
         
         modelStyle = ModelStyle(
             cell: CellStyle(

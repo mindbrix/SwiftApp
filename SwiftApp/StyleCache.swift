@@ -62,7 +62,6 @@ class StyleCache {
     }
     
     var smallStyle = TextStyle()
-    var defaultStyle = TextStyle()
     var largeStyle = TextStyle()
     var hugeStyle = TextStyle()
     var counterStyle = TextStyle()
@@ -75,7 +74,6 @@ class StyleCache {
         let hugeFont = UIFont(name: name, size: size * 1.6)
         
         smallStyle = .init(color: .gray, font: smallFont)
-        defaultStyle = .init(font: defaultFont)
         largeStyle = .init(font: largeFont)
         hugeStyle = .init(font: hugeFont, alignment: .center)
         counterStyle = .init(font: largeFont, alignment: .center)
@@ -85,6 +83,6 @@ class StyleCache {
                 insets: UIEdgeInsets(spacing: spacing),
                 spacing: spacing,
                 underline: underline),
-            text: defaultStyle)
+            text: .init(font: defaultFont))
     }
 }

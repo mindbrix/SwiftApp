@@ -33,7 +33,7 @@ enum Screen: String, CaseIterable {
                         header: Cell(.text("Menu")),
                         cells: Screen.allCases.filter({ !$0.embedInNavController }).map({ menuScreen in
                             Cell(.text(menuScreen.rawValue,
-                                       style: cache.defaultStyle.withColor(.blue),
+                                       style: cache.modelStyle.text.withColor(.blue),
                                     onTap: {
                                         app.push(menuScreen)
                                     }
@@ -112,7 +112,7 @@ enum Screen: String, CaseIterable {
                         cells: Store.Key.allCases.map({ key in
                             Cell([
                                 .text(key.rawValue,
-                                    style: cache.defaultStyle.withColor(.gray)
+                                    style: cache.modelStyle.text.withColor(.gray)
                                 ),
                                 .input(String(describing: store.get(key)),
                                     style: cache.largeStyle
@@ -196,7 +196,7 @@ enum Screen: String, CaseIterable {
                     Section(
                         header: Cell(
                             .text(cache.name,
-                                style: cache.defaultStyle.withAlignment(.center),
+                                style: cache.modelStyle.text.withAlignment(.center),
                                 onTap: {
                                     app.push(.Fonts)
                                 })
@@ -234,7 +234,7 @@ enum Screen: String, CaseIterable {
                             ]),
                             Cell(
                                 .text("Underline: " + (cache.underline == nil ? "Off" : "On"),
-                                    style: cache.defaultStyle.withAlignment(.center),
+                                      style: cache.modelStyle.text.withAlignment(.center),
                                     onTap: {
                                         app.styleCache.underline = cache.underline == nil ? .gray : nil
                                     }

@@ -155,20 +155,24 @@ enum Screen: String, CaseIterable {
                 guard let cache = app?.styleCache, let store = app?.store
                 else { return nil }
                 
+                let username = store.getString(.username)
+                let password = store.getString(.password)
+                let canLogin = username.count > 0 && password.count > 6
+                
                 return ViewModel(style: cache.modelStyle, title: title, sections: [
                     Section(
                         header: nil,
                         cells: [
                             Cell([
                                 .text("\n"),
-                                .input(store.getString(.username),
+                                .input(username,
                                     placeholder: "User",
                                     style: cache.hugeStyle,
                                     onSet: { string in
                                         store.set(.username, value: string)
                                     }
                                 ),
-                                .input(store.getString(.password),
+                                .input(password,
                                     isSecure: true,
                                     placeholder: "Password",
                                     style: cache.hugeStyle,
@@ -180,7 +184,14 @@ enum Screen: String, CaseIterable {
                                       style: cache.smallStyle.withColor(.blue).withAlignment(.center),
                                     onTap: {
                                     }
-                                )],
+                                ),
+                                .text("\n"),
+                                .text("Login",
+                                      style: cache.hugeStyle.withColor(canLogin ? .blue : .gray).withAlignment(.center),
+                                    onTap: {
+                                    }
+                                )
+                                ],
                                 axis: .vertical
                             ),
                         ]

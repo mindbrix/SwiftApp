@@ -39,7 +39,7 @@ class ImageView: UIImageView, AtomAView {
                     lessThanOrEqualTo: widthAnchor,
                     multiplier: size.height / size.width
                 )
-                heightConstraint?.priority = .defaultHigh
+                heightConstraint?.priority = .required
                 heightConstraint?.isActive = true
                 widthConstraint.isActive = false
             }

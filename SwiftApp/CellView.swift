@@ -79,7 +79,8 @@ class CellView: UIView {
     }
     
     private func setupStack() {
-        guard let cell = cell else { return }
+        guard let cell = cell
+        else { return }
         
         for atom in cell.atoms {
            switch atom {
@@ -120,7 +121,8 @@ class CellView: UIView {
     @objc func onAtomTap(_ sender: UITapGestureRecognizer) {
         guard let cell = cell,
                 let view = sender.view,
-                let index = stack.subviews.firstIndex(of: view)
+                let index = stack.subviews.firstIndex(of: view),
+                index < cell.atoms.count
         else { return }
         
         switch cell.atoms[index] {

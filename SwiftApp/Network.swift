@@ -24,9 +24,9 @@ class Network {
                 completionHandler: { [weak self] data, response, error in
                     if let data = data, let self = self {
                         self.cache[request] = data
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
+                        DispatchQueue.main.async {
                             self.onDidUpdate?()
-                        })
+                        }
                     }
             }).resume()
             return nil

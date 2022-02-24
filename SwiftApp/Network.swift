@@ -17,7 +17,7 @@ class Network {
         else { return nil }
 
         let request = URLRequest(url: url)
-        let key = NSNumber.init(value: request.hashValue)
+        let key = NSNumber(value: request.hashValue)
         
         if let cached = imageCache.object(forKey: key) {
             return cached
@@ -41,7 +41,7 @@ class Network {
         else { return nil }
 
         let request = URLRequest(url: url)
-        let key = NSNumber.init(value: request.hashValue)
+        let key = NSNumber(value: request.hashValue)
         
         if let data = dataCache.object(forKey: key) {
             return data as Data

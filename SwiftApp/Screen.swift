@@ -33,13 +33,12 @@ enum Screen: String, CaseIterable {
                 let url = "https://frame.ai/images/tour-early-warning@2x.png"
                 let image = network.getImage(URL(string: url)) ?? UIImage()
                 
-                let data = network.getURL(URL(string: "http://www.wikipedia.com"))
+                let data = network.getData(URL(string: "http://www.wikipedia.com"))
                 let string = String(bytes: data ?? Data(), encoding: .utf8) ?? ""
-                print(string.count)
                 
                 return ViewModel(style: cache.modelStyle, title: title, sections: [
                     Section(
-                        header: Cell(.text("Menu - string.count: \(image.size)")),
+                        header: Cell(.text("Menu - string.count: \(string.count)")),
                         cells: Screen.allCases.filter({ !$0.embedInNavController }).map({ menuScreen in
                             Cell(.text(menuScreen.rawValue,
                                        style: cache.modelStyle.text.withColor(.blue),

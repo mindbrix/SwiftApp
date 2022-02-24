@@ -36,7 +36,7 @@ class Network {
         }
     }
     
-    func getURL(_ url: URL?) -> Data? {
+    func getData(_ url: URL?) -> Data? {
         guard let url = url
         else { return nil }
 

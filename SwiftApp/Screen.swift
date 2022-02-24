@@ -30,11 +30,22 @@ enum Screen: String, CaseIterable {
                         let app = app
                 else { return nil }
                 
-                let url = "https://frame.ai/images/tour-early-warning@2x.png"
-                let image = network.getImage(URL(string: url)) ?? UIImage()
+                let image = network.getImage(URL(string: "https://frame.ai/images/tour-early-warning@2x.png")) ?? UIImage()
+                let data = network.getData(URL(string: "http://www.wikipedia.com")) ?? Data()
+                let jsonData = network.getData(URL(string: "https://blogname.blogspot.com/feeds/posts/default?alt=json-in-script")) ?? Data()
+                let jsonString = String(bytes: jsonData, encoding: .utf8) ?? ""
+                print(jsonString)
                 
-                let data = network.getData(URL(string: "http://www.wikipedia.com"))
-                let string = String(bytes: data ?? Data(), encoding: .utf8) ?? ""
+                let string = String(bytes: data, encoding: .utf8) ?? ""
+                
+                let str = "{\"names\": [\"Bob\", \"Tim\", \"Tina\"]}"
+                let strData = Data(str.utf8)
+                
+                if let json = try? JSONSerialization.jsonObject(with: strData, options: []) {
+                    print(json)
+                }
+            
+//                let json = JSONDecoder().decode(NSDictionary.self, from: jsonData)
                 
                 return ViewModel(style: cache.modelStyle, title: title, sections: [
                     Section(

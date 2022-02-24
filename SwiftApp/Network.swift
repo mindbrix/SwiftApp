@@ -41,15 +41,16 @@ class Network {
         else { return nil }
 
         let request = URLRequest(url: url)
+        let key = NSNumber.init(value: request.hashValue)
         
-        if let data = cache[request] {
-            return data
+        if let data = dataCache.object(forKey: key) {
+            return data as Data
         } else {
             URLSession.shared.dataTask(
                 with: request,
                 completionHandler: { [weak self] data, response, error in
                     if let data = data, let self = self {
-                        self.cache[request] = data
+                        self.dataCache.setObject(data as NSData, forKey: key)
                         DispatchQueue.main.async {
                             self.onDidUpdate?()
                         }
@@ -60,5 +61,5 @@ class Network {
     }
     
     private var imageCache: NSCache<NSNumber, UIImage> = .init()
-    private var cache: [URLRequest: Data] = [:]
+    private var dataCache: NSCache<NSNumber, NSData> = .init()
 }

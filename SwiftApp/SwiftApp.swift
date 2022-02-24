@@ -10,12 +10,16 @@ import UIKit
 
 
 class SwiftApp {
+    let network = Network()
     let store = Store()
     let styleCache = StyleCache()
     
     init(_ window: UIWindow, rootScreen: Screen) {
         self.window = window
         
+        self.network.onDidUpdate = { [weak self] in
+            self?.reload()
+        }
         self.styleCache.onDidUpdate = { [weak self] in
             self?.reload()
         }

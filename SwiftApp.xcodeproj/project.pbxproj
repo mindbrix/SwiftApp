@@ -67,6 +67,9 @@
 		E9A838CC27BA6ADC0096FAFB /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A838CB27BA6ADC0096FAFB /* String+Extensions.swift */; };
 		E9A838CD27BA6ADC0096FAFB /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A838CB27BA6ADC0096FAFB /* String+Extensions.swift */; };
 		E9A838CE27BA6ADC0096FAFB /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A838CB27BA6ADC0096FAFB /* String+Extensions.swift */; };
+		E9CB39C127C7908C00A02A2D /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9CB39C027C7908C00A02A2D /* Network.swift */; };
+		E9CB39C227C7908C00A02A2D /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9CB39C027C7908C00A02A2D /* Network.swift */; };
+		E9CB39C327C7908C00A02A2D /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9CB39C027C7908C00A02A2D /* Network.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -117,6 +120,7 @@
 		E977D06C27B1A628007E4998 /* CellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellView.swift; sourceTree = "<group>"; };
 		E977D07627B1A9C9007E4998 /* UIVIew+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIVIew+Extensions.swift"; sourceTree = "<group>"; };
 		E9A838CB27BA6ADC0096FAFB /* String+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
+		E9CB39C027C7908C00A02A2D /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -183,6 +187,7 @@
 				E977D00527AFC887007E4998 /* AppDelegate.swift */,
 				E977D06C27B1A628007E4998 /* CellView.swift */,
 				E977D06427B1635A007E4998 /* CellViewCell.swift */,
+				E9CB39C027C7908C00A02A2D /* Network.swift */,
 				E977D00727AFC887007E4998 /* SceneDelegate.swift */,
 				E903CB2527BE5A2200B58113 /* Screen.swift */,
 				E925920127BF167200D40925 /* Store.swift */,
@@ -362,6 +367,7 @@
 				E94A1F6827C1490600168123 /* UIEdgeInsets+Extensions.swift in Sources */,
 				E925920A27BF8AE100D40925 /* ViewModel+description.swift in Sources */,
 				E913064227BA6CC600460F22 /* TextField.swift in Sources */,
+				E9CB39C127C7908C00A02A2D /* Network.swift in Sources */,
 				E977D00A27AFC887007E4998 /* TableViewController.swift in Sources */,
 				E903CB2627BE5A2200B58113 /* Screen.swift in Sources */,
 				E977D00627AFC887007E4998 /* AppDelegate.swift in Sources */,
@@ -394,6 +400,7 @@
 				E9A838CD27BA6ADC0096FAFB /* String+Extensions.swift in Sources */,
 				E925921327BFC0CA00D40925 /* Cell+atomsTypes.swift in Sources */,
 				E977D06E27B1A628007E4998 /* CellView.swift in Sources */,
+				E9CB39C227C7908C00A02A2D /* Network.swift in Sources */,
 				E925920327BF167200D40925 /* Store.swift in Sources */,
 				E977D07827B1A9C9007E4998 /* UIVIew+Extensions.swift in Sources */,
 				E925920B27BF8AE100D40925 /* ViewModel+description.swift in Sources */,
@@ -420,6 +427,7 @@
 				E9A838CE27BA6ADC0096FAFB /* String+Extensions.swift in Sources */,
 				E925921427BFC0CA00D40925 /* Cell+atomsTypes.swift in Sources */,
 				E977D06F27B1A628007E4998 /* CellView.swift in Sources */,
+				E9CB39C327C7908C00A02A2D /* Network.swift in Sources */,
 				E925920427BF167200D40925 /* Store.swift in Sources */,
 				E977D07927B1A9C9007E4998 /* UIVIew+Extensions.swift in Sources */,
 				E925920C27BF8AE100D40925 /* ViewModel+description.swift in Sources */,

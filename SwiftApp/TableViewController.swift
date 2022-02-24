@@ -13,6 +13,8 @@ class TableViewController: UITableViewController {
         
         tableView.register(CellViewCell.self,
             forCellReuseIdentifier: CellViewCell.reuseID)
+        tableView.register(CellViewHeaderView.self,
+            forHeaderFooterViewReuseIdentifier: CellViewHeaderView.reuseID)
         tableView.separatorStyle = .none
         tableView.backgroundColor = .white
         if #available(iOS 15.0, *) {
@@ -67,7 +69,21 @@ class TableViewController: UITableViewController {
         }
     }
     
+    private var headerStyle: ModelStyle {
+        ModelStyle(
+            cell: model.style.cell.withColor(UIColor(white: 0.9, alpha: 1)),
+            text: model.style.text
+        )
+    }
+    
     private func reapplyVisibleCells() {
+        for i in 0 ..< model.sections.count {
+            if let header = tableView.headerView(forSection: i) as? CellViewHeaderView {
+                header.cellView.applyCell(model.sections[i].header,
+                    modelStyle: headerStyle,
+                    fadeColor: .green)
+            }
+        }
         for tableViewCell in tableView.visibleCells {
             if let cv = (tableViewCell as? CellViewCell)?.cellView,
                let indexPath = tableView.indexPath(for: tableViewCell) {
@@ -94,15 +110,13 @@ class TableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let headerColor = UIColor(white: 0.9, alpha: 1)
-        let headerStyle = ModelStyle(
-            cell: model.style.cell.withColor(headerColor),
-            text: model.style.text)
-        let cv = CellView()
-        cv.applyCell(model.sections[section].header,
-            modelStyle: headerStyle,
-            fadeColor: .blue)
-        return cv
+        let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: CellViewHeaderView.reuseID)
+        if let cv = (headerView as? CellViewHeaderView)?.cellView {
+            cv.applyCell(model.sections[section].header,
+                modelStyle: headerStyle,
+                fadeColor: .blue)
+        }
+        return headerView
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

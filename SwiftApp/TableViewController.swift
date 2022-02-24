@@ -78,10 +78,10 @@ class TableViewController: UITableViewController {
     
     private func reapplyVisibleCells() {
         for i in 0 ..< model.sections.count {
-            if let header = tableView.headerView(forSection: i) as? CellViewHeaderView {
-                header.cellView.applyCell(model.sections[i].header,
+            if let cv = (tableView.headerView(forSection: i) as? CellViewHeaderView)?.cellView {
+                cv.applyCell(model.sections[i].header,
                     modelStyle: headerStyle,
-                    fadeColor: .green)
+                    fadeColor: .cyan)
             }
         }
         for tableViewCell in tableView.visibleCells {

@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 
+
 enum Screen: String, CaseIterable {
     case Main
     case Counter
@@ -30,26 +31,15 @@ enum Screen: String, CaseIterable {
                         let app = app
                 else { return nil }
                 
-                let image = network.getImage(URL(string: "https://frame.ai/images/tour-early-warning@2x.png")) ?? UIImage()
-                let data = network.getData(URL(string: "http://www.wikipedia.com")) ?? Data()
-                let jsonData = network.getData(URL(string: "https://blogname.blogspot.com/feeds/posts/default?alt=json-in-script")) ?? Data()
-                let jsonString = String(bytes: jsonData, encoding: .utf8) ?? ""
-                print(jsonString)
-                
-                let string = String(bytes: data, encoding: .utf8) ?? ""
-                
-                let str = "{\"names\": [\"Bob\", \"Tim\", \"Tina\"]}"
-                let strData = Data(str.utf8)
-                
-                if let json = try? JSONSerialization.jsonObject(with: strData, options: []) {
-                    print(json)
-                }
-            
-//                let json = JSONDecoder().decode(NSDictionary.self, from: jsonData)
-                
+                let jsonURL = URL(string: "https://goweather.herokuapp.com/weather/London")
+                let imageURL = URL(string: "https://frame.ai/images/tour-early-warning@2x.png")
+                let image = network.getImage(imageURL) ?? UIImage()
+                let weather = network.get(Weather.self, from: jsonURL)
+                print(weather ?? "nil")
+        
                 return ViewModel(style: cache.modelStyle, title: title, sections: [
                     Section(
-                        header: Cell(.text("Menu - string.count: \(string.count)")),
+                        header: Cell(.text("Menu")),
                         cells: Screen.allCases.filter({ !$0.embedInNavController }).map({ menuScreen in
                             Cell(.text(menuScreen.rawValue,
                                        style: cache.modelStyle.text.withColor(.blue),

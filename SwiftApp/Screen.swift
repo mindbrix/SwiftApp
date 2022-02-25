@@ -34,7 +34,7 @@ enum Screen: String, CaseIterable {
                 else { return nil }
                 
                 let imageURL = URL(string: "https://frame.ai/images/tour-early-warning@2x.png")
-                let image = network.getImage(imageURL) ?? UIImage()
+                let image = network.getImage(imageURL)
         
                 return ViewModel(style: cache.modelStyle, title: title, sections: [
                     Section(
@@ -53,7 +53,7 @@ enum Screen: String, CaseIterable {
                         header: Cell(.text("Images")),
                         cells: [
                             Cell([
-                                .image(image.size.width > 0 ? image : grab0,
+                                .image(image ?? grab0,
                                     onTap: {
                                         print("grab0")
                                     }

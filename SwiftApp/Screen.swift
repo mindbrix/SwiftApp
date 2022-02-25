@@ -272,26 +272,45 @@ enum Screen: String, CaseIterable {
                         let app = app
                 else { return nil }
                 
-                
                 print(weather)
+                let center = cache.modelStyle.text.withAlignment(.center)
                 let right = cache.modelStyle.text.withAlignment(.right)
                 
                 return ViewModel(style: cache.modelStyle, title: title, sections: [
                     Section(
                         header: Cell(
                             .text("London",
-                                style: cache.modelStyle.text.withAlignment(.center),
+                                style: center,
                                 onTap: {
                                     
                                 })
                         ),
                         cells: [
                             Cell([
-                                .text("Temprature", style: nil),
+                                .text("Temperature", style: nil),
                                 .text(weather.temperature, style: right)
-                            ])
+                            ]),
+                            Cell([
+                                .text("Wind", style: nil),
+                                .text(weather.wind, style: right)
+                            ]),
+                            Cell([
+                                .text("Description", style: nil),
+                                .text(weather.description, style: right)
+                            ]),
                         ]
-                    )]
+                    ),
+                    Section(header: Cell(.text("Forecast", style: center)), cells: [
+                        Cell(weather.forecast.map({ day in
+                            Atom.text("Day " + day.day, style: center)
+                        })),
+                        Cell(weather.forecast.map({ day in
+                            Atom.text(day.temperature, style: center)
+                        })),
+                        Cell(weather.forecast.map({ day in
+                            Atom.text(day.wind, style: center)
+                        })),
+                    ])]
                 )
             }
         }

@@ -88,10 +88,17 @@ class Network {
                 with: request,
                 completionHandler: { [weak self] data, response, error in
                     if let self = self, let data = data {
-                        let object = try? JSONDecoder().decode(type, from: data)
-                        self.jsonCache[key] = object
-                        DispatchQueue.main.async {
-                            self.onDidUpdate?()
+                        do {
+                            let object = try JSONDecoder().decode(type, from: data)
+                            self.jsonCache[key] = object
+                            DispatchQueue.main.async {
+                                self.onDidUpdate?()
+                            }
+                        } catch {
+                            print(error)
+                            if let string = String(data: data, encoding: .utf8) {
+                                print(string)
+                            }
                         }
                     }
             }).resume()

@@ -151,6 +151,7 @@ enum Screen: String, CaseIterable {
                                     ),
                                     onTap: {
                                         app.styleCache.name = fontName
+                                        app.pop()
                                     })
                                 )
                             })
@@ -277,8 +278,12 @@ enum Screen: String, CaseIterable {
                 else { return nil }
                 
                 print(weather)
-                let center = cache.modelStyle.text.withAlignment(.center)
-                let right = cache.modelStyle.text.withAlignment(.right)
+                let textStyle = cache.modelStyle.text
+                
+                let gray = textStyle.withColor(.gray)
+                let center = textStyle.withAlignment(.center)
+                let centerGray = textStyle.withAlignment(.center).withColor(.gray)
+                let right = textStyle.withAlignment(.right)
                 
                 return ViewModel(style: cache.modelStyle, title: title, sections: [
                     Section(
@@ -291,22 +296,22 @@ enum Screen: String, CaseIterable {
                         ),
                         cells: [
                             Cell([
-                                .text("Temperature", style: nil),
+                                .text("Temperature", style: gray),
                                 .text(weather.temperature, style: right)
                             ]),
                             Cell([
-                                .text("Wind", style: nil),
+                                .text("Wind", style: gray),
                                 .text(weather.wind, style: right)
                             ]),
                             Cell([
-                                .text("Description", style: nil),
+                                .text("Description", style: gray),
                                 .text(weather.description, style: right)
                             ]),
                         ]
                     ),
                     Section(header: Cell(.text("Forecast", style: center)), cells: [
                         Cell(weather.forecast.map({ day in
-                            Atom.text("Day " + day.day, style: center)
+                            Atom.text("Day " + day.day, style: centerGray)
                         })),
                         Cell(weather.forecast.map({ day in
                             Atom.text(day.temperature, style: center)

@@ -62,7 +62,14 @@ class SwiftApp {
         }
         top.present(vc, animated: true, completion: nil)
     }
+       
+    func pop() {
+        guard let nc = window.rootViewController as? UINavigationController
+        else { return }
         
+        nc.popViewController(animated: true)
+    }
+    
     func push(_ screen: Screen) {
         guard let nc = window.rootViewController as? UINavigationController
         else { return }

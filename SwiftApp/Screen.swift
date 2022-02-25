@@ -16,6 +16,8 @@ enum Screen: String, CaseIterable {
     case Fonts
     case Login
     case Style
+    case CityWeather
+    
     
     var embedInNavController: Bool { self == .Main }
     
@@ -33,8 +35,6 @@ enum Screen: String, CaseIterable {
                 
                 let imageURL = URL(string: "https://frame.ai/images/tour-early-warning@2x.png")
                 let image = network.getImage(imageURL) ?? UIImage()
-                let weather = network.get(Weather.self, from: Weather.jsonURL)
-                print(weather ?? "nil")
         
                 return ViewModel(style: cache.modelStyle, title: title, sections: [
                     Section(
@@ -264,7 +264,36 @@ enum Screen: String, CaseIterable {
                     ])
                 
             }
+        case .CityWeather:
+            return { [weak app] in
+                guard let cache = app?.styleCache,
+                        let network = app?.network,
+                        let weather = network.get(Weather.self, from: Weather.jsonURL),
+                        let app = app
+                else { return nil }
+                
+                
+                print(weather)
+                let right = cache.modelStyle.text.withAlignment(.right)
+                
+                return ViewModel(style: cache.modelStyle, title: title, sections: [
+                    Section(
+                        header: Cell(
+                            .text("London",
+                                style: cache.modelStyle.text.withAlignment(.center),
+                                onTap: {
+                                    
+                                })
+                        ),
+                        cells: [
+                            Cell([
+                                .text("Temprature", style: nil),
+                                .text(weather.temperature, style: right)
+                            ])
+                        ]
+                    )]
+                )
+            }
         }
-    
     }
 }

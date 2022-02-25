@@ -267,8 +267,12 @@ enum Screen: String, CaseIterable {
         case .CityWeather:
             return { [weak app] in
                 guard let cache = app?.styleCache,
+                      let store = app?.store,
                         let network = app?.network,
-                        let weather = network.get(Weather.self, from: Weather.jsonURL),
+                        let weather = network.get(
+                            Weather.self,
+                            from: Weather.url(for: store.getString(.weatherCity))
+                        ),
                         let app = app
                 else { return nil }
                 
@@ -279,7 +283,7 @@ enum Screen: String, CaseIterable {
                 return ViewModel(style: cache.modelStyle, title: title, sections: [
                     Section(
                         header: Cell(
-                            .text("London",
+                            .text(store.getString(.weatherCity),
                                 style: center,
                                 onTap: {
                                     

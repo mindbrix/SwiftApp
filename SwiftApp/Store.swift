@@ -16,6 +16,8 @@ class Store {
         case spacing
         case underline
         case username
+        case weatherCity
+        
         
         var defaultValue: Any {
             switch self {
@@ -33,6 +35,8 @@ class Store {
                 return ""
             case .underline:
                 return false
+            case .weatherCity:
+                return "Granada"
             }
         }
     }

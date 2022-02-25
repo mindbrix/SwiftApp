@@ -31,10 +31,9 @@ enum Screen: String, CaseIterable {
                         let app = app
                 else { return nil }
                 
-                let jsonURL = URL(string: "https://goweather.herokuapp.com/weather/London")
                 let imageURL = URL(string: "https://frame.ai/images/tour-early-warning@2x.png")
                 let image = network.getImage(imageURL) ?? UIImage()
-                let weather = network.get(Weather.self, from: jsonURL)
+                let weather = network.get(Weather.self, from: Weather.jsonURL)
                 print(weather ?? "nil")
         
                 return ViewModel(style: cache.modelStyle, title: title, sections: [

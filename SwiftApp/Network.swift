@@ -9,6 +9,8 @@ import Foundation
 import UIKit
 
 struct Weather: Codable {
+    static let jsonURL = URL(string: "https://goweather.herokuapp.com/weather/London")
+    
     struct Day: Codable {
         let day: String
         let temperature: String

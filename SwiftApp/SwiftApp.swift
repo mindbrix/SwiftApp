@@ -36,7 +36,9 @@ class SwiftApp {
         self.styleCache.size = round(scale * self.styleCache.size)
         
         Timer.scheduledTimer(withTimeInterval: 1 / 60, repeats: true) { [weak self] timer in
-            guard let self = self else { return }
+            guard let self = self
+            else { return }
+            
             if self.needsReload {
                 if let top = self.topViewController {
                     top.reloadModel()

@@ -36,9 +36,7 @@ struct Weather: Codable {
                     let app = app
             else { return nil }
             
-            print(weather)
             let textStyle = cache.modelStyle.text
-            
             let gray = textStyle.withColor(.gray)
             let center = textStyle.withAlignment(.center)
             let centerGray = textStyle.withAlignment(.center).withColor(.gray)
@@ -50,7 +48,7 @@ struct Weather: Codable {
                         .text(store.getString(.weatherCity),
                             style: center.withColor(.blue),
                             onTap: {
-                                app.push(.WeatherCities)
+                                app.present(.WeatherCities)
                             })
                     ),
                     cells: [
@@ -105,7 +103,7 @@ struct Weather: Codable {
                                 style: nil,
                                 onTap: {
                                     store.set(.weatherCity, value: city)
-                                    app.pop()
+                                    app.dismiss()
                                 }
                             )
                         )

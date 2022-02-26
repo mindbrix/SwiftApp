@@ -49,6 +49,13 @@ class SwiftApp {
         }
     }
     
+    func dismiss() {
+        guard let top = topViewController, let presented = top.presentedViewController
+        else { return }
+        
+        presented.dismiss(animated: true, completion: nil)
+    }
+    
     func present(_ screen: Screen) {
         guard let top = topViewController
         else { return }

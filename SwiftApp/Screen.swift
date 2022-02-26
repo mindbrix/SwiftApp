@@ -16,7 +16,8 @@ enum Screen: String, CaseIterable {
     case Fonts
     case Login
     case Style
-    case CityWeather
+    case WeatherMain
+    case WeatherCities
     
     
     var embedInNavController: Bool { self == .Main }
@@ -264,8 +265,10 @@ enum Screen: String, CaseIterable {
                     ])
                 
             }
-        case .CityWeather:
-            return Weather.modelClosure(app: app)
+        case .WeatherMain:
+            return Weather.mainClosure(app: app)
+        case .WeatherCities:
+            return Weather.citiesClosure(app: app)
         }
     }
 }

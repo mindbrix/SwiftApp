@@ -24,7 +24,7 @@ struct Weather: Codable {
         return URL(string: "https://goweather.herokuapp.com/weather/" + city)
     }
     
-    static func modelClosure(app: SwiftApp) -> ViewModel.Closure {
+    static func mainClosure(app: SwiftApp) -> ViewModel.Closure {
         { [weak app] in
             guard let cache = app?.styleCache,
                   let store = app?.store,
@@ -48,9 +48,9 @@ struct Weather: Codable {
                 Section(
                     header: Cell(
                         .text(store.getString(.weatherCity),
-                            style: center,
+                            style: center.withColor(.blue),
                             onTap: {
-                                
+                                app.push(.WeatherCities)
                             })
                     ),
                     cells: [
@@ -79,6 +79,38 @@ struct Weather: Codable {
                         Atom.text(day.wind, style: center)
                     })),
                 ])]
+            )
+        }
+    }
+    
+    static func citiesClosure(app: SwiftApp) -> ViewModel.Closure {
+        { [weak app] in
+            guard let cache = app?.styleCache,
+                  let store = app?.store,
+                    let app = app
+            else { return nil }
+            
+            let cities = [
+                "Granada",
+                "London",
+                "Paris",
+            ]
+            
+            return ViewModel(style: cache.modelStyle, title: "Choose a city", sections: [
+                Section(
+                    header: nil,
+                    cells: cities.map({ city in
+                        Cell(
+                            .text(city,
+                                style: nil,
+                                onTap: {
+                                    store.set(.weatherCity, value: city)
+                                    app.pop()
+                                }
+                            )
+                        )
+                    })
+                )]
             )
         }
     }

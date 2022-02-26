@@ -8,22 +8,6 @@
 import Foundation
 import UIKit
 
-struct Weather: Codable {
-    struct Day: Codable {
-        let day: String
-        let temperature: String
-        let wind: String
-    }
-    let temperature: String
-    let wind: String
-    let description: String
-    let forecast: [Day]
-    
-    static func url(for city: String) -> URL? {
-        return URL(string: "https://goweather.herokuapp.com/weather/" + city)
-    }
-}
-
 
 class Network {
     var onDidUpdate: (() -> Void)?

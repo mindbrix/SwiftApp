@@ -73,6 +73,9 @@
 		E9CB39C527C7B10100A02A2D /* CellViewHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9CB39C427C7B10100A02A2D /* CellViewHeaderView.swift */; };
 		E9CB39C627C7B10100A02A2D /* CellViewHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9CB39C427C7B10100A02A2D /* CellViewHeaderView.swift */; };
 		E9CB39C727C7B10100A02A2D /* CellViewHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9CB39C427C7B10100A02A2D /* CellViewHeaderView.swift */; };
+		E9CB39C927CA312A00A02A2D /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9CB39C827CA312A00A02A2D /* Weather.swift */; };
+		E9CB39CA27CA312A00A02A2D /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9CB39C827CA312A00A02A2D /* Weather.swift */; };
+		E9CB39CB27CA312A00A02A2D /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9CB39C827CA312A00A02A2D /* Weather.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -125,6 +128,7 @@
 		E9A838CB27BA6ADC0096FAFB /* String+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 		E9CB39C027C7908C00A02A2D /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		E9CB39C427C7B10100A02A2D /* CellViewHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellViewHeaderView.swift; sourceTree = "<group>"; };
+		E9CB39C827CA312A00A02A2D /* Weather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -201,6 +205,7 @@
 				E977D03E27AFDBBA007E4998 /* SwiftApp.swift */,
 				E977D00927AFC887007E4998 /* TableViewController.swift */,
 				E977D05127AFECA8007E4998 /* ViewModel.swift */,
+				E9CB39C827CA312A00A02A2D /* Weather.swift */,
 				E977D00E27AFC887007E4998 /* Assets.xcassets */,
 				E977D01027AFC887007E4998 /* LaunchScreen.storyboard */,
 				E977D01327AFC887007E4998 /* Info.plist */,
@@ -367,6 +372,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E9CB39C927CA312A00A02A2D /* Weather.swift in Sources */,
 				E9CB39C527C7B10100A02A2D /* CellViewHeaderView.swift in Sources */,
 				E977D05227AFECA8007E4998 /* ViewModel.swift in Sources */,
 				E94C6A2727C4FF5A00697DD7 /* AtomView.swift in Sources */,
@@ -410,6 +416,7 @@
 				E9CB39C627C7B10100A02A2D /* CellViewHeaderView.swift in Sources */,
 				E925920327BF167200D40925 /* Store.swift in Sources */,
 				E977D07827B1A9C9007E4998 /* UIVIew+Extensions.swift in Sources */,
+				E9CB39CA27CA312A00A02A2D /* Weather.swift in Sources */,
 				E925920B27BF8AE100D40925 /* ViewModel+description.swift in Sources */,
 				E94C6A2827C4FF5A00697DD7 /* AtomView.swift in Sources */,
 				E977D09027B1D630007E4998 /* ViewModel.swift in Sources */,
@@ -438,6 +445,7 @@
 				E9CB39C727C7B10100A02A2D /* CellViewHeaderView.swift in Sources */,
 				E925920427BF167200D40925 /* Store.swift in Sources */,
 				E977D07927B1A9C9007E4998 /* UIVIew+Extensions.swift in Sources */,
+				E9CB39CB27CA312A00A02A2D /* Weather.swift in Sources */,
 				E925920C27BF8AE100D40925 /* ViewModel+description.swift in Sources */,
 				E94C6A2927C4FF5A00697DD7 /* AtomView.swift in Sources */,
 				E977D09427B1D631007E4998 /* ViewModel.swift in Sources */,

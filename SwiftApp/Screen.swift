@@ -111,27 +111,7 @@ enum Screen: String, CaseIterable {
                 ])
             }
         case .DefaultStore:
-            return { [weak app] in
-                guard let cache = app?.styleCache, let store = app?.store
-                else { return nil }
-                
-                return ViewModel(style: cache.modelStyle, title: title, sections: [
-                    Section(
-                        header: Cell(.text(title)),
-                        cells: Store.Key.allCases.sorted(by: { a,b in return a.rawValue < b.rawValue }).map({ key in
-                            Cell([
-                                .text(key.rawValue,
-                                      style: cache.largeStyle.withColor(.gray)
-                                ),
-                                .input(String(describing: store.get(key)),
-                                       style: cache.largeStyle.withAlignment(.right)
-                                )],
-                                 style: cache.modelStyle.cell.withInsets(UIEdgeInsets(spacing: 8)).withUnderline(.gray)
-                            )
-                        })
-                    )
-                ])
-            }
+            return Store.mainClosure(app: app)
         case .Fonts:
             return { [weak app] in
                 guard let cache = app?.styleCache, let app = app

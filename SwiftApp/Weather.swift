@@ -96,9 +96,9 @@ struct Weather: Codable {
                 "Paris",
             ]
             
-            return ViewModel(style: cache.modelStyle, title: "Choose a city", sections: [
+            return ViewModel(style: cache.modelStyle, title: "Cities", sections: [
                 Section(
-                    header: nil,
+                    header: Cell(.text("Choose a city", style: nil)),
                     cells: cities.map({ city in
                         Cell(
                             .text(city,

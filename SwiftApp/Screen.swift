@@ -117,16 +117,15 @@ enum Screen: String, CaseIterable {
                 return ViewModel(style: cache.modelStyle, title: title, sections: [
                     Section(
                         header: Cell(.text(title)),
-                        cells: Store.Key.allCases.map({ key in
+                        cells: Store.Key.allCases.sorted(by: { a,b in return a.rawValue < b.rawValue }).map({ key in
                             Cell([
                                 .text(key.rawValue,
-                                    style: cache.modelStyle.text.withColor(.gray)
+                                      style: cache.largeStyle.withColor(.gray)
                                 ),
                                 .input(String(describing: store.get(key)),
-                                    style: cache.largeStyle
+                                       style: cache.largeStyle.withAlignment(.right)
                                 )],
-                                axis: .vertical,
-                                style: cache.modelStyle.cell.withSpacing(0)
+                                 style: cache.modelStyle.cell.withInsets(UIEdgeInsets(spacing: 8)).withUnderline(.gray)
                             )
                         })
                     )

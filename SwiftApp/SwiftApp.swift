@@ -59,8 +59,7 @@ class SwiftApp {
     func present(_ screen: Screen) {
         guard let top = topViewController
         else { return }
-                
-        
+
         let vc = makeScreenController(screen)
         if #available(iOS 15.0, *) {
             if let presentationController = vc.presentationController as? UISheetPresentationController {

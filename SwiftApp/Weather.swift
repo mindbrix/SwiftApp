@@ -20,8 +20,12 @@ struct Weather: Codable {
     let description: String
     let forecast: [Day]
     
+    static let baseURL = "https://goweather.herokuapp.com/weather/"
+    
     static func url(for city: String) -> URL? {
-        return URL(string: "https://goweather.herokuapp.com/weather/" + (city.addingPercentEncoding(withAllowedCharacters: .alphanumerics) ?? ""))
+        var components = URLComponents(string: baseURL)
+        components?.path.append(contentsOf: city)
+        return components?.url
     }
     
     static func mainClosure(app: SwiftApp) -> ViewModel.Closure {

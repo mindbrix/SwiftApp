@@ -29,6 +29,8 @@ class CellView: UIView {
     }
     
     func applyCell(_ cell: Cell?, modelStyle: ModelStyle, fadeColor: UIColor = .red) {
+        let oldHash = self.cell?.hashValue ?? 0
+        
         self.cell = cell
         stack.directionalLayoutMargins = .zero
         stack.axis = .horizontal
@@ -57,11 +59,14 @@ class CellView: UIView {
             underline.backgroundColor = color
             underline.isHidden = false
         }
-        for (index, atom) in cell.atoms.enumerated() {
-            (stack.subviews[index] as? AtomAView)?.applyAtom(atom, modelStyle: modelStyle)
-        }
         backgroundColor = cellStyle.color
-        fadeToBackground(from: fadeColor)
+        
+        if oldHash != cell.hashValue {
+            for (index, atom) in cell.atoms.enumerated() {
+                (stack.subviews[index] as? AtomAView)?.applyAtom(atom, modelStyle: modelStyle)
+            }
+            fadeToBackground(from: fadeColor)
+        }
     }
     
     private var cell: Cell?

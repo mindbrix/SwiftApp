@@ -53,7 +53,7 @@ enum Atom: Equatable {
     }
 }
 
-struct Cell: Equatable {
+struct Cell: Equatable, Hashable {
     enum Axis {
         case horizontal
         case vertical
@@ -66,10 +66,15 @@ struct Cell: Equatable {
     init(_ atom: Atom, style: CellStyle? = nil) {
         self.init([atom], style: style)        
     }
+    
     init(_ atoms: [Atom], axis: Axis = .horizontal, style: CellStyle? = nil) {
         self.atoms = atoms
         self.axis = axis
         self.style = style
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(String(describing: self))
     }
 }
 

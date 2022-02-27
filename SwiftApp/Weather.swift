@@ -34,12 +34,13 @@ struct Weather: Codable {
         { [weak app] in
             guard let cache = app?.styleCache,
                   let store = app?.store,
-                    let network = app?.network,
-                    let weather = network.get(
+                  let network = app?.network,
+                  let url = Weather.url(for: store.getString(.weatherCity)),
+                  let weather = network.get(
                         Weather.self,
-                        from: Weather.url(for: store.getString(.weatherCity))
-                    ),
-                    let app = app
+                        from: url
+                  ),
+                  let app = app
             else { return nil }
             
             let textStyle = cache.modelStyle.text

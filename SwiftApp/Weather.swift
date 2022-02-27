@@ -84,29 +84,27 @@ struct Weather: Codable {
     static func citiesClosure(app: SwiftApp) -> ViewModel.Closure {
         { [weak app] in
             guard let cache = app?.styleCache,
-                  let store = app?.store,
-                    let app = app
+                  let store = app?.store
             else { return nil }
             
             let cities = [
                 "Amsterdam",
-                "Berlin",
-                "Granada",
                 "London",
+                "Madrid",
                 "New York",
                 "Paris",
+                "San Francisco",
             ]
             
             return ViewModel(style: cache.modelStyle, title: "Cities", sections: [
                 Section(
                     header: Cell(.text("Choose a city", style: nil)),
-                    cells: cities.map({ city in
+                    cells: cities.sorted(by: { $0 < $1 }).map({ city in
                         Cell(
                             .text(city,
                                 style: nil,
                                 onTap: {
                                     store.set(.weatherCity, value: city)
-                                    app.dismiss()
                                 }
                             )
                         )

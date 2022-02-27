@@ -102,14 +102,15 @@ struct Weather: Codable {
                 "Paris",
                 "San Francisco",
             ]
+            let textStyle = cache.modelStyle.text
             
             return ViewModel(style: cache.modelStyle, title: "Cities", sections: [
                 Section(
-                    header: Cell(.text("Choose a city", style: nil)),
+                    header: Cell(.text("Choose a city")),
                     cells: cities.sorted(by: { $0 < $1 }).map({ city in
                         Cell(
                             .text(city,
-                                style: nil,
+                                style: textStyle.withColor(.blue),
                                 onTap: {
                                     store.set(.weatherCity, value: city)
                                 }

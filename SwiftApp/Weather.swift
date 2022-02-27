@@ -21,7 +21,7 @@ struct Weather: Codable {
     let forecast: [Day]
     
     static func url(for city: String) -> URL? {
-        return URL(string: "https://goweather.herokuapp.com/weather/" + city)
+        return URL(string: "https://goweather.herokuapp.com/weather/" + (city.addingPercentEncoding(withAllowedCharacters: .alphanumerics) ?? ""))
     }
     
     static func mainClosure(app: SwiftApp) -> ViewModel.Closure {
@@ -89,8 +89,11 @@ struct Weather: Codable {
             else { return nil }
             
             let cities = [
+                "Amsterdam",
+                "Berlin",
                 "Granada",
                 "London",
+                "New York",
                 "Paris",
             ]
             

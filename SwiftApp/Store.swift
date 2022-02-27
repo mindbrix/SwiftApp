@@ -38,7 +38,7 @@ class Store {
             case .underline:
                 return false
             case .weatherCity:
-                return "Granada"
+                return "London"
             }
         }
     }

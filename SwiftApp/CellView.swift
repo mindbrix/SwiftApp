@@ -34,7 +34,7 @@ class CellView: UIView {
         self.cell = cell
         stack.directionalLayoutMargins = .zero
         stack.axis = .horizontal
-        stack.spacing = modelStyle.cell.spacing
+        stack.spacing = modelStyle.cell.spacing ?? 4
         
         let types = cell?.atomsTypes ?? []
         if types != atomsTypes {
@@ -53,7 +53,7 @@ class CellView: UIView {
         stack.directionalLayoutMargins = insets.directionalInsets
         stack.axis = cell.axis == .horizontal ? .horizontal : .vertical
         stack.alignment = cell.axis == .vertical ? .fill : .center
-        stack.spacing = cellStyle.spacing
+        stack.spacing = cellStyle.spacing ?? 4
         
         if let color = cellStyle.underline {
             underline.backgroundColor = color

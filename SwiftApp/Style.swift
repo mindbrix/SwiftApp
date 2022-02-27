@@ -12,10 +12,10 @@ import UIKit
 struct CellStyle: Equatable {
     let color: UIColor
     let insets: UIEdgeInsets?
-    let spacing: CGFloat
+    let spacing: CGFloat?
     let underline: UIColor?
     
-    init(color: UIColor = .white, insets: UIEdgeInsets? = nil, spacing: CGFloat = 4, underline: UIColor? = nil) {
+    init(color: UIColor = .white, insets: UIEdgeInsets? = nil, spacing: CGFloat? = nil, underline: UIColor? = nil) {
         self.color = color
         self.insets = insets
         self.spacing = spacing

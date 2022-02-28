@@ -9,7 +9,32 @@ import Foundation
 import UIKit
 
 extension UIView {
-   func edgeConstraints(for subview: UIView, insets: UIEdgeInsets = .zero) -> [NSLayoutConstraint] {
+    func textSize(for text: String?, font: UIFont?, width: CGFloat) -> CGSize {
+        guard let font = font,
+              let text = text,
+              width > 0
+        else { return .zero }
+        
+        let scale = contentScaleFactor
+        let size = (text as NSString).boundingRect(
+            with: CGSize(
+                width: width,
+                height: .greatestFiniteMagnitude),
+            options: [
+//                .usesFontLeading,
+                .usesLineFragmentOrigin,
+            ],
+            attributes: [
+                NSAttributedString.Key.font: font
+            ],
+            context: nil).size
+        
+        return CGSize(
+            width: ceil(scale * size.width) / scale,
+            height: ceil(scale * size.height) / scale)
+    }
+    
+    func edgeConstraints(for subview: UIView, insets: UIEdgeInsets = .zero) -> [NSLayoutConstraint] {
         [
             subview.topAnchor.constraint(equalTo: topAnchor, constant: insets.top),
             subview.leadingAnchor.constraint(equalTo: leadingAnchor, constant: insets.left),

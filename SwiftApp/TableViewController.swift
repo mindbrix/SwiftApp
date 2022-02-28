@@ -7,6 +7,20 @@
 
 import UIKit
 
+extension UITableView {
+    func visibleSectionIndices(count: Int) -> [Int] {
+        let visible = CGRect(
+            origin: contentOffset,
+            size: bounds.size)
+    
+        return Array(0 ..< count).filter({ i in
+            visible.intersects(style == .plain ?
+                                rect(forSection: i) :
+                                rectForHeader(inSection: i))
+        })
+    }
+}
+
 class TableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -77,7 +91,9 @@ class TableViewController: UITableViewController {
     }
     
     private func reapplyVisibleCells() {
-        for i in 0 ..< model.sections.count {
+        let indices = tableView.visibleSectionIndices(count: model.sections.count)
+        
+        for i in indices {
             if let cv = (tableView.headerView(forSection: i) as? CellViewHeaderView)?.cellView {
                 cv.applyCell(model.sections[i].header,
                     modelStyle: headerStyle,

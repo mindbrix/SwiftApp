@@ -22,4 +22,36 @@ class Label: UILabel, AtomAView {
             break
         }
     }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        print(frame.size)
+        print(textSize)
+    }
+    
+    var textSize: CGSize {
+        guard let font = font,
+              let text = text,
+              frame.size.width > 0 &&
+                frame.size.height > 0
+        else { return .zero }
+        
+        let scale = contentScaleFactor
+        let size = (text as NSString).boundingRect(
+            with: CGSize(
+                width: frame.size.width,
+                height: .greatestFiniteMagnitude),
+            options: [
+//                .usesFontLeading,
+                .usesLineFragmentOrigin,
+            ],
+            attributes: [
+                NSAttributedString.Key.font: font
+            ],
+            context: nil).size
+        
+        return CGSize(
+            width: ceil(scale * size.width) / scale,
+            height: ceil(scale * size.height) / scale)
+    }
 }

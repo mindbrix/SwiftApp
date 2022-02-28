@@ -20,6 +20,8 @@ struct Weather: Codable {
     let description: String
     let forecast: [Day]
     
+    // https://github.com/robertoduessmann/weather-api
+    //
     static let baseURL = "https://goweather.herokuapp.com/weather/"
     
     static func url(for city: String) -> URL? {

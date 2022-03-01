@@ -8,5 +8,5 @@
 import Foundation
 
 protocol AtomAView {
-    func applyAtom(_ atom: Atom, modelStyle: ModelStyle)
+    func applyAtom(_ atom: Atom, modelStyle: ModelStyle) -> Bool
 }

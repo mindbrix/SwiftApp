@@ -30,7 +30,7 @@ class TextField : UITextField, AtomAView {
         print(textSize)
     }
     
-    func applyAtom(_ atom: Atom, modelStyle: ModelStyle) {
+    func applyAtom(_ atom: Atom, modelStyle: ModelStyle) -> Bool {
         switch atom {
         case .input(let value, let isSecure, let placeholder, let style, let onSet):
             let textStyle = style ?? modelStyle.text
@@ -45,8 +45,9 @@ class TextField : UITextField, AtomAView {
             clearButtonMode = .whileEditing
             isSecureTextEntry = isSecure
             underline.backgroundColor = onSet == nil ? .clear : .lightGray
+            return false
         default:
-            break
+            return false
         }
     }
     

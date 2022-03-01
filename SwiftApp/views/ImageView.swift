@@ -16,7 +16,7 @@ class ImageView: UIImageView, AtomAView {
         widthAnchor.constraint(equalToConstant: 0)
     }()
     
-    func applyAtom(_ atom: Atom, modelStyle: ModelStyle) {
+    func applyAtom(_ atom: Atom, modelStyle: ModelStyle) -> Bool {
         switch atom {
         case .image(let image, let style, _):
             self.image = image
@@ -25,7 +25,7 @@ class ImageView: UIImageView, AtomAView {
             
             let size = image.size
             guard size.height > 0 && size.width > 0
-            else { return }
+            else { return false }
             
             let imageStyle = style ?? modelStyle.image
             if let width = imageStyle.width {
@@ -47,8 +47,9 @@ class ImageView: UIImageView, AtomAView {
             if image.isSymbolImage {
                 tintColor = imageStyle.color
             }
+            return false
         default:
-            break
+            return false
         }
     }
 }

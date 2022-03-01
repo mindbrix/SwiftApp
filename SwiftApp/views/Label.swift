@@ -10,7 +10,7 @@ import UIKit
 
 
 class Label: UILabel, AtomAView {
-    func applyAtom(_ atom: Atom, modelStyle: ModelStyle) {
+    func applyAtom(_ atom: Atom, modelStyle: ModelStyle) -> Bool {
         switch atom {
         case .text(let string, let style, _):
             let textStyle = style ?? modelStyle.text
@@ -18,15 +18,17 @@ class Label: UILabel, AtomAView {
             font = textStyle.font
             textAlignment = textStyle.alignment
             textColor = textStyle.color
+            
+            let width = frame.size.width == 0 ? .greatestFiniteMagnitude : frame.size.width
+            let textSize = textSize(
+                for: text,
+                font: font,
+                width: width)
+            print(frame.size)
+            print(textSize)
+            return false
         default:
-            break
+            return false
         }
-    }
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        let textSize = textSize(for: text, font: font, width: frame.size.width)
-        print(frame.size)
-        print(textSize)
     }
 }

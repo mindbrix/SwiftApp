@@ -14,9 +14,8 @@ extension UITableView {
             size: bounds.size)
     
         return Array(0 ..< count).filter({ i in
-            visible.intersects(style == .plain ?
-                                rect(forSection: i) :
-                                rectForHeader(inSection: i))
+            let rect = style == .plain ? rect(forSection: i) : rectForHeader(inSection: i)
+            return visible.intersects(rect)
         })
     }
 }

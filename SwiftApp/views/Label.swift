@@ -24,9 +24,8 @@ class Label: UILabel, AtomAView {
                 for: text,
                 font: font,
                 width: width)
-            print(frame.size)
-            print(textSize)
-            return false
+            let willResize = frame.size.height != textSize.height
+            return willResize
         default:
             return false
         }

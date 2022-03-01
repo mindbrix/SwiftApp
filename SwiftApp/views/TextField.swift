@@ -19,17 +19,11 @@ class TextField : UITextField, AtomAView {
         )
         delegate = self
     }
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        let textSize = textSize(for: text, font: font, width: frame.size.width)
-        print(frame.size)
-        print(textSize)
-    }
-    
+        
     func applyAtom(_ atom: Atom, modelStyle: ModelStyle) -> Bool {
         switch atom {
         case .input(let value, let isSecure, let placeholder, let style, let onSet):
@@ -45,7 +39,14 @@ class TextField : UITextField, AtomAView {
             clearButtonMode = .whileEditing
             isSecureTextEntry = isSecure
             underline.backgroundColor = onSet == nil ? .clear : .lightGray
-            return false
+            
+            let width = frame.size.width == 0 ? .greatestFiniteMagnitude : frame.size.width
+            let textSize = textSize(
+                for: text,
+                font: font,
+                width: width)
+            let willResize = frame.size.height < textSize.height
+            return willResize
         default:
             return false
         }

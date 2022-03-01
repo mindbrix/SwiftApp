@@ -28,16 +28,22 @@ class ImageView: UIImageView, AtomAView {
             else { return false }
             
             let imageStyle = style ?? modelStyle.image
+            let aspect = size.height / size.width
+            var height: CGFloat = .greatestFiniteMagnitude
+            
             if let width = imageStyle.width {
+                height = width * aspect
                 heightConstraint = heightAnchor.constraint(
-                    lessThanOrEqualToConstant: width * size.height / size.width)
+                    lessThanOrEqualToConstant: height)
                 heightConstraint?.isActive = true
                 widthConstraint.constant = width
                 widthConstraint.isActive = true
             } else {
+                let baseWidth = min(size.width, frame.size.width) 
+                height = frame.size.width == 0 ? .greatestFiniteMagnitude : baseWidth * aspect
                 heightConstraint = heightAnchor.constraint(
                     lessThanOrEqualTo: widthAnchor,
-                    multiplier: size.height / size.width
+                    multiplier: aspect
                 )
                 heightConstraint?.priority = .required
                 heightConstraint?.isActive = true
@@ -47,7 +53,8 @@ class ImageView: UIImageView, AtomAView {
             if image.isSymbolImage {
                 tintColor = imageStyle.color
             }
-            return false
+            let willResize = frame.size.height < height
+            return willResize
         default:
             return false
         }

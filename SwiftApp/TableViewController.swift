@@ -73,6 +73,8 @@ class TableViewController: UITableViewController {
             guard oldValue != model else { return }
             
             self.title = model.title
+            self.tableView.fadeToBackground(from: UIColor(white: 0.66, alpha: 1))
+            
             if oldValue.style == model.style &&
                 oldValue.sections.count == model.sections.count &&
                 !self.reapplyVisibleHeaders()

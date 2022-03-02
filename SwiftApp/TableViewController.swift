@@ -87,8 +87,9 @@ class TableViewController: UITableViewController {
         
         for i in tableView.visibleSectionIndices(count: model.sections.count) {
             if let cv = (tableView.headerView(forSection: i) as? CellViewHeaderView)?.cellView {
-                willResize = cv.applyCell(model.sections[i].header,
-                                        modelStyle: headerStyle,
+                let header = model.sections[i].header
+                willResize = cv.applyCell(header,
+                                        modelStyle: (header?.atoms.count ?? 0) == 0 ? model.style : headerStyle,
                                         fadeColor: .cyan) || willResize
             }
         }
@@ -130,9 +131,10 @@ class TableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: CellViewHeaderView.reuseID)
         if let cv = (headerView as? CellViewHeaderView)?.cellView {
-            _ = cv.applyCell(model.sections[section].header,
-                modelStyle: headerStyle,
-                fadeColor: .blue)
+            let header = model.sections[section].header
+            _ = cv.applyCell(header,
+                             modelStyle: (header?.atoms.count ?? 0) == 0 ? model.style : headerStyle,
+                             fadeColor: .blue)
         }
         return headerView
     }

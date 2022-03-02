@@ -39,7 +39,7 @@ class SwiftAppTests: XCTestCase {
         
         let c0 = Cell(.image(rawImg0))
         let c1 = Cell(.image(rawImg1))
-        XCTAssertTrue(c0.atoms.hashValue != c1.atoms.hashValue)
+        XCTAssertTrue(c0.hashValue != c1.hashValue)
     }
 
     func testModel() throws {

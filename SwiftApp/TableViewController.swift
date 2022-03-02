@@ -7,18 +7,6 @@
 
 import UIKit
 
-extension UITableView {
-    func visibleSectionIndices(count: Int) -> [Int] {
-        let visible = CGRect(
-            origin: contentOffset,
-            size: bounds.size)
-    
-        return Array(0 ..< count).filter({ i in
-            let rect = style == .plain ? rect(forSection: i) : rectForHeader(inSection: i)
-            return visible.intersects(rect)
-        })
-    }
-}
 
 class TableViewController: UITableViewController {
     override func viewDidLoad() {

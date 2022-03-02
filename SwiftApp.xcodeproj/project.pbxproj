@@ -76,6 +76,9 @@
 		E9CB39C927CA312A00A02A2D /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9CB39C827CA312A00A02A2D /* Weather.swift */; };
 		E9CB39CA27CA312A00A02A2D /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9CB39C827CA312A00A02A2D /* Weather.swift */; };
 		E9CB39CB27CA312A00A02A2D /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9CB39C827CA312A00A02A2D /* Weather.swift */; };
+		E9CB39CD27CF89F500A02A2D /* UITableView+visibleSectionIndices.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9CB39CC27CF89F500A02A2D /* UITableView+visibleSectionIndices.swift */; };
+		E9CB39CE27CF89F500A02A2D /* UITableView+visibleSectionIndices.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9CB39CC27CF89F500A02A2D /* UITableView+visibleSectionIndices.swift */; };
+		E9CB39CF27CF89F500A02A2D /* UITableView+visibleSectionIndices.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9CB39CC27CF89F500A02A2D /* UITableView+visibleSectionIndices.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -129,6 +132,7 @@
 		E9CB39C027C7908C00A02A2D /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		E9CB39C427C7B10100A02A2D /* CellViewHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellViewHeaderView.swift; sourceTree = "<group>"; };
 		E9CB39C827CA312A00A02A2D /* Weather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
+		E9CB39CC27CF89F500A02A2D /* UITableView+visibleSectionIndices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+visibleSectionIndices.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -239,6 +243,7 @@
 				E94A1F6727C1490600168123 /* UIEdgeInsets+Extensions.swift */,
 				E977D07627B1A9C9007E4998 /* UIVIew+Extensions.swift */,
 				E925920927BF8AE100D40925 /* ViewModel+description.swift */,
+				E9CB39CC27CF89F500A02A2D /* UITableView+visibleSectionIndices.swift */,
 			);
 			path = extensions;
 			sourceTree = "<group>";
@@ -372,6 +377,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E9CB39CD27CF89F500A02A2D /* UITableView+visibleSectionIndices.swift in Sources */,
 				E9CB39C927CA312A00A02A2D /* Weather.swift in Sources */,
 				E9CB39C527C7B10100A02A2D /* CellViewHeaderView.swift in Sources */,
 				E977D05227AFECA8007E4998 /* ViewModel.swift in Sources */,
@@ -413,6 +419,7 @@
 				E925921327BFC0CA00D40925 /* Cell+atomsTypes.swift in Sources */,
 				E977D06E27B1A628007E4998 /* CellView.swift in Sources */,
 				E9CB39C227C7908C00A02A2D /* Network.swift in Sources */,
+				E9CB39CE27CF89F500A02A2D /* UITableView+visibleSectionIndices.swift in Sources */,
 				E9CB39C627C7B10100A02A2D /* CellViewHeaderView.swift in Sources */,
 				E925920327BF167200D40925 /* Store.swift in Sources */,
 				E977D07827B1A9C9007E4998 /* UIVIew+Extensions.swift in Sources */,
@@ -442,6 +449,7 @@
 				E925921427BFC0CA00D40925 /* Cell+atomsTypes.swift in Sources */,
 				E977D06F27B1A628007E4998 /* CellView.swift in Sources */,
 				E9CB39C327C7908C00A02A2D /* Network.swift in Sources */,
+				E9CB39CF27CF89F500A02A2D /* UITableView+visibleSectionIndices.swift in Sources */,
 				E9CB39C727C7B10100A02A2D /* CellViewHeaderView.swift in Sources */,
 				E925920427BF167200D40925 /* Store.swift in Sources */,
 				E977D07927B1A9C9007E4998 /* UIVIew+Extensions.swift in Sources */,

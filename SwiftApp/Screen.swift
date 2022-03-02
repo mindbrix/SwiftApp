@@ -152,36 +152,36 @@ enum Screen: String, CaseIterable {
                     Section(
                         header: nil,
                         cells: [
-                            Cell([
-                                .text("\n"),
-                                .input(username,
+                            Cell(.text("\n")),
+                            Cell(.input(username,
                                     placeholder: "User",
                                     style: cache.hugeStyle,
                                     onSet: { string in
                                         store.set(.username, value: string)
                                     }
-                                ),
-                                .input(password,
+                                )
+                            ),
+                            Cell(.input(password,
                                     isSecure: true,
                                     placeholder: "Password",
                                     style: cache.hugeStyle,
                                     onSet: { string in
                                         store.set(.password, value: string)
                                     }
-                                ),
-                                .text("forgot password?",
+                                )
+                            ),
+                            Cell(.text("forgot password?",
                                     style: cache.smallStyle.withColor(.blue).withAlignment(.center),
                                     onTap: {
                                     }
-                                ),
-                                .text("\n"),
-                                .text("Login",
+                                )
+                            ),
+                            Cell(.text("\n")),
+                            Cell(.text("Login",
                                     style: cache.hugeStyle.withColor(canLogin ? .blue : .gray).withAlignment(.center),
                                     onTap: {
                                     }
                                 )
-                                ],
-                                axis: .vertical
                             ),
                         ]
                     )

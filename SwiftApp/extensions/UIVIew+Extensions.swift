@@ -52,7 +52,10 @@ extension UIView {
         ]
     }
     
-    func fadeToBackground(from color: UIColor, duration: TimeInterval = 0.66) {
+    func fadeToBackground(from color: UIColor?, duration: TimeInterval = 0.66) {
+        guard let color = color
+        else { return }
+
         let animation = CABasicAnimation(keyPath: #keyPath(CALayer.backgroundColor))
         animation.fromValue = color.cgColor
         animation.toValue = backgroundColor?.cgColor

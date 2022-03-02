@@ -73,9 +73,11 @@ class TableViewController: UITableViewController {
             guard oldValue != model else { return }
             
             self.title = model.title
-            if oldValue.style == model.style
-                && oldValue.sections.count == model.sections.count {
-                self.reapplyVisibleCells()
+            if oldValue.style == model.style &&
+                oldValue.sections.count == model.sections.count &&
+                !self.reapplyVisibleHeaders() &&
+                !self.reapplyVisibleCells()
+            {
             } else {
                 self.tableView.reloadData()
             }
@@ -89,24 +91,31 @@ class TableViewController: UITableViewController {
         )
     }
     
-    private func reapplyVisibleCells() {
-        let indices = tableView.visibleSectionIndices(count: model.sections.count)
+    private func reapplyVisibleHeaders() -> Bool {
+        var willResize = false
         
-        for i in indices {
+        for i in tableView.visibleSectionIndices(count: model.sections.count) {
             if let cv = (tableView.headerView(forSection: i) as? CellViewHeaderView)?.cellView {
-                cv.applyCell(model.sections[i].header,
-                    modelStyle: headerStyle,
-                    fadeColor: .cyan)
+                willResize = cv.applyCell(model.sections[i].header,
+                                        modelStyle: headerStyle,
+                                        fadeColor: .cyan) || willResize
             }
         }
+        return willResize
+    }
+    
+    private func reapplyVisibleCells() -> Bool {
+        var willResize = false
+        
         for tableViewCell in tableView.visibleCells {
             if let cv = (tableViewCell as? CellViewCell)?.cellView,
                let indexPath = tableView.indexPath(for: tableViewCell) {
-                cv.applyCell(model.sections[indexPath.section].cells[indexPath.row],
+                willResize = cv.applyCell(model.sections[indexPath.section].cells[indexPath.row],
                     modelStyle: model.style,
-                    fadeColor: .green)
+                    fadeColor: .green) || willResize
             }
         }
+        return willResize
     }
     
     // MARK: - UITableViewDelegate, UITableViewDataSource
@@ -127,7 +136,7 @@ class TableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: CellViewHeaderView.reuseID)
         if let cv = (headerView as? CellViewHeaderView)?.cellView {
-            cv.applyCell(model.sections[section].header,
+            _ = cv.applyCell(model.sections[section].header,
                 modelStyle: headerStyle,
                 fadeColor: .blue)
         }
@@ -137,7 +146,7 @@ class TableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let tableViewCell = tableView.dequeueReusableCell(withIdentifier: CellViewCell.reuseID, for: indexPath)
         if let cv = (tableViewCell as? CellViewCell)?.cellView {
-            cv.applyCell(model.sections[indexPath.section].cells[indexPath.row],
+            _ = cv.applyCell(model.sections[indexPath.section].cells[indexPath.row],
                 modelStyle: model.style,
                 fadeColor: .red)
         }

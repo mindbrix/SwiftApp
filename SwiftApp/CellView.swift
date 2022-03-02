@@ -28,7 +28,7 @@ class CellView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func applyCell(_ cell: Cell?, modelStyle: ModelStyle, fadeColor: UIColor = .red) {
+    func applyCell(_ cell: Cell?, modelStyle: ModelStyle, fadeColor: UIColor = .red) -> Bool {
         let oldHash = self.cell?.hashValue ?? 0
         
         self.cell = cell
@@ -46,7 +46,7 @@ class CellView: UIView {
         underline.isHidden = true
         
         guard let cell = cell
-        else { return }
+        else { return oldHash != 0 }
         
         let cellStyle = cell.style ?? modelStyle.cell
         let insets = cellStyle.insets ?? .zero
@@ -61,12 +61,17 @@ class CellView: UIView {
         }
         backgroundColor = cellStyle.color
         
+        var willResize = false
+        
         if oldHash != cell.hashValue {
             for (index, atom) in cell.atoms.enumerated() {
-                (stack.subviews[index] as? AtomAView)?.applyAtom(atom, modelStyle: modelStyle)
+                if let view = stack.subviews[index] as? AtomAView {
+                    willResize = view.applyAtom(atom, modelStyle: modelStyle) || willResize
+                }
             }
             fadeToBackground(from: fadeColor)
         }
+        return willResize
     }
     
     private var cell: Cell?

@@ -75,9 +75,10 @@ class TableViewController: UITableViewController {
             self.title = model.title
             if oldValue.style == model.style &&
                 oldValue.sections.count == model.sections.count &&
-                !self.reapplyVisibleHeaders() &&
-                !self.reapplyVisibleCells()
+                !self.reapplyVisibleHeaders()
             {
+                let resizedIndexPaths = self.reapplyVisibleCells()
+                self.tableView.reloadRows(at: resizedIndexPaths, with: .fade)
             } else {
                 self.tableView.reloadData()
             }
@@ -104,18 +105,21 @@ class TableViewController: UITableViewController {
         return willResize
     }
     
-    private func reapplyVisibleCells() -> Bool {
-        var willResize = false
+    private func reapplyVisibleCells() -> [IndexPath] {
+        var resizedIndexPaths: [IndexPath] = []
         
         for tableViewCell in tableView.visibleCells {
             if let cv = (tableViewCell as? CellViewCell)?.cellView,
                let indexPath = tableView.indexPath(for: tableViewCell) {
-                willResize = cv.applyCell(model.sections[indexPath.section].cells[indexPath.row],
+                let willResize = cv.applyCell(model.sections[indexPath.section].cells[indexPath.row],
                     modelStyle: model.style,
-                    fadeColor: .green) || willResize
+                    fadeColor: .green)
+                if willResize {
+                    resizedIndexPaths.append(indexPath)
+                }
             }
         }
-        return willResize
+        return resizedIndexPaths
     }
     
     // MARK: - UITableViewDelegate, UITableViewDataSource

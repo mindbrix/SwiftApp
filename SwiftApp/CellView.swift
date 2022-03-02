@@ -20,7 +20,7 @@ class CellView: UIView {
         NSLayoutConstraint.activate(
             edgeConstraints(for: stack)
             + underlineConstraints(for: underline)
-            + [heightAnchor.constraint(greaterThanOrEqualToConstant: 1)]
+            + [heightAnchor.constraint(greaterThanOrEqualToConstant: 1 / contentScaleFactor)]
         )
     }
     

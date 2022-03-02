@@ -40,11 +40,10 @@ class TextField : UITextField, AtomAView {
             isSecureTextEntry = isSecure
             underline.backgroundColor = onSet == nil ? .clear : .lightGray
             
-            let width = frame.size.width == 0 ? .greatestFiniteMagnitude : frame.size.width
             let textSize = textSize(
                 for: text,
                 font: font,
-                width: width)
+                width: .greatestFiniteMagnitude)
             let willResize = frame.size.height < textSize.height
             return willResize
         default:

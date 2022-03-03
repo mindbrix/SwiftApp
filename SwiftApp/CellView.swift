@@ -44,7 +44,11 @@ class CellView: UIView {
         underline.isHidden = true
         
         guard let cell = cell
-        else { return cellHash != 0 }
+        else {
+            let willResize = cellHash != 0
+            cellHash = 0
+            return willResize
+        }
         
         let cellStyle = cell.style ?? modelStyle.cell
         let insets = cellStyle.insets ?? .zero

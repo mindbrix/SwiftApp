@@ -83,7 +83,7 @@ class Store {
                                 style: cache.largeStyle.withAlignment(.right)
                             )],
                             style: cache.modelStyle.cell
-                                .withInsets(UIEdgeInsets(spacing: 8))
+                                .withStackStyle(.init(insets: .init(spacing: 8)))
                                 .withUnderline(.gray)
                         )
                     })

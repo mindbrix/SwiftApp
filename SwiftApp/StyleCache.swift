@@ -87,9 +87,8 @@ class StyleCache {
         
         modelStyle = ModelStyle(
             cell: CellStyle(
-                insets: UIEdgeInsets(spacing: spacing),
-                spacing: spacing,
-                underline: underline),
+                underline: underline,
+                stackStyle: .init(insets: .init(spacing: spacing), spacing: spacing)),
             text: .init(font: defaultFont),
             showRefresh: showRefresh
         )

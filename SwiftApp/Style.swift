@@ -8,31 +8,43 @@
 import Foundation
 import UIKit
 
+struct StackStyle: Equatable {
+    let insets: UIEdgeInsets?
+    let spacing: CGFloat?
+    
+    init(insets: UIEdgeInsets? = nil, spacing: CGFloat? = nil) {
+        self.insets = insets
+        self.spacing = spacing
+    }
+    
+    func withInsets(_ insets: UIEdgeInsets?) -> Self {
+        return Self( insets: insets, spacing: spacing)
+    }
+    func withSpacing(_ spacing: CGFloat) -> Self {
+        return Self(insets: insets, spacing: spacing)
+    }
+
+}
 
 struct CellStyle: Equatable {
     let color: UIColor
-    let insets: UIEdgeInsets?
-    let spacing: CGFloat?
     let underline: UIColor?
+    let stackStyle: StackStyle
     
-    init(color: UIColor = .white, insets: UIEdgeInsets? = nil, spacing: CGFloat? = nil, underline: UIColor? = nil) {
+    init(color: UIColor = .white, underline: UIColor? = nil, stackStyle: StackStyle = .init()) {
         self.color = color
-        self.insets = insets
-        self.spacing = spacing
         self.underline = underline
+        self.stackStyle = stackStyle
     }
     
     func withColor(_ color: UIColor) -> Self {
-        return Self(color: color, insets: insets, spacing: spacing, underline: underline)
-    }
-    func withInsets(_ insets: UIEdgeInsets?) -> Self {
-        return Self(color: color, insets: insets, spacing: spacing, underline: underline)
-    }
-    func withSpacing(_ spacing: CGFloat) -> Self {
-        return Self(color: color, insets: insets, spacing: spacing, underline: underline)
+        return Self(color: color, underline: underline, stackStyle: stackStyle)
     }
     func withUnderline(_ underline: UIColor?) -> Self {
-        return Self(color: color, insets: insets, spacing: spacing, underline: underline)
+        return Self(color: color, underline: underline, stackStyle: stackStyle)
+    }
+    func withStackStyle(_ stackStyle: StackStyle) -> Self {
+        return Self(color: color, underline: underline, stackStyle: stackStyle)
     }
 }
 

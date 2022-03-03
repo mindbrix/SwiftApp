@@ -32,7 +32,7 @@ class CellView: UIView {
         self.cell = cell
         stack.layoutMargins = .zero
         stack.axis = .horizontal
-        stack.spacing = modelStyle.cell.spacing ?? 0
+        stack.spacing = modelStyle.cell.stackStyle.spacing ?? 0
         
         let types = cell?.atomsTypes ?? []
         if types != atomsTypes {
@@ -51,11 +51,11 @@ class CellView: UIView {
         }
         
         let cellStyle = cell.style ?? modelStyle.cell
-        let insets = cellStyle.insets ?? .zero
+        let insets = cellStyle.stackStyle.insets ?? .zero
         stack.layoutMargins = insets
         stack.axis = cell.axis == .horizontal ? .horizontal : .vertical
         stack.alignment = cell.axis == .vertical ? .fill : .center
-        stack.spacing = cellStyle.spacing ?? 0
+        stack.spacing = cellStyle.stackStyle.spacing ?? 0
         
         if let color = cellStyle.underline {
             underline.backgroundColor = color

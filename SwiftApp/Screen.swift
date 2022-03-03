@@ -163,71 +163,7 @@ enum Screen: String, CaseIterable {
                 ])
             }
         case .Style:
-            return { [weak app] in
-                    guard let cache = app?.styleCache, let app = app
-                    else { return nil }
-                
-                return ViewModel(style: cache.modelStyle, title: title, sections: [
-                    Section(
-                        header: Cell(
-                            .text(cache.name,
-                                style: cache.modelStyle.text.withAlignment(.center),
-                                onTap: {
-                                    app.push(.Fonts)
-                                })
-                        ),
-                        cells: [
-                            Cell([
-                                .image(cache.minusImage,
-                                    onTap: {
-                                        app.styleCache.size = max(4, cache.size - 1)
-                                    }
-                                ),
-                                .text("\(cache.size)",
-                                    style: cache.counterStyle
-                                ),
-                                .image(cache.plusImage,
-                                    onTap: {
-                                        app.styleCache.size = cache.size + 1
-                                    }
-                                )
-                            ]),
-                            Cell([
-                                .image(cache.minusImage,
-                                    onTap: {
-                                        app.styleCache.spacing = max(0, cache.spacing - 1)
-                                    }
-                                ),
-                                .text("\(cache.spacing)",
-                                    style: cache.counterStyle
-                                ),
-                                .image(cache.plusImage,
-                                    onTap: {
-                                        app.styleCache.spacing = cache.spacing + 1
-                                    }
-                                )
-                            ]),
-                            Cell(
-                                .text("Underline: " + (cache.underline == nil ? "Off" : "On"),
-                                      style: cache.modelStyle.text.withAlignment(.center),
-                                    onTap: {
-                                        app.styleCache.underline = cache.underline == nil ? .gray : nil
-                                    }
-                                )
-                            ),
-                            Cell(
-                                .text("Show Refresh: " + (cache.showRefresh ? "On" : "Off"),
-                                      style: cache.modelStyle.text.withAlignment(.center),
-                                    onTap: {
-                                        app.styleCache.showRefresh = !cache.showRefresh
-                                    }
-                                )
-                            ),
-                        ]
-                        )
-                    ])
-                
-            }
+            return app.styleCache.mainClosure(app: app)
         case .WeatherMain:
             return Weather.mainClosure(app: app)
         case .WeatherCities:

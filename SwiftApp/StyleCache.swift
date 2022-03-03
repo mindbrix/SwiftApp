@@ -95,6 +95,74 @@ class StyleCache {
         )
     }
     
+    func mainClosure(app: SwiftApp) -> ViewModel.Closure {
+        { [weak self, weak app] in
+            guard let self = self,
+                    let app = app
+            else { return nil }
+            
+            return ViewModel(style: self.modelStyle, title: "Style", sections: [
+                Section(
+                    header: Cell(
+                        .text(self.name,
+                            style: self.modelStyle.text.withAlignment(.center),
+                            onTap: {
+                                app.push(.Fonts)
+                            })
+                    ),
+                    cells: [
+                        Cell([
+                            .image(self.minusImage,
+                                onTap: {
+                                    self.size = max(4, self.size - 1)
+                                }
+                            ),
+                            .text("\(self.size)",
+                                style: self.counterStyle
+                            ),
+                            .image(self.plusImage,
+                                onTap: {
+                                    self.size = self.size + 1
+                                }
+                            )
+                        ]),
+                        Cell([
+                            .image(self.minusImage,
+                                onTap: {
+                                    self.spacing = max(0, self.spacing - 1)
+                                }
+                            ),
+                            .text("\(self.spacing)",
+                                style: self.counterStyle
+                            ),
+                            .image(self.plusImage,
+                                onTap: {
+                                    self.spacing = self.spacing + 1
+                                }
+                            )
+                        ]),
+                        Cell(
+                            .text("Underline: " + (self.underline == nil ? "Off" : "On"),
+                                  style: self.modelStyle.text.withAlignment(.center),
+                                onTap: {
+                                    self.underline = self.underline == nil ? .gray : nil
+                                }
+                            )
+                        ),
+                        Cell(
+                            .text("Show Refresh: " + (self.showRefresh ? "On" : "Off"),
+                                  style: self.modelStyle.text.withAlignment(.center),
+                                onTap: {
+                                    self.showRefresh = !self.showRefresh
+                                }
+                            )
+                        ),
+                    ]
+                    )
+                ])
+        }
+    }
+    
     func fontsClosure() -> ViewModel.Closure {
         { [weak self] in
             guard let self = self

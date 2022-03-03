@@ -65,7 +65,7 @@ class CellView: UIView {
         
         var willResize = false
         
-        let cellStyleHash = cell.style == nil ? 0 : String(describing: modelStyle.cell).hashValue
+        let cellStyleHash = cell.style == nil ? String(describing: modelStyle.cell).hashValue : 0
         let textStyleHash = String(describing: modelStyle.text).hashValue
         let newHash = cell.hashValue ^ cellStyleHash ^ textStyleHash
         

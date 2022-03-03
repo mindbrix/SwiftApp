@@ -55,45 +55,60 @@ struct Weather: Codable {
             let textStyle = cache.modelStyle.text
             let gray = textStyle.withColor(.gray)
             let center = textStyle.withAlignment(.center)
-            let centerGray = textStyle.withAlignment(.center).withColor(.gray)
             let right = textStyle.withAlignment(.right)
+            let centerBlue = center.withColor(.blue)
+            let centerGray = center.withColor(.gray)
             
             return ViewModel(style: cache.modelStyle, title: "Weather", sections: [
                 Section(
                     header: Cell(
                         .text(store.getString(.weatherCity),
-                            style: center.withColor(.blue),
+                            style: centerBlue,
                             onTap: {
                                 app.present(.WeatherCities)
                             })
                     ),
                     cells: [
                         Cell([
-                            .text("Temperature", style: gray),
-                            .text(weather.temperature, style: right)
+                            .text("Temperature",
+                                  style: gray),
+                            .text(weather.temperature,
+                                  style: right)
                         ]),
                         Cell([
-                            .text("Wind", style: gray),
-                            .text(weather.wind, style: right)
+                            .text("Wind",
+                                  style: gray),
+                            .text(weather.wind,
+                                  style: right)
                         ]),
                         Cell([
-                            .text("Description", style: gray),
-                            .text(weather.description + weather.description + weather.description, style: right)
+                            .text("Description",
+                                  style: gray),
+                            .text(weather.description + weather.description + weather.description,
+                                  style: right)
                         ]),
                     ]
                 ),
-                Section(header: Cell(.text("Forecast", style: center)), cells: [
-                    Cell(weather.forecast.map({ day in
-                        Atom.text("Day " + day.day, style: centerGray)
-                    })),
-                    Cell(weather.forecast.map({ day in
-                        Atom.text(day.temperature, style: center)
-                    })),
-                    Cell(weather.forecast.map({ day in
-                        Atom.text(day.wind, style: center)
-                    })),
-                ])]
-            )
+                Section(
+                    header: Cell(
+                        .text("Forecast",
+                              style: center)),
+                    cells: [
+                        Cell(weather.forecast.map({ day in
+                            .text("Day " + day.day,
+                                  style: centerGray)
+                        })),
+                        Cell(weather.forecast.map({ day in
+                            .text(day.temperature,
+                                  style: center)
+                        })),
+                        Cell(weather.forecast.map({ day in
+                            .text(day.wind,
+                                  style: center)
+                        })),
+                    ]
+                )
+            ])
         }
     }
     
@@ -115,7 +130,9 @@ struct Weather: Codable {
             
             return ViewModel(style: cache.modelStyle, title: "Cities", sections: [
                 Section(
-                    header: Cell(.text("Choose a city")),
+                    header: Cell(
+                        .text("Choose a city")
+                    ),
                     cells: cities.sorted(by: { $0 < $1 }).map({ city in
                         Cell(
                             .text(city,

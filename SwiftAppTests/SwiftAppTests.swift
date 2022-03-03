@@ -27,25 +27,25 @@ class SwiftAppTests: XCTestCase {
             return
         }
         
-        XCTAssertTrue(img0 != img1)
-        XCTAssertTrue(img0.hashValue != img1.hashValue)
-        XCTAssertTrue(cg0.hashValue != cg1.hashValue)
+        XCTAssertNotEqual(img0, img1)
+        XCTAssertNotEqual(img0.hashValue, img1.hashValue)
+        XCTAssertNotEqual(cg0.hashValue, cg1.hashValue)
         XCTAssertTrue(String(img0.hashValue).count >= String(cg0.hashValue).count)
         
         let rawImg0 = UIImage(cgImage: cg0)
         let rawImg1 = UIImage(cgImage: cg0)
-        XCTAssertTrue(rawImg0 == rawImg1)
-        XCTAssertTrue(rawImg0.hashValue == rawImg1.hashValue)
+        XCTAssertEqual(rawImg0, rawImg1)
+        XCTAssertEqual(rawImg0.hashValue, rawImg1.hashValue)
         
         let c0 = Cell(.image(rawImg0))
         let c1 = Cell(.image(rawImg1))
-        XCTAssertTrue(c0.hashValue != c1.hashValue)
+        XCTAssertNotEqual(c0.hashValue, c1.hashValue)
     }
 
     func testCellEquality() throws {
         let c0 = Cell(.text("Title0"))
         let c1 = Cell(.text("Title1"))
-        XCTAssertTrue("\(c0)" == String(describing: c0))
+        XCTAssertEqual("\(c0)", String(describing: c0))
         XCTAssertEqual(c0, c0)
         XCTAssertNotEqual(c0, c1)
     }

@@ -50,13 +50,36 @@ class SwiftAppTests: XCTestCase {
         XCTAssertNotEqual(c0, c1)
     }
     
-    func testCellClosureEquality() throws {
+    func testTextCellClosureEquality() throws {
         let title = "Title"
         let c0 = Cell(.text(title, onTap: {}))
         let c1 = Cell(.text(title))
+        let c2 = Cell(.text(title))
         XCTAssertNotEqual(c0, c1)
+        XCTAssertEqual(c1, c2)
+    }
+    
+    func testInputCellClosureEquality() throws {
+        let title = "Title"
+        let c0 = Cell(.input(title, onSet: {_ in }))
+        let c1 = Cell(.input(title))
+        let c2 = Cell(.input(title))
+        XCTAssertNotEqual(c0, c1)
+        XCTAssertEqual(c1, c2)
     }
 
+    func testImageCellClosureEquality() throws {
+        guard let img0 = UIImage(systemName: "plus.circle")
+        else {
+            return
+        }
+        let c0 = Cell(.image(img0, onTap: {}))
+        let c1 = Cell(.image(img0))
+        let c2 = Cell(.image(img0))
+        XCTAssertNotEqual(c0, c1)
+        XCTAssertEqual(c1, c2)
+    }
+    
     func testPerformanceExample() throws {
         // This is an example of a performance test case.
         self.measure {

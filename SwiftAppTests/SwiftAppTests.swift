@@ -42,11 +42,18 @@ class SwiftAppTests: XCTestCase {
         XCTAssertTrue(c0.hashValue != c1.hashValue)
     }
 
-    func testModel() throws {
-        let c0 = Cell([.text("Title0")])
-        let c1 = Cell([.text("Title1")])
+    func testCellEquality() throws {
+        let c0 = Cell(.text("Title0"))
+        let c1 = Cell(.text("Title1"))
         XCTAssertTrue("\(c0)" == String(describing: c0))
         XCTAssertEqual(c0, c0)
+        XCTAssertNotEqual(c0, c1)
+    }
+    
+    func testCellClosureEquality() throws {
+        let title = "Title"
+        let c0 = Cell(.text(title, onTap: {}))
+        let c1 = Cell(.text(title))
         XCTAssertNotEqual(c0, c1)
     }
 

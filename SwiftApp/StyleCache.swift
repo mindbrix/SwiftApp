@@ -46,7 +46,7 @@ class StyleCache {
             onDidUpdate?()
         }
     }
-    var showRefresh: Bool = false {
+    var showRefresh: Bool = true {
         didSet {
             guard oldValue != showRefresh else { return }
             updateStyles()

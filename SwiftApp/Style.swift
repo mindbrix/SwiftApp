@@ -9,21 +9,30 @@ import Foundation
 import UIKit
 
 struct StackStyle: Equatable {
+    enum Axis {
+        case horizontal
+        case vertical
+    }
+    
+    let axis: Axis
     let insets: UIEdgeInsets?
     let spacing: CGFloat?
     
-    init(insets: UIEdgeInsets? = nil, spacing: CGFloat? = nil) {
+    init(axis: Axis = .horizontal, insets: UIEdgeInsets? = nil, spacing: CGFloat? = nil) {
+        self.axis = axis
         self.insets = insets
         self.spacing = spacing
     }
     
+    func withAxis(_ axis: Axis) -> Self {
+        return Self(axis: axis, insets: insets, spacing: spacing)
+    }
     func withInsets(_ insets: UIEdgeInsets?) -> Self {
-        return Self( insets: insets, spacing: spacing)
+        return Self(axis: axis, insets: insets, spacing: spacing)
     }
     func withSpacing(_ spacing: CGFloat) -> Self {
-        return Self(insets: insets, spacing: spacing)
+        return Self(axis: axis, insets: insets, spacing: spacing)
     }
-
 }
 
 struct CellStyle: Equatable {

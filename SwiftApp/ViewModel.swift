@@ -54,22 +54,15 @@ enum Atom: Equatable {
 }
 
 struct Cell: Equatable, Hashable {
-    enum Axis {
-        case horizontal
-        case vertical
-    }
-    
     let atoms: [Atom]
     let style: CellStyle?
-    let axis: Axis
     
     init(_ atom: Atom, style: CellStyle? = nil) {
         self.init([atom], style: style)        
     }
     
-    init(_ atoms: [Atom], axis: Axis = .horizontal, style: CellStyle? = nil) {
+    init(_ atoms: [Atom], style: CellStyle? = nil) {
         self.atoms = atoms
-        self.axis = axis
         self.style = style
     }
     

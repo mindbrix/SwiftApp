@@ -34,6 +34,7 @@ enum Screen: String, CaseIterable {
                         let app = app
                 else { return nil }
                 
+                let cellStyle = cache.modelStyle.cell
                 let imageURL = URL(string: "https://frame.ai/images/tour-early-warning@2x.png")
                 let image = network.getImage(imageURL)
         
@@ -62,7 +63,7 @@ enum Screen: String, CaseIterable {
                                 .text(.longText,
                                     style: cache.smallStyle
                                 )],
-                                axis: .vertical
+                                style: cellStyle.withStackStyle(cellStyle.stackStyle.withAxis(.vertical))
                             ),
                             Cell([
                                 .image(grab0,

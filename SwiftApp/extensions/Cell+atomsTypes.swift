@@ -9,8 +9,7 @@ import Foundation
 
 extension Cell {
     var atomsTypes: [String] {
-        return [axis == .horizontal ? "horizontal." : "vertical."]
-            + atoms.map( { atom in
+        return atoms.map( { atom in
                 switch atom{
                 case .image(_, _, let onTap):
                     return ImageView.description()

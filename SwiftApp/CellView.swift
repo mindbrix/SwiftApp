@@ -53,8 +53,8 @@ class CellView: UIView {
         let cellStyle = cell.style ?? modelStyle.cell
         let insets = cellStyle.stackStyle.insets ?? .zero
         stack.layoutMargins = insets
-        stack.axis = cell.axis == .horizontal ? .horizontal : .vertical
-        stack.alignment = cell.axis == .vertical ? .fill : .center
+        stack.axis = cellStyle.stackStyle.axis == .horizontal ? .horizontal : .vertical
+        stack.alignment = cellStyle.stackStyle.axis == .vertical ? .fill : .center
         stack.spacing = cellStyle.stackStyle.spacing ?? 0
         
         if let color = cellStyle.underline {

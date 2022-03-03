@@ -12,13 +12,4 @@ extension UIEdgeInsets {
     init(spacing: CGFloat) {
         self.init(top: spacing, left: spacing, bottom: spacing, right: spacing)
     }
-    
-    var directionalInsets: NSDirectionalEdgeInsets {
-        .init(
-            top: top,
-            leading: left,
-            bottom: bottom,
-            trailing: right
-        )
-    }
 }

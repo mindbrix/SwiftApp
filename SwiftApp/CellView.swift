@@ -30,7 +30,7 @@ class CellView: UIView {
     
     func applyCell(_ cell: Cell?, modelStyle: ModelStyle, fadeColor: UIColor? = .red) -> Bool {
         self.cell = cell
-        stack.directionalLayoutMargins = .zero
+        stack.layoutMargins = .zero
         stack.axis = .horizontal
         stack.spacing = modelStyle.cell.spacing ?? 0
         
@@ -52,7 +52,7 @@ class CellView: UIView {
         
         let cellStyle = cell.style ?? modelStyle.cell
         let insets = cellStyle.insets ?? .zero
-        stack.directionalLayoutMargins = insets.directionalInsets
+        stack.layoutMargins = insets
         stack.axis = cell.axis == .horizontal ? .horizontal : .vertical
         stack.alignment = cell.axis == .vertical ? .fill : .center
         stack.spacing = cellStyle.spacing ?? 0

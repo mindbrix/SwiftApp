@@ -29,8 +29,6 @@ class CellView: UIView {
     }
     
     func applyCell(_ cell: Cell?, modelStyle: ModelStyle, fadeColor: UIColor? = .red) -> Bool {
-        let oldHash = self.cell?.hashValue ?? 0
-        
         self.cell = cell
         stack.directionalLayoutMargins = .zero
         stack.axis = .horizontal
@@ -46,7 +44,7 @@ class CellView: UIView {
         underline.isHidden = true
         
         guard let cell = cell
-        else { return oldHash != 0 }
+        else { return cellHash != 0 }
         
         let cellStyle = cell.style ?? modelStyle.cell
         let insets = cellStyle.insets ?? .zero
@@ -63,7 +61,13 @@ class CellView: UIView {
         
         var willResize = false
         
-        if oldHash != cell.hashValue {
+        let cellStyleHash = cell.style == nil ? 0 : String(describing: modelStyle.cell).hashValue
+        let textStyleHash = String(describing: modelStyle.text).hashValue
+        let newHash = cell.hashValue ^ cellStyleHash ^ textStyleHash
+        
+        if newHash != cellHash {
+            cellHash = newHash
+            
             for (index, atom) in cell.atoms.enumerated() {
                 if let view = stack.subviews[index] as? AtomAView {
                     willResize = view.applyAtom(atom, modelStyle: modelStyle) || willResize
@@ -75,6 +79,7 @@ class CellView: UIView {
     }
     
     private var cell: Cell?
+    private var cellHash: Int = 0
     private var atomsTypes: [String] = []
     private let underline = UIView()
     private let stack = UIStackView()

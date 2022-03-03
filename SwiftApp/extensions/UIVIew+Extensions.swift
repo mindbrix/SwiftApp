@@ -18,7 +18,8 @@ extension UIView {
         let size = (text as NSString).boundingRect(
             with: CGSize(
                 width: width,
-                height: .greatestFiniteMagnitude),
+                height: .greatestFiniteMagnitude
+            ),
             options: [
                 .usesLineFragmentOrigin,
             ],

@@ -113,32 +113,7 @@ enum Screen: String, CaseIterable {
         case .DefaultStore:
             return Store.mainClosure(app: app)
         case .Fonts:
-            return { [weak app] in
-                guard let cache = app?.styleCache, let app = app
-                else { return nil }
-                
-                return ViewModel(style: cache.modelStyle.withShowIndex(), title: title, sections:
-                    UIFont.familyNames.filter({ $0 != "System Font" }).map({ familyName in
-                        Section(
-                            header: Cell(.text(familyName)),
-                            cells: UIFont.fontNames(forFamilyName: familyName).map({ fontName in
-                                Cell(.text(fontName,
-                                    style: TextStyle(
-                                        font: UIFont.init(
-                                            name: fontName,
-                                            size: cache.size
-                                        )
-                                    ),
-                                    onTap: {
-                                        app.styleCache.name = fontName
-                                        app.pop()
-                                    })
-                                )
-                            })
-                        )
-                    })
-                )
-            }
+            return app.styleCache.fontsClosure()
         case .Login:
             return { [weak app] in
                 guard let cache = app?.styleCache, let store = app?.store

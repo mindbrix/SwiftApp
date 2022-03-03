@@ -94,4 +94,36 @@ class StyleCache {
             showRefresh: showRefresh
         )
     }
+    
+    func fontsClosure() -> ViewModel.Closure {
+        { [weak self] in
+            guard let self = self
+            else { return nil }
+            
+            return ViewModel(style: self.modelStyle.withShowIndex(), title: "Fonts", sections:
+                UIFont.familyNames.filter({ $0 != "System Font" }).map({ familyName in
+                    Section(
+                        header: Cell(
+                            .text(familyName)
+                        ),
+                        cells: UIFont.fontNames(forFamilyName: familyName).map({ fontName in
+                            Cell(
+                                .text(fontName,
+                                    style: TextStyle(
+                                        font: UIFont(
+                                            name: fontName,
+                                            size: self.size
+                                        )
+                                    ),
+                                    onTap: {
+                                        self.name = fontName
+                                    }
+                                )
+                            )
+                        })
+                    )
+                })
+            )
+        }
+    }
 }

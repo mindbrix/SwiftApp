@@ -15,13 +15,11 @@ extension UIView {
               width > 0
         else { return .zero }
         
-        let scale = contentScaleFactor
         let size = (text as NSString).boundingRect(
             with: CGSize(
                 width: width,
                 height: .greatestFiniteMagnitude),
             options: [
-//                .usesFontLeading,
                 .usesLineFragmentOrigin,
             ],
             attributes: [
@@ -30,8 +28,9 @@ extension UIView {
             context: nil).size
         
         return CGSize(
-            width: ceil(scale * size.width) / scale,
-            height: ceil(scale * size.height) / scale)
+            width: ceil(contentScaleFactor * size.width) / contentScaleFactor,
+            height: ceil(contentScaleFactor * size.height) / contentScaleFactor
+        )
     }
     
     func edgeConstraints(for subview: UIView, insets: UIEdgeInsets = .zero) -> [NSLayoutConstraint] {

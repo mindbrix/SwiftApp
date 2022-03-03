@@ -20,6 +20,12 @@ struct Weather: Codable {
     let description: String
     let forecast: [Day]
     
+    static let defaultWeather = Self(temperature: "--", wind: "--", description: "--", forecast: [
+        Day(day: "1", temperature: "-", wind: "-"),
+        Day(day: "2", temperature: "-", wind: "-"),
+        Day(day: "3", temperature: "-", wind: "-")
+    ])
+    
     // https://github.com/robertoduessmann/weather-api
     //
     static let baseURL = "https://goweather.herokuapp.com/weather/"
@@ -38,12 +44,13 @@ struct Weather: Codable {
                   let store = app?.store,
                   let network = app?.network,
                   let url = Weather.url(for: store.getString(.weatherCity)),
-                  let weather = network.get(
-                        Weather.self,
-                        from: url
-                  ),
                   let app = app
             else { return nil }
+            
+            let weather = network.get(
+                  Weather.self,
+                  from: url
+            ) ?? .defaultWeather
             
             let textStyle = cache.modelStyle.text
             let gray = textStyle.withColor(.gray)

@@ -9,30 +9,8 @@ import Foundation
 import UIKit
 
 extension UIView {
-    func textSize(for text: String?, font: UIFont?, width: CGFloat) -> CGSize {
-        guard let font = font,
-              let text = text,
-              width > 0
-        else { return .zero }
-        
-        let size = (text as NSString).boundingRect(
-            with: CGSize(
-                width: width,
-                height: .greatestFiniteMagnitude
-            ),
-            options: [
-                .usesLineFragmentOrigin,
-            ],
-            attributes: [
-                NSAttributedString.Key.font: font
-            ],
-            context: nil).size
-        
-        return CGSize(
-            width: ceil(contentScaleFactor * size.width) / contentScaleFactor,
-            height: ceil(contentScaleFactor * size.height) / contentScaleFactor
-        )
-    }
+
+    // MARK: - Auto Layout
     
     func edgeConstraints(for subview: UIView, insets: UIEdgeInsets = .zero) -> [NSLayoutConstraint] {
         [
@@ -52,6 +30,9 @@ extension UIView {
         ]
     }
     
+    
+    // MARK: - Animation
+    
     func fadeToBackground(from color: UIColor?, duration: TimeInterval = 0.66) {
         guard let color = color
         else { return }
@@ -62,5 +43,35 @@ extension UIView {
         animation.duration = duration
         animation.repeatCount = 1
         layer.add(animation, forKey: #keyPath(CALayer.backgroundColor))
+    }
+    
+    
+    // MARK: - Text sizing
+    
+    func textSize(for text: String?, font: UIFont?, width: CGFloat) -> CGSize {
+        guard let font = font,
+              let text = text,
+              width > 0
+        else {
+            return .zero
+        }
+        
+        let size = (text as NSString).boundingRect(
+            with: CGSize(
+                width: width,
+                height: .greatestFiniteMagnitude
+            ),
+            options: [
+                .usesLineFragmentOrigin,
+            ],
+            attributes: [
+                NSAttributedString.Key.font: font
+            ],
+            context: nil).size
+        
+        return CGSize(
+            width: ceil(contentScaleFactor * size.width) / contentScaleFactor,
+            height: ceil(contentScaleFactor * size.height) / contentScaleFactor
+        )
     }
 }

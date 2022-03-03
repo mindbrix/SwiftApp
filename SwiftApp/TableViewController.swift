@@ -61,7 +61,7 @@ class TableViewController: UITableViewController {
             guard oldValue != model else { return }
             
             self.title = model.title
-            self.tableView.fadeToBackground(from: UIColor(white: 0.66, alpha: 1))
+            self.tableView.fadeToBackground(from: model.style.showRefresh ? UIColor(white: 0.66, alpha: 1) : nil)
             
             if oldValue.style == model.style &&
                 oldValue.sections.count == model.sections.count &&
@@ -89,8 +89,8 @@ class TableViewController: UITableViewController {
             if let cv = (tableView.headerView(forSection: i) as? CellViewHeaderView)?.cellView {
                 let header = model.sections[i].header
                 willResize = cv.applyCell(header,
-                                        modelStyle: (header?.atoms.count ?? 0) == 0 ? model.style : headerStyle,
-                                        fadeColor: .cyan) || willResize
+                                          modelStyle: (header?.atoms.count ?? 0) == 0 ? model.style : headerStyle,
+                                          fadeColor: model.style.showRefresh ? .cyan : nil) || willResize
             }
         }
         return willResize
@@ -103,8 +103,8 @@ class TableViewController: UITableViewController {
             if let cv = (tableViewCell as? CellViewCell)?.cellView,
                let indexPath = tableView.indexPath(for: tableViewCell) {
                 let willResize = cv.applyCell(model.sections[indexPath.section].cells[indexPath.row],
-                    modelStyle: model.style,
-                    fadeColor: .green)
+                                              modelStyle: model.style,
+                                              fadeColor: model.style.showRefresh ? .green : nil)
                 if willResize {
                     resizedIndexPaths.append(indexPath)
                 }
@@ -134,7 +134,7 @@ class TableViewController: UITableViewController {
             let header = model.sections[section].header
             _ = cv.applyCell(header,
                              modelStyle: (header?.atoms.count ?? 0) == 0 ? model.style : headerStyle,
-                             fadeColor: .blue)
+                             fadeColor: model.style.showRefresh ? .blue : nil)
         }
         return headerView
     }
@@ -143,8 +143,8 @@ class TableViewController: UITableViewController {
         let tableViewCell = tableView.dequeueReusableCell(withIdentifier: CellViewCell.reuseID, for: indexPath)
         if let cv = (tableViewCell as? CellViewCell)?.cellView {
             _ = cv.applyCell(model.sections[indexPath.section].cells[indexPath.row],
-                modelStyle: model.style,
-                fadeColor: .red)
+                             modelStyle: model.style,
+                             fadeColor: model.style.showRefresh ? .red : nil)
         }
         tableViewCell.selectionStyle = .none
         return tableViewCell

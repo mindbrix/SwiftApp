@@ -28,7 +28,7 @@ class CellView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func applyCell(_ cell: Cell?, modelStyle: ModelStyle, fadeColor: UIColor = .red) -> Bool {
+    func applyCell(_ cell: Cell?, modelStyle: ModelStyle, fadeColor: UIColor? = .red) -> Bool {
         let oldHash = self.cell?.hashValue ?? 0
         
         self.cell = cell
@@ -69,7 +69,7 @@ class CellView: UIView {
                     willResize = view.applyAtom(atom, modelStyle: modelStyle) || willResize
                 }
             }
-            fadeToBackground(from: willResize ? .orange : fadeColor)
+            fadeToBackground(from: willResize ? (fadeColor == nil ? nil : .orange) : fadeColor)
         }
         return willResize
     }

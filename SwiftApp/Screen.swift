@@ -240,6 +240,14 @@ enum Screen: String, CaseIterable {
                                     }
                                 )
                             ),
+                            Cell(
+                                .text("Show Refresh: " + (cache.showRefresh ? "On" : "Off"),
+                                      style: cache.modelStyle.text.withAlignment(.center),
+                                    onTap: {
+                                        app.styleCache.showRefresh = !cache.showRefresh
+                                    }
+                                )
+                            ),
                         ]
                         )
                     ])

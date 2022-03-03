@@ -46,6 +46,13 @@ class StyleCache {
             onDidUpdate?()
         }
     }
+    var showRefresh: Bool = false {
+        didSet {
+            guard oldValue != showRefresh else { return }
+            updateStyles()
+            onDidUpdate?()
+        }
+    }
     var spacing: CGFloat = 4 {
         didSet {
             guard spacing != oldValue else { return }
@@ -83,6 +90,8 @@ class StyleCache {
                 insets: UIEdgeInsets(spacing: spacing),
                 spacing: spacing,
                 underline: underline),
-            text: .init(font: defaultFont))
+            text: .init(font: defaultFont),
+            showRefresh: showRefresh
+        )
     }
 }

@@ -69,7 +69,7 @@ class CellView: UIView {
                     willResize = view.applyAtom(atom, modelStyle: modelStyle) || willResize
                 }
             }
-            fadeToBackground(from: willResize ? (fadeColor == nil ? nil : .orange) : fadeColor)
+            fadeToBackground(from: fadeColor)
         }
         return willResize
     }

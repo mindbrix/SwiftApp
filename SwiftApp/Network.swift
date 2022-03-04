@@ -67,7 +67,7 @@ class Network {
         let request = URLRequest(url: url)
         let key = request.hashValue
 
-        if let object = jsonCache[key] as? T {
+        if let object = objectCache[key] as? T {
             return object
         } else {
             URLSession.shared.dataTask(
@@ -76,7 +76,7 @@ class Network {
                     if let self = self, let data = data {
                         do {
                             let object = try JSONDecoder().decode(type, from: data)
-                            self.jsonCache[key] = object
+                            self.objectCache[key] = object
                             DispatchQueue.main.async {
                                 self.onDidUpdate?()
                             }
@@ -92,7 +92,7 @@ class Network {
         }
     }
     
-    private var jsonCache: [Int: Any] = [:]
+    private var objectCache: [Int: Any] = [:]
     private var imageCache: NSCache<NSNumber, UIImage> = .init()
     private var dataCache: NSCache<NSNumber, NSData> = .init()
 }

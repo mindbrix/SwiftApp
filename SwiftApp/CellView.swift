@@ -30,9 +30,9 @@ class CellView: UIView {
     
     func applyCell(_ cell: Cell?, modelStyle: ModelStyle, fadeColor: UIColor? = .red) -> Bool {
         self.cell = cell
-        stack.layoutMargins = .zero
         stack.axis = .horizontal
-        stack.spacing = modelStyle.cell.stackStyle.spacing ?? 0
+        stack.layoutMargins = .zero
+        stack.spacing = 0
         
         let types = cell?.atomsTypes ?? []
         if types != atomsTypes {
@@ -52,9 +52,10 @@ class CellView: UIView {
         
         let cellStyle = cell.style ?? modelStyle.cell
         let stackStyle = cellStyle.stackStyle
-        stack.layoutMargins = stackStyle.insets ?? .zero
         stack.axis = stackStyle.axis
         stack.alignment = stackStyle.alignment ?? (stackStyle.axis == .vertical ? .fill : .center)
+        stack.distribution = stackStyle.distribution ?? .fill
+        stack.layoutMargins = stackStyle.insets ?? .zero
         stack.spacing = stackStyle.spacing ?? 0
         
         if let color = cellStyle.underline {

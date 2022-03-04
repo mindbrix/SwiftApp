@@ -88,7 +88,7 @@ struct Weather: Codable {
                         Cell([
                             .text("Description",
                                   style: gray),
-                            .text(weather.description + weather.description + weather.description,
+                            .text(weather.description,
                                   style: right)
                             ],
                             style: cellStyle),

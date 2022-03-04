@@ -40,10 +40,11 @@ struct Weather: Codable {
     
     static func mainClosure(app: SwiftApp) -> ViewModel.Closure {
         { [weak app] in
+            let city = app?.store.get(.weatherCity) as? String ?? "London"
+            
             guard let cache = app?.styleCache,
-                  let store = app?.store,
                   let network = app?.network,
-                  let url = Weather.url(for: store.getString(.weatherCity)),
+                  let url = Weather.url(for: city),
                   let app = app
             else { return nil }
             
@@ -64,7 +65,7 @@ struct Weather: Codable {
             return ViewModel(style: cache.modelStyle, title: "Weather", sections: [
                 Section(
                     header: Cell(
-                        .text(store.getString(.weatherCity),
+                        .text(city,
                             style: centerBlue,
                             onTap: {
                                 app.present(.WeatherCities)

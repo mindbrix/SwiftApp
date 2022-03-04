@@ -84,7 +84,7 @@ enum Screen: String, CaseIterable {
                 guard let cache = app?.styleCache, let store = app?.store
                 else { return nil }
                 
-                let count = store.getInt(.counter)
+                let count = store.get(.counter) as? Int ?? 0
                 
                 return ViewModel(style: cache.modelStyle, title: title, sections: [
                     Section(
@@ -120,8 +120,8 @@ enum Screen: String, CaseIterable {
                 guard let cache = app?.styleCache, let store = app?.store
                 else { return nil }
                 
-                let username = store.getString(.username)
-                let password = store.getString(.password)
+                let username = store.get(.username) as? String ?? ""
+                let password = store.get(.password) as? String ?? ""
                 let canLogin = username.count > 0 && password.count > 6
                 
                 return ViewModel(style: cache.modelStyle, title: title, sections: [

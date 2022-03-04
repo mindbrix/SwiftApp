@@ -79,11 +79,11 @@ class Store {
                             .text(key.rawValue + ": ",
                                 style: cache.largeStyle.withColor(.gray)
                             ),
-                            .input(String(describing: store.get(key)),
+                            .text(String(describing: store.get(key)),
                                 style: cache.largeStyle.withAlignment(.right)
                             )],
                             style: cache.modelStyle.cell
-                                .withStackStyle(.init(insets: .init(spacing: 8)))
+                                .withStackStyle(.init(alignment: .leading, insets: .init(spacing: 8)))
                                 .withUnderline(.gray)
                         )
                     })

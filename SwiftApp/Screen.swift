@@ -114,7 +114,7 @@ enum Screen: String, CaseIterable {
         case .DefaultStore:
             return Store.mainClosure(app: app)
         case .Fonts:
-            return app.styleCache.fontsClosure()
+            return StyleCache.fontsClosure(app: app)
         case .Login:
             return { [weak app] in
                 guard let cache = app?.styleCache, let store = app?.store
@@ -164,7 +164,7 @@ enum Screen: String, CaseIterable {
                 ])
             }
         case .Style:
-            return app.styleCache.mainClosure(app: app)
+            return StyleCache.mainClosure(app: app)
         case .WeatherMain:
             return Weather.mainClosure(app: app)
         case .WeatherCities:

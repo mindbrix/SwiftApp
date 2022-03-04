@@ -94,9 +94,9 @@ class StyleCache {
         )
     }
     
-    func mainClosure(app: SwiftApp) -> ViewModel.Closure {
-        { [weak self, weak app] in
-            guard let self = self,
+    static func mainClosure(app: SwiftApp) -> ViewModel.Closure {
+        { [weak app] in
+            guard let self = app?.styleCache,
                     let app = app
             else { return nil }
             
@@ -162,9 +162,9 @@ class StyleCache {
         }
     }
     
-    func fontsClosure() -> ViewModel.Closure {
-        { [weak self] in
-            guard let self = self
+    static func fontsClosure(app: SwiftApp) -> ViewModel.Closure {
+        { [weak app] in
+            guard let self = app?.styleCache
             else { return nil }
             
             return ViewModel(style: self.modelStyle.withShowIndex(), title: "Fonts", sections:

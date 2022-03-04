@@ -52,6 +52,8 @@ struct Weather: Codable {
                   from: url
             ) ?? .defaultWeather
             
+            let stackStyle = cache.modelStyle.cell.stackStyle.withAlignment(.leading)
+            let cellStyle = cache.modelStyle.cell.withStackStyle(stackStyle)
             let textStyle = cache.modelStyle.text
             let gray = textStyle.withColor(.gray)
             let center = textStyle.withAlignment(.center)
@@ -74,19 +76,22 @@ struct Weather: Codable {
                                   style: gray),
                             .text(weather.temperature,
                                   style: right)
-                        ]),
+                            ],
+                            style: cellStyle),
                         Cell([
                             .text("Wind",
                                   style: gray),
                             .text(weather.wind,
                                   style: right)
-                        ]),
+                            ],
+                            style: cellStyle),
                         Cell([
                             .text("Description",
                                   style: gray),
                             .text(weather.description + weather.description + weather.description,
                                   style: right)
-                        ]),
+                            ],
+                            style: cellStyle),
                     ]
                 ),
                 Section(

@@ -36,30 +36,6 @@ class Network {
         }
     }
     
-    func getData(_ url: URL?) -> Data? {
-        guard let url = url
-        else { return nil }
-
-        let request = URLRequest(url: url)
-        let key = NSNumber(value: request.hashValue)
-        
-        if let data = dataCache.object(forKey: key) {
-            return data as Data
-        } else {
-            URLSession.shared.dataTask(
-                with: request,
-                completionHandler: { [weak self] data, response, error in
-                    if let data = data, let self = self {
-                        self.dataCache.setObject(data as NSData, forKey: key)
-                        DispatchQueue.main.async {
-                            self.onDidUpdate?()
-                        }
-                    }
-            }).resume()
-            return nil
-        }
-    }
-    
     func get<T>(_ type: T.Type, from url: URL?) -> T? where T : Decodable {
         guard let url = url
         else { return nil }
@@ -94,5 +70,4 @@ class Network {
     
     private var objectCache: [Int: Any] = [:]
     private var imageCache: NSCache<NSNumber, UIImage> = .init()
-    private var dataCache: NSCache<NSNumber, NSData> = .init()
 }

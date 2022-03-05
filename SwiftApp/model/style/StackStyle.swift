@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 
+
 struct StackStyle: Equatable {
     let axis: NSLayoutConstraint.Axis
     let alignment: UIStackView.Alignment?

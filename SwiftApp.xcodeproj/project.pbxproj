@@ -223,8 +223,8 @@
 			isa = PBXGroup;
 			children = (
 				E9A838BE27BA69B40096FAFB /* extensions */,
+				E9CB39EF27D3A33900A02A2D /* model */,
 				E9CB39D027D3745200A02A2D /* screens */,
-				E9CB39DE27D3A08100A02A2D /* style */,
 				E913063C27BA6CC600460F22 /* views */,
 				E977D00527AFC887007E4998 /* AppDelegate.swift */,
 				E9CB39C027C7908C00A02A2D /* Network.swift */,
@@ -233,7 +233,6 @@
 				E925920127BF167200D40925 /* Store.swift */,
 				E977D03E27AFDBBA007E4998 /* SwiftApp.swift */,
 				E977D00927AFC887007E4998 /* TableViewController.swift */,
-				E977D05127AFECA8007E4998 /* ViewModel.swift */,
 				E977D00E27AFC887007E4998 /* Assets.xcassets */,
 				E977D01027AFC887007E4998 /* LaunchScreen.storyboard */,
 				E977D01327AFC887007E4998 /* Info.plist */,
@@ -305,6 +304,15 @@
 				E925920D27BF8D3700D40925 /* StyleCache.swift */,
 			);
 			path = style;
+			sourceTree = "<group>";
+		};
+		E9CB39EF27D3A33900A02A2D /* model */ = {
+			isa = PBXGroup;
+			children = (
+				E9CB39DE27D3A08100A02A2D /* style */,
+				E977D05127AFECA8007E4998 /* ViewModel.swift */,
+			);
+			path = model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

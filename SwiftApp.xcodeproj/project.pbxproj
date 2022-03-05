@@ -82,6 +82,9 @@
 		E9CB39D327D3759300A02A2D /* MainScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9CB39D227D3759300A02A2D /* MainScreen.swift */; };
 		E9CB39D427D3759300A02A2D /* MainScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9CB39D227D3759300A02A2D /* MainScreen.swift */; };
 		E9CB39D527D3759300A02A2D /* MainScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9CB39D227D3759300A02A2D /* MainScreen.swift */; };
+		E9CB39D727D376D200A02A2D /* CounterScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9CB39D627D376D200A02A2D /* CounterScreen.swift */; };
+		E9CB39D827D376D200A02A2D /* CounterScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9CB39D627D376D200A02A2D /* CounterScreen.swift */; };
+		E9CB39D927D376D200A02A2D /* CounterScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9CB39D627D376D200A02A2D /* CounterScreen.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -137,6 +140,7 @@
 		E9CB39C827CA312A00A02A2D /* Weather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
 		E9CB39CC27CF89F500A02A2D /* UITableView+visibleSectionIndices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+visibleSectionIndices.swift"; sourceTree = "<group>"; };
 		E9CB39D227D3759300A02A2D /* MainScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreen.swift; sourceTree = "<group>"; };
+		E9CB39D627D376D200A02A2D /* CounterScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CounterScreen.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -252,8 +256,9 @@
 		E9CB39D027D3745200A02A2D /* screens */ = {
 			isa = PBXGroup;
 			children = (
-				E9CB39C827CA312A00A02A2D /* Weather.swift */,
 				E9CB39D227D3759300A02A2D /* MainScreen.swift */,
+				E9CB39C827CA312A00A02A2D /* Weather.swift */,
+				E9CB39D627D376D200A02A2D /* CounterScreen.swift */,
 			);
 			path = screens;
 			sourceTree = "<group>";
@@ -422,6 +427,7 @@
 				E925920E27BF8D3700D40925 /* StyleCache.swift in Sources */,
 				E977D03F27AFDBBA007E4998 /* SwiftApp.swift in Sources */,
 				E977D06D27B1A628007E4998 /* CellView.swift in Sources */,
+				E9CB39D727D376D200A02A2D /* CounterScreen.swift in Sources */,
 				E913063F27BA6CC600460F22 /* ImageView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -438,6 +444,7 @@
 				E94A1F6927C1490600168123 /* UIEdgeInsets+Extensions.swift in Sources */,
 				E977D01D27AFC887007E4998 /* SwiftAppTests.swift in Sources */,
 				E977D04027AFDBBA007E4998 /* SwiftApp.swift in Sources */,
+				E9CB39D827D376D200A02A2D /* CounterScreen.swift in Sources */,
 				E9A838CD27BA6ADC0096FAFB /* String+Extensions.swift in Sources */,
 				E925921327BFC0CA00D40925 /* Cell+atomsTypes.swift in Sources */,
 				E977D06E27B1A628007E4998 /* CellView.swift in Sources */,
@@ -469,6 +476,7 @@
 				E94A1F6A27C1490600168123 /* UIEdgeInsets+Extensions.swift in Sources */,
 				E977D02827AFC887007E4998 /* SwiftAppUITests.swift in Sources */,
 				E977D04127AFDBBA007E4998 /* SwiftApp.swift in Sources */,
+				E9CB39D927D376D200A02A2D /* CounterScreen.swift in Sources */,
 				E9A838CE27BA6ADC0096FAFB /* String+Extensions.swift in Sources */,
 				E925921427BFC0CA00D40925 /* Cell+atomsTypes.swift in Sources */,
 				E977D06F27B1A628007E4998 /* CellView.swift in Sources */,

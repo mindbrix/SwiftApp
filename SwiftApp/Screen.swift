@@ -29,37 +29,7 @@ enum Screen: String, CaseIterable {
         case .Main:
             return MainScreen.mainClosure(app: app)
         case .Counter:
-            return { [weak app] in
-                guard let cache = app?.styleCache, let store = app?.store
-                else { return nil }
-                
-                let count = store.get(.counter) as? Int ?? 0
-                
-                return ViewModel(style: cache.modelStyle, title: title, sections: [
-                    Section(
-                        header: nil,
-                        cells: [
-                            Cell(.text(String(count),
-                                    style: cache.hugeStyle)
-                            ),
-                            Cell([
-                                .text("Down",
-                                    style: cache.counterStyle.withColor(.blue),
-                                    onTap: {
-                                        store.set(.counter, value: max(0, count - 1))
-                                    }
-                                ),
-                                .text("Up",
-                                    style: cache.counterStyle.withColor(.blue),
-                                    onTap: {
-                                        store.set(.counter, value: count + 1)
-                                    }
-                                )
-                            ]),
-                        ]
-                    )
-                ])
-            }
+            return CounterScreen.mainClosure(app: app)
         case .DefaultStore:
             return Store.mainClosure(app: app)
         case .Fonts:

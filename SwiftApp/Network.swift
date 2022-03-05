@@ -27,6 +27,7 @@ class Network {
                 completionHandler: { [weak self] data, response, error in
                     if let self = self, let data = data, let image = UIImage(data: data) {
                         DispatchQueue.main.async {
+                            self.creationDates[key.intValue] = Date()
                             self.imageCache.setObject(image, forKey: key)
                             self.onDidUpdate?()
                         }
@@ -53,6 +54,7 @@ class Network {
                         do {
                             let object = try JSONDecoder().decode(type, from: data)
                             DispatchQueue.main.async {
+                                self.creationDates[key] = Date()
                                 self.objectCache[key] = object
                                 self.onDidUpdate?()
                             }
@@ -68,6 +70,7 @@ class Network {
         }
     }
     
+    private var creationDates: [Int: Date] = [:]
     private var objectCache: [Int: Any] = [:]
     private var imageCache: NSCache<NSNumber, UIImage> = .init()
 }

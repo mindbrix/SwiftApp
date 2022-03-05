@@ -15,8 +15,8 @@ struct LoginScreen {
             guard let cache = app?.styleCache, let store = app?.store
             else { return nil }
             
-            let username = store.get(.username) as? String ?? ""
-            let password = store.get(.password) as? String ?? ""
+            let username = store.get(.username) ?? ""
+            let password = store.get(.password) ?? ""
             let canLogin = username.count > 0 && password.count > 6
             
             return ViewModel(style: cache.modelStyle, title: "Login", sections: [

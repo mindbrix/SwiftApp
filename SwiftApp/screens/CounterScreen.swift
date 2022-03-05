@@ -15,7 +15,7 @@ struct CounterScreen {
             guard let cache = app?.styleCache, let store = app?.store
             else { return nil }
             
-            let count = store.get(.counter) as? Int ?? 0
+            let count = store.get(.counter) ?? 0
             
             return ViewModel(style: cache.modelStyle, title: "Counter", sections: [
                 Section(

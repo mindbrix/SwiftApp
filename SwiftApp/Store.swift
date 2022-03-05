@@ -22,9 +22,9 @@ class Store {
     }
     
     var onDidUpdate: (() -> Void)?
-    
-    func get(_ key: Key) -> Any? {
-        UserDefaults.standard.object(forKey: key.rawValue)
+
+    func get<T>(_ key: Key) -> T? {
+        UserDefaults.standard.object(forKey: key.rawValue) as? T
     }
 
     func set(_ key: Key, value: Any) {
@@ -45,11 +45,13 @@ class Store {
                 Section(
                     header: Cell(.text(title)),
                     cells: Store.Key.allCases.sorted(by: { $0.rawValue < $1.rawValue }).map({ key in
-                        Cell([
+                        let object: Any? = store.get(key)
+                        
+                        return Cell([
                             .text(key.rawValue + ": ",
                                 style: cache.largeStyle.withColor(.gray)
                             ),
-                            .text(String(describing: store.get(key)),
+                            .text(String(describing: object),
                                 style: cache.largeStyle.withAlignment(.right)
                             )],
                             style: cache.modelStyle.cell

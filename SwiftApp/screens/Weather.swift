@@ -40,7 +40,7 @@ struct Weather: Codable {
     
     static func mainClosure(app: SwiftApp) -> ViewModel.Closure {
         { [weak app] in
-            let city = app?.store.get(.weatherCity) as? String ?? "London"
+            let city = app?.store.get(.weatherCity) ?? "London"
             
             guard let cache = app?.styleCache,
                   let network = app?.network,

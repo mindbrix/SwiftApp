@@ -28,7 +28,7 @@ class Network {
     
     var onDidUpdate: (() -> Void)?
     
-    func getImage(_ url: URL?, ttl: TimeInterval = defaultTTL) -> UIImage? {
+    func getImage(_ url: URL?, ttl: TimeInterval = oneHour) -> UIImage? {
         guard let url = url
         else { return nil }
 
@@ -53,7 +53,7 @@ class Network {
         }
     }
     
-    func get<T>(_ url: URL?, ttl: TimeInterval = defaultTTL) -> T? where T : Decodable {
+    func get<T>(_ url: URL?, ttl: TimeInterval = oneHour) -> T? where T : Decodable {
         guard let url = url
         else { return nil }
         
@@ -90,5 +90,5 @@ class Network {
     private var objectCache: [Int: Any] = [:]
     private var imageCache: NSCache<NSNumber, UIImage> = .init()
     
-    static let defaultTTL: TimeInterval = 3600
+    static let oneHour: TimeInterval = 3600
 }

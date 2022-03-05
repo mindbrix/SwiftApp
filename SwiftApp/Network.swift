@@ -26,8 +26,8 @@ class Network {
                 with: request,
                 completionHandler: { [weak self] data, response, error in
                     if let self = self, let data = data, let image = UIImage(data: data) {
-                        self.imageCache.setObject(image, forKey: key)
                         DispatchQueue.main.async {
+                            self.imageCache.setObject(image, forKey: key)
                             self.onDidUpdate?()
                         }
                     }
@@ -52,8 +52,8 @@ class Network {
                     if let self = self, let data = data {
                         do {
                             let object = try JSONDecoder().decode(type, from: data)
-                            self.objectCache[key] = object
                             DispatchQueue.main.async {
+                                self.objectCache[key] = object
                                 self.onDidUpdate?()
                             }
                         } catch {

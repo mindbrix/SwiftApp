@@ -85,6 +85,9 @@
 		E9CB39D727D376D200A02A2D /* CounterScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9CB39D627D376D200A02A2D /* CounterScreen.swift */; };
 		E9CB39D827D376D200A02A2D /* CounterScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9CB39D627D376D200A02A2D /* CounterScreen.swift */; };
 		E9CB39D927D376D200A02A2D /* CounterScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9CB39D627D376D200A02A2D /* CounterScreen.swift */; };
+		E9CB39DB27D377C500A02A2D /* LoginScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9CB39DA27D377C500A02A2D /* LoginScreen.swift */; };
+		E9CB39DC27D377C500A02A2D /* LoginScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9CB39DA27D377C500A02A2D /* LoginScreen.swift */; };
+		E9CB39DD27D377C500A02A2D /* LoginScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9CB39DA27D377C500A02A2D /* LoginScreen.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -141,6 +144,7 @@
 		E9CB39CC27CF89F500A02A2D /* UITableView+visibleSectionIndices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+visibleSectionIndices.swift"; sourceTree = "<group>"; };
 		E9CB39D227D3759300A02A2D /* MainScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreen.swift; sourceTree = "<group>"; };
 		E9CB39D627D376D200A02A2D /* CounterScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CounterScreen.swift; sourceTree = "<group>"; };
+		E9CB39DA27D377C500A02A2D /* LoginScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreen.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -256,9 +260,10 @@
 		E9CB39D027D3745200A02A2D /* screens */ = {
 			isa = PBXGroup;
 			children = (
+				E9CB39D627D376D200A02A2D /* CounterScreen.swift */,
+				E9CB39DA27D377C500A02A2D /* LoginScreen.swift */,
 				E9CB39D227D3759300A02A2D /* MainScreen.swift */,
 				E9CB39C827CA312A00A02A2D /* Weather.swift */,
-				E9CB39D627D376D200A02A2D /* CounterScreen.swift */,
 			);
 			path = screens;
 			sourceTree = "<group>";
@@ -414,6 +419,7 @@
 				E9CB39C127C7908C00A02A2D /* Network.swift in Sources */,
 				E977D00A27AFC887007E4998 /* TableViewController.swift in Sources */,
 				E903CB2627BE5A2200B58113 /* Screen.swift in Sources */,
+				E9CB39DB27D377C500A02A2D /* LoginScreen.swift in Sources */,
 				E977D00627AFC887007E4998 /* AppDelegate.swift in Sources */,
 				E9CB39D327D3759300A02A2D /* MainScreen.swift in Sources */,
 				E925921227BFC0CA00D40925 /* Cell+atomsTypes.swift in Sources */,
@@ -449,6 +455,7 @@
 				E925921327BFC0CA00D40925 /* Cell+atomsTypes.swift in Sources */,
 				E977D06E27B1A628007E4998 /* CellView.swift in Sources */,
 				E9CB39C227C7908C00A02A2D /* Network.swift in Sources */,
+				E9CB39DC27D377C500A02A2D /* LoginScreen.swift in Sources */,
 				E9CB39CE27CF89F500A02A2D /* UITableView+visibleSectionIndices.swift in Sources */,
 				E9CB39C627C7B10100A02A2D /* CellViewHeaderView.swift in Sources */,
 				E925920327BF167200D40925 /* Store.swift in Sources */,
@@ -481,6 +488,7 @@
 				E925921427BFC0CA00D40925 /* Cell+atomsTypes.swift in Sources */,
 				E977D06F27B1A628007E4998 /* CellView.swift in Sources */,
 				E9CB39C327C7908C00A02A2D /* Network.swift in Sources */,
+				E9CB39DD27D377C500A02A2D /* LoginScreen.swift in Sources */,
 				E9CB39CF27CF89F500A02A2D /* UITableView+visibleSectionIndices.swift in Sources */,
 				E9CB39C727C7B10100A02A2D /* CellViewHeaderView.swift in Sources */,
 				E925920427BF167200D40925 /* Store.swift in Sources */,

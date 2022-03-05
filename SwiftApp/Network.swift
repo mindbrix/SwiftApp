@@ -10,6 +10,22 @@ import UIKit
 
 
 class Network {
+    init() {
+        Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { [weak self] timer in
+            guard let self = self
+            else { return }
+            
+            let now = Date()
+            for (key, expiryDate) in self.expiryDates {
+                if expiryDate < now {
+                    self.imageCache.removeObject(forKey: NSNumber(value: key))
+                    self.objectCache.removeValue(forKey: key)
+                    self.expiryDates.removeValue(forKey: key)
+                }
+            }
+        })
+    }
+    
     var onDidUpdate: (() -> Void)?
     
     func getImage(_ url: URL?, ttl: TimeInterval = defaultTTL) -> UIImage? {

@@ -28,7 +28,7 @@ class Network {
     
     var onDidUpdate: (() -> Void)?
     
-    func getImage(_ url: URL?, ttl: TimeInterval = oneHour) -> UIImage? {
+    func getImage(_ url: URL?, expiryInterval: TimeInterval = oneHour) -> UIImage? {
         guard let url = url
         else { return nil }
 
@@ -43,8 +43,8 @@ class Network {
                 completionHandler: { [weak self] data, response, error in
                     if let self = self, let data = data, let image = UIImage(data: data) {
                         DispatchQueue.main.async {
-                            self.expiryDates[key.intValue] = Date(timeIntervalSinceNow: ttl)
                             self.imageCache.setObject(image, forKey: key)
+                            self.expiryDates[key.intValue] = Date(timeIntervalSinceNow: expiryInterval)
                             self.onDidUpdate?()
                         }
                     }
@@ -53,7 +53,7 @@ class Network {
         }
     }
     
-    func get<T>(_ url: URL?, ttl: TimeInterval = oneHour) -> T? where T : Decodable {
+    func get<T>(_ url: URL?, expiryInterval: TimeInterval = oneHour) -> T? where T : Decodable {
         guard let url = url
         else { return nil }
         
@@ -70,8 +70,8 @@ class Network {
                         do {
                             let object = try JSONDecoder().decode(T.self, from: data)
                             DispatchQueue.main.async {
-                                self.expiryDates[key] = Date(timeIntervalSinceNow: ttl)
                                 self.objectCache[key] = object
+                                self.expiryDates[key] = Date(timeIntervalSinceNow: expiryInterval)
                                 self.onDidUpdate?()
                             }
                         } catch {

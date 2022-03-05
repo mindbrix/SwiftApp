@@ -163,10 +163,10 @@
 		E913063C27BA6CC600460F22 /* views */ = {
 			isa = PBXGroup;
 			children = (
-				E94C6A2627C4FF5A00697DD7 /* AtomView.swift */,
-				E925920527BF80D500D40925 /* Label.swift */,
-				E913063D27BA6CC600460F22 /* ImageView.swift */,
-				E913063E27BA6CC600460F22 /* TextField.swift */,
+				E9CB39D127D374EA00A02A2D /* atoms */,
+				E977D06C27B1A628007E4998 /* CellView.swift */,
+				E977D06427B1635A007E4998 /* CellViewCell.swift */,
+				E9CB39C427C7B10100A02A2D /* CellViewHeaderView.swift */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -198,9 +198,6 @@
 				E9CB39D027D3745200A02A2D /* screens */,
 				E913063C27BA6CC600460F22 /* views */,
 				E977D00527AFC887007E4998 /* AppDelegate.swift */,
-				E977D06C27B1A628007E4998 /* CellView.swift */,
-				E977D06427B1635A007E4998 /* CellViewCell.swift */,
-				E9CB39C427C7B10100A02A2D /* CellViewHeaderView.swift */,
 				E9CB39C027C7908C00A02A2D /* Network.swift */,
 				E977D00727AFC887007E4998 /* SceneDelegate.swift */,
 				E903CB2527BE5A2200B58113 /* Screen.swift */,
@@ -254,6 +251,17 @@
 				E9CB39C827CA312A00A02A2D /* Weather.swift */,
 			);
 			path = screens;
+			sourceTree = "<group>";
+		};
+		E9CB39D127D374EA00A02A2D /* atoms */ = {
+			isa = PBXGroup;
+			children = (
+				E94C6A2627C4FF5A00697DD7 /* AtomView.swift */,
+				E925920527BF80D500D40925 /* Label.swift */,
+				E913063D27BA6CC600460F22 /* ImageView.swift */,
+				E913063E27BA6CC600460F22 /* TextField.swift */,
+			);
+			path = atoms;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

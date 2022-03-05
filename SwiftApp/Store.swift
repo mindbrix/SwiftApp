@@ -29,7 +29,6 @@ class Store {
 
     func set(_ key: Key, value: Any) {
         UserDefaults.standard.setValue(value, forKey: key.rawValue)
-        UserDefaults.standard.synchronize()
         onDidUpdate?()
     }
     

@@ -48,10 +48,7 @@ struct Weather: Codable {
                   let app = app
             else { return nil }
             
-            let weather = network.get(
-                  Weather.self,
-                  from: url
-            ) ?? .defaultWeather
+            let weather: Weather = network.get(url) ?? .defaultWeather
             
             let stackStyle = cache.modelStyle.cell.stackStyle.withAlignment(.leading)
             let cellStyle = cache.modelStyle.cell.withStackStyle(stackStyle)

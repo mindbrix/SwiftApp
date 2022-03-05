@@ -23,7 +23,7 @@ struct MainScreen {
             let imageURL = URL(string: "https://frame.ai/images/tour-early-warning@2x.png")
             let image = network.getImage(imageURL)
     
-            return ViewModel(style: cache.modelStyle, title: "Main", sections: [
+            return ViewModel(style: cache.modelStyle, title: Screen.Main.rawValue, sections: [
                 Section(
                     header: Cell(.text("Menu")),
                     cells: Screen.allCases.filter({ !$0.embedInNavController }).map({ menuScreen in

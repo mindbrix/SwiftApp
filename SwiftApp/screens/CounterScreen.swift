@@ -18,7 +18,7 @@ struct CounterScreen {
             
             let count = store.get(.counter) ?? 0
             
-            return ViewModel(style: cache.modelStyle, title: "Counter", sections: [
+            return ViewModel(style: cache.modelStyle, title: Screen.Counter.rawValue, sections: [
                 Section(
                     header: nil,
                     cells: [

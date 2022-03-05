@@ -20,7 +20,7 @@ struct LoginScreen {
             let password = store.get(.password) ?? ""
             let canLogin = username.count > 0 && password.count > 6
             
-            return ViewModel(style: cache.modelStyle, title: "Login", sections: [
+            return ViewModel(style: cache.modelStyle, title: Screen.Login.rawValue, sections: [
                 Section(
                     header: nil,
                     cells: [

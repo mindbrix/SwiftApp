@@ -59,7 +59,7 @@ struct Weather: Codable {
             let centerBlue = center.withColor(.blue)
             let centerGray = center.withColor(.gray)
             
-            return ViewModel(style: cache.modelStyle, title: "Weather", sections: [
+            return ViewModel(style: cache.modelStyle, title: Screen.WeatherMain.rawValue, sections: [
                 Section(
                     header: Cell(
                         .text(city,

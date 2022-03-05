@@ -79,6 +79,9 @@
 		E9CB39CD27CF89F500A02A2D /* UITableView+visibleSectionIndices.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9CB39CC27CF89F500A02A2D /* UITableView+visibleSectionIndices.swift */; };
 		E9CB39CE27CF89F500A02A2D /* UITableView+visibleSectionIndices.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9CB39CC27CF89F500A02A2D /* UITableView+visibleSectionIndices.swift */; };
 		E9CB39CF27CF89F500A02A2D /* UITableView+visibleSectionIndices.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9CB39CC27CF89F500A02A2D /* UITableView+visibleSectionIndices.swift */; };
+		E9CB39D327D3759300A02A2D /* MainScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9CB39D227D3759300A02A2D /* MainScreen.swift */; };
+		E9CB39D427D3759300A02A2D /* MainScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9CB39D227D3759300A02A2D /* MainScreen.swift */; };
+		E9CB39D527D3759300A02A2D /* MainScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9CB39D227D3759300A02A2D /* MainScreen.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -133,6 +136,7 @@
 		E9CB39C427C7B10100A02A2D /* CellViewHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellViewHeaderView.swift; sourceTree = "<group>"; };
 		E9CB39C827CA312A00A02A2D /* Weather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
 		E9CB39CC27CF89F500A02A2D /* UITableView+visibleSectionIndices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+visibleSectionIndices.swift"; sourceTree = "<group>"; };
+		E9CB39D227D3759300A02A2D /* MainScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreen.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -249,6 +253,7 @@
 			isa = PBXGroup;
 			children = (
 				E9CB39C827CA312A00A02A2D /* Weather.swift */,
+				E9CB39D227D3759300A02A2D /* MainScreen.swift */,
 			);
 			path = screens;
 			sourceTree = "<group>";
@@ -405,6 +410,7 @@
 				E977D00A27AFC887007E4998 /* TableViewController.swift in Sources */,
 				E903CB2627BE5A2200B58113 /* Screen.swift in Sources */,
 				E977D00627AFC887007E4998 /* AppDelegate.swift in Sources */,
+				E9CB39D327D3759300A02A2D /* MainScreen.swift in Sources */,
 				E925921227BFC0CA00D40925 /* Cell+atomsTypes.swift in Sources */,
 				E977D07727B1A9C9007E4998 /* UIVIew+Extensions.swift in Sources */,
 				E9A838CC27BA6ADC0096FAFB /* String+Extensions.swift in Sources */,
@@ -424,6 +430,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E9CB39D427D3759300A02A2D /* MainScreen.swift in Sources */,
 				E925920F27BF8D3700D40925 /* StyleCache.swift in Sources */,
 				E977D08827B1D62C007E4998 /* TableViewController.swift in Sources */,
 				E913064027BA6CC600460F22 /* ImageView.swift in Sources */,
@@ -454,6 +461,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E9CB39D527D3759300A02A2D /* MainScreen.swift in Sources */,
 				E925921027BF8D3700D40925 /* StyleCache.swift in Sources */,
 				E977D08C27B1D62D007E4998 /* TableViewController.swift in Sources */,
 				E913064127BA6CC600460F22 /* ImageView.swift in Sources */,

@@ -24,61 +24,10 @@ enum Screen: String, CaseIterable {
     
     func modelClosure(app: SwiftApp) -> ViewModel.Closure {
         let title = self.rawValue
-        let grab0 = UIImage(named: "grab0") ?? UIImage()
         
         switch self {
         case .Main:
-            return { [weak app] in
-                guard let cache = app?.styleCache,
-                        let network = app?.network,
-                        let app = app
-                else { return nil }
-                
-                let cellStyle = cache.modelStyle.cell
-                let imageURL = URL(string: "https://frame.ai/images/tour-early-warning@2x.png")
-                let image = network.getImage(imageURL)
-        
-                return ViewModel(style: cache.modelStyle, title: title, sections: [
-                    Section(
-                        header: Cell(.text("Menu")),
-                        cells: Screen.allCases.filter({ !$0.embedInNavController }).map({ menuScreen in
-                            Cell(.text(menuScreen.rawValue,
-                                       style: cache.modelStyle.text.withColor(.blue),
-                                    onTap: {
-                                        app.push(menuScreen)
-                                    }
-                                )
-                            )
-                        })
-                    ),
-                    Section(
-                        header: Cell(.text("Images")),
-                        cells: [
-                            Cell([
-                                .image(image ?? grab0,
-                                    onTap: {
-                                        print("grab0")
-                                    }
-                                ),
-                                .text(.longText,
-                                    style: cache.smallStyle
-                                )],
-                                style: cellStyle.withStackStyle(cellStyle.stackStyle.withAxis(.vertical))
-                            ),
-                            Cell([
-                                .image(grab0,
-                                    style: cache.modelStyle.image.withWidth(64),
-                                    onTap: {
-                                        print("grab0")
-                                    }
-                                ),
-                                .text(.longText,
-                                    style: cache.smallStyle
-                                ),
-                            ]),
-                        ])
-                ])
-            }
+            return MainScreen.mainClosure(app: app)
         case .Counter:
             return { [weak app] in
                 guard let cache = app?.styleCache, let store = app?.store

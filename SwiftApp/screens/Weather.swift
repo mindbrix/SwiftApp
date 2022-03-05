@@ -131,7 +131,7 @@ struct Weather: Codable {
             ]
             let textStyle = cache.modelStyle.text
             
-            return ViewModel(style: cache.modelStyle, title: "Cities", sections: [
+            return ViewModel(style: cache.modelStyle, title: Screen.WeatherCities.rawValue, sections: [
                 Section(
                     header: Cell(
                         .text("Choose a city")

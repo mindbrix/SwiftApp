@@ -12,12 +12,12 @@ import UIKit
 enum Screen: String, CaseIterable {
     case Main
     case Counter
-    case DefaultStore
+    case DefaultStore = "Store"
     case Fonts
     case Login
     case Style
-    case WeatherMain
-    case WeatherCities
+    case WeatherMain = "Weather"
+    case WeatherCities = "Weather Cities"
     
     var embedInNavController: Bool { self == .Main }
     

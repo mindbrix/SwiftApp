@@ -12,7 +12,8 @@ import UIKit
 struct LoginScreen {
     static func mainClosure(app: SwiftApp) -> ViewModel.Closure {
         { [weak app] in
-            guard let cache = app?.styleCache, let store = app?.store
+            guard let cache = app?.styleCache,
+                    let store = app?.store
             else { return nil }
             
             let username = store.get(.username) ?? ""
@@ -28,7 +29,7 @@ struct LoginScreen {
                                 placeholder: "User",
                                 style: cache.hugeStyle,
                                 onSet: { string in
-                                    store.set(.username, value: string)
+                                    store.set(string, key: .username)
                                 }
                             )
                         ),
@@ -37,7 +38,7 @@ struct LoginScreen {
                                 placeholder: "Password",
                                 style: cache.hugeStyle,
                                 onSet: { string in
-                                    store.set(.password, value: string)
+                                    store.set(string, key: .password)
                                 }
                             )
                         ),

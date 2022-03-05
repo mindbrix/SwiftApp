@@ -12,7 +12,8 @@ import UIKit
 struct CounterScreen {
     static func mainClosure(app: SwiftApp) -> ViewModel.Closure {
         { [weak app] in
-            guard let cache = app?.styleCache, let store = app?.store
+            guard let cache = app?.styleCache,
+                    let store = app?.store
             else { return nil }
             
             let count = store.get(.counter) ?? 0
@@ -28,13 +29,13 @@ struct CounterScreen {
                             .text("Down",
                                 style: cache.counterStyle.withColor(.blue),
                                 onTap: {
-                                    store.set(.counter, value: max(0, count - 1))
+                                    store.set(max(0, count - 1), key: .counter)
                                 }
                             ),
                             .text("Up",
                                 style: cache.counterStyle.withColor(.blue),
                                 onTap: {
-                                    store.set(.counter, value: count + 1)
+                                    store.set(count + 1, key: .counter)
                                 }
                             )
                         ]),

@@ -141,7 +141,7 @@ struct Weather: Codable {
                             .text(city,
                                 style: textStyle.withColor(.blue),
                                 onTap: {
-                                    store.set(.weatherCity, value: city)
+                                    store.set(city, key: .weatherCity)
                                 }
                             )
                         )

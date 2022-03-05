@@ -27,7 +27,7 @@ class Store {
         UserDefaults.standard.object(forKey: key.rawValue) as? T
     }
 
-    func set(_ key: Key, value: Any) {
+    func set(_ value: Any, key: Key) {
         UserDefaults.standard.setValue(value, forKey: key.rawValue)
         onDidUpdate?()
     }

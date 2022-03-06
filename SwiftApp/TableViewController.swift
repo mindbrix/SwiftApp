@@ -12,6 +12,8 @@ class TableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // https://jayeshkawli.ghost.io/add-header-footer-view-tableview/
+        
         tableView.register(CellViewCell.self,
             forCellReuseIdentifier: CellViewCell.reuseID)
         tableView.register(CellViewHeaderView.self,

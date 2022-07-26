@@ -16,11 +16,11 @@ class Network {
             else { return }
             
             let now = Date()
-            for (key, expiryDate) in self.expiryDates {
+            for (key, expiryDate) in self.keyExpiryDates {
                 if expiryDate < now {
                     self.imageCache.removeObject(forKey: NSNumber(value: key))
                     self.objectCache.removeValue(forKey: key)
-                    self.expiryDates.removeValue(forKey: key)
+                    self.keyExpiryDates.removeValue(forKey: key)
                 }
             }
         })
@@ -44,7 +44,7 @@ class Network {
                     if let self = self, let data = data, let image = UIImage(data: data) {
                         DispatchQueue.main.async {
                             self.imageCache.setObject(image, forKey: key)
-                            self.expiryDates[key.intValue] = Date(timeIntervalSinceNow: expiryInterval)
+                            self.keyExpiryDates[key.intValue] = Date(timeIntervalSinceNow: expiryInterval)
                             self.onDidUpdate?()
                         }
                     }
@@ -71,7 +71,7 @@ class Network {
                             let object = try JSONDecoder().decode(T.self, from: data)
                             DispatchQueue.main.async {
                                 self.objectCache[key] = object
-                                self.expiryDates[key] = Date(timeIntervalSinceNow: expiryInterval)
+                                self.keyExpiryDates[key] = Date(timeIntervalSinceNow: expiryInterval)
                                 self.onDidUpdate?()
                             }
                         } catch {
@@ -86,7 +86,7 @@ class Network {
         }
     }
     
-    private var expiryDates: [Int: Date] = [:]
+    private var keyExpiryDates: [Int: Date] = [:]
     private var objectCache: [Int: Any] = [:]
     private var imageCache: NSCache<NSNumber, UIImage> = .init()
     

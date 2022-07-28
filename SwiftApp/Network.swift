@@ -28,7 +28,7 @@ class Network {
     
     var onDidUpdate: (() -> Void)?
     
-    func getImage(_ url: URL?, expiryInterval: TimeInterval = oneHour) -> UIImage? {
+    func getImage(_ url: URL?, ttl: TimeInterval = oneHour) -> UIImage? {
         guard let url = url
         else { return nil }
 
@@ -44,7 +44,7 @@ class Network {
                     if let self = self, let data = data, let image = UIImage(data: data) {
                         DispatchQueue.main.async {
                             self.imageCache.setObject(image, forKey: key)
-                            self.keyExpiryDates[key.intValue] = Date(timeIntervalSinceNow: expiryInterval)
+                            self.keyExpiryDates[key.intValue] = Date(timeIntervalSinceNow: ttl)
                             self.onDidUpdate?()
                         }
                     }

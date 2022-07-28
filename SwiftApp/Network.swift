@@ -53,7 +53,7 @@ class Network {
         }
     }
     
-    func get<T>(_ url: URL?, expiryInterval: TimeInterval = oneHour) -> T? where T : Decodable {
+    func get<T>(_ url: URL?, ttl: TimeInterval = oneHour) -> T? where T : Decodable {
         guard let url = url
         else { return nil }
         
@@ -71,7 +71,7 @@ class Network {
                             let object = try JSONDecoder().decode(T.self, from: data)
                             DispatchQueue.main.async {
                                 self.objectCache[key] = object
-                                self.keyExpiryDates[key] = Date(timeIntervalSinceNow: expiryInterval)
+                                self.keyExpiryDates[key] = Date(timeIntervalSinceNow: ttl)
                                 self.onDidUpdate?()
                             }
                         } catch {
